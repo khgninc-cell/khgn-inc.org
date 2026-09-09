@@ -1,110 +1,1788 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Tipple Trial - KHGN Game Portal</title>
-    <!-- Link to your existing main stylesheet if applicable, or embed custom arcade styles -->
-    <link rel="stylesheet" href="index.html"> <!-- Or link to main CSS if separated -->
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        header {
-            background-color: #1e293b;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #334155;
-        }
-        header a {
-            color: #38bdf8;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        header a:hover {
-            text-decoration: underline;
-        }
-        .game-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            max-width: 960px;
-            margin: 0 auto;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .game-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .game-header h1 {
-            font-size: 2rem;
-            color: #f1f5f9;
-            margin-bottom: 0.5rem;
-        }
-        .game-header p {
-            color: #94a3b8;
-            font-size: 1rem;
-        }
-        /* GDevelop Canvas Frame Wrapper */
-        .canvas-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            background: #000;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-            border: 1px solid #334155;
-        }
-        .canvas-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KHGN Field Training Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A;
+    --walnut-deep:#1C140F;
+    --parchment:#EDE0C8;
+    --parchment-dim:#E0D0AC;
+    --ink:#221A12;
+    --brass:#B08D57;
+    --brass-bright:#D4AF6A;
+    --rust:#A63D2F;
+    --rust-bright:#C2503F;
+    --sage:#6B8A5C;
+    --sage-bright:#82A671;
+    --line:#4A392A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%),
+      var(--walnut);
+    color:var(--parchment);
+    font-family:'Public Sans', sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 16px 60px;
+  }
+  .app{ width:100%; max-width:760px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{
+    font-size:13px; letter-spacing:0.03em; color:var(--brass-bright); margin-bottom:4px;
+  }
+  .masthead h1{
+    font-family:'Rye', serif; font-weight:400; font-size:clamp(26px,5vw,38px);
+    margin:0; color:var(--parchment); text-shadow:0 2px 0 var(--walnut-deep);
+  }
+
+  /* --- Level tabs --- */
+  .level-tabs{
+    display:flex; gap:8px; margin-bottom:16px;
+    overflow-x:auto; padding-bottom:2px;
+  }
+  .level-tab{
+    flex:1; min-width:140px;
+    background:var(--walnut-deep);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 12px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .level-tab.locked{ opacity:.45; cursor:not-allowed; }
+  .level-tab.active{ border-color:var(--brass); background:rgba(176,141,87,0.12); }
+  .level-tab .lt-num{
+    font-size:10px; letter-spacing:.05em; color:var(--brass-bright); margin-bottom:2px;
+  }
+  .level-tab .lt-name{ font-family:'Rye', serif; font-size:15px; color:var(--parchment); }
+  .level-tab .lt-topic{ font-size:10.5px; color:var(--parchment-dim); opacity:.75; margin-top:2px; }
+
+  /* --- Trail map --- */
+  .trail-wrap{
+    background:var(--walnut-deep); border:1px solid var(--line); border-radius:14px;
+    padding:18px 14px 10px; margin-bottom:20px; overflow-x:auto;
+  }
+  .trail{ display:flex; align-items:center; min-width:640px; position:relative; padding:0 6px; }
+  .trail-line{ position:absolute; left:26px; right:26px; top:15px; height:3px; background:var(--line); z-index:0; }
+  .trail-line-fill{ position:absolute; left:26px; top:15px; height:3px; background:var(--brass); z-index:1; transition:width .5s ease; }
+  .stop{ flex:1; display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
+  .stop-dot{
+    width:32px; height:32px; border-radius:50%; background:var(--walnut);
+    border:3px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:var(--parchment-dim); transition:all .3s ease;
+  }
+  .stop.done .stop-dot{ background:var(--sage); border-color:var(--sage-bright); color:var(--walnut-deep); }
+  .stop.current .stop-dot{
+    background:var(--brass); border-color:var(--brass-bright); color:var(--walnut-deep);
+    box-shadow:0 0 0 4px rgba(176,141,87,0.25);
+  }
+  .stop-label{ font-size:10px; margin-top:6px; color:var(--parchment-dim); opacity:.7; }
+
+  /* --- Card --- */
+  .card{
+    background:var(--parchment); color:var(--ink); border-radius:16px; padding:28px 26px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .4s ease;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  .card.sheriff{ background:#EAD9CE; }
+
+  .character-row{ display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; }
+  .portrait{ width:76px; height:76px; flex-shrink:0; border-radius:10px; border:2px solid var(--ink); background:var(--walnut); }
+  .char-meta{ flex:1; }
+  .char-name{ font-family:'Rye', serif; font-size:22px; margin:0 0 2px; color:var(--ink); }
+  .char-role{ font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:#6B5A42; margin:0 0 8px; }
+  .narration-btn{
+    display:inline-flex; align-items:center; gap:6px; background:var(--ink); color:var(--parchment);
+    border:none; border-radius:20px; padding:6px 14px; font-size:12px; font-weight:600; cursor:pointer;
+  }
+  .narration-btn:hover{ background:#3a2c1e; }
+
+  .body-text{ font-size:15.5px; line-height:1.6; margin:0 0 18px; }
+  .scenario-box{
+    background:rgba(0,0,0,0.06); border-left:4px solid var(--brass); padding:14px 16px;
+    border-radius:6px; font-size:14.5px; line-height:1.55; margin-bottom:20px; font-style:italic;
+    position:relative;
+  }
+  .gotcha-badge{
+    display:inline-block; background:var(--rust); color:#fff; font-size:10px; font-weight:700;
+    letter-spacing:.04em; padding:3px 9px; border-radius:12px; margin-bottom:8px;
+  }
+
+  .primary-btn{
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
+    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+  }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .primary-btn:disabled{ background:#B7A78E; cursor:not-allowed; }
+  .secondary-btn{
+    background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
+    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+  }
+
+  .question-block{ margin-bottom:20px; }
+  .q-num{ font-size:12px; font-weight:700; color:var(--rust); letter-spacing:.03em; margin-bottom:6px; }
+  .q-prompt{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .options{ display:flex; flex-direction:column; gap:8px; }
+  .option{
+    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:11px 14px;
+    font-size:14.5px; font-family:inherit; cursor:pointer; color:var(--ink); transition:all .12s ease;
+  }
+  .option:hover{ border-color:var(--brass); }
+  .option.selected{ border-color:var(--ink); background:#F5EBD6; font-weight:600; }
+  .option.correct{ border-color:var(--sage); background:#DCE9D6; }
+  .option.incorrect{ border-color:var(--rust); background:#F2D9D4; }
+  .option:disabled{ cursor:default; }
+
+  .feedback-banner{
+    display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:8px;
+    font-size:14px; font-weight:700; margin-bottom:16px;
+  }
+  .feedback-banner.pass{ background:#DCE9D6; color:#3C5533; }
+  .feedback-banner.fail{ background:#F2D9D4; color:#7A2E23; }
+
+  .final-question{ background:rgba(0,0,0,0.05); border-radius:10px; padding:16px; margin-top:6px; }
+
+  .footer-note{
+    text-align:center; font-size:11.5px; color:var(--parchment-dim); opacity:.55;
+    margin-top:18px; line-height:1.5;
+  }
+
+  .complete-screen{ text-align:center; }
+  .complete-screen .badge{
+    width:90px; height:90px; margin:0 auto 16px; border-radius:50%; background:var(--sage);
+    display:flex; align-items:center; justify-content:center; font-size:40px;
+  }
+
+  .program-complete .badge{ background:var(--brass); }
+  #volunteer-form-hook{
+    border:2px dashed var(--line); border-radius:10px; padding:22px; margin-top:18px;
+    background:rgba(0,0,0,0.04); font-size:13px; color:#6B5A42; text-align:center;
+  }
+
+  /* --- Reading gate --- */
+  .article-content{
+    max-height:440px; overflow-y:auto; background:#fff; border:1px solid #D8C7A3;
+    border-radius:10px; padding:18px 20px; margin-bottom:16px; font-size:14px; line-height:1.65;
+  }
+  .article-content h2{ font-family:'Rye', serif; font-size:22px; margin:0 0 4px; color:var(--ink); }
+  .article-content h3{ font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:#6B5A42; margin:0 0 10px; font-weight:600; }
+  .article-content h4{ font-size:17px; margin:18px 0 6px; color:var(--rust); font-family:'Rye', serif; font-weight:400; }
+  .article-content p{ margin:0 0 12px; }
+  .article-content ul, .article-content ol{ margin:0 0 12px; padding-left:22px; }
+  .article-content li{ margin-bottom:6px; }
+  .article-content blockquote{
+    margin:12px 0; padding:10px 14px; border-left:4px solid var(--brass);
+    background:rgba(176,141,87,0.08); font-style:italic; color:#4A3A28;
+  }
+  .article-content hr{ border:none; border-top:1px solid #E0D0AC; margin:18px 0; }
+  .gate-status{
+    display:flex; flex-direction:column; gap:6px; margin-bottom:14px;
+    font-size:13px; color:#6B5A42;
+  }
+  .gate-row{ transition:color .2s ease; }
+  .gate-row.gate-done{ color:var(--sage); font-weight:700; }
+</style>
 </head>
 <body>
- <nav class="site-nav" aria-label="Global">
-    <div class="site-nav-inner">
-        <a href="index.html" class="site-nav-brand">KHGN Inc.</a>
-        <div class="site-nav-links">
-            <a href="index.html">Home</a>
-            <a href="socialmedia.html">Social Media</a>
-            <a href="recruiting.html">Volunteer Recruitment</a>
-            <a href="donation-portal.html">Donation Portal</a>
-            <a href="training.html">Volunteer Training</a>
-            <a href="game-portal.html">Game Portal</a>
-        </div>
+<div class="app">
+
+  <div class="masthead">
+    <div class="eyebrow">KHGN FIELD TRAINING · COMMUNITY ADVISORY TRACK</div>
+    <h1 id="program-title">The Trail</h1>
+  </div>
+
+  <div class="level-tabs" id="level-tabs"></div>
+  <div class="trail-wrap" id="trail-wrap"><div class="trail" id="trail"></div></div>
+  <div id="stage"></div>
+
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc. — Volunteer Field Training Program<br>
+    Failing the Sheriff's final chance at any waypoint returns you to the start of that level.
+  </div>
+</div>
+
+<script>
+const TOTAL_STOPS = 12;
+const MIN_READ_SECONDS = 50 * 60; // Staff: adjust the required reading time (in seconds) here.
+
+/* ---------- Approved gate articles (Levels 1–4), stored as Markdown and rendered at runtime ---------- */
+const ARTICLES = {
+1: `# Understanding Personally Identifiable Information
+### A Field Guide for KHGN Volunteers, Moderators, and Field Workers
+
+*Level 1 Reading — Kentucky History & Genealogy Network, Inc.*
+
+---
+
+## Why This Matters Before You Touch a Single Record
+
+Genealogy is, at its heart, an act of trust. Families trust researchers with letters, photographs, and stories they wouldn't hand to a stranger on the street. Communities trust historical societies to preserve the past without exposing the present. And KHGN, as an organization built entirely on volunteer labor, has staked its reputation on being a place where that trust is honored — not because a law requires it, but because it's the right way to treat people's lives.
+
+Before you're trusted with moderation duties, field work, or any role that touches KHGN's records and social platforms, you need a working understanding of **Personally Identifiable Information**, commonly shortened to **PII**. This isn't a legal training course, and nothing here should be treated as formal legal advice — but it is a serious grounding in a topic that carries real consequences: for the people whose information is involved, and for KHGN's ability to keep doing this work at all.
+
+By the end of this reading, you should be able to recognize PII when you see it, understand why the rules around *living* people differ sharply from the rules around the *deceased*, and know what to do when you spot a problem.
+
+---
+
+## Part One: What Is PII, Really?
+
+At the simplest level, PII is any piece of information that can be used, on its own or combined with other details, to identify a specific living individual.
+
+That definition is broader than most people expect. It's easy to picture PII as just the "big three" — Social Security numbers, home addresses, and phone numbers. Those absolutely count. But PII also includes things that feel harmless in isolation:
+
+- A full name combined with a town or county
+- An employer's name
+- A date of birth or an approximate age
+- A physical description or a recent photograph
+- A relationship to another named, identifiable person
+- An email address or a social media handle
+- A vehicle, a license plate, or a home's physical appearance in a photo
+
+The key insight is that **PII is often about combination, not just content**. A first name alone rarely identifies anyone. A first name, a hometown, and an employer, taken together, often will. This is why a post that "doesn't contain anything private" can still be a PII violation — the danger is in the assembly, not any single fact.
+
+### A Simple Test
+
+When you're unsure whether something counts as PII, ask:
+
+> "If I were the person this information is about, could someone use this — alone or combined with a quick search — to find me, contact me, or learn something about my life that I haven't chosen to share?"
+
+If the honest answer is yes, treat it as PII, even if no single detail feels alarming by itself.
+
+---
+
+## Part Two: The Living/Deceased Divide
+
+This is the single most important distinction in genealogical PII work, and it's the one that trips up even experienced researchers.
+
+**Privacy protections, as a general matter, exist to protect living people.** Once a person has died, most of the specific legal protections around their personal information no longer apply to them directly — this is part of why genealogy as a field is possible at all. Census records become public. Vital records become accessible. Historical letters can be published, studied, and shared.
+
+But here is the trap: **genealogical records are rarely about only one person.** A record from 1975 might name a person who has since passed away — but the same record might also name their spouse, children, or witnesses who are very much alive today. A 1998 school photo of a person who died last year still shows other classmates who are living, working, and raising families right now.
+
+**The rule of thumb KHGN volunteers should internalize:**
+
+> Deceased status protects the deceased person's information. It does not extend that protection to any living person who appears in, or is connected to, the same record.
+
+Every time you review a record, post, or photo, you should be asking two separate questions:
+1. Who in this record is deceased?
+2. Who in this record — named directly, pictured, or identifiable by relationship — might still be living?
+
+If the answer to question two is "possibly," proceed as though it's PII until you can confirm otherwise.
+
+---
+
+## Part Three: PII That Doesn't Look Like PII
+
+Some of the most common — and most easily missed — PII violations in genealogy work don't look like violations at all. They look like ordinary historical research. This section covers patterns you'll be tested on directly.
+
+### 1. "Already Public" Isn't the Same as "Free to Redistribute"
+
+A funeral home's obituary is public the moment it's posted — but it was made public *for a specific purpose*: to inform a community about a death and a memorial service. When that same obituary is copied wholesale into a searchable genealogy database, the calculus changes. The deceased person's information is no longer the concern — but the obituary likely lists **living survivors**: children, grandchildren, sometimes their current cities or even employers. Republishing all of that indefinitely, outside its original context, is where the real risk sits.
+
+**The fix isn't to avoid obituaries.** It's to extract what's genealogically valuable (names, relationships, dates) and leave out details that only serve to locate or describe living relatives in the present day.
+
+### 2. Cemetery Photography and the Blank Date
+
+Headstones are about as "public record" as it gets — they sit outdoors, viewable by anyone who walks by. But companion or double headstones create a specific hazard: when one spouse has died and the other has not, it's common for the stone to already have the living spouse's name and birth year engraved, with the death date left blank.
+
+That blank space is a signal. It tells you, and anyone else who sees the photo, that this named individual — with a **birth year, and therefore an approximate current age**, tied to a specific town — is very likely still alive. A photo that would be entirely unremarkable if both individuals were deceased becomes a live PII question the moment you notice that gap.
+
+### 3. Identification Through Relationship, Not Direct Disclosure
+
+Not every PII exposure involves a name-and-address pairing. Consider a simple research post: *"Looking for info on John Doe — he's the father of Jim Doe, and Jim Doe is my father."*
+
+No address. No phone number. No photo. And yet this post identifies a specific living person (Jim Doe) as the poster's father, and by doing so, tells anyone reading that the poster has living siblings who share that same father — findable by anyone willing to do a small amount of cross-referencing.
+
+This is **PII through inference**: identity and relationships revealed not by a direct fact, but by connecting stated relationships together. It's subtle, it's common in genealogy forums, and it's exactly the kind of thing moderators are trained to catch.
+
+### 4. Records That Were Never Meant to Be Fully Public
+
+Some documents *look* like harmless historical ephemera but actually carry protected information that stays sensitive for a person's entire lifetime. A military discharge form (a DD-214, for example) often includes a Social Security number and place of birth — and unlike a census record, it is not a public record, regardless of how old the paper itself looks. A decades-old benefits form or an old family document may carry the same risk. Age of the paper does not equal age of the protection; what matters is whether the person named is still alive and whether the specific data type (like an SSN) remains sensitive indefinitely.
+
+### 5. DNA Results and Genetic Information
+
+DNA match information deserves its own caution. A DNA match confirms a biological relationship — but sharing a match's name, employer, or social media profile "to help people verify the connection" shares far more than the genealogical fact itself. Genetic information about a living person is uniquely sensitive: it cannot be changed, it reveals information about relatives who never tested at all, and in some cases it touches on health information the person may not have chosen to disclose. When in doubt, share the *finding* (a confirmed relationship), not the *person's identifying details*.
+
+### 6. Reunion Rosters, Sign-In Sheets, and "For Posterity" Scans
+
+Family reunion sign-in sheets, class reunion rosters, and similar documents are often scanned "just for the archive" — but they frequently contain home addresses and phone numbers of people who are still alive and never expected that sign-in sheet to end up in a public research database.
+
+### 7. Adoption and Birth-Parent Records
+
+This category carries not just a privacy concern but a real ethical one. Surfacing the identity of a living birth parent or adoptee — even accurately, even with good intentions — before that person has consented to being found or contacted can cause serious harm and violate the trust that adoption reunion processes are built around. Treat any adoption-related identification as high-sensitivity by default, and escalate rather than post.
+
+---
+
+## Part Four: Your Role as a Moderator and Field Worker
+
+Understanding PII isn't an academic exercise for KHGN volunteers — it's the foundation of the moderation and field-work responsibilities you're training toward. When you're reviewing posts in one of KHGN's community groups, or handling records at the county level, you are the last line of defense between a well-meaning member's post and a real person's unwanted exposure.
+
+That means:
+
+- **When in doubt, hold it back.** A post can always be approved after a quick edit. It's much harder to undo something that's already been shared widely.
+- **Explain, don't just delete.** Most PII issues come from good intentions, not bad ones. Members respond better — and learn — when you explain *why* something needs to change, not just that it was removed.
+- **Escalate what you're unsure about.** You are not expected to be a lawyer. If something feels like it might cross into legal territory (adoption records, active legal disputes, anything involving a minor), escalate to the Community Advisory Committee rather than guessing.
+- **Remember the "why."** KHGN's mission depends on people trusting us with their families' stories. Every careful PII decision you make protects that trust — and, over time, protects KHGN's ability to keep growing and serving genealogy researchers across Kentucky and beyond.
+
+---
+
+## A Closing Thought
+
+None of this is meant to make you afraid of genealogy work — quite the opposite. Most records, most photos, and most family stories carry no PII risk at all, especially once the people involved are gone and only history remains. The goal of this training isn't caution for its own sake; it's giving you the judgment to tell the difference between a story that's safe to share freely and one that needs a second look first.
+
+When you're ready, continue to the Level 1 trail, where you'll apply everything in this reading to real-world scenarios.
+
+---
+
+*This material is intended for internal KHGN training purposes and reflects organizational best practices. It is not a substitute for formal legal advice. Questions about specific situations should be directed to the Community Advisory Committee.*`,
+
+2: `# Understanding Copyright and Terms of Use
+### A Field Guide for KHGN Volunteers, Moderators, and Field Workers
+
+*Level 2 Reading — Kentucky History & Genealogy Network, Inc.*
+
+> *"The only person who isn't required to cite their sources was Adam."*
+
+---
+
+## Why This Matters for a Genealogy Organization
+
+Genealogy is a field built almost entirely on other people's work: transcriptions someone else painstakingly typed out, photographs someone else took or preserved, indexes someone else compiled, family trees someone else researched over years or decades. That's not a criticism — it's simply how the field functions. Nearly everything a researcher touches was created, gathered, or curated by somebody.
+
+That reality is exactly why copyright and terms-of-use literacy matters so much for KHGN. Every time a volunteer shares a record, reposts a photo, or copies text into a forum thread, they're making a decision — often without realizing it — about whether that material is theirs to redistribute. Get it wrong often enough, and KHGN risks damaging relationships with the very archives, publishers, and fellow researchers whose cooperation the whole genealogy community depends on.
+
+This reading isn't legal advice, and copyright law has real nuance that varies by country and by specific fact pattern. But by the end of it, you should be able to recognize the common patterns of copyright and terms-of-use violations well enough to catch them before they become a problem for KHGN.
+
+---
+
+## Part One: What Copyright Actually Protects
+
+Copyright protects **original creative expression** — the specific way someone wrote, photographed, arranged, or presented something. It does not protect **facts** themselves.
+
+This distinction matters enormously in genealogy work:
+
+- A person's birth date, the fact that a marriage occurred, or the names on a census page are **facts**. Facts, by themselves, are not copyrightable.
+- The specific **wording** of an article discussing that birth, a **photograph** of a gravestone, or a **transcription's particular formatting and annotations** can be copyrighted, because those involve someone's original creative or organizational effort.
+
+The practical result: you can generally state that "John Smith was born in 1850 in Madison County" freely, because that's a fact. You cannot generally copy, word-for-word, someone else's article *about* John Smith's life, or their specific photograph of his headstone, without considering copyright.
+
+---
+
+## Part Two: Common Violation Patterns
+
+### 1. Copying Full Text Instead of Summarizing
+One of the most frequent mistakes is treating "I gave credit" as the same thing as "I had permission." Copying an entire article, blog post, or write-up — even with a source link at the bottom — usually goes well beyond what's legally protected as fair use for commentary or discussion. A tiny attribution link doesn't fix a full-text reproduction.
+
+**The pattern to watch for:** long blocks of copied text, especially 1,000+ words lifted wholesale from somewhere else, with only a small citation. The fix is almost always to summarize the key facts in your own words and link to the original for anyone who wants the full piece.
+
+### 2. Downloading and Re-Hosting Images
+Finding an image online and downloading it to host directly on KHGN's own platform — rather than linking to where it lives — strips away the context (and often the copyright notice) the original creator attached to it. This applies to photographs, infographics, illustrations, and scanned documents alike. Even when there's no ill intent, re-hosting someone else's image as if it were freely available material is a common violation.
+
+### 3. Removing Watermarks, Metadata, or Attribution
+Stripping a creator's watermark, embedded metadata, or credit line before redistributing their work compounds a copyright issue into something closer to deliberate misattribution. This is true even if the person doing it genuinely believes the material is "probably fine to share" — removing identifying marks is itself a red flag that should trigger extra caution, not less.
+
+### 4. Treating "License" as All-or-Nothing
+Not everything online is either "fully copyrighted, don't touch" or "totally free, use however." Many creators publish under specific licenses — Creative Commons variants, for instance — that allow some uses but not others. A license that permits non-commercial sharing does not automatically permit commercial use, even if the material is otherwise freely viewable. Before reusing licensed material, check exactly what the license permits rather than assuming a license means "anything goes."
+
+### 5. Open-Source Software and Attribution Requirements
+This applies less to day-to-day genealogy posts and more to KHGN's technical side — but it's worth knowing. Open-source code libraries often come with license terms that require keeping the original license file and copyright notice intact in anything built using them. Deleting those files and re-publishing the resulting software as fully proprietary violates the license's terms, regardless of how much the code was modified.
+
+### 6. Scraping and Bulk-Copying Content
+Automatically or manually pulling large volumes of content — reviews, articles, photo galleries, compiled data — from other websites and republishing it natively (rather than linking out) is a pattern that shows up in commercial contexts but is worth recognizing in community platforms too. Bulk reproduction of someone else's compiled work, even when individual facts within it are public, can still infringe on the effort and originality of how that compilation was assembled.
+
+### 7. Reproducing "Almost All" of a Source and Calling It Commentary
+Fair use exists to protect genuine commentary, criticism, and analysis — but it has real limits tied to how much of the original was used and how transformative the new use is. Copying 90%, 95%, or more of someone else's proprietary writing or data, and adding only a thin layer of commentary on top, does not qualify as fair use no matter how the post is framed. If a "review" or "analysis" is mostly the original material with a light coat of paint, it's reproduction, not commentary.
+
+### 8. Using Copyrighted Material Without Any Transformation
+Reposting someone else's copyrighted content in full — a video, an image, a full article — without adding meaningful new commentary, analysis, or creative transformation generally fails the test that makes reuse legally defensible. The bar isn't "I said something before or after it" — it's whether the new post genuinely adds substantial original value rather than simply re-presenting the original work.
+
+---
+
+## Part Three: Terms of Use — A Different (But Related) Problem
+
+Copyright law governs what you're legally allowed to do with someone's creative work. **Terms of use** are a separate, contractual layer — the rules a specific platform or website sets for how its content and services can be used, which you agree to (often without reading) when you use that platform.
+
+This distinction matters because **content can be both copyright-compliant and still violate a platform's terms of use**, or vice versa. A few patterns specific to terms-of-use violations:
+
+- **Bypassing paywalls or access restrictions.** Sharing a workaround, script, or method that lets people access paid or subscription-only content for free violates the platform's terms, separate from any copyright question about the content itself.
+- **Violating a platform's stated redistribution rules**, even for content that might otherwise seem shareable. Many genealogy subscription sites, for instance, explicitly prohibit bulk downloading or redistributing their transcriptions and indexes, even though the underlying facts (names, dates) aren't copyrightable on their own. Their terms of service still bind anyone who created an account and agreed to them.
+- **Automated scraping tools** that violate a site's explicit terms prohibiting automated access, even when the scraped content itself might not raise a separate copyright issue.
+
+**The practical takeaway:** always consider two separate questions — "Do I have the right to use this content under copyright law?" and "Am I following the rules of the platform I got it from?" A post can fail either test independently.
+
+---
+
+## Part Four: Your Role as a Moderator and Field Worker
+
+- **Summarize, don't reproduce.** When in doubt, describe what a source says in your own words and link to it, rather than copying the source's own text or images.
+- **Check the license before assuming.** If material is labeled with a specific license (Creative Commons or otherwise), read what it actually permits rather than treating any license as a blanket "free to use."
+- **Watch for stripped attribution.** A missing watermark, missing credit line, or missing source link on content that looks professionally made is worth a second look before it's approved.
+- **Distinguish facts from expression.** Genealogical facts can be freely shared and restated. The specific writing, photography, or compiled presentation of those facts usually cannot be, without permission.
+- **When something feels like "too much" copied material, it probably is.** There's no need to calculate an exact percentage — if a post is mostly someone else's original work with a thin layer of commentary on top, treat it as a likely violation and ask the poster to revise it.
+
+---
+
+## A Closing Thought
+
+None of this is meant to make you afraid to reference other people's research — genealogy simply doesn't work without building on prior work. The goal is making sure KHGN builds on that work the right way: crediting it, linking to it, summarizing rather than reproducing it, and respecting the licenses and terms creators and platforms have set. Doing this consistently is what keeps KHGN in good standing with the archives, publishers, and fellow researchers this whole field depends on.
+
+When you're ready, continue to the Level 2 trail, where the Teacher will walk you through real scenarios testing exactly this judgment.
+
+---
+
+*This material is intended for internal KHGN training purposes and reflects organizational best practices. It is not a substitute for formal legal advice. Questions about specific situations should be directed to the Community Advisory Committee.*`,
+
+3: `# Understanding Legal Release Dates for Records
+### A Field Guide for KHGN Volunteers, Moderators, and Field Workers
+
+*Level 3 Reading — Kentucky History & Genealogy Network, Inc.*
+
+---
+
+## Why "Old" Doesn't Automatically Mean "Public"
+
+One of the most persistent misunderstandings in genealogy work is the assumption that a record becomes fair game the moment it feels historical. A document from 1955 *feels* old. A court file from 1998 *feels* like ancient history to a researcher who's used to working with 19th-century census pages. But feeling old and being legally releasable are two entirely different things.
+
+Governments and institutions set specific **release dates** — sometimes called embargo periods, restriction periods, or closure periods — for different categories of records. These dates exist for a reason: they balance the historical and genealogical value of a record against the privacy interests of the people named in it, many of whom may still be alive decades after the record was created.
+
+As a KHGN volunteer, moderator, or field worker, your job isn't to memorize every jurisdiction's exact rule — that's genuinely difficult even for professionals, since rules vary by record type, by state, and sometimes by county. Your job is to recognize **when a record type is the kind that has a release date at all**, and to know to check before assuming a record is fair to share, publish, or index.
+
+This reading is not a substitute for legal advice, and rules described here are general patterns, not guarantees for every jurisdiction. When in doubt, escalate to the Community Advisory Committee before publishing.
+
+---
+
+## Part One: Why Release Dates Exist
+
+Release dates aren't bureaucratic red tape for its own sake. They reflect a real trade-off:
+
+- **Too short a restriction period**, and living people's sensitive information (health details in death records, financial details in probate, family conflict in divorce filings) becomes exposed while they or their close family are still alive to be affected by it.
+- **Too long a restriction period**, and legitimate historical and genealogical research is blocked long after any real privacy interest has faded.
+
+Most record-keeping systems try to strike a balance by tying release to either a **fixed number of years after creation** or a **fixed number of years after the event** (like a person's death). Genealogists benefit enormously from this system once they understand it — but only if they respect the boundary while it's still in effect.
+
+---
+
+## Part Two: The Big Example — U.S. Federal Census Records
+
+The most famous release-date rule in American genealogy is the **72-year rule** governing U.S. federal census records. Census records are sealed for 72 years from the date they were collected, specifically to protect the privacy of the individuals who answered detailed personal questions — such as income, health conditions, and household relationships — under a promise of confidentiality from the Census Bureau.
+
+This means:
+
+- As of any given year, only census records from **72 years and earlier** are publicly released.
+- A researcher cannot access the "next" census release early, no matter how motivated, connected, or well-intentioned they are.
+- Once released, census records become a cornerstone of genealogical research precisely because the waiting period has already resolved the privacy concern for the vast majority of people named in them.
+
+The lesson for KHGN volunteers: **just because a nearby census year "feels" like it should be available doesn't mean it is.** Always confirm the actual most recently released census year rather than assuming based on how much time feels like it "should" have passed.
+
+---
+
+## Part Three: Vital Records — Births, Deaths, Marriages, and Divorces
+
+Vital records are where release-date confusion causes the most real-world problems for genealogy volunteers, because **the rules vary significantly by state, and sometimes by the specific type of vital record.**
+
+### Birth Records
+Birth certificates are often the most tightly restricted vital record, because they can remain relevant to identity, inheritance, and even fraud prevention for a person's entire life. Many states restrict access to a birth record for **decades** after the birth — sometimes 75–100 years, sometimes tied to whether the person is confirmed deceased — precisely because the person named may still be alive and the record contains sensitive identifying details.
+
+### Death Records
+Death records are generally released sooner than birth records, since the core privacy concern (protecting a living person's data) is different once someone has died. However, many states still impose a waiting period — commonly in the range of 25–50 years — before death certificates become fully open to the public, partly because death records can include sensitive information about cause of death, and surviving family members may still be living.
+
+### Marriage and Divorce Records
+Marriage records are often released on a shorter timeline than birth or death records, since the core details (names, date, location) are less sensitive. Divorce records, however, frequently contain far more sensitive material — financial disputes, custody arrangements, allegations — and are often restricted longer or require special access procedures even after the "public" date has technically passed.
+
+**The pattern to remember:** the more personally sensitive the content of a record type tends to be, the longer and stricter its typical release period — but the specific number of years is not universal, and Kentucky's rules may differ from a neighboring state's. Always verify the current rule for the specific state and record type rather than assuming a number from memory or from a different state's system.
+
+---
+
+## Part Four: Court, Legal, and Adoption Records
+
+### General Court Records
+Many civil and criminal court records become public relatively quickly, since court proceedings are often open by design. But **sealed records** — cases involving minors, certain family law matters, or cases a judge has specifically ordered sealed — remain closed regardless of how much time has passed, unless a court unseals them.
+
+### Probate Records
+Probate records (wills, estate settlements) are genealogically valuable and often become public on a shorter timeline than vital records, but can still contain sensitive financial and family details about living heirs.
+
+### Adoption Records
+Adoption records deserve special mention because they combine a **legal restriction** with a **serious ethical dimension**. In many jurisdictions, original birth certificates and adoption records remain sealed indefinitely, or are only unsealed through a specific legal process — sometimes requiring the consent of the parties involved, sometimes only through a court order, and sometimes never for older cases. Even where records have technically become accessible under evolving state laws, the underlying relationships often involve people who never consented to being found or identified. Treat any adoption-related record as high-sensitivity regardless of its formal release status, and escalate rather than publish independently.
+
+### Military and Government Personnel Records
+Some military records are surprisingly public once a servicemember is deceased and enough time has passed, while others — particularly those containing Social Security numbers or medical information — remain restricted regardless of age. As covered in Level 1's PII training, forms like the DD-214 are a common example of a document that "looks" historical but is not automatically public.
+
+---
+
+## Part Five: A Practical Framework for KHGN Volunteers
+
+You are not expected to be a records-law expert. You are expected to follow a simple, repeatable process:
+
+1. **Identify the record type.** Is this a census record, a birth/death/marriage/divorce record, a court file, a probate file, an adoption-related record, or a government personnel record? Each category has different rules.
+
+2. **Ask whether a release date applies at all.** Not every record type has a waiting period — plenty of historical materials (newspapers, city directories, church records depending on the denomination's own policies) don't carry a government-imposed embargo. But when a record originates from a government vital-records office, court, or federal agency, assume a release date exists until you've confirmed otherwise.
+
+3. **Check the current rule for the correct jurisdiction.** Don't assume a number you remember from a different state, a different record type, or an outdated source. Rules change over time as legislatures update them.
+
+4. **When a record involves adoption, sealed court proceedings, or clearly sensitive personal history, treat it as restricted regardless of its formal age**, and escalate to the Community Advisory Committee rather than making the call solo.
+
+5. **When in doubt, don't publish yet.** As with PII, it is far easier to release a record a little later, once confirmed, than to walk back a record that was shared prematurely.
+
+---
+
+## Part Six: Why This Matters Beyond Compliance
+
+Every time KHGN correctly respects a record's release date, it reinforces something bigger than avoiding a technical violation: it protects the organization's credibility with the very institutions — county clerks, state archives, historical societies — that genealogy research depends on. Archives and record offices are far more willing to work cooperatively with organizations that have a demonstrated track record of handling records responsibly. A single embarrassing incident of publishing a record before its legal release date can damage relationships that took years to build.
+
+Your careful judgment here isn't just about following a rule. It's about being the kind of organization that institutions trust enough to keep opening their doors to.
+
+---
+
+## A Closing Thought
+
+Release dates can feel like an obstacle to good research, especially when a record you need sits just a few years on the wrong side of a waiting period. But these rules exist because someone, at some point, decided that a real person's privacy interest was worth protecting for a defined period of time — and that judgment deserves respect, even when it's inconvenient.
+
+When you're ready, continue to the Level 3 trail, where you'll apply this framework to real-world scenarios involving the Scholar's specialty: knowing not just what a record says, but when it was truly meant to be seen.
+
+---
+
+*This material is intended for internal KHGN training purposes and reflects organizational best practices. It is not a substitute for formal legal advice. Rules described here vary by jurisdiction and record type and may change over time. Questions about specific records should be directed to the Community Advisory Committee.*`,
+
+4: `# Understanding Inurement and Private Gain
+### A Field Guide for KHGN Volunteers, Moderators, and Field Workers
+
+*Level 4 Reading — Kentucky History & Genealogy Network, Inc.*
+
+---
+
+## Why This Level Exists
+
+The first three levels of this training protect the people whose stories and records KHGN handles: the living relatives named in a post, the researchers whose work carries copyright, the individuals whose records aren't legally releasable yet. This level protects something different — the organization itself, and the public trust it was built on.
+
+KHGN is a nonprofit. That single fact carries real legal weight. In exchange for tax-exempt status, favorable treatment, and the public's willingness to donate time and money, a nonprofit makes an implicit promise: **its resources, its name, and its opportunities exist to serve its stated public mission — not to enrich any individual connected to it.**
+
+When that promise is broken, the legal term for it is **inurement** — allowing the organization's net earnings or resources to benefit a private individual. A closely related concept is **private benefit** — using the organization's platform, reputation, or assets to advantage someone personally or commercially, even without a direct transfer of money. Both are treated seriously by nonprofit law, because both threaten the fundamental bargain a 501(c)(3) organization makes with the public.
+
+This reading is general education, not legal advice. If you ever suspect an actual inurement or private-benefit situation is happening — not just a training scenario — that's a matter for the Board and the Community Advisory Committee, not something to handle informally.
+
+---
+
+## Part One: What Inurement Actually Means
+
+"Inurement" sounds like dense legal jargon, but the underlying idea is simple: **no part of a nonprofit's net earnings may benefit a private individual, especially someone considered an "insider"** — a board member, officer, key employee, major donor, or someone closely connected to any of them.
+
+This doesn't mean nonprofits can't pay anyone. Reasonable compensation for real work, reimbursement for actual expenses, and legitimate vendor payments are all normal and lawful. The problem arises when the benefit is:
+
+- **Disproportionate** to any real service provided
+- **Not available on the same terms to the general public or membership**
+- **Tied to someone's insider position** rather than to a fair transaction
+
+The classic historical example is a nonprofit whose founder pays himself an enormous, unjustified salary, or whose board quietly awards contracts to companies owned by board members' relatives at inflated prices. But inurement in a modern volunteer organization is often much smaller and much less dramatic than that — which is exactly why it's easy to miss.
+
+---
+
+## Part Two: What This Looks Like in a Volunteer Organization Like KHGN
+
+You don't need a corporate embezzlement scheme to have an inurement problem. Some patterns that are far more common — and far easier for a volunteer to stumble into without bad intent:
+
+### 1. Using the Organization's Platform for Personal Business
+A board member or volunteer with administrative access to KHGN's social media groups, forums, or mailing lists uses that access to promote their own private business — a professional genealogy research service, a photography studio, a travel agency, a self-published book — under the appearance of an official KHGN announcement. Even if the person genuinely believes they're just "sharing something useful with the community," this uses an asset that belongs to the organization (its audience, its credibility, its platform) for private commercial gain.
+
+### 2. Steering Organizational Opportunities to Oneself or Family
+If KHGN needs a service — printing, web design, event catering, research assistance — and a volunteer or board member arranges for the contract to go to their own business, or a close relative's business, without the same open comparison given to other options, that's a private-benefit concern, regardless of whether the price was technically "fair."
+
+### 3. Using Donor or Membership Data for Personal Advantage
+Contact lists, donor records, and volunteer databases exist to serve KHGN's mission. Using that same list to promote a personal side business, solicit customers, or advance a private project is a misuse of an organizational asset, separate from — but often overlapping with — the PII concerns covered in Level 1.
+
+### 4. Accepting Personal Perks Tied to Organizational Position
+If a volunteer's access to historical archives, county records, or KHGN's reputation is used to negotiate personal deals, discounts, or opportunities that wouldn't be available to them as a private citizen, that's a private benefit flowing from an organizational role.
+
+### 5. Blurring Personal and Organizational Fundraising
+Soliciting donations "for KHGN" that are actually directed toward a volunteer's personal expenses, a side project not authorized by the Board, or an unrelated cause is a serious inurement and trust violation — even when the underlying cause seems sympathetic.
+
+---
+
+## Part Three: Why "I Wasn't Trying to Cheat Anyone" Isn't the Test
+
+Most real-world inurement problems in small nonprofits don't come from someone twirling a mustache and plotting to loot the treasury. They come from people who see an opportunity that feels harmless — "I'll just mention my business, it's relevant to the group anyway" — and don't stop to separate their personal interest from the organization's.
+
+The legal and ethical test isn't whether someone *intended* harm. It's whether:
+
+1. **An insider received a benefit** (money, opportunity, access, promotion) **connected to their position**, and
+2. **That benefit wasn't available on equal terms to others**, or **wasn't a fair exchange for value actually provided.**
+
+If both are true, it's an inurement or private-benefit concern — regardless of good intentions.
+
+---
+
+## Part Four: What's at Stake
+
+For an organization, sustained or serious inurement violations can jeopardize **tax-exempt status itself** — the IRS can revoke a 501(c)(3)'s exemption for inurement violations, and in more serious cases, insiders who benefited improperly can face personal excise-tax penalties under what's known as "intermediate sanctions."
+
+But beyond the legal exposure, there's something more immediate for an organization like KHGN: **donor and volunteer trust**. People give their time, their family records, and sometimes their money to KHGN because they believe it exists to serve Kentucky's genealogical and historical community — not to serve any individual's private interests. A single visible incident of a board member or volunteer using KHGN's platform for personal gain can do lasting damage to that trust, even if it's resolved quickly.
+
+---
+
+## Part Five: What to Do If You See This Happening
+
+As with the earlier levels, your job as a moderator or field worker isn't to be the final legal judge — it's to recognize the pattern and route it correctly.
+
+1. **Recognize the pattern**: an insider benefiting personally, commercially, or reputationally through their KHGN access or position.
+2. **Don't confront it publicly or informally as a personal accusation.** This is a governance matter, not a moderation call you should make solo.
+3. **Escalate to the Community Advisory Committee**, who can bring it to the Board — the only body with the authority to review, decide, and act on matters like this, per KHGN's governance structure.
+4. **Document what you observed factually**, without speculating about motive. What was posted, by whom, when, and what personal benefit it appeared to provide.
+
+---
+
+## A Closing Thought
+
+This level exists to protect something you can't see in any single post the way you can see a PII violation or a copyright infringement — the long-term integrity of the organization every other level exists to serve. Every dollar, every volunteer hour, and every piece of community trust that KHGN holds is held *for* the mission, not for any one person's benefit — including yours, if you ever find yourself in a position where the line gets blurry.
+
+When you're ready, continue to the Level 4 trail, where the Village Court Clerk will walk you through real scenarios testing exactly this judgment.
+
+---
+
+*This material is intended for internal KHGN training purposes and reflects organizational best practices. It is not a substitute for formal legal advice. Questions about specific situations should be directed to the Community Advisory Committee and, where appropriate, the Board.*`
+};
+
+/* ---------- Lightweight Markdown renderer (headers, bold/italic, lists, blockquotes, rules) ---------- */
+function renderMarkdown(md){
+  const lines = md.split('\n');
+  let html = '';
+  let listBuffer = [];
+  let listType = null;
+  function flushList(){
+    if(listBuffer.length){
+      html += `<${listType}>` + listBuffer.map(li => `<li>${li}</li>`).join('') + `</${listType}>`;
+      listBuffer = [];
+      listType = null;
+    }
+  }
+  function inline(text){
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  }
+  lines.forEach(raw => {
+    const line = raw.trim();
+    if(line === ''){ flushList(); return; }
+    if(line === '---'){ flushList(); html += '<hr>'; return; }
+    let m;
+    if((m = line.match(/^### (.*)/))){ flushList(); html += `<h4>${inline(m[1])}</h4>`; return; }
+    if((m = line.match(/^## (.*)/))){ flushList(); html += `<h3>${inline(m[1])}</h3>`; return; }
+    if((m = line.match(/^# (.*)/))){ flushList(); html += `<h2>${inline(m[1])}</h2>`; return; }
+    if((m = line.match(/^> (.*)/))){ flushList(); html += `<blockquote>${inline(m[1])}</blockquote>`; return; }
+    if((m = line.match(/^- (.*)/))){ if(listType !== 'ul'){ flushList(); listType = 'ul'; } listBuffer.push(inline(m[1])); return; }
+    if((m = line.match(/^\d+\.\s(.*)/))){ if(listType !== 'ol'){ flushList(); listType = 'ol'; } listBuffer.push(inline(m[1])); return; }
+    flushList();
+    html += `<p>${inline(line)}</p>`;
+  });
+  flushList();
+  return html;
+}
+
+/* ---------- Character portraits (placeholder illustrations — swap for real art later) ---------- */
+const ELDER_SVG = `<svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="76" rx="10" fill="#2B211A"/>
+  <circle cx="38" cy="30" r="14" fill="#D9B98C"/>
+  <path d="M22 30 Q38 8 54 30 L54 24 Q38 4 22 24 Z" fill="#E8E1D4"/>
+  <path d="M20 66 Q38 44 56 66 Z" fill="#5C4A34"/>
+  <path d="M30 34 Q38 42 46 34" stroke="#7A5C3E" stroke-width="2" fill="none"/>
+  <rect x="24" y="52" width="28" height="6" rx="3" fill="#B08D57"/>
+</svg>`;
+
+const SHERIFF_SVG = `<svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="76" rx="10" fill="#3A231C"/>
+  <path d="M18 30 Q38 4 58 30 L58 20 Q38 -2 18 20 Z" fill="#4A2E22"/>
+  <circle cx="38" cy="32" r="13" fill="#C99B6E"/>
+  <path d="M28 44 L48 44 L44 62 L32 62 Z" fill="#5B3A2A"/>
+  <polygon points="38,50 40,54 44,54 41,57 42,61 38,58 34,61 35,57 32,54 36,54"
+    fill="#D4AF6A" stroke="#2B211A" stroke-width="0.6"/>
+  <path d="M27 32 Q38 38 49 32" stroke="#3A231C" stroke-width="2" fill="none"/>
+</svg>`;
+
+const TEACHER_SVG = `<svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="76" rx="10" fill="#2E2A1C"/>
+  <circle cx="38" cy="30" r="13" fill="#E3C09A"/>
+  <path d="M25 24 Q38 12 51 24 L51 20 Q38 10 25 20 Z" fill="#3A2E20"/>
+  <rect x="28" y="27" width="20" height="6" rx="1" fill="#221A12" opacity="0.7"/>
+  <path d="M20 66 Q38 46 56 66 Z" fill="#4A5A4A"/>
+  <rect x="16" y="52" width="20" height="14" rx="1" fill="#EDE0C8" stroke="#221A12" stroke-width="1"/>
+  <line x1="19" y1="56" x2="33" y2="56" stroke="#221A12" stroke-width="1"/>
+  <line x1="19" y1="60" x2="33" y2="60" stroke="#221A12" stroke-width="1"/>
+</svg>`;
+
+const SCHOLAR_SVG = `<svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="76" rx="10" fill="#241E2A"/>
+  <circle cx="38" cy="30" r="13" fill="#D9B98C"/>
+  <path d="M23 26 Q38 6 53 26 L53 30 Q38 14 23 30 Z" fill="#EDE0C8"/>
+  <path d="M18 66 Q38 42 58 66 Z" fill="#5A4A6A"/>
+  <ellipse cx="38" cy="58" rx="16" ry="4" fill="#B08D57" opacity="0.5"/>
+  <rect x="30" y="52" width="16" height="4" rx="2" fill="#D4AF6A"/>
+</svg>`;
+
+const CLERK_SVG = `<svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="76" rx="10" fill="#2B231C"/>
+  <circle cx="38" cy="30" r="13" fill="#C99B6E"/>
+  <path d="M26 24 Q38 14 50 24 L50 20 Q38 12 26 20 Z" fill="#221A12"/>
+  <path d="M20 66 Q38 44 56 66 Z" fill="#3A3A4A"/>
+  <rect x="26" y="50" width="24" height="16" rx="1" fill="#EDE0C8" stroke="#221A12" stroke-width="1"/>
+  <line x1="29" y1="54" x2="47" y2="54" stroke="#A63D2F" stroke-width="1.4"/>
+  <line x1="29" y1="58" x2="47" y2="58" stroke="#221A12" stroke-width="1"/>
+  <line x1="29" y1="62" x2="40" y2="62" stroke="#221A12" stroke-width="1"/>
+</svg>`;
+
+/* ---------- Level 1: PII (Village Elder) — 3 of 12 stops fully built ---------- */
+const LEVEL1_QUIZZES = [
+  {
+    title: "The Anniversary Post",
+    scenario: `A volunteer shares a post to celebrate a family's 100th anniversary in the county. It includes a scanned letter with a living descendant's full name, current home address, and cell phone number, posted "so cousins can reach out."`,
+    questions: [
+      { prompt: "What is the core PII problem with this post?",
+        options: ["It shares a living person's contact information publicly","The letter is too old to be interesting","It doesn't mention the county name","The photo quality is too low"], correct: 0 },
+      { prompt: "What should be scrubbed before this post is approved?",
+        options: ["The year of the anniversary","The living descendant's address and phone number","The name of the original letter writer, who is deceased","Nothing — genealogy posts are exempt from privacy rules"], correct: 1 },
+      { prompt: "Why is this different from posting a deceased ancestor's old address?",
+        options: ["It isn't different — both are equally fine","Deceased individuals generally are not covered by the same PII protections as the living","Old addresses are always public record","Only phone numbers count as PII, not addresses"], correct: 1 },
+      { prompt: "What's the safer way to let cousins reconnect?",
+        options: ["Post the number publicly so it's easy to find","Leave the personal info in and hope no one misuses it","Direct interested members to message the moderator, who can facilitate contact privately","Email the descendant's information to everyone who comments"], correct: 2 }
+    ]
+  },
+  {
+    title: "The School Photo",
+    scenario: `A member posts a class photo from a small county school circa 1998, tagging a living relative who was a student in the photo — including her current married name, the town she lives in now, and the fact that "she still lives two doors down from the old schoolhouse."`,
+    questions: [
+      { prompt: "What makes this post risky, beyond a simple old photo?",
+        options: ["Old class photos can never be shared","It combines identity (married name) with a real-time physical location","1998 is too recent to be genealogy","It's risky because the photo is black and white"], correct: 1 },
+      { prompt: "Which detail is the most urgent to remove?",
+        options: ["The name of the school","The approximate decade (1990s)","The specific current location detail ('two doors down from...')","The fact that it's a class photo"], correct: 2 },
+      { prompt: "The subject is a living adult, not a minor at time of posting. Does that change the PII concern?",
+        options: ["Yes — living adults have no privacy expectations in genealogy research","No — living individuals still warrant care, especially combining identity with current location","Yes — only minors are ever protected","It's irrelevant since the photo is old"], correct: 1 },
+      { prompt: "What's the best moderation action here?",
+        options: ["Delete the whole post and give no explanation","Approve it as-is since it's 'just history'","Ask the poster to remove the current-location detail before it goes live","Make the post more detailed to help other researchers"], correct: 2 }
+    ]
+  },
+  {
+    title: "The DNA Match Thread",
+    scenario: `A trainee posts in a surname group about a new DNA match: "Match came back as a 2nd cousin — here's her name, her employer, and her Facebook profile link so people can verify the connection."`,
+    questions: [
+      { prompt: "What's the immediate PII issue?",
+        options: ["DNA matches should never be discussed at all","Sharing a living match's name, employer, and social profile without consent","The relationship (2nd cousin) is stated incorrectly","There is no issue — this is standard DNA research practice"], correct: 1 },
+      { prompt: "What should the poster have asked before sharing any of this?",
+        options: ["Whether the match consented to being identified publicly","Whether the surname is common enough","Whether the match has more than 500 friends","Nothing — DNA testing implies public consent"], correct: 0 },
+      { prompt: "Which piece of shared info is the least relevant to genealogy and most purely personal?",
+        options: ["The stated relationship (2nd cousin)","Her current employer","The surname group topic","The century the family line originates from"], correct: 1 },
+      { prompt: "What's the appropriate fix?",
+        options: ["Leave employer and profile link in, remove only the name","Remove all personally identifying details; keep the general research finding if consent isn't confirmed","Report the DNA company instead","Nothing needs to change since it's already posted"], correct: 1 }
+    ]
+  },
+  {
+    title: "The Funeral Home Notice",
+    gotcha: true,
+    scenario: `A modern obituary, originally posted by a funeral home, is copied in full into a KHGN research thread. It lists the deceased's children and grandchildren by name, their current cities, and one grandchild's employer — all standard for a funeral notice, "already public since the funeral home posted it."`,
+    questions: [
+      { prompt: "Why is 'the funeral home already published it' not a complete defense?",
+        options: ["It is a complete defense — nothing more to consider","Publishing for a funeral notice's original audience differs from indefinite redistribution in a searchable database","Funeral homes are never allowed to publish obituaries","Obituaries are only about the deceased, so this doesn't apply"], correct: 1 },
+      { prompt: "Which living people's info appears in this scenario?",
+        options: ["Only the deceased's","Children and grandchildren, including a workplace","No one — obituaries only discuss the deceased","The funeral home staff"], correct: 1 },
+      { prompt: "What is the safest editorial approach when re-posting an obituary for research purposes?",
+        options: ["Copy it in full for completeness","Keep genealogically relevant facts (names, dates, relationships) and drop current employer/location details of the living","Refuse to ever reference obituaries","Only quote the funeral home's name"], correct: 1 },
+      { prompt: "This is a 'gotcha' scenario because:",
+        options: ["It's an obvious violation anyone would catch","It looks completely safe since the source already made it public, but still needs editorial care for the living","Obituaries are illegal to discuss","There's no PII involved at all"], correct: 1 }
+    ]
+  },
+  {
+    title: "The Companion Headstone",
+    gotcha: true,
+    scenario: `A volunteer photographs a double/companion headstone for the cemetery archive. One side reads "John Miller, 1938–2011." The other reads "Mary Miller, 1941–" with the death year left blank, indicating she is presumed living.`,
+    questions: [
+      { prompt: "What does the blank death year on Mary's side of the stone tell us?",
+        options: ["Nothing — it's just decorative","She is very likely still living","The stone carver made an error","She died the same year as John"], correct: 1 },
+      { prompt: "What PII does this photo reveal about a likely-living person?",
+        options: ["Her full name and approximate current age, tied to a specific cemetery/town","Her phone number","Her employer","Nothing — cemetery photos are always fine"], correct: 0 },
+      { prompt: "Why is this a 'gotcha' rather than an obvious violation?",
+        options: ["Cemetery photography is inherently illegal","It looks like routine historical documentation, but a blank death date signals a living subject","Headstones never contain birth years","It's not actually a gotcha, it's completely safe"], correct: 1 },
+      { prompt: "What's the appropriate handling?",
+        options: ["Post the full photo with no changes since it's 'just a cemetery'","Flag it for review; consider cropping or blurring the living spouse's inscription until a death date is confirmed","Refuse to ever photograph companion stones","Add her home address for context"], correct: 1 }
+    ]
+  },
+  {
+    title: "The Search Post",
+    gotcha: true,
+    scenario: `A member posts in a surname group: "Looking for info on John Doe — he's the father of Jim Doe, and Jim Doe is my father." No addresses, phone numbers, or photos are included anywhere in the post.`,
+    questions: [
+      { prompt: "Does this post contain PII even though there's no address, phone number, or photo?",
+        options: ["No — without contact details, there's no PII issue","Yes — it identifies a living person (Jim Doe) and implies the poster's siblings by relation","No — only direct contact information counts as PII","Yes, but only because it names an ancestor"], correct: 1 },
+      { prompt: "Who becomes identifiable as a result of this post, beyond the person named?",
+        options: ["No one else","The poster's living siblings, by inference from the stated relationship chain","Distant cousins with no connection","Only deceased relatives"], correct: 1 },
+      { prompt: "What is this pattern called?",
+        options: ["Direct disclosure","PII through inference — identity revealed by connecting relationships rather than by a direct fact","Public record research","Not a PII pattern at all"], correct: 1 },
+      { prompt: "What's the better way to phrase this kind of research request?",
+        options: ["Include full names and current cities for accuracy","Describe the ancestral line generally and invite private messages for specifics","Post it exactly as written — it's fine","Tag the living relatives directly so they can confirm"], correct: 1 }
+    ]
+  },
+  {
+    title: "The Public Transcript",
+    scenario: `A customer support portal logs incoming chat interactions and displays them on a public troubleshooting forum. A support representative accidentally pastes a complete transcript containing a user's full legal name, social security number, and home address into a publicly searchable thread.`,
+    questions: [{
+      prompt: "What is the primary compliance failure regarding this data exposure?",
+      options: [
+        "The forum is fully compliant because support transcripts are considered public domain knowledge once submitted.",
+        "Publishing sensitive Personally Identifiable Information (PII) on a public-facing platform without redaction violates privacy regulations and user trust.",
+        "The issue is strictly technical, caused by failing to use an encrypted iframe tag for chat logs.",
+        "Support representatives are legally authorized to publish any customer data as long as the account status is active."
+      ], correct: 1
+    }]
+  },
+  {
+    title: "The Alumni Directory",
+    scenario: `An alumni or membership association publishes an online directory for networking purposes. Without seeking permission from individual members, the portal publicly lists every member's join year, county chapter, personal mobile phone number, and private home email address.`,
+    questions: [{
+      prompt: "What privacy boundary has been crossed by the association?",
+      options: [
+        "Publishing personal contact information like phone numbers and private emails without individual consent violates reasonable privacy expectations and institutional data policies.",
+        "Membership records are automatically designated as open public directory assets by federal statute.",
+        "The association is compliant because the directory is restricted to members.",
+        "The issue is restricted to a minor broken link in the navigation menu."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Lost Flash Drive",
+    scenario: `A volunteer coordinator downloads a spreadsheet containing thousands of volunteer applications — including names, phone numbers, and personal background details — and saves the file on a personal, unencrypted USB flash drive that is subsequently lost while commuting.`,
+    questions: [{
+      prompt: "What major security and data governance failure occurred?",
+      options: [
+        "Exporting sensitive volunteer PII to an unencrypted, unsecured portable storage device creates a high-risk vector for unauthorized data exposure and loss.",
+        "Volunteer records lose their confidential status once downloaded to local storage media.",
+        "The coordinator is compliant as long as the USB drive was manufactured by a certified brand.",
+        "The infraction is limited solely to a hardware inventory tracking error."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Open Cloud Bucket",
+    scenario: `An organization's administrative office stores volunteer and donor records — including addresses, banking routing numbers for reimbursements, and background-check details — in an open cloud storage folder that lacks password protection, allowing anyone on the internet to view or download the files via a direct URL.`,
+    questions: [{
+      prompt: "What core security and privacy breach is demonstrated here?",
+      options: [
+        "Leaving internal volunteer and donor records in an unsecured, publicly accessible directory exposes high-risk PII to unauthorized access and exfiltration.",
+        "Cloud storage folders are legally categorized as public archives by default unless locked down manually.",
+        "Donor banking and background-check information are classified as public organizational data rather than PII.",
+        "The organization is fully compliant as long as they track who accesses the direct download link."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Raw Survey Data",
+    scenario: `A volunteer satisfaction survey collects detailed demographic data, county assignments, and personal feedback from respondents. To share results quickly with the Board, the coordinator publishes the complete raw dataset in a shared document, featuring respondents' full names and email addresses directly linked to their individual answers.`,
+    questions: [{
+      prompt: "What core privacy and ethical standard has been violated?",
+      options: [
+        "Disclosing individual survey responses alongside direct identifiers like names and emails destroys respondent anonymity and breaches data confidentiality commitments.",
+        "Survey data is automatically classified as public domain material once submitted online.",
+        "The coordinator is compliant as long as the survey questions were answered voluntarily.",
+        "The issue is restricted exclusively to a missing copyright notice on the survey results page."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Scrapeable Resume Database",
+    scenario: `A volunteer application portal allows staff to search submitted applications. However, a system configuration flaw allows any unauthenticated visitor to query the database directly and pull up raw applicant files containing dates of birth, home addresses, phone numbers, and background history.`,
+    questions: [{
+      prompt: "What vulnerability and compliance failure is demonstrated here?",
+      options: [
+        "Failing to secure backend database access exposes applicant PII to public scraping and unauthorized harvesting, violating user privacy expectations.",
+        "Volunteer applications are intended to be globally accessible public documents with no access controls.",
+        "The portal is compliant because applicants submitted their information voluntarily.",
+        "The issue is strictly related to webpage load speeds rather than data security."
+      ], correct: 0
+    }]
+  }
+];
+
+/* ---------- Level 2: Copyright & Terms of Use (The Teacher) — 12 of 12 stops built ---------- */
+const LEVEL2_QUIZZES = [
+  {
+    title: "The CC BY-NC Embed",
+    scenario: `A training platform includes a tutorial video published under a Creative Commons Attribution-NonCommercial (CC BY-NC) license. A corporate blog embeds this video directly into a commercial product launch page to promote their paid subscription tier, without contacting the creator or securing separate commercial rights.`,
+    questions: [{
+      prompt: "What is the primary compliance issue regarding this usage?",
+      options: [
+        "The embedding is fully compliant because embedded media streams do not fall under copyright restrictions.",
+        "The usage violates the non-commercial restriction by deploying the material for commercial promotional gain without permission.",
+        "The blog failed to use an inline iframe tag, which invalidates the fair use exemption.",
+        "The creator's copyright is completely forfeited once media is embedded on any third-party platform."
+      ], correct: 1
+    }]
+  },
+  {
+    title: "The Copied Product Listing",
+    scenario: `An e-commerce website copies the entire product description, bulleted feature list, and promotional photography from a competing manufacturer's catalog word-for-word to populate their own store listings, providing no attribution or link back to the original source.`,
+    questions: [{
+      prompt: "What is the primary legal and ethical infraction in this scenario?",
+      options: [
+        "Original creative text and proprietary product imagery are protected by copyright, making unauthorized duplication infringement regardless of whether it is used for competing sales.",
+        "Product descriptions are considered public domain facts and can never be protected under intellectual property laws.",
+        "The e-commerce site is fully compliant under the digital curation act as long as the prices listed are lower than the competitor's.",
+        "The issue is restricted exclusively to trademark law, meaning copyright policies do not apply to online storefronts."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Newsletter Roundup",
+    scenario: `A digital newsletter curates a weekly roundup of industry news. For each external article, they copy the complete text (ranging from 1,500 to 3,000 words) directly into their email blast, adding only a tiny "Source: Daily Tech" text link at the very bottom of the post.`,
+    questions: [{
+      prompt: "What compliance failure has occurred in this publishing workflow?",
+      options: [
+        "The newsletter is entirely legal because they included an attribution link at the bottom.",
+        "Reproducing entire articles exceeds the legal boundaries of fair use for quotation or commentary, substituting for the original publisher's traffic.",
+        "Email newsletters are exempt from copyright law under private communication privileges.",
+        "The failure is strictly technical, caused by not placing the attribution link at the top of the email."
+      ], correct: 1
+    }]
+  },
+  {
+    title: "The Stripped Watermark",
+    scenario: `A graphic design blog downloads several high-resolution vector illustrations from an independent artist's portfolio website, strips out the embedded metadata and watermark, and re-uploads them into a public asset library labeled as "free public domain graphics for any use."`,
+    questions: [{
+      prompt: "What copyright or terms of use violation is demonstrated here?",
+      options: [
+        "Removing creator watermarks and metadata while redistributing proprietary art as public domain violates both copyright law and the artist's explicit terms of service.",
+        "Modifying metadata automatically converts copyrighted digital assets into open-source public domain material.",
+        "The blog is compliant because they categorized the images under a helpful asset library tag.",
+        "Independent artist portfolios are legally categorized as open-access educational resources by default."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Rebranded Wiki",
+    scenario: `A software documentation wiki takes detailed API integration guides from a third-party developer portal, pastes them directly into their own help center pages, and explicitly replaces all references and brand names of the original author with their own company name.`,
+    questions: [{
+      prompt: "What major violation of intellectual property standards is taking place?",
+      options: [
+        "This represents blatant copyright infringement combined with false attribution (plagiarism), stripping the creator of both ownership rights and credit.",
+        "Technical documentation is excluded from copyright protection, but replacing brand names violates open-source software licenses.",
+        "The wiki is fully compliant under software interoperability guidelines.",
+        "The issue is solely a trademark dispute, with no copyright implications involved."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The 90% Copy",
+    scenario: `A financial analyst publishes a deep-dive report analyzing a proprietary subscription research paper. Instead of summarizing or quoting brief excerpts for critique, the analyst copies 90 percent of the original paper's proprietary text and data tables verbatim into their open-access blog post, cutting off only the final conclusion paragraph.`,
+    questions: [{
+      prompt: "What makes this usage non-compliant under standard copyright doctrine?",
+      options: [
+        "The amount and substantiality of the portion copied verbatim supersedes what is legally permitted under fair use for commentary and analysis.",
+        "Financial data and analytical tables can never be copyrighted under any circumstances.",
+        "The blog post is compliant because they omitted the final paragraph of the original study.",
+        "Open-access blogs automatically acquire a compulsory license to reproduce subscription content."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Travel Scraper",
+    scenario: `A travel aggregator website scrapes full photo galleries and detailed hotel review write-ups daily from multiple independent travel blogs, displaying the content natively on their own pages without iframe embedding and without authorization from the original site owners.`,
+    questions: [{
+      prompt: "What core legal issue arises from this scraping practice?",
+      options: [
+        "Unauthorized scraping and republishing of complete copyrighted works on a third-party commercial platform constitutes widespread copyright infringement.",
+        "Automated scraping is protected under the data aggregation and search engine indexing exception.",
+        "The aggregator is fully compliant provided they include a small disclaimer stating that content belongs to respective owners.",
+        "Travel reviews are classified as user-generated content, meaning they enter the public domain instantly upon online publication."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Deleted License File",
+    scenario: `An educational app developer takes an open-source coding library hosted on GitHub. While the library's license explicitly mandates that any derivative software must retain the original copyright notice and license file, the developer deletes these files from the project directory and publishes the app under a closed-source proprietary license.`,
+    questions: [{
+      prompt: "What compliance failure has occurred in this software distribution?",
+      options: [
+        "The developer failed to comply with the mandatory attribution and license propagation terms of the open-source software license.",
+        "Open-source licenses are legally non-binding guidelines that carry no enforceable requirements.",
+        "The developer is compliant because modifying code automatically grants them a new copyright.",
+        "The issue is restricted to a minor formatting error in the project's root folder structure."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Silent Reaction Video",
+    scenario: `A fitness influencer records a 30-second reaction video to a popular online workout routine, playing the entire copyrighted instruction video uninterrupted in the background while eating a snack and offering zero commentary, critique, or transformative analysis.`,
+    questions: [{
+      prompt: "Why does this video fail the standard test for legal compliance?",
+      options: [
+        "The use fails the transformative nature test required by fair use, as it merely republishes the original work in full without adding substantial new expression or critique.",
+        "Reaction videos of any length are entirely exempt from copyright restrictions under social media platform safe harbors.",
+        "The clip is compliant because it is under one minute long.",
+        "Fitness instructions are considered athletic movements and cannot be protected by copyright."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Menu Database",
+    scenario: `A marketing agency compiles a database by copying thousands of proprietary restaurant menus, pricing structures, and chef bios directly from individual restaurant websites, compiling them into a paid directory service sold to local tourists without seeking consent or licensing agreements.`,
+    questions: [{
+      prompt: "What primary legal and structural violation is present?",
+      options: [
+        "Systematic unauthorized copying and commercial exploitation of proprietary compilation data and original descriptions violate database rights and copyright protections.",
+        "Restaurant menus and pricing information are completely unprotected public facts.",
+        "The agency is compliant under the directory assistance exception for local commerce.",
+        "The issue is solely a breach of contract rather than an intellectual property violation."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Rewritten RSS Feed",
+    scenario: `A news aggregator site publishes full-length RSS feed articles sourced from various media outlets. To maximize ad revenue on their own platform, they modify the headline text, strip out all outbound hyperlinks pointing to the original publishers, and present the reporting as their own staff-written articles.`,
+    questions: [{
+      prompt: "What multiple compliance and ethical violations are evident?",
+      options: [
+        "The site is committing copyright infringement, removing essential attribution links, and engaging in deceptive publishing practices by misrepresenting authorship.",
+        "RSS feeds are legally intended to be completely rewritten and republished without attribution.",
+        "The aggregator is fully compliant under standard news syndication privileges.",
+        "The infraction is limited solely to an RSS protocol syntax error."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Downloaded Infographic",
+    scenario: `A lifestyle blogger finds an eye-catching, professionally shot infographic on an external design agency's website. Instead of linking to the source or embedding it via the agency's provided share code, the blogger downloads the image file, hosts it directly on their own media server, and publishes it within their post without any source credit.`,
+    questions: [{
+      prompt: "What copyright and usage policy boundary has been crossed?",
+      options: [
+        "Hotlinking or unauthorized downloading and direct hosting of proprietary graphic design assets without license or attribution violates copyright law and terms of use.",
+        "Infographics published online are automatically designated as public domain clip art.",
+        "The blogger is compliant because visual graphics shared on the internet are meant for universal distribution.",
+        "The issue is strictly technical, related to server bandwidth consumption rather than intellectual property."
+      ], correct: 0
+    }]
+  }
+];
+
+/* ---------- Level 3: Legal Release Dates for Records (The Scholar) — 12 of 12 stops built ---------- */
+const LEVEL3_QUIZZES = [
+  {
+    title: "The Rejected Marriage License Request",
+    scenario: `A local history enthusiast attempts to access 1940s marriage licenses and 1950s vital statistics through a state archival portal, only to find that recent public record access requests are being rejected uniformly across the board.`,
+    questions: [{
+      prompt: "What is the primary statutory or compliance issue governing public release timelines for marriage and vital records in most jurisdictions?",
+      options: [
+        "Vital records like marriage and birth certificates typically remain under privacy restrictions for a designated statutory timeframe (often 50 to 100 years) to protect living individuals before becoming fully open to the public.",
+        "All state vital records are immediately accessible to any citizen on the exact day they are filed with the county clerk.",
+        "Marriage records are classified as top-secret federal documents that can never be released to civilian researchers.",
+        "The state portal is fully compliant because privacy laws permanently ban the disclosure of historical marriage data."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Denied Census Request",
+    scenario: `A genealogy researcher submits a records request for a federal decennial census record from less than 70 years ago, but the national archive denies the request, citing strict federal disclosure laws.`,
+    questions: [{
+      prompt: "What core legal restriction dictates the public release timeline for federal census records?",
+      options: [
+        "Federal census data is legally sealed for 72 years from the date of the enumeration to balance historical research needs with the personal privacy of living respondents.",
+        "Census records are legally mandated to become public domain exactly 10 years after collection.",
+        "Federal census data can only be accessed by immediate family members of the listed respondents indefinitely.",
+        "The archive violated federal law by withholding the census data prior to its 100-year expiration mark."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The 150-Year Land Record Claim",
+    scenario: `A title researcher attempts to pull property deed and land transaction records from 1920 at a county courthouse, but the clerk's office refuses access, claiming that land records remain strictly confidential for a minimum of 150 years.`,
+    questions: [{
+      prompt: "What is the standard legal compliance issue regarding historical land and property records?",
+      options: [
+        "Land transactions and property deeds are public economic records that are generally open for public inspection much earlier than vital records, meaning a 150-year restriction violates public recording statutes.",
+        "Property deeds are permanently confidential documents restricted exclusively to the original landowners' descendants.",
+        "Land transactions become legally void and enter public domain after exactly 50 years.",
+        "County clerks have total legal discretion to lock property records for any duration without oversight."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Sealed Will",
+    scenario: `A biographer requests access to a recently filed probate will and associated estate inventory documents from a local probate court. The court rejects the request, stating that all wills are permanently sealed to protect the privacy of the deceased person's heirs.`,
+    questions: [{
+      prompt: "What standard legal status applies to probate and will records?",
+      options: [
+        "Once a will enters probate and is processed by the court, it becomes a matter of public record, making a permanent blanket sealing policy non-compliant with open court and probate laws.",
+        "Wills remain strictly confidential and closed to the public for a mandatory period of 100 years.",
+        "Probate records are automatically classified as corporate trade secrets upon filing.",
+        "The court is fully compliant because estate files are exempt from public records statutes."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The 100-Year Birth Certificate Denial",
+    scenario: `A family historian attempts to pull a birth certificate from a state department of health for an individual born 40 years ago. The request is denied because the state enforces a strict 100-year closure rule on all birth records, regardless of whether the individual is living or deceased.`,
+    questions: [{
+      prompt: "What standard regulatory distinction governs the public release timeline of birth records?",
+      options: [
+        "Birth records carry extended privacy windows (frequently 75 to 100 years, or until proof of death) to safeguard living persons against identity theft and fraud.",
+        "Birth records must legally become public knowledge immediately upon the child's first birthday.",
+        "State health departments are legally prohibited from ever releasing birth certificates under any circumstances.",
+        "The 100-year rule is legally invalid because vital statistics are open public data at birth."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Death Record Comparison",
+    scenario: `A researcher requests access to death certificates filed at a state vital statistics office from 35 years ago. The office denies the request, arguing that death records are restricted for a full century just like birth records.`,
+    questions: [{
+      prompt: "What is the typical legal compliance standard regarding the public release timeline of death records compared to birth records?",
+      options: [
+        "Death records generally have much shorter privacy closure windows (often ranging from 20 to 50 years) than birth records because deceased individuals no longer hold privacy rights in the same manner.",
+        "Death records are classified as permanent state secrets that can never be viewed by the public.",
+        "Death certificates must remain confidential for a minimum of 200 years to protect family estates.",
+        "The office is compliant because death records follow the exact same statutory timeline as birth records."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Sealed Divorce Decree",
+    scenario: `A legal historian applies to view divorce decrees filed at a county court from 45 years ago. The court clerk refuses the request, asserting that all domestic relations and divorce case files are permanently sealed from public scrutiny by state mandate.`,
+    questions: [{
+      prompt: "What is the general legal principle governing court records, including divorce proceedings?",
+      options: [
+        "Court proceedings and final judgments like divorce decrees are presumptively public records open to inspection after a standard statutory archiving period, barring specific judicial sealing orders for sensitive cases.",
+        "Divorce records are automatically sealed forever upon the finalization of the legal separation.",
+        "Court clerks are legally required to destroy all divorce files after 10 years to save storage space.",
+        "Domestic relations files are categorized as private personal letters rather than public court documents."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Confidential Tax Rolls",
+    scenario: `A researcher attempts to access historical tax assessment rolls and property tax lien records from the 1930s at a municipal tax office. The office rejects the request, claiming tax records are confidential financial documents that remain closed to the public for 100 years.`,
+    questions: [{
+      prompt: "What compliance reality governs tax assessment and municipal property records?",
+      options: [
+        "Municipal tax assessment rolls and public property tax records are public fiscal documents meant for open inspection, making a 100-year closure policy legally unjustified.",
+        "Tax records are classified as private personal income data and can never be made public.",
+        "Tax assessment records expire and are deleted from government systems every five years.",
+        "The tax office is fully compliant under federal banking privacy acts."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Sealed Naturalization Petition",
+    scenario: `A historical society requests access to naturalization and citizenship petitions filed in a federal district court during the 1920s. The court clerk blocks access, claiming immigration and naturalization records are sealed for 150 years.`,
+    questions: [{
+      prompt: "What standard access timeline governs historical naturalization and immigration records?",
+      options: [
+        "Historical naturalization and court-filed immigration records are public historical documents that transition to open archives much sooner than 150 years (often managed via national archives after standard administrative windows).",
+        "Naturalization records are permanently classified as restricted national security files.",
+        "Immigration petitions are automatically expunged from government databases after 20 years.",
+        "The court is compliant because federal immigration laws bar public access to all foreign-born citizen records."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Locked Civil Case File",
+    scenario: `A local news organization requests copies of civil lawsuit case files and civil judgments from a county clerk's office dating back 30 years. The clerk denies the request, stating that all civil litigation files are permanently locked away once a case is closed.`,
+    questions: [{
+      prompt: "What core legal mandate dictates public access to civil court case files?",
+      options: [
+        "Under common law and open courts principles, civil litigation files and final judgments are public records that remain accessible after closure, rather than being permanently locked away.",
+        "Civil lawsuit files are legally required to be destroyed immediately upon the conclusion of a trial.",
+        "County clerks have absolute statutory authority to seal any civil case file indefinitely without judicial review.",
+        "The clerk's policy is fully compliant because closed civil cases lose their public record status."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Coroner's Report Denial",
+    scenario: `A researcher requests access to historical coroner's inquest files and medical examiner investigation reports from a major public health disaster that occurred 60 years ago. The county medical examiner denies the request, citing permanent medical confidentiality rules.`,
+    questions: [{
+      prompt: "What legal standard applies to historical coroner and medical examiner reports?",
+      options: [
+        "While acute medical records are strictly protected during a person's life, historical public safety and coroner investigation reports eventually transition into open public historical archives after a reasonable statutory period.",
+        "Medical examiner reports are classified as private doctor-patient communications for eternity.",
+        "Coroner inquest files are automatically destroyed 10 years after an investigation concludes.",
+        "The medical examiner is fully compliant because investigative medical files are permanently exempt from public records laws."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Denied Military Discharge Record",
+    scenario: `A genealogist files a freedom of information request for a historical military service record and discharge paper from a veteran who served over a century ago. The military personnel records center denies the request, claiming service files are confidential personnel records closed to everyone indefinitely.`,
+    questions: [{
+      prompt: "What is the established public release framework for historical military personnel and service records?",
+      options: [
+        "Military service and discharge records transition into publicly accessible archival records after a defined statutory window (such as 62 years after discharge for National Personnel Records Center files), rather than remaining permanently closed.",
+        "Military service files are classified as confidential defense secrets that can never be reviewed by civilians.",
+        "Discharge papers are automatically destroyed the moment a service member separates from the armed forces.",
+        "The records center is compliant because military personnel data is exempt from all public record timelines."
+      ], correct: 0
+    }]
+  }
+];
+
+/* ---------- Level 4: Inurement & Commercial/Personal Gain (The Village Court Clerk) — 1 of 12 stops built ---------- */
+const LEVEL4_QUIZZES = [
+  {
+    title: "The Board Member's Side Business",
+    scenario: `A board member of a nonprofit environmental group uses the organization's official public discussion board to heavily promote their private, for-profit eco-tourism travel agency, posting daily commercial tour packages and booking links under the guise of organizational announcements.`,
+    questions: [{
+      prompt: "What conflict of interest and private benefit violation has occurred?",
+      options: [
+        "Utilizing an organizational public discussion platform for personal commercial self-promotion and private financial gain violates nonprofit ethics and benefit rules.",
+        "Nonprofit board members retain absolute rights to advertise personal travel agencies on organizational boards.",
+        "The board member is compliant provided they offer a ten percent discount to fellow members.",
+        "The issue is restricted to a typographical error in the travel package pricing schedule."
+      ], correct: 0
+    }]
+  }
+];
+
+/* ---------- Level 4: Inurement & Commercial/Personal Gain (The Village Court Clerk) — 12 of 12 stops built ---------- */
+const LEVEL4_QUIZZES_PART2 = [
+  {
+    title: "The Self-Published Book Plug",
+    gotcha: true,
+    scenario: `A community member on the KHGN social platform posts about a local historical event and mentions their newly published local history book. They note that while the book is a commercial product sold for personal royalties, reading it will give members a "deep appreciation" for the community's heritage.`,
+    questions: [{
+      prompt: "What core compliance issue or 'gotcha' regarding self-promotion has occurred?",
+      options: [
+        "Even when content is educationally relevant or locally focused, using the platform to drive commercial sales for personal financial gain constitutes an improper private benefit.",
+        "Promoting a book is fully compliant as long as the author includes a brief historical anecdote in the post text.",
+        "Authors are completely exempt from self-promotion limits if their book references community history.",
+        "The issue is restricted exclusively to a missing preview chapter link in the post body."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Records Handling Fee",
+    gotcha: true,
+    scenario: `A regular forum user posts an offer providing free research services to fellow members who are building family trees. However, they require users to pay a fixed "shipping and handling fee" for digital PDF files of public census and marriage records they copy from free government archives.`,
+    questions: [{
+      prompt: "What deceptive 'gotcha' scenario regarding public records monetization has taken place?",
+      options: [
+        "Charging fees — even disguised as administrative or shipping costs — for the distribution of publicly available government records violates community trust and fair-use norms.",
+        "Charging digital handling fees for public records is fully legal as long as the records themselves were originally free.",
+        "Forum users have absolute rights to monetize public records through arbitrary document delivery fees.",
+        "The problem is limited strictly to a typographical error in the digital delivery timeframe."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Personal Cemetery Fundraiser",
+    gotcha: true,
+    scenario: `A dedicated volunteer posts an urgent fundraising request on the KHGN community board, asking members to send money via a personal electronic payment handle for "essential maintenance and upkeep" of a historic local cemetery plot where early pioneers are buried.`,
+    questions: [{
+      prompt: "What compliance failure or borderline violation has been triggered by this post?",
+      options: [
+        "Soliciting funds for external projects — even community-minded causes like cemetery upkeep — into personal payment accounts without institutional oversight violates fundraising and anti-fraud rules.",
+        "Independent fundraising for historical cemeteries is automatically permitted on all nonprofit community boards.",
+        "The post is fully compliant because cemetery upkeep is a charitable and benevolent community endeavor.",
+        "The issue is restricted to a minor formatting error in the personal payment handle link."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Comment-Section Discount Funnel",
+    gotcha: true,
+    scenario: `A professional photographer posts a stunning gallery of local landscape photos on the KHGN platform. In the comments, when users compliment the work, the photographer drops a link to their commercial booking site, offering discounted portrait sessions exclusively to KHGN members.`,
+    questions: [{
+      prompt: "What borderline self-promotion 'gotcha' is demonstrated here?",
+      options: [
+        "Leveraging community engagement by posting creative work as a backdoor funnel to advertise commercial services and discount packages breaches anti-spam and self-promotion policies.",
+        "Photographers are legally encouraged to offer member-only discounts on their commercial services within community threads.",
+        "The post is fully compliant because the initial photo gallery shared on the platform was free to view.",
+        "The infraction is limited solely to a missing copyright watermark on the landscape images."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Paywalled Public Record Index",
+    gotcha: true,
+    scenario: `A user posts a curated index of historical divorce and land records on the community board. They state the database is free to search, but block access to the actual record transcriptions behind a tiered "premium subscriber" paywall operated by their personal side business.`,
+    questions: [{
+      prompt: "What policy violation occurs in this paywalled data sharing setup?",
+      options: [
+        "Using a community platform to drive traffic toward a personal paid subscription service built on public records exploits the network for private commercial gain.",
+        "Community users are allowed to gate any database they compile behind a commercial paywall.",
+        "The post is fully compliant because the initial index search feature is provided free of charge.",
+        "The issue is restricted exclusively to a broken stylesheet path on the subscriber login page."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Undisclosed Referral Commission",
+    gotcha: true,
+    scenario: `A long-time forum contributor writes a glowing product review for a local tax preparation software tool. They disclose that they received a free copy of the software from the vendor, but omit the fact that they earn a cash commission for every user who signs up using their unique referral code.`,
+    questions: [{
+      prompt: "What subtle ethical and transparency 'gotcha' has been committed?",
+      options: [
+        "Failing to disclose hidden financial incentives and referral commissions while posting positive product reviews misleads members and violates commercial transparency standards.",
+        "Reviewers are never required to disclose financial commissions as long as they received the product for free.",
+        "The review is fully compliant because tax preparation software is a useful tool for community members.",
+        "The problem is limited strictly to a missing version number in the software review title."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Courier Expense Request",
+    gotcha: true,
+    scenario: `A member posts a request for donations to help cover the "gas and courier expenses" required to drive to the county archives, copy dozens of 19th-century probate wills, and mail physical paper copies to interested local history hobbyists.`,
+    questions: [{
+      prompt: "What unauthorized solicitation boundary has been crossed in this post?",
+      options: [
+        "Requesting reimbursement or donations for personal travel and copying expenses related to public records creates an unauthorized commercial transaction loop within the community platform.",
+        "Members are permitted to request travel expense reimbursements for any historical research project they undertake.",
+        "The post is fully compliant because historical wills are public domain documents.",
+        "The issue is restricted to a minor calculation error in the estimated mileage total."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Signature Banner Ad",
+    gotcha: true,
+    scenario: `A local business owner creates a helpful, informative discussion thread about small business tax strategies, but intentionally signs off every reply using their corporate title and a signature banner that reads: "Need expert accounting? Visit my firm's paid booking page here."`,
+    questions: [{
+      prompt: "What subtle self-promotion violation is present in this signature setup?",
+      options: [
+        "Utilizing persistent signature banners and professional titles to perpetually advertise a commercial advisory service constitutes unauthorized passive self-promotion.",
+        "Business owners are entitled to include commercial booking links in their forum signatures on any platform.",
+        "The thread is fully compliant because the core tax advice provided in the body text was accurate.",
+        "The infraction is limited solely to a font size discrepancy in the signature banner text."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Webinar Bait-and-Switch",
+    gotcha: true,
+    scenario: `A member posts an announcement about a free community webinar on genealogy research. However, during the live webinar hosted via an external link, attendees are heavily pressured to purchase the presenter's expensive, proprietary software package required to execute the techniques shown.`,
+    questions: [{
+      prompt: "What deceptive 'bait-and-switch' self-promotion violation has occurred?",
+      options: [
+        "Promoting a free educational event on the community platform only to upsell attendees on proprietary commercial products constitutes deceptive marketing and self-promotion.",
+        "Presenters are legally allowed to sell any software package they want at the end of a free webinar.",
+        "The community post is fully compliant because the initial webinar announcement advertised free admission.",
+        "The issue is restricted exclusively to a broken video stream link in the event room."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The Venmo PDF",
+    gotcha: true,
+    scenario: `A forum user copies hundreds of birth and marriage transcriptions from a subscription-only genealogy website, pastes them into a KHGN discussion thread, and adds a note stating: "If you want the clean PDF formatting and citation index, send $5 to my personal Venmo."`,
+    questions: [{
+      prompt: "What dual compliance violation involving copyright and monetization is demonstrated?",
+      options: [
+        "Republishing copyrighted data sourced from external paid platforms while attempting to monetize the output via personal payment handles violates intellectual property and anti-profiteering rules.",
+        "Users have absolute freedom to redistribute any data they find online and charge whatever fees they choose.",
+        "The post is fully compliant because the user added custom PDF formatting to the copied records.",
+        "The problem is limited strictly to a typographical error in the Venmo handle username."
+      ], correct: 0
+    }]
+  },
+  {
+    title: "The 'Volunteer' Print Shop",
+    gotcha: true,
+    scenario: `A community member posts an offer to design custom digital family tree charts for other users. They clarify that the design work is done "strictly on a volunteer basis," but require clients to pay a mandatory printing and courier fee through their private online print shop.`,
+    questions: [{
+      prompt: "What borderline commercial 'gotcha' has been triggered by this service offer?",
+      options: [
+        "Framing a commercial printing service as a voluntary favor while routing mandatory payments through a private retail shop bypasses platform commerce restrictions.",
+        "Members are fully permitted to run private print shops as long as the initial design labor is labeled as voluntary.",
+        "The post is compliant because custom family tree charts are useful visual aids for genealogy enthusiasts.",
+        "The issue is restricted to a minor delay in the print shop's shipping confirmation emails."
+      ], correct: 0
+    }]
+  }
+];
+LEVEL4_QUIZZES.push(...LEVEL4_QUIZZES_PART2);
+
+/* ---------- Level construction ---------- */
+const LEVELS = [
+  {
+    id: 1,
+    topic: "Personally Identifiable Information",
+    guideName: "The Village Elder",
+    guideRole: "Trail Guide",
+    guideSvg: ELDER_SVG,
+    introText: `"Before you carry another family's story forward, you must learn to carry it carefully. What you're about to guard is called Personally Identifiable Information — PII, for short. It's any detail that can point back to a real, living person: a name paired with an address, a phone number, a workplace, a face in a recent photo tagged with a location. Our ancestors' stories are meant to be shared. The people still walking among us deserve a say in how their own details travel. Answer true, and you'll earn your place watching over these records. Answer false, and I'm afraid the Sheriff will have a word with you."`,
+    quizzes: LEVEL1_QUIZZES
+  },
+  {
+    id: 2,
+    topic: "Copyright & Terms of Use",
+    guideName: "The Teacher",
+    guideRole: "Trail Guide",
+    guideSvg: TEACHER_SVG,
+    introText: `"Welcome to the schoolhouse. Here we study a different kind of trust: the trust between a researcher and the work of others. Old records, transcriptions, photographs, and even other researchers' family trees can carry copyright or terms-of-use restrictions. Reusing them without permission — even with good intentions — can cause real harm to the people and institutions who preserved them. Twelve lessons await. Study well." `,
+    quizzes: LEVEL2_QUIZZES
+  },
+  {
+    id: 3,
+    topic: "Legal Release Dates for Records",
+    guideName: "The Scholar",
+    guideRole: "Trail Guide",
+    guideSvg: SCHOLAR_SVG,
+    introText: `"Every record has its season. Census records, vital records, and court files each become public at different times — some after decades, some sooner, some not at all without special permission. Sharing a record before its legal release date isn't just a technicality; it can violate real privacy law. Let us study the calendar of records together."`,
+    quizzes: LEVEL3_QUIZZES
+  },
+  {
+    id: 4,
+    topic: "Inurement & Commercial/Personal Gain",
+    guideName: "The Village Court Clerk",
+    guideRole: "Trail Guide",
+    guideSvg: CLERK_SVG,
+    introText: `"Step into my office. As a nonprofit, KHGN's resources, records, and volunteer labor exist for the public benefit — not for the private gain of any one person, however well-connected. Using our platform, our data, or our name for personal or commercial advantage is called inurement, and it can jeopardize the organization's entire nonprofit status. Let's make sure every trainee understands exactly where that line sits."`,
+    quizzes: LEVEL4_QUIZZES
+  }
+];
+
+/* ---------- State ---------- */
+let currentLevelIdx = 0;
+let currentStop = 0; // 0 = intro
+let quizAnswers = {}; // keyed by `${levelIdx}-${stop}`
+let unlockedLevels = [true, false, false, false];
+let gateUnlocked = [false, false, false, false]; // has the reading gate been passed for this level?
+let gateTimerInterval = null;
+let gateElapsedSeconds = 0;
+let gateScrolledToEnd = false;
+
+function levelKey(stop){ return currentLevelIdx + '-' + stop; }
+
+function renderLevelTabs(){
+  const wrap = document.getElementById('level-tabs');
+  wrap.innerHTML = '';
+  LEVELS.forEach((lvl, i) => {
+    const tab = document.createElement('div');
+    tab.className = 'level-tab' + (i === currentLevelIdx ? ' active' : '') + (!unlockedLevels[i] ? ' locked' : '');
+    tab.innerHTML = `<div class="lt-num">LEVEL ${lvl.id}${unlockedLevels[i] ? '' : ' · LOCKED'}</div>
+      <div class="lt-name">${lvl.guideName}</div>
+      <div class="lt-topic">${lvl.topic}</div>`;
+    if(unlockedLevels[i]){
+      tab.onclick = () => { currentLevelIdx = i; currentStop = 0; render(); };
+    }
+    wrap.appendChild(tab);
+  });
+}
+
+function renderTrail(){
+  const trail = document.getElementById('trail');
+  trail.innerHTML = '';
+  const line = document.createElement('div'); line.className = 'trail-line'; trail.appendChild(line);
+  const fill = document.createElement('div'); fill.className = 'trail-line-fill';
+  const pct = currentStop === 0 ? 0 : ((currentStop-1) / (TOTAL_STOPS-1)) * 100;
+  fill.style.width = pct + '%';
+  trail.appendChild(fill);
+  const quizzes = LEVELS[currentLevelIdx].quizzes;
+  for(let i=1;i<=TOTAL_STOPS;i++){
+    const stop = document.createElement('div');
+    stop.className = 'stop';
+    if(i < currentStop) stop.classList.add('done');
+    if(i === currentStop) stop.classList.add('current');
+    const dot = document.createElement('div'); dot.className = 'stop-dot';
+    dot.textContent = i < currentStop ? '✓' : i;
+    const label = document.createElement('div'); label.className = 'stop-label';
+    label.textContent = i <= quizzes.length ? 'Stop '+i : '';
+    stop.appendChild(dot); stop.appendChild(label);
+    trail.appendChild(stop);
+  }
+}
+
+function resetLevel(){
+  currentStop = 0;
+  render();
+}
+
+function startLevel(){
+  currentStop = 1;
+  render();
+}
+
+function renderIntro(){
+  const lvl = LEVELS[currentLevelIdx];
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${lvl.guideSvg}</div>
+      <div class="char-meta">
+        <p class="char-name">${lvl.guideName}</p>
+        <p class="char-role">${lvl.guideRole} · Level ${lvl.id}: ${lvl.topic}</p>
+        <button class="narration-btn" onclick="playNarration('level${lvl.id}-intro')">▶ Play narration</button>
+      </div>
     </div>
+    <p class="body-text">${lvl.introText}</p>
+    <button class="primary-btn" onclick="startLevel()">Begin the Trail</button>
+  </div>
+  <div class="footer-note" style="margin-top:14px;">
+    Staff note: replace playNarration() with your recorded voiceover audio file per character.
+  </div>`;
+}
 
-    <main class="game-container">
-        <div class="game-header">
-            <h1>The Tipple Trial</h1>
-            <p>Compliance Training: PII, Copyright, Terms of Use, and Local Release Dates</p>
-        </div>
+function renderQuiz(stopIndex){
+  const lvl = LEVELS[currentLevelIdx];
+  const quiz = lvl.quizzes[stopIndex-1];
+  if(!quiz){
+    return `<div class="card"><p class="body-text">Level ${lvl.id} (${lvl.topic}) — Waypoint ${stopIndex} content is still being written. Add it to that level's quizzes array in the code.</p>
+    <button class="primary-btn" onclick="advanceAfterPass()">Skip for now (prototype only)</button></div>`;
+  }
+  const key = levelKey(stopIndex);
+  const answered = quizAnswers[key] !== undefined;
+  let html = `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${lvl.guideSvg}</div>
+      <div class="char-meta">
+        <p class="char-name">${quiz.title}</p>
+        <p class="char-role">Level ${lvl.id} · Trail Stop ${stopIndex} of ${TOTAL_STOPS}</p>
+      </div>
+    </div>
+    ${quiz.gotcha ? '<span class="gotcha-badge">⚠ BORDERLINE CASE</span>' : ''}
+    <div class="scenario-box">${quiz.scenario}</div>
+  `;
 
-        <!-- 
-          The GDevelop export files live at the root of the game--portal repo,
-          not in the "Village People" subfolder (that folder only contains a placeholder).
-          Point directly at the repo root's index.html to avoid a 404.
-        -->
-        <div class="canvas-wrapper">
-            <iframe src="https://khgninc-cell.github.io/game--portal/index.html" allowfullscreen></iframe>
-        </div>
-    </main>
+  quiz.questions.forEach((q, qi) => {
+    const picked = quizAnswers[key]?.[qi];
+    html += `<div class="question-block">
+      <div class="q-num">QUESTION ${qi+1} OF ${quiz.questions.length}</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options">`;
+    q.options.forEach((opt, oi) => {
+      let cls = 'option';
+      if(answered){
+        if(oi === q.correct) cls += ' correct';
+        else if(oi === picked) cls += ' incorrect';
+      } else if(picked === oi){
+        cls += ' selected';
+      }
+      html += `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="selectAnswer(${stopIndex},${qi},${oi})">${opt}</button>`;
+    });
+    html += `</div></div>`;
+  });
 
+  if(!answered){
+    const allPicked = quiz.questions.every((_,qi) => quizAnswers[key]?.[qi] !== undefined);
+    html += `<button class="primary-btn" ${allPicked ? '' : 'disabled'} onclick="submitQuiz(${stopIndex})">Submit Answers</button>`;
+  } else {
+    const numCorrect = quiz.questions.filter((q,qi) => quizAnswers[key][qi] === q.correct).length;
+    const passed = numCorrect === quiz.questions.length;
+    if(passed){
+      const isLast = stopIndex === TOTAL_STOPS;
+      html += `<div class="feedback-banner pass">✓ All correct — the trail continues.</div>
+      <button class="primary-btn" onclick="advanceAfterPass()">${isLast ? 'Finish Level ' + lvl.id : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+    } else {
+      html += `<div class="feedback-banner fail">⚠ ${quiz.questions.length - numCorrect} answer(s) missed. The Sheriff would like a word.</div>
+      <button class="primary-btn" onclick="goToSheriff(${stopIndex})">Face the Sheriff</button>`;
+    }
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function renderSheriff(stopIndex){
+  const lvl = LEVELS[currentLevelIdx];
+  const quiz = lvl.quizzes[stopIndex-1];
+  const key = levelKey(stopIndex);
+  const missedIndex = quiz.questions.findIndex((q,qi) => quizAnswers[key][qi] !== q.correct);
+  const q = quiz.questions[missedIndex];
+
+  return `
+  <div class="card sheriff">
+    <div class="character-row">
+      <div class="portrait">${SHERIFF_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">The Sheriff</p>
+        <p class="char-role">Compliance &amp; Consequences</p>
+        <button class="narration-btn" onclick="playNarration('sheriff-L${lvl.id}-'+stopIndex)">▶ Play narration</button>
+      </div>
+    </div>
+    <p class="body-text">
+      "Hold on now. What you just approved would've caused real harm — this is exactly the kind of
+      mistake that damages trust, exposes people to risk, and puts this organization's credibility
+      on the line. I'm going to give you one more chance to get it right. Answer true this time, and
+      you'll walk on. Answer false, and you're headed back to the start of this level."
+    </p>
+    <div class="final-question">
+      <div class="q-num">FINAL CHANCE</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options" id="final-options">
+        ${q.options.map((opt,oi) => `<button class="option" onclick="answerFinal(${stopIndex},${missedIndex},${oi})">${opt}</button>`).join('')}
+      </div>
+    </div>
+    <div id="final-result"></div>
+  </div>`;
+}
+
+function renderLevelComplete(){
+  const lvl = LEVELS[currentLevelIdx];
+  const isLastLevel = currentLevelIdx === LEVELS.length - 1;
+  let html = `
+  <div class="card complete-screen ${isLastLevel ? 'program-complete' : ''}">
+    <div class="badge">${isLastLevel ? '🏆' : '🏅'}</div>
+    <p class="char-name" style="font-size:26px;">${isLastLevel ? 'Program Complete' : 'Level ' + lvl.id + ' Complete'}</p>
+    <p class="body-text">
+      ${isLastLevel
+        ? `You've cleared all four levels of KHGN Field Training. You're now eligible for the Community Advisory Committee's field-worker track.`
+        : `You've cleared all ${TOTAL_STOPS} waypoints of ${lvl.topic}. Level ${lvl.id + 1}: ${LEVELS[currentLevelIdx+1].topic} awaits.`}
+    </p>`;
+  if(isLastLevel){
+    html += `<div id="volunteer-form-hook">KHGN staff: embed your volunteer sign-up / contact form here.</div>`;
+  } else {
+    html += `<button class="primary-btn" onclick="goToNextLevel()">Continue to Level ${lvl.id + 1}</button>`;
+  }
+  html += `<button class="secondary-btn" onclick="resetLevel()">Replay This Level</button></div>`;
+  return html;
+}
+
+function renderGate(){
+  const lvl = LEVELS[currentLevelIdx];
+  const articleHtml = renderMarkdown(ARTICLES[lvl.id] || '');
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${lvl.guideSvg}</div>
+      <div class="char-meta">
+        <p class="char-name">Required Reading</p>
+        <p class="char-role">Level ${lvl.id}: ${lvl.topic}</p>
+      </div>
+    </div>
+    <div class="article-content" id="article-scroll" onscroll="checkArticleScroll()">
+      ${articleHtml}
+    </div>
+    <div class="gate-status">
+      <div class="gate-row" id="scroll-indicator">○ Scroll to the end of the reading</div>
+      <div class="gate-row" id="timer-indicator">○ Reading time: 00:00 / ${String(Math.floor(MIN_READ_SECONDS/60)).padStart(2,'0')}:00</div>
+    </div>
+    <button class="primary-btn" id="gate-continue-btn" disabled onclick="passGate()">Continue to the Trail</button>
+  </div>`;
+}
+
+function startGateTimer(){
+  clearGateTimer();
+  gateElapsedSeconds = 0;
+  gateScrolledToEnd = false;
+  updateGateStatus();
+  gateTimerInterval = setInterval(() => {
+    gateElapsedSeconds++;
+    updateGateStatus();
+  }, 1000);
+}
+
+function clearGateTimer(){
+  if(gateTimerInterval){ clearInterval(gateTimerInterval); gateTimerInterval = null; }
+}
+
+function checkArticleScroll(){
+  const el = document.getElementById('article-scroll');
+  if(!el) return;
+  if(el.scrollTop + el.clientHeight >= el.scrollHeight - 20){
+    gateScrolledToEnd = true;
+  }
+  updateGateStatus();
+}
+
+function updateGateStatus(){
+  const scrollEl = document.getElementById('scroll-indicator');
+  const timerEl = document.getElementById('timer-indicator');
+  const btn = document.getElementById('gate-continue-btn');
+  if(!scrollEl || !timerEl) return; // screen has moved on
+  scrollEl.textContent = (gateScrolledToEnd ? '✓' : '○') + ' Scroll to the end of the reading';
+  scrollEl.classList.toggle('gate-done', gateScrolledToEnd);
+  const mm = String(Math.floor(gateElapsedSeconds/60)).padStart(2,'0');
+  const ss = String(gateElapsedSeconds%60).padStart(2,'0');
+  const totalMin = String(Math.floor(MIN_READ_SECONDS/60)).padStart(2,'0');
+  const timeDone = gateElapsedSeconds >= MIN_READ_SECONDS;
+  timerEl.textContent = (timeDone ? '✓' : '○') + ` Reading time: ${mm}:${ss} / ${totalMin}:00`;
+  timerEl.classList.toggle('gate-done', timeDone);
+  if(btn) btn.disabled = !(gateScrolledToEnd && timeDone);
+}
+
+function passGate(){
+  clearGateTimer();
+  gateUnlocked[currentLevelIdx] = true;
+  currentStop = 0;
+  render();
+}
+
+function render(){
+  renderLevelTabs();
+  const stage = document.getElementById('stage');
+  const trailWrap = document.getElementById('trail-wrap');
+  const lvl = LEVELS[currentLevelIdx];
+
+  if(!gateUnlocked[currentLevelIdx]){
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderGate();
+    startGateTimer();
+    return;
+  }
+  clearGateTimer();
+  trailWrap.style.display = '';
+
+  renderTrail();
+  if(currentStop === 0){
+    stage.innerHTML = renderIntro();
+  } else if(currentStop <= TOTAL_STOPS){
+    stage.innerHTML = renderQuiz(currentStop);
+  } else {
+    stage.innerHTML = renderLevelComplete();
+  }
+}
+
+function selectAnswer(stopIndex, qIndex, optIndex){
+  const key = levelKey(stopIndex);
+  if(!quizAnswers[key]) quizAnswers[key] = {};
+  quizAnswers[key][qIndex] = optIndex;
+  render();
+}
+
+function submitQuiz(stopIndex){ render(); }
+
+function advanceAfterPass(){
+  currentStop += 1;
+  render();
+}
+
+function goToSheriff(stopIndex){
+  document.getElementById('stage').innerHTML = renderSheriff(stopIndex);
+}
+
+function answerFinal(stopIndex, questionIndex, chosenIndex){
+  const lvl = LEVELS[currentLevelIdx];
+  const quiz = lvl.quizzes[stopIndex-1];
+  const q = quiz.questions[questionIndex];
+  const resultDiv = document.getElementById('final-result');
+  const buttons = document.querySelectorAll('#final-options .option');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if(i === q.correct) btn.classList.add('correct');
+    else if(i === chosenIndex) btn.classList.add('incorrect');
+  });
+  if(chosenIndex === q.correct){
+    const isLast = stopIndex === TOTAL_STOPS;
+    resultDiv.innerHTML = `<div class="feedback-banner pass" style="margin-top:14px;">✓ Corrected. The Sheriff nods and steps aside.</div>
+    <button class="primary-btn" onclick="advanceAfterPass()">${isLast ? 'Finish Level ' + lvl.id : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+  } else {
+    resultDiv.innerHTML = `<div class="feedback-banner fail" style="margin-top:14px;">✗ Still not right. Back to the start of this level.</div>
+    <button class="primary-btn" onclick="resetLevel()">Return to Trailhead</button>`;
+  }
+}
+
+function goToNextLevel(){
+  unlockedLevels[currentLevelIdx+1] = true;
+  currentLevelIdx += 1;
+  currentStop = 0;
+  render();
+}
+
+function playNarration(clipId){
+  alert('Placeholder: wire this button to your recorded voiceover file for "' + clipId + '".');
+}
+
+render();
+</script>
 </body>
 </html>
