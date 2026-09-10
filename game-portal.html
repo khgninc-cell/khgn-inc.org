@@ -5,22 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Portal - KHGN Inc.</title>
     <meta name="description" content="Explore interactive history and genealogy learning games from the KHGN Inc. Training Arcade.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root{
+            --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+            --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+            --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A; --blue:#3B7BB0; --blue-bright:#5B9BD0;
+        }
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f8f9fa;
-            color: #333;
+            font-family: 'Public Sans', Arial, sans-serif;
+            background: var(--walnut);
+            color: var(--parchment);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
-        a { color: #0056b3; }
+        a { color: var(--brass-bright); }
 
         /* Navigation */
         .site-nav {
-            background: #ffffff;
-            border-bottom: 1px solid #d9e2ef;
+            background: var(--walnut-deep);
+            border-bottom: 1px solid var(--line);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -35,10 +42,11 @@
             gap: 20px;
         }
         .site-nav-brand {
-            color: #111;
+            color: var(--brass-bright);
             text-decoration: none;
+            font-family: 'Rye', serif;
+            font-weight: 400;
             font-size: 22px;
-            font-weight: bold;
             white-space: nowrap;
         }
         .site-nav-links {
@@ -48,15 +56,15 @@
             gap: 18px;
         }
         .site-nav-links a {
-            color: #333;
+            color: var(--parchment);
             text-decoration: none;
             font-size: 15px;
-            font-weight: bold;
+            font-weight: 600;
             padding: 8px 0;
             border-bottom: 2px solid transparent;
             transition: color 0.2s ease, border-color 0.2s ease;
         }
-        .site-nav-links a:hover { color: #0056b3; }
+        .site-nav-links a:hover { color: var(--brass-bright); }
         .site-nav-toggle {
             display: none;
             margin-left: auto;
@@ -71,11 +79,11 @@
             height: 3px;
             margin: 4px 0;
             border-radius: 999px;
-            background: #0056b3;
+            background: var(--brass-bright);
         }
-        .page-games .site-nav-links a[href="training.html"] {
-            color: #0056b3;
-            border-bottom-color: #0056b3;
+        .page-games .site-nav-links a[href="game-portal.html"] {
+            color: var(--brass-bright);
+            border-bottom-color: var(--brass);
         }
 
         @media (max-width: 700px) {
@@ -89,56 +97,84 @@
         }
 
         /* Hero */
-        .hero { background: #f4f4f4; border-bottom: 2px solid #ddd; padding: 60px 20px; text-align: center; }
-        .hero h1 { font-size: 32px; color: #111; margin: 0 0 14px; }
-        .hero p { max-width: 700px; margin: 0 auto; font-size: 17px; line-height: 1.6; color: #555; }
+        .hero {
+            background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+            border-bottom: 1px solid var(--line);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: 'Rye', serif;
+            font-weight: 400;
+            font-size: 38px;
+            color: var(--parchment);
+            margin: 0 0 14px;
+            text-shadow: 0 2px 0 var(--walnut-deep);
+        }
+        .hero p { max-width: 700px; margin: 0 auto; font-size: 17px; line-height: 1.6; color: var(--parchment-dim); }
 
         .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; box-sizing: border-box; width: 100%; }
 
+        /* Category sections */
+        .category-section { margin-bottom: 48px; }
+        .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .category-dot { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; }
+        .category-dot.blue { background: var(--blue-bright); }
+        .category-dot.teal { background: var(--sage-bright); }
+        .category-title { font-family: 'Rye', serif; font-weight: 400; font-size: 24px; color: var(--parchment); }
+        .category-desc { font-size: 13.5px; color: var(--parchment-dim); margin: 2px 0 0; }
+
         /* Game cards */
-        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 50px; }
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .game-card {
             display: flex;
             flex-direction: column;
-            border: 1px solid #eee;
-            border-radius: 8px;
+            border-top: 4px solid var(--brass);
+            border-radius: 10px;
             overflow: hidden;
-            background: #ffffff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            background: var(--parchment);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
             transition: box-shadow 0.2s ease, transform 0.2s ease;
         }
-        .game-card:hover { box-shadow: 0 6px 14px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .game-card.blue-accent { border-top-color: var(--blue); }
+        .game-card.teal-accent { border-top-color: var(--sage); }
+        .game-card:hover { box-shadow: 0 10px 24px rgba(0,0,0,0.35); transform: translateY(-3px); }
         .game-thumb {
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 48px;
-            height: 140px;
-            background: #eef3fb;
-            color: #0056b3;
+            height: 120px;
+            background: rgba(0,0,0,0.05);
         }
-        .game-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
-        .game-title { font-size: 18px; font-weight: bold; color: #111; margin-bottom: 8px; }
-        .game-desc { font-size: 14px; line-height: 1.5; color: #555; flex-grow: 1; margin-bottom: 18px; }
+        .game-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; color: var(--ink); }
+        .game-title { font-family: 'Rye', serif; font-weight: 400; font-size: 19px; color: var(--ink); margin-bottom: 8px; }
+        .game-desc { font-size: 14px; line-height: 1.55; color: #4A3A28; flex-grow: 1; margin-bottom: 18px; }
         .game-btn {
             display: inline-block;
             align-self: flex-start;
-            background: #0056b3;
+            background: var(--rust);
             color: #ffffff;
             text-decoration: none;
-            font-size: 13px;
-            font-weight: bold;
+            font-size: 12.5px;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             padding: 10px 18px;
-            border-radius: 4px;
+            border-radius: 6px;
             transition: background 0.2s ease;
         }
-        .game-btn:hover { background: #003d80; }
+        .game-btn:hover { background: var(--rust-bright); }
 
-        .overview { border-top: 1px solid #ddd; padding-top: 40px; }
-        .overview h2 { font-size: 22px; color: #111; margin-bottom: 15px; }
-        .overview p { font-size: 16px; line-height: 1.7; color: #555; }
+        .overview { border-top: 1px solid var(--line); padding-top: 40px; }
+        .overview h2 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; color: var(--parchment); margin-bottom: 15px; }
+        .overview p { font-size: 16px; line-height: 1.7; color: var(--parchment-dim); }
+
+        .mission-note {
+            background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 12px;
+            padding: 20px 24px; margin-top: 30px; font-size: 13.5px; line-height: 1.65; color: var(--parchment-dim);
+        }
+        .mission-note strong { color: var(--brass-bright); }
     </style>
 </head>
 <body class="page-games">
@@ -150,77 +186,117 @@
                 <span class="site-nav-toggle-bar"></span>
                 <span class="site-nav-toggle-bar"></span>
             </button>
-             <a href="index.html">Home</a>
-    <a href="socialmedia.html">Social Media</a>
-    <a href="recruiting.html">Volunteer Recruitment</a>
-    <a href="donation-portal.html">Donation Portal</a>
-    <a href="training.html">Volunteer Training</a>
-    <a href="game-portal.html">Game Portal</a>
+            <div class="site-nav-links">
+                <a href="index.html">Home</a>
+                <a href="socialmedia.html">Social Media</a>
+                <a href="recruiting.html">Volunteer Recruitment</a>
+                <a href="donation-portal.html">Donation Portal</a>
+                <a href="training.html">Volunteer Training</a>
+                <a href="game-portal.html">Game Portal</a>
+            </div>
         </div>
     </nav>
 
     <div class="hero">
         <h1>Game Portal</h1>
-        <p>Discover interactive learning games designed to build history, genealogy, and archival research skills. Pick a game below to get started.</p>
+        <p>Discover interactive learning games and free genealogy resources designed to build history, research, and archival skills. Pick a category below to get started.</p>
     </div>
 
     <div class="container">
-        <div class="game-grid">
-            <div class="game-card">
-                <div class="game-thumb">⚖️</div>
-                <div class="game-body">
-                    <div class="game-title">The Tipple Trial</div>
-                    <div class="game-desc">Step into the boots of a county volunteer trying to navigate the minefield of archival compliance before the local sheriff catches you slipping. Test your wits against the strict laws of PII protection, copyright restrictions, and local release dates in an interactive trial where every misstep brings the law down on your head. Think you can keep your record clean and survive the shift? Take the trial and find out.</div>
-                    <a href="https://khgninc-cell.github.io/Pii-and-Copyright/" class="game-btn">Play Now &rarr;</a>
+
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-dot blue"></div>
+                <div>
+                    <div class="category-title">Volunteer Training</div>
+                    <p class="category-desc">Required learning for KHGN volunteers, moderators, and field workers</p>
                 </div>
             </div>
-            <div class="game-card">
-                <div class="game-thumb">🗺️</div>
-                <div class="game-body">
-                    <div class="game-title">Game Title 2</div>
-                    <div class="game-desc">Placeholder description for this game. Explain the skills players will practice and what makes it engaging.</div>
-                    <a href="game2.html" class="game-btn">Play Now &rarr;</a>
+            <div class="game-grid">
+                <div class="game-card blue-accent">
+                    <div class="game-thumb">⚖️</div>
+                    <div class="game-body">
+                        <div class="game-title">The Tipple Trial</div>
+                        <div class="game-desc">Step into the boots of a county volunteer trying to navigate the minefield of archival compliance before the local sheriff catches you slipping. Test your wits against the strict laws of PII protection, copyright restrictions, and local release dates in an interactive trial where every misstep brings the law down on your head.</div>
+                        <a href="https://khgninc-cell.github.io/Pii-and-Copyright/" class="game-btn">Play Now &rarr;</a>
+                    </div>
                 </div>
             </div>
-            <div class="game-card">
-                <div class="game-thumb">📜</div>
-                <div class="game-body">
-                    <div class="game-title">Game Title 3</div>
-                    <div class="game-desc">Placeholder description for this game. Explain the skills players will practice and what makes it engaging.</div>
-                    <a href="game3.html" class="game-btn">Play Now &rarr;</a>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-dot teal"></div>
+                <div>
+                    <div class="category-title">Story Trails</div>
+                    <p class="category-desc">Narrative history games &mdash; play through a journey, open to everyone</p>
                 </div>
             </div>
-            <div class="game-card">
-                <div class="game-thumb">🏛️</div>
-                <div class="game-body">
-                    <div class="game-title">Game Title 4</div>
-                    <div class="game-desc">Placeholder description for this game. Explain the skills players will practice and what makes it engaging.</div>
-                    <a href="game4.html" class="game-btn">Play Now &rarr;</a>
+            <div class="game-grid">
+                <div class="game-card teal-accent">
+                    <div class="game-thumb">🗺️</div>
+                    <div class="game-body">
+                        <div class="game-title">The Road to Kentucky</div>
+                        <div class="game-desc">From an agent's promise in Ireland to a Kentucky homestead &mdash; indenture, war, and land, with a choice at the end that changes everything.</div>
+                        <a href="road-to-kentucky.html" class="game-btn">Play Now &rarr;</a>
+                    </div>
                 </div>
             </div>
-            <div class="game-card">
-                <div class="game-thumb">🔍</div>
-                <div class="game-body">
-                    <div class="game-title">Game Title 5</div>
-                    <div class="game-desc">Placeholder description for this game. Explain the skills players will practice and what makes it engaging.</div>
-                    <a href="game5.html" class="game-btn">Play Now &rarr;</a>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-dot teal"></div>
+                <div>
+                    <div class="category-title">Practice Your Skills</div>
+                    <p class="category-desc">Interactive tools for practicing real genealogical research methods</p>
                 </div>
             </div>
-            <div class="game-card">
-                <div class="game-thumb">🏆</div>
-                <div class="game-body">
-                    <div class="game-title">Game Title 6</div>
-                    <div class="game-desc">Placeholder description for this game. Explain the skills players will practice and what makes it engaging.</div>
-                    <a href="game6.html" class="game-btn">Play Now &rarr;</a>
+            <div class="game-grid">
+                <div class="game-card teal-accent">
+                    <div class="game-thumb">📜</div>
+                    <div class="game-body">
+                        <div class="game-title">Building a Genealogical Proof Argument</div>
+                        <div class="game-desc">Think like a trial lawyer about your own family tree &mdash; evidence, cross-examination, and an honest verdict.</div>
+                        <a href="proof-standard-guide.html" class="game-btn">Read the Guide &rarr;</a>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-dot teal"></div>
+                <div>
+                    <div class="category-title">Dignified History</div>
+                    <p class="category-desc">Serious history, told without gamification &mdash; the harder parts of the record</p>
+                </div>
+            </div>
+            <div class="game-grid">
+                <div class="game-card teal-accent">
+                    <div class="game-thumb">🏛️</div>
+                    <div class="game-body">
+                        <div class="game-title">Roads Between the Stations</div>
+                        <div class="game-desc">How Kentucky's early turnpikes were built, and an honest look at who built them.</div>
+                        <a href="roads-between-stations.html" class="game-btn">Read the Article &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mission-note">
+            <strong>Why this is free:</strong> Genealogy education is too often paid, fragmented, or locked
+            behind course fees. KHGN believes free, well-built, honest genealogy education &mdash; both how to
+            research responsibly and the real texture of Kentucky's history, including its hardest parts &mdash;
+            is worth building for everyone.
         </div>
 
         <div class="overview">
             <h2>About the Game Portal</h2>
             <p>
                 The KHGN Inc. Game Portal is part of our <a href="training.html">Training Arcade</a>, offering interactive ways to learn history and genealogy research skills.
-                New games are added regularly, so check back often for more opportunities to learn while you play.
+                New content is sorted into the categories above based on what it teaches: required volunteer skills, general historical stories, practical research methods, or serious history that deserves a dignified telling rather than a game score.
+                New additions are made regularly, so check back often.
             </p>
         </div>
     </div>
