@@ -1,29 +1,108 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Media Group Directory - KHGN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root{
+            --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+            --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+            --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Public Sans', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--parchment);
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
+            padding: 0 20px 40px;
+            background-color: var(--walnut);
         }
-    </div>
         h1, h2, h3 {
-            color: #1a365d;
+            font-family: 'Rye', serif;
+            font-weight: 400;
+            color: var(--brass-bright);
         }
+        h1 { margin-top: 30px; text-shadow: 0 2px 0 var(--walnut-deep); }
+
+        /* Navigation */
+        .site-nav {
+            background: var(--walnut-deep);
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            margin: 0 -20px 30px;
+        }
+        .site-nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .site-nav-brand {
+            color: var(--brass-bright);
+            text-decoration: none;
+            font-family: 'Rye', serif;
+            font-weight: 400;
+            font-size: 22px;
+            white-space: nowrap;
+        }
+        .site-nav-links {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .site-nav-links a {
+            color: var(--parchment);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .site-nav-links a:hover { color: var(--brass-bright); }
+        .site-nav-toggle {
+            display: none;
+            margin-left: auto;
+            padding: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        .site-nav-toggle-bar {
+            display: block;
+            width: 24px;
+            height: 3px;
+            margin: 4px 0;
+            border-radius: 999px;
+            background: var(--brass-bright);
+        }
+        .page-groups .site-nav-links a[href="socialmedia.html"] {
+            color: var(--brass-bright);
+            border-bottom-color: var(--brass);
+        }
+        @media (max-width: 700px) {
+            .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+            .site-nav-toggle { display: block; }
+            .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+            .site-nav.is-open .site-nav-links { display: flex; }
+            .site-nav-links a { width: 100%; padding: 10px 0; }
+        }
+
         .jump-bar {
-            background: #fff;
+            background: var(--parchment);
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
             margin-bottom: 30px;
             text-align: center;
         }
@@ -31,24 +110,27 @@
             display: inline-block;
             margin: 4px 6px;
             padding: 6px 10px;
-            background: #e2e8f0;
-            color: #2d3748;
+            background: rgba(0,0,0,0.06);
+            color: var(--ink);
             text-decoration: none;
             border-radius: 4px;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 14px;
         }
         .jump-bar a:hover {
-            background: #3182ce;
+            background: var(--rust);
             color: #fff;
         }
         section {
-            background: #fff;
+            background: var(--parchment);
+            color: var(--ink);
             padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            border-top: 4px solid var(--brass);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
             margin-bottom: 30px;
         }
+        section > p { color: #4A3A28; }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -57,40 +139,61 @@
         }
         th, td {
             padding: 12px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #D8C7A3;
             text-align: left;
+            color: var(--ink);
         }
         th {
-            background-color: #f7fafc;
-            color: #2d3748;
+            background-color: rgba(0,0,0,0.04);
+            color: var(--rust);
+            font-family: 'Rye', serif;
+            font-weight: 400;
         }
+        td a { color: var(--rust); font-weight: 600; text-decoration: none; }
+        td a:hover { text-decoration: underline; }
         .letter-header {
-            border-bottom: 2px solid #3182ce;
+            border-bottom: 2px solid var(--brass);
             padding-bottom: 5px;
             margin-top: 30px;
+            color: var(--ink);
         }
         .top-link {
             float: right;
             font-size: 12px;
-            font-weight: normal;
+            font-weight: 600;
+            font-family: 'Public Sans', sans-serif;
             text-decoration: none;
-            color: #3182ce;
+            color: var(--rust);
         }
+        ul li a { color: var(--rust); font-weight: 600; }
     </style>
 </head>
-<body>
- <a href="index.html">Home</a>
-    <a href="socialmedia.html">Social Media</a>
-    <a href="recruiting.html">Volunteer Recruitment</a>
-    <a href="donation-portal.html">Donation Portal</a>
-    <a href="training.html">Volunteer Training</a>
-    <a href="game-portal.html">Game Portal</a>
+<body class="page-groups">
+    <nav class="site-nav" aria-label="Global">
+        <div class="site-nav-inner">
+            <a href="index.html" class="site-nav-brand">KHGN Inc.</a>
+            <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="site-nav-toggle-bar"></span>
+                <span class="site-nav-toggle-bar"></span>
+                <span class="site-nav-toggle-bar"></span>
+            </button>
+            <div class="site-nav-links">
+                <a href="index.html">Home</a>
+                <a href="socialmedia.html">Social Media</a>
+                <a href="recruiting.html">Volunteer Recruitment</a>
+                <a href="donation-portal.html">Donation Portal</a>
+                <a href="training.html">Volunteer Training</a>
+                <a href="game-portal.html">Game Portal</a>
+            </div>
+        </div>
+    </nav>
+
     <h1>Social Media Group Directory</h1>
     <p>Welcome to the community hub. Browse our local county groups or explore our statewide thematic networks below.</p>
 
     <!-- SECTION 1: LOCAL & DISTRICT GROUPS -->
     <section>
-        <h2>Local & District Groups (Geographic)</h2>
+        <h2>Local &amp; District Groups (Geographic)</h2>
         <p>Quickly jump to a county using the index below:</p>
 
         <!-- A-Z Jump Bar -->
@@ -109,126 +212,110 @@
         <!-- County Letter A -->
         <h3 id="county-a" class="letter-header">A <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Adair</strong></td><td><a href="https://www.facebook.com/groups/adaircumberlandmetcalfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Adair, Cumberland, & Metcalfe County Genealogy</a></td></tr>
-                <tr><td><strong>Allen</strong></td><td><a href="https://www.facebook.com/groups/allencountysimpsoncountywarrencounty" target="_blank" rel="noopener">Allen, Simpson, & Warren County Genealogy</a></td></tr>
-                <tr><td><strong>Anderson</strong></td><td><a href="https://www.facebook.com/groups/andersoncountymarioncountywashingtoncounty" target="_blank" rel="noopener">Anderson, Marion, & Washington County Genealogy</a></td></tr>
+                <tr><td><strong>Adair</strong></td><td><a href="https://www.facebook.com/groups/adaircumberlandmetcalfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Adair County</a></td></tr>
+                <tr><td><strong>Allen</strong></td><td><a href="https://www.facebook.com/groups/allencountysimpsoncountywarrencounty" target="_blank" rel="noopener">Allen County</a></td></tr>
+                <tr><td><strong>Anderson</strong></td><td><a href="https://www.facebook.com/groups/andersoncountymarioncountywashingtoncounty" target="_blank" rel="noopener">Anderson County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter B -->
         <h3 id="county-b" class="letter-header">B <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Bath</strong></td><td><a href="https://www.facebook.com/groups/bathcountymenifeecountyrowancounty" target="_blank" rel="noopener">Bath, Menifee, & Rowan County Genealogy</a></td></tr>
-                <tr><td><strong>Bell</strong></td><td><a href="https://www.facebook.com/groups/bellcountykentucky" target="_blank" rel="noopener">Bell County Kentucky History and Genealogy</a></td></tr>
-                <tr><td><strong>Boone</strong></td><td><a href="https://www.facebook.com/groups/BooneCampbellGallatinGrantKentonPendletonCountyKyH" target="_blank" rel="noopener">Northern KY District Group (Boone, Campbell, Gallatin, Grant, Kenton, Pendleton)</a></td></tr>
-                <tr><td><strong>Bourbon</strong></td><td><a href="https://www.facebook.com/groups/bourboncountymontgomerycountynicholascounty" target="_blank" rel="noopener">Bourbon, Montgomery, & Nicholas County Genealogy</a></td></tr>
-                <tr><td><strong>Boyd</strong></td><td><a href="https://www.facebook.com/groups/boydcountycartercountylawrencecounty" target="_blank" rel="noopener">Boyd, Carter, & Lawrence County Genealogy</a></td></tr>
-                <tr><td><strong>Bracken</strong></td><td><a href="https://www.facebook.com/groups/brackencountymasoncountyrobertsoncounty" target="_blank" rel="noopener">Bracken, Mason, & Robertson County Genealogy</a></td></tr>
-                <tr><td><strong>Breathitt</strong></td><td><a href="https://www.facebook.com/groups/breathittcountykyhistoryandgenealogy" target="_blank" rel="noopener">Breathitt County History and Genealogy</a></td></tr>
-                <tr><td><strong>Breckinridge</strong></td><td><a href="https://www.facebook.com/groups/hancockcountyhancockcountymeadecounty" target="_blank" rel="noopener">Breckinridge, Hancock, & Meade County Genealogy</a></td></tr>
-                <tr><td><strong>Bullitt</strong></td><td><a href="https://www.facebook.com/groups/bullitcountyhardincountynelsoncountykentucky" target="_blank" rel="noopener">Bullitt, Hardin, & Nelson County Genealogy</a></td></tr>
-                <tr><td><strong>Butler</strong></td><td><a href="https://www.facebook.com/groups/butlercountydaviesscountyohiocountykygenealogy" target="_blank" rel="noopener">Butler, Daviess, & Ohio County Genealogy</a></td></tr>
+                <tr><td><strong>Bath</strong></td><td><a href="https://www.facebook.com/groups/bathcountymenifeecountyrowancounty" target="_blank" rel="noopener">Bath County</a></td></tr>
+                <tr><td><strong>Bell</strong></td><td><a href="https://www.facebook.com/groups/bellcountykentucky" target="_blank" rel="noopener">Bell County</a></td></tr>
+                <tr><td><strong>Boone</strong></td><td><a href="https://www.facebook.com/groups/BooneCampbellGallatinGrantKentonPendletonCountyKyH" target="_blank" rel="noopener">Boone County</a></td></tr>
+                <tr><td><strong>Bourbon</strong></td><td><a href="https://www.facebook.com/groups/bourboncountymontgomerycountynicholascounty" target="_blank" rel="noopener">Bourbon County</a></td></tr>
+                <tr><td><strong>Boyd</strong></td><td><a href="https://www.facebook.com/groups/boydcountycartercountylawrencecounty" target="_blank" rel="noopener">Boyd County</a></td></tr>
+                <tr><td><strong>Bracken</strong></td><td><a href="https://www.facebook.com/groups/brackencountymasoncountyrobertsoncounty" target="_blank" rel="noopener">Bracken County</a></td></tr>
+                <tr><td><strong>Breathitt</strong></td><td><a href="https://www.facebook.com/groups/breathittcountykyhistoryandgenealogy" target="_blank" rel="noopener">Breathitt County</a></td></tr>
+                <tr><td><strong>Breckinridge</strong></td><td><a href="https://www.facebook.com/groups/hancockcountyhancockcountymeadecounty" target="_blank" rel="noopener">Breckinridge County</a></td></tr>
+                <tr><td><strong>Bullitt</strong></td><td><a href="https://www.facebook.com/groups/bullitcountyhardincountynelsoncountykentucky" target="_blank" rel="noopener">Bullitt County</a></td></tr>
+                <tr><td><strong>Butler</strong></td><td><a href="https://www.facebook.com/groups/butlercountydaviesscountyohiocountykygenealogy" target="_blank" rel="noopener">Butler County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter C -->
         <h3 id="county-c" class="letter-header">C <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Caldwell</strong></td><td><a href="https://www.facebook.com/groups/caldwellcountycrittendencountylivingstoncounty" target="_blank" rel="noopener">Caldwell, Crittenden, & Livingston County Genealogy</a></td></tr>
-                <tr><td><strong>Calloway</strong></td><td><a href="https://www.facebook.com/groups/callowaycountylyoncountytriggcounty" target="_blank" rel="noopener">Calloway, Lyon, & Trigg County Genealogy</a></td></tr>
-                <tr><td><strong>Campbell</strong></td><td><a href="https://www.facebook.com/groups/BooneCampbellGallatinGrantKentonPendletonCountyKyH" target="_blank" rel="noopener">Northern KY District Group (Boone, Campbell, Gallatin, Grant, Kenton, Pendleton)</a></td></tr>
-                <tr><td><strong>Carroll</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Carroll, Trimble, Henry, & Owen County Genealogy</a></td></tr>
-                <tr><td><strong>Carter</strong></td><td><a href="https://www.facebook.com/groups/boydcountycartercountylawrencecounty" target="_blank" rel="noopener">Boyd, Carter, & Lawrence County Genealogy</a></td></tr>
-                <tr><td><strong>Casey</strong></td><td><a href="https://www.facebook.com/groups/caseycounty" target="_blank" rel="noopener">Casey County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Christian</strong></td><td><a href="https://www.facebook.com/groups/christiancountylogancountoddcountyky" target="_blank" rel="noopener">Christian, Logan, & Todd County Genealogy</a></td></tr>
-                <tr><td><strong>Clark</strong></td><td><a href="https://www.facebook.com/groups/clarkcountyestillcountypowellcountykygenealogy" target="_blank" rel="noopener">Clark, Estill, & Powell County Genealogy</a></td></tr>
-                <tr><td><strong>Clay</strong></td><td><a href="https://www.facebook.com/groups/claycountykentuckygenealogy" target="_blank" rel="noopener">Clay County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Clinton</strong></td><td><a href="https://www.facebook.com/groups/clintoncountykentucky" target="_blank" rel="noopener">Clinton County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Crittenden</strong></td><td><a href="https://www.facebook.com/groups/caldwellcountycrittendencountylivingstoncounty" target="_blank" rel="noopener">Caldwell, Crittenden, & Livingston County Genealogy</a></td></tr>
-                <tr><td><strong>Cumberland</strong></td><td><a href="https://www.facebook.com/groups/cumberlandcountykentucky" target="_blank" rel="noopener">Cumberland County Kentucky Genealogy</a></td></tr>
+                <tr><td><strong>Caldwell</strong></td><td><a href="https://www.facebook.com/groups/caldwellcountycrittendencountylivingstoncounty" target="_blank" rel="noopener">Caldwell County</a></td></tr>
+                <tr><td><strong>Calloway</strong></td><td><a href="https://www.facebook.com/groups/callowaycountylyoncountytriggcounty" target="_blank" rel="noopener">Calloway County</a></td></tr>
+                <tr><td><strong>Campbell</strong></td><td><a href="https://www.facebook.com/groups/BooneCampbellGallatinGrantKentonPendletonCountyKyH" target="_blank" rel="noopener">Campbell County</a></td></tr>
+                <tr><td><strong>Carroll</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Carroll County</a></td></tr>
+                <tr><td><strong>Carter</strong></td><td><a href="https://www.facebook.com/groups/boydcountycartercountylawrencecounty" target="_blank" rel="noopener">Carter County</a></td></tr>
+                <tr><td><strong>Casey</strong></td><td><a href="https://www.facebook.com/groups/caseycounty" target="_blank" rel="noopener">Casey County</a></td></tr>
+                <tr><td><strong>Christian</strong></td><td><a href="https://www.facebook.com/groups/christiancountylogancountoddcountyky" target="_blank" rel="noopener">Christian County</a></td></tr>
+                <tr><td><strong>Clark</strong></td><td><a href="https://www.facebook.com/groups/clarkcountyestillcountypowellcountykygenealogy" target="_blank" rel="noopener">Clark County</a></td></tr>
+                <tr><td><strong>Clay</strong></td><td><a href="https://www.facebook.com/groups/claycountykentuckygenealogy" target="_blank" rel="noopener">Clay County</a></td></tr>
+                <tr><td><strong>Clinton</strong></td><td><a href="https://www.facebook.com/groups/clintoncountykentucky" target="_blank" rel="noopener">Clinton County</a></td></tr>
+                <tr><td><strong>Crittenden</strong></td><td><a href="https://www.facebook.com/groups/caldwellcountycrittendencountylivingstoncounty" target="_blank" rel="noopener">Crittenden County</a></td></tr>
+                <tr><td><strong>Cumberland</strong></td><td><a href="https://www.facebook.com/groups/cumberlandcountykentucky" target="_blank" rel="noopener">Cumberland County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter D -->
         <h3 id="county-d" class="letter-header">D <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Daviess</strong></td><td><a href="https://www.facebook.com/groups/butlercountydaviesscountyohiocountykygenealogy" target="_blank" rel="noopener">Butler, Daviess, & Ohio County Genealogy</a></td></tr>
+                <tr><td><strong>Daviess</strong></td><td><a href="https://www.facebook.com/groups/butlercountydaviesscountyohiocountykygenealogy" target="_blank" rel="noopener">Daviess County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter E -->
         <h3 id="county-e" class="letter-header">E <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Edmonson</strong></td><td><a href="https://www.facebook.com/groups/barrenedmonsonandmonroecountyhistoryandgenealogy" target="_blank" rel="noopener">Barren, Edmonson, & Monroe County History and Genealogy</a></td></tr>
-                <tr><td><strong>Elliott</strong></td><td><a href="https://www.facebook.com/groups/elliottcountymorgancountywolfecountykentucky" target="_blank" rel="noopener">Elliott, Morgan, & Wolfe County Genealogy</a></td></tr>
-                <tr><td><strong>Estill</strong></td><td><a href="https://www.facebook.com/groups/estillcountykentucky" target="_blank" rel="noopener">Estill County Kentucky Genealogy</a></td></tr>
+                <tr><td><strong>Edmonson</strong></td><td><a href="https://www.facebook.com/groups/barrenedmonsonandmonroecountyhistoryandgenealogy" target="_blank" rel="noopener">Edmonson County</a></td></tr>
+                <tr><td><strong>Elliott</strong></td><td><a href="https://www.facebook.com/groups/elliottcountymorgancountywolfecountykentucky" target="_blank" rel="noopener">Elliott County</a></td></tr>
+                <tr><td><strong>Estill</strong></td><td><a href="https://www.facebook.com/groups/estillcountykentucky" target="_blank" rel="noopener">Estill County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter F -->
         <h3 id="county-f" class="letter-header">F <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Fayette</strong></td><td><a href="https://www.facebook.com/groups/fayettecountyjessaminecountymadisoncounty" target="_blank" rel="noopener">Fayette, Jessamine, & Madison County Genealogy</a></td></tr>
-                <tr><td><strong>Fleming</strong></td><td><a href="https://www.facebook.com/groups/flemingcountygreenupcountylewiscounty" target="_blank" rel="noopener">Fleming, Greenup, & Lewis County Genealogy</a></td></tr>
-                <tr><td><strong>Floyd</strong></td><td><a href="https://www.facebook.com/groups/floydcountyjohnsoncontymagoffincountyky" target="_blank" rel="noopener">Floyd, Johnson, & Magoffin County Genealogy</a></td></tr>
-                <tr><td><strong>Franklin</strong></td><td><a href="https://www.facebook.com/groups/franklincountyscottcountywoodfordcountykentucky" target="_blank" rel="noopener">Franklin, Scott, & Woodford County Genealogy</a></td></tr>
+                <tr><td><strong>Fayette</strong></td><td><a href="https://www.facebook.com/groups/fayettecountyjessaminecountymadisoncounty" target="_blank" rel="noopener">Fayette County</a></td></tr>
+                <tr><td><strong>Fleming</strong></td><td><a href="https://www.facebook.com/groups/flemingcountygreenupcountylewiscounty" target="_blank" rel="noopener">Fleming County</a></td></tr>
+                <tr><td><strong>Floyd</strong></td><td><a href="https://www.facebook.com/groups/floydcountyjohnsoncontymagoffincountyky" target="_blank" rel="noopener">Floyd County</a></td></tr>
+                <tr><td><strong>Franklin</strong></td><td><a href="https://www.facebook.com/groups/franklincountyscottcountywoodfordcountykentucky" target="_blank" rel="noopener">Franklin County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter G -->
         <h3 id="county-g" class="letter-header">G <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Gallatin</strong></td><td><a href="https://www.facebook.com/groups/BooneCampbellGallatinGrantKentonPendletonCountyKyH" target="_blank" rel="noopener">Northern KY District Group (Boone, Campbell, Gallatin, Grant, Kenton, Pendleton)</a></td></tr>
-                <tr><td><strong>Garrard</strong></td><td><a href="https://www.facebook.com/groups/boylecountygarrarcountymercercounty" target="_blank" rel="noopener">Boyle, Garrard, & Mercer County Genealogy</a></td></tr>
-                <tr><td><strong>Grayson</strong></td><td><a href="https://www.facebook.com/groups/graysoncountyhardincountylaruecounty" target="_blank" rel="noopener">Grayson, Hardin, & LaRue County Genealogy</a></td></tr>
-                <tr><td><strong>Green</strong></td><td><a href="https://www.facebook.com/groups/greencountyhartcountytaylorcounty" target="_blank" rel="noopener">Green, Hart, & Taylor County Genealogy</a></td></tr>
-                <tr><td><strong>Greenup</strong></td><td><a href="https://www.facebook.com/groups/flemingcountygreenupcountylewiscounty" target="_blank" rel="noopener">Fleming, Greenup, & Lewis County Genealogy</a></td></tr>
+                <tr><td><strong>Gallatin</strong></td><td><a href="https://www.facebook.com/groups/BooneCampbellGallatinGrantKentonPendletonCountyKyH" target="_blank" rel="noopener">Gallatin County</a></td></tr>
+                <tr><td><strong>Garrard</strong></td><td><a href="https://www.facebook.com/groups/boylecountygarrarcountymercercounty" target="_blank" rel="noopener">Garrard County</a></td></tr>
+                <tr><td><strong>Grayson</strong></td><td><a href="https://www.facebook.com/groups/graysoncountyhardincountylaruecounty" target="_blank" rel="noopener">Grayson County</a></td></tr>
+                <tr><td><strong>Green</strong></td><td><a href="https://www.facebook.com/groups/greencountyhartcountytaylorcounty" target="_blank" rel="noopener">Green County</a></td></tr>
+                <tr><td><strong>Greenup</strong></td><td><a href="https://www.facebook.com/groups/flemingcountygreenupcountylewiscounty" target="_blank" rel="noopener">Greenup County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter H -->
         <h3 id="county-h" class="letter-header">H <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Hancock</strong></td><td><a href="https://www.facebook.com/groups/hancockcountyhancockcountymeadecounty" target="_blank" rel="noopener">Breckinridge, Hancock, & Meade County Genealogy</a></td></tr>
-                <tr><td><strong>Hardin</strong></td><td><a href="https://www.facebook.com/groups/bullitcountyhardincountynelsoncountykentucky" target="_blank" rel="noopener">Bullitt, Hardin, & Nelson County Genealogy</a></td></tr>
-                <tr><td><strong>Harlan</strong></td><td><a href="https://www.facebook.com/groups/harlancountykentucky" target="_blank" rel="noopener">Harlan County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Harrison</strong></td><td><a href="https://www.facebook.com/groups/grantcountyharrisoncountypendletoncounty" target="_blank" rel="noopener">Grant, Harrison, & Pendleton County Genealogy</a></td></tr>
-                <tr><td><strong>Hart</strong></td><td><a href="https://www.facebook.com/groups/greencountyhartcountytaylorcounty" target="_blank" rel="noopener">Green, Hart, & Taylor County Genealogy</a></td></tr>
-                <tr><td><strong>Henderson</strong></td><td><a href="https://www.facebook.com/groups/hendersoncountywebstercountyunioncountygenealogy" target="_blank" rel="noopener">Henderson, Webster, & Union County Genealogy</a></td></tr>
-                <tr><td><strong>Henry</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Carroll, Trimble, Henry, & Owen County Genealogy</a></td></tr>
-                <tr><td><strong>Hopkins</strong></td><td><a href="https://www.facebook.com/groups/hopkinscountymuhlenbergcountymcleancounty" target="_blank" rel="noopener">Hopkins, Muhlenberg, & McLean County Genealogy</a></td></tr>
+                <tr><td><strong>Hancock</strong></td><td><a href="https://www.facebook.com/groups/hancockcountyhancockcountymeadecounty" target="_blank" rel="noopener">Hancock County</a></td></tr>
+                <tr><td><strong>Hardin</strong></td><td><a href="https://www.facebook.com/groups/bullitcountyhardincountynelsoncountykentucky" target="_blank" rel="noopener">Hardin County</a></td></tr>
+                <tr><td><strong>Harlan</strong></td><td><a href="https://www.facebook.com/groups/harlancountykentucky" target="_blank" rel="noopener">Harlan County</a></td></tr>
+                <tr><td><strong>Harrison</strong></td><td><a href="https://www.facebook.com/groups/grantcountyharrisoncountypendletoncounty" target="_blank" rel="noopener">Harrison County</a></td></tr>
+                <tr><td><strong>Hart</strong></td><td><a href="https://www.facebook.com/groups/greencountyhartcountytaylorcounty" target="_blank" rel="noopener">Hart County</a></td></tr>
+                <tr><td><strong>Henderson</strong></td><td><a href="https://www.facebook.com/groups/hendersoncountywebstercountyunioncountygenealogy" target="_blank" rel="noopener">Henderson County</a></td></tr>
+                <tr><td><strong>Henry</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Henry County</a></td></tr>
+                <tr><td><strong>Hopkins</strong></td><td><a href="https://www.facebook.com/groups/hopkinscountymuhlenbergcountymcleancounty" target="_blank" rel="noopener">Hopkins County</a></td></tr>
             </tbody>
         </table>
 
@@ -239,110 +326,96 @@
         <!-- County Letter J -->
         <h3 id="county-j" class="letter-header">J <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Jackson</strong></td><td><a href="https://www.facebook.com/groups/jacksoncountykentucky" target="_blank" rel="noopener">Jackson County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Jefferson</strong></td><td><a href="https://www.facebook.com/groups/jeffersoncountyoldhamcountyshelbycounty" target="_blank" rel="noopener">Jefferson, Oldham, & Shelby County Genealogy</a></td></tr>
-                <tr><td><strong>Jessamine</strong></td><td><a href="https://www.facebook.com/groups/fayettecountyjessaminecountymadisoncounty" target="_blank" rel="noopener">Fayette, Jessamine, & Madison County Genealogy</a></td></tr>
-                <tr><td><strong>Johnson</strong></td><td><a href="https://www.facebook.com/groups/floydcountyjohnsoncontymagoffincountyky" target="_blank" rel="noopener">Floyd, Johnson, & Magoffin County Genealogy</a></td></tr>
+                <tr><td><strong>Jackson</strong></td><td><a href="https://www.facebook.com/groups/jacksoncountykentucky" target="_blank" rel="noopener">Jackson County</a></td></tr>
+                <tr><td><strong>Jefferson</strong></td><td><a href="https://www.facebook.com/groups/jeffersoncountyoldhamcountyshelbycounty" target="_blank" rel="noopener">Jefferson County</a></td></tr>
+                <tr><td><strong>Jessamine</strong></td><td><a href="https://www.facebook.com/groups/fayettecountyjessaminecountymadisoncounty" target="_blank" rel="noopener">Jessamine County</a></td></tr>
+                <tr><td><strong>Johnson</strong></td><td><a href="https://www.facebook.com/groups/floydcountyjohnsoncontymagoffincountyky" target="_blank" rel="noopener">Johnson County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter K -->
         <h3 id="county-k" class="letter-header">K <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Kenton</strong></td><td><a href="https://www.facebook.com/groups/BooneCampbellGallatinGrantKentonPendletonCountyKyH" target="_blank" rel="noopener">Northern KY District Group (Boone, Campbell, Gallatin, Grant, Kenton, Pendleton)</a></td></tr>
-                <tr><td><strong>Knox</strong></td><td><a href="https://www.facebook.com/groups/BellKnoxLaurelMcCrearyWhitleyCountyKyHistoryandGen" target="_blank" rel="noopener">Bell, Knox, Laurel, McCreary, & Whitley County History and Gen</a></td></tr>
+                <tr><td><strong>Kenton</strong></td><td><a href="https://www.facebook.com/groups/BooneCampbellGallatinGrantKentonPendletonCountyKyH" target="_blank" rel="noopener">Kenton County</a></td></tr>
+                <tr><td><strong>Knox</strong></td><td><a href="https://www.facebook.com/groups/BellKnoxLaurelMcCrearyWhitleyCountyKyHistoryandGen" target="_blank" rel="noopener">Knox County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter L -->
         <h3 id="county-l" class="letter-header">L <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>LaRue</strong></td><td><a href="https://www.facebook.com/groups/graysoncountyhardincountylaruecounty" target="_blank" rel="noopener">Grayson, Hardin, & LaRue County Genealogy</a></td></tr>
-                <tr><td><strong>Laurel</strong></td><td><a href="https://www.facebook.com/groups/laurelcountykentucky" target="_blank" rel="noopener">Laurel County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Lawrence</strong></td><td><a href="https://www.facebook.com/groups/boydcountycartercountylawrencecounty" target="_blank" rel="noopener">Boyd, Carter, & Lawrence County Genealogy</a></td></tr>
-                <tr><td><strong>Lee</strong></td><td><a href="https://www.facebook.com/groups/leecountywolfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Lee & Wolfe County History and Genealogy</a></td></tr>
-                <tr><td><strong>Leslie</strong></td><td><a href="https://www.facebook.com/groups/lesliecountykentucky" target="_blank" rel="noopener">Leslie County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Lewis</strong></td><td><a href="https://www.facebook.com/groups/flemingcountygreenupcountylewiscounty" target="_blank" rel="noopener">Fleming, Greenup, & Lewis County Genealogy</a></td></tr>
-                <tr><td><strong>Livingston</strong></td><td><a href="https://www.facebook.com/groups/caldwellcountycrittendencountylivingstoncounty" target="_blank" rel="noopener">Caldwell, Crittenden, & Livingston County Genealogy</a></td></tr>
-                <tr><td><strong>Logan</strong></td><td><a href="https://www.facebook.com/groups/christiancountylogancountoddcountyky" target="_blank" rel="noopener">Christian, Logan, & Todd County Genealogy</a></td></tr>
-                <tr><td><strong>Lyon</strong></td><td><a href="https://www.facebook.com/groups/callowaycountylyoncountytriggcounty" target="_blank" rel="noopener">Calloway, Lyon, & Trigg County Genealogy</a></td></tr>
+                <tr><td><strong>LaRue</strong></td><td><a href="https://www.facebook.com/groups/graysoncountyhardincountylaruecounty" target="_blank" rel="noopener">LaRue County</a></td></tr>
+                <tr><td><strong>Laurel</strong></td><td><a href="https://www.facebook.com/groups/laurelcountykentucky" target="_blank" rel="noopener">Laurel County</a></td></tr>
+                <tr><td><strong>Lawrence</strong></td><td><a href="https://www.facebook.com/groups/boydcountycartercountylawrencecounty" target="_blank" rel="noopener">Lawrence County</a></td></tr>
+                <tr><td><strong>Lee</strong></td><td><a href="https://www.facebook.com/groups/leecountywolfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Lee County</a></td></tr>
+                <tr><td><strong>Leslie</strong></td><td><a href="https://www.facebook.com/groups/lesliecountykentucky" target="_blank" rel="noopener">Leslie County</a></td></tr>
+                <tr><td><strong>Lewis</strong></td><td><a href="https://www.facebook.com/groups/flemingcountygreenupcountylewiscounty" target="_blank" rel="noopener">Lewis County</a></td></tr>
+                <tr><td><strong>Livingston</strong></td><td><a href="https://www.facebook.com/groups/caldwellcountycrittendencountylivingstoncounty" target="_blank" rel="noopener">Livingston County</a></td></tr>
+                <tr><td><strong>Logan</strong></td><td><a href="https://www.facebook.com/groups/christiancountylogancountoddcountyky" target="_blank" rel="noopener">Logan County</a></td></tr>
+                <tr><td><strong>Lyon</strong></td><td><a href="https://www.facebook.com/groups/callowaycountylyoncountytriggcounty" target="_blank" rel="noopener">Lyon County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter M -->
         <h3 id="county-m" class="letter-header">M <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>McCreary</strong></td><td><a href="https://www.facebook.com/groups/mccrearycountykentucky" target="_blank" rel="noopener">McCreary County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>McLean</strong></td><td><a href="https://www.facebook.com/groups/hopkinscountymuhlenbergcountymcleancounty" target="_blank" rel="noopener">Hopkins, Muhlenberg, & McLean County Genealogy</a></td></tr>
-                <tr><td><strong>Madison</strong></td><td><a href="https://www.facebook.com/groups/madisoncountykentucky" target="_blank" rel="noopener">Madison County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Magoffin</strong></td><td><a href="https://www.facebook.com/groups/floydcountyjohnsoncontymagoffincountyky" target="_blank" rel="noopener">Floyd, Johnson, & Magoffin County Genealogy</a></td></tr>
-                <tr><td><strong>Marion</strong></td><td><a href="https://www.facebook.com/groups/andersoncountymarioncountywashingtoncounty" target="_blank" rel="noopener">Anderson, Marion, & Washington County Genealogy</a></td></tr>
-                <tr><td><strong>Martin</strong></td><td><a href="https://www.facebook.com/groups/pikecountymartincountykentucky" target="_blank" rel="noopener">Pike & Martin County Genealogy</a></td></tr>
-                <tr><td><strong>Mason</strong></td><td><a href="https://www.facebook.com/groups/brackencountymasoncountyrobertsoncounty" target="_blank" rel="noopener">Bracken, Mason, & Robertson County Genealogy</a></td></tr>
-                <tr><td><strong>Meade</strong></td><td><a href="https://www.facebook.com/groups/hancockcountyhancockcountymeadecounty" target="_blank" rel="noopener">Breckinridge, Hancock, & Meade County Genealogy</a></td></tr>
-                <tr><td><strong>Menifee</strong></td><td><a href="https://www.facebook.com/groups/bathcountymenifeecountyrowancounty" target="_blank" rel="noopener">Bath, Menifee, & Rowan County Genealogy</a></td></tr>
-                <tr><td><strong>Mercer</strong></td><td><a href="https://www.facebook.com/groups/boylecountygarrarcountymercercounty" target="_blank" rel="noopener">Boyle, Garrard, & Mercer County Genealogy</a></td></tr>
-                <tr><td><strong>Metcalfe</strong></td><td><a href="https://www.facebook.com/groups/adaircumberlandmetcalfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Adair, Cumberland, & Metcalfe County Genealogy</a></td></tr>
-                <tr><td><strong>Monroe</strong></td><td><a href="https://www.facebook.com/groups/barrenedmonsonandmonroecountyhistoryandgenealogy" target="_blank" rel="noopener">Barren, Edmonson, & Monroe County History and Genealogy</a></td></tr>
-                <tr><td><strong>Montgomery</strong></td><td><a href="https://www.facebook.com/groups/bourboncountymontgomerycountynicholascounty" target="_blank" rel="noopener">Bourbon, Montgomery, & Nicholas County Genealogy</a></td></tr>
-                <tr><td><strong>Morgan</strong></td><td><a href="https://www.facebook.com/groups/elliottcountymorgancountywolfecountykentucky" target="_blank" rel="noopener">Elliott, Morgan, & Wolfe County Genealogy</a></td></tr>
-                <tr><td><strong>Muhlenberg</strong></td><td><a href="https://www.facebook.com/groups/hopkinscountymuhlenbergcountymcleancounty" target="_blank" rel="noopener">Hopkins, Muhlenberg, & McLean County Genealogy</a></td></tr>
+                <tr><td><strong>McCreary</strong></td><td><a href="https://www.facebook.com/groups/mccrearycountykentucky" target="_blank" rel="noopener">McCreary County</a></td></tr>
+                <tr><td><strong>McLean</strong></td><td><a href="https://www.facebook.com/groups/hopkinscountymuhlenbergcountymcleancounty" target="_blank" rel="noopener">McLean County</a></td></tr>
+                <tr><td><strong>Madison</strong></td><td><a href="https://www.facebook.com/groups/madisoncountykentucky" target="_blank" rel="noopener">Madison County</a></td></tr>
+                <tr><td><strong>Magoffin</strong></td><td><a href="https://www.facebook.com/groups/floydcountyjohnsoncontymagoffincountyky" target="_blank" rel="noopener">Magoffin County</a></td></tr>
+                <tr><td><strong>Marion</strong></td><td><a href="https://www.facebook.com/groups/andersoncountymarioncountywashingtoncounty" target="_blank" rel="noopener">Marion County</a></td></tr>
+                <tr><td><strong>Martin</strong></td><td><a href="https://www.facebook.com/groups/pikecountymartincountykentucky" target="_blank" rel="noopener">Martin County</a></td></tr>
+                <tr><td><strong>Mason</strong></td><td><a href="https://www.facebook.com/groups/brackencountymasoncountyrobertsoncounty" target="_blank" rel="noopener">Mason County</a></td></tr>
+                <tr><td><strong>Meade</strong></td><td><a href="https://www.facebook.com/groups/hancockcountyhancockcountymeadecounty" target="_blank" rel="noopener">Meade County</a></td></tr>
+                <tr><td><strong>Menifee</strong></td><td><a href="https://www.facebook.com/groups/bathcountymenifeecountyrowancounty" target="_blank" rel="noopener">Menifee County</a></td></tr>
+                <tr><td><strong>Mercer</strong></td><td><a href="https://www.facebook.com/groups/boylecountygarrarcountymercercounty" target="_blank" rel="noopener">Mercer County</a></td></tr>
+                <tr><td><strong>Metcalfe</strong></td><td><a href="https://www.facebook.com/groups/adaircumberlandmetcalfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Metcalfe County</a></td></tr>
+                <tr><td><strong>Monroe</strong></td><td><a href="https://www.facebook.com/groups/barrenedmonsonandmonroecountyhistoryandgenealogy" target="_blank" rel="noopener">Monroe County</a></td></tr>
+                <tr><td><strong>Montgomery</strong></td><td><a href="https://www.facebook.com/groups/bourboncountymontgomerycountynicholascounty" target="_blank" rel="noopener">Montgomery County</a></td></tr>
+                <tr><td><strong>Morgan</strong></td><td><a href="https://www.facebook.com/groups/elliottcountymorgancountywolfecountykentucky" target="_blank" rel="noopener">Morgan County</a></td></tr>
+                <tr><td><strong>Muhlenberg</strong></td><td><a href="https://www.facebook.com/groups/hopkinscountymuhlenbergcountymcleancounty" target="_blank" rel="noopener">Muhlenberg County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter N -->
         <h3 id="county-n" class="letter-header">N <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Nelson</strong></td><td><a href="https://www.facebook.com/groups/bullitcountyhardincountynelsoncountykentucky" target="_blank" rel="noopener">Bullitt, Hardin, & Nelson County Genealogy</a></td></tr>
-                <tr><td><strong>Nicholas</strong></td><td><a href="https://www.facebook.com/groups/bourboncountymontgomerycountynicholascounty" target="_blank" rel="noopener">Bourbon, Montgomery, & Nicholas County Genealogy</a></td></tr>
+                <tr><td><strong>Nelson</strong></td><td><a href="https://www.facebook.com/groups/bullitcountyhardincountynelsoncountykentucky" target="_blank" rel="noopener">Nelson County</a></td></tr>
+                <tr><td><strong>Nicholas</strong></td><td><a href="https://www.facebook.com/groups/bourboncountymontgomerycountynicholascounty" target="_blank" rel="noopener">Nicholas County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter O -->
         <h3 id="county-o" class="letter-header">O <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Ohio</strong></td><td><a href="https://www.facebook.com/groups/butlercountydaviesscountyohiocountykygenealogy" target="_blank" rel="noopener">Butler, Daviess, & Ohio County Genealogy</a></td></tr>
-                <tr><td><strong>Oldham</strong></td><td><a href="https://www.facebook.com/groups/jeffersoncountyoldhamcountyshelbycounty" target="_blank" rel="noopener">Jefferson, Oldham, & Shelby County Genealogy</a></td></tr>
-                <tr><td><strong>Owen</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Carroll, Trimble, Henry, & Owen County Genealogy</a></td></tr>
-                <tr><td><strong>Owsley</strong></td><td><a href="https://www.facebook.com/groups/owsleycountykentucky" target="_blank" rel="noopener">Owsley County Kentucky Genealogy</a></td></tr>
+                <tr><td><strong>Ohio</strong></td><td><a href="https://www.facebook.com/groups/butlercountydaviesscountyohiocountykygenealogy" target="_blank" rel="noopener">Ohio County</a></td></tr>
+                <tr><td><strong>Oldham</strong></td><td><a href="https://www.facebook.com/groups/jeffersoncountyoldhamcountyshelbycounty" target="_blank" rel="noopener">Oldham County</a></td></tr>
+                <tr><td><strong>Owen</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Owen County</a></td></tr>
+                <tr><td><strong>Owsley</strong></td><td><a href="https://www.facebook.com/groups/owsleycountykentucky" target="_blank" rel="noopener">Owsley County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter P -->
         <h3 id="county-p" class="letter-header">P <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Pendleton</strong></td><td><a href="https://www.facebook.com/groups/grantcountyharrisoncountypendletoncounty" target="_blank" rel="noopener">Grant, Harrison, & Pendleton County Genealogy</a></td></tr>
-                <tr><td><strong>Pike</strong></td><td><a href="https://www.facebook.com/groups/pikecountymartincountykentucky" target="_blank" rel="noopener">Pike & Martin County Genealogy</a></td></tr>
-                <tr><td><strong>Powell</strong></td><td><a href="https://www.facebook.com/groups/clarkcountyestillcountypowellcountykygenealogy" target="_blank" rel="noopener">Clark, Estill, & Powell County Genealogy</a></td></tr>
-                <tr><td><strong>Pulaski</strong></td><td><a href="https://www.facebook.com/groups/caseycountyclintoncountypulaskicountywaynecountyly" target="_blank" rel="noopener">Casey, Clinton, Pulaski, Russell, & Wayne County Genealogy</a></td></tr>
+                <tr><td><strong>Pendleton</strong></td><td><a href="https://www.facebook.com/groups/grantcountyharrisoncountypendletoncounty" target="_blank" rel="noopener">Pendleton County</a></td></tr>
+                <tr><td><strong>Pike</strong></td><td><a href="https://www.facebook.com/groups/pikecountymartincountykentucky" target="_blank" rel="noopener">Pike County</a></td></tr>
+                <tr><td><strong>Powell</strong></td><td><a href="https://www.facebook.com/groups/clarkcountyestillcountypowellcountykygenealogy" target="_blank" rel="noopener">Powell County</a></td></tr>
+                <tr><td><strong>Pulaski</strong></td><td><a href="https://www.facebook.com/groups/caseycountyclintoncountypulaskicountywaynecountyly" target="_blank" rel="noopener">Pulaski County</a></td></tr>
             </tbody>
         </table>
 
@@ -353,52 +426,44 @@
         <!-- County Letter R -->
         <h3 id="county-r" class="letter-header">R <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Robertson</strong></td><td><a href="https://www.facebook.com/groups/brackencountymasoncountyrobertsoncounty" target="_blank" rel="noopener">Bracken, Mason, & Robertson County Genealogy</a></td></tr>
-                <tr><td><strong>Rockcastle</strong></td><td><a href="https://www.facebook.com/groups/rockcastlecountykentucky" target="_blank" rel="noopener">Rockcastle County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Rowan</strong></td><td><a href="https://www.facebook.com/groups/bathcountymenifeecountyrowancounty" target="_blank" rel="noopener">Bath, Menifee, & Rowan County Genealogy</a></td></tr>
-                <tr><td><strong>Russell</strong></td><td><a href="https://www.facebook.com/groups/caseycountyclintoncountypulaskicountywaynecountyly" target="_blank" rel="noopener">Casey, Clinton, Pulaski, Russell, & Wayne County Genealogy</a></td></tr>
+                <tr><td><strong>Robertson</strong></td><td><a href="https://www.facebook.com/groups/brackencountymasoncountyrobertsoncounty" target="_blank" rel="noopener">Robertson County</a></td></tr>
+                <tr><td><strong>Rockcastle</strong></td><td><a href="https://www.facebook.com/groups/rockcastlecountykentucky" target="_blank" rel="noopener">Rockcastle County</a></td></tr>
+                <tr><td><strong>Rowan</strong></td><td><a href="https://www.facebook.com/groups/bathcountymenifeecountyrowancounty" target="_blank" rel="noopener">Rowan County</a></td></tr>
+                <tr><td><strong>Russell</strong></td><td><a href="https://www.facebook.com/groups/caseycountyclintoncountypulaskicountywaynecountyly" target="_blank" rel="noopener">Russell County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter S -->
         <h3 id="county-s" class="letter-header">S <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Scott</strong></td><td><a href="https://www.facebook.com/groups/franklincountyscottcountywoodfordcountykentucky" target="_blank" rel="noopener">Franklin, Scott, & Woodford County Genealogy</a></td></tr>
-                <tr><td><strong>Shelby</strong></td><td><a href="https://www.facebook.com/groups/jeffersoncountyoldhamcountyshelbycounty" target="_blank" rel="noopener">Jefferson, Oldham, & Shelby County Genealogy</a></td></tr>
-                <tr><td><strong>Simpson</strong></td><td><a href="https://www.facebook.com/groups/allencountysimpsoncountywarrencounty" target="_blank" rel="noopener">Allen, Simpson, & Warren County Genealogy</a></td></tr>
+                <tr><td><strong>Scott</strong></td><td><a href="https://www.facebook.com/groups/franklincountyscottcountywoodfordcountykentucky" target="_blank" rel="noopener">Scott County</a></td></tr>
+                <tr><td><strong>Shelby</strong></td><td><a href="https://www.facebook.com/groups/jeffersoncountyoldhamcountyshelbycounty" target="_blank" rel="noopener">Shelby County</a></td></tr>
+                <tr><td><strong>Simpson</strong></td><td><a href="https://www.facebook.com/groups/allencountysimpsoncountywarrencounty" target="_blank" rel="noopener">Simpson County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter T -->
         <h3 id="county-t" class="letter-header">T <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Taylor</strong></td><td><a href="https://www.facebook.com/groups/greencountyhartcountytaylorcounty" target="_blank" rel="noopener">Green, Hart, & Taylor County Genealogy</a></td></tr>
-                <tr><td><strong>Todd</strong></td><td><a href="https://www.facebook.com/groups/christiancountylogancountoddcountyky" target="_blank" rel="noopener">Christian, Logan, & Todd County Genealogy</a></td></tr>
-                <tr><td><strong>Trigg</strong></td><td><a href="https://www.facebook.com/groups/callowaycountylyoncountytriggcounty" target="_blank" rel="noopener">Calloway, Lyon, & Trigg County Genealogy</a></td></tr>
-                <tr><td><strong>Trimble</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Carroll, Trimble, Henry, & Owen County Genealogy</a></td></tr>
+                <tr><td><strong>Taylor</strong></td><td><a href="https://www.facebook.com/groups/greencountyhartcountytaylorcounty" target="_blank" rel="noopener">Taylor County</a></td></tr>
+                <tr><td><strong>Todd</strong></td><td><a href="https://www.facebook.com/groups/christiancountylogancountoddcountyky" target="_blank" rel="noopener">Todd County</a></td></tr>
+                <tr><td><strong>Trigg</strong></td><td><a href="https://www.facebook.com/groups/callowaycountylyoncountytriggcounty" target="_blank" rel="noopener">Trigg County</a></td></tr>
+                <tr><td><strong>Trimble</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Trimble County</a></td></tr>
             </tbody>
         </table>
 
         <!-- County Letter U -->
         <h3 id="county-u" class="letter-header">U <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Union</strong></td><td><a href="https://www.facebook.com/groups/hendersoncountywebstercountyunioncountygenealogy" target="_blank" rel="noopener">Henderson, Webster, & Union County Genealogy</a></td></tr>
+                <tr><td><strong>Union</strong></td><td><a href="https://www.facebook.com/groups/hendersoncountywebstercountyunioncountygenealogy" target="_blank" rel="noopener">Union County</a></td></tr>
             </tbody>
         </table>
 
@@ -409,17 +474,15 @@
         <!-- County Letter W -->
         <h3 id="county-w" class="letter-header">W <a href="#" class="top-link">Back to Top ↑</a></h3>
         <table>
-            <thead>
-                <tr><th>County</th><th>Group</th></tr>
-            </thead>
+            <thead><tr><th>County</th><th>Group</th></tr></thead>
             <tbody>
-                <tr><td><strong>Warren</strong></td><td><a href="https://www.facebook.com/groups/allencountysimpsoncountywarrencounty" target="_blank" rel="noopener">Allen, Simpson, & Warren County Genealogy</a></td></tr>
-                <tr><td><strong>Washington</strong></td><td><a href="https://www.facebook.com/groups/andersoncountymarioncountywashingtoncounty" target="_blank" rel="noopener">Anderson, Marion, & Washington County Genealogy</a></td></tr>
-                <tr><td><strong>Wayne</strong></td><td><a href="https://www.facebook.com/groups/waynecountykentucky" target="_blank" rel="noopener">Wayne County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Webster</strong></td><td><a href="https://www.facebook.com/groups/hendersoncountywebstercountyunioncountygenealogy" target="_blank" rel="noopener">Henderson, Webster, & Union County Genealogy</a></td></tr>
-                <tr><td><strong>Whitley</strong></td><td><a href="https://www.facebook.com/groups/whitleycountykentucky" target="_blank" rel="noopener">Whitley County Kentucky Genealogy</a></td></tr>
-                <tr><td><strong>Wolfe</strong></td><td><a href="https://www.facebook.com/groups/leecountywolfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Lee & Wolfe County History and Genealogy</a></td></tr>
-                <tr><td><strong>Woodford</strong></td><td><a href="https://www.facebook.com/groups/franklincountyscottcountywoodfordcountykentucky" target="_blank" rel="noopener">Franklin, Scott, & Woodford County Genealogy</a></td></tr>
+                <tr><td><strong>Warren</strong></td><td><a href="https://www.facebook.com/groups/allencountysimpsoncountywarrencounty" target="_blank" rel="noopener">Warren County</a></td></tr>
+                <tr><td><strong>Washington</strong></td><td><a href="https://www.facebook.com/groups/andersoncountymarioncountywashingtoncounty" target="_blank" rel="noopener">Washington County</a></td></tr>
+                <tr><td><strong>Wayne</strong></td><td><a href="https://www.facebook.com/groups/waynecountykentucky" target="_blank" rel="noopener">Wayne County</a></td></tr>
+                <tr><td><strong>Webster</strong></td><td><a href="https://www.facebook.com/groups/hendersoncountywebstercountyunioncountygenealogy" target="_blank" rel="noopener">Webster County</a></td></tr>
+                <tr><td><strong>Whitley</strong></td><td><a href="https://www.facebook.com/groups/whitleycountykentucky" target="_blank" rel="noopener">Whitley County</a></td></tr>
+                <tr><td><strong>Wolfe</strong></td><td><a href="https://www.facebook.com/groups/leecountywolfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Wolfe County</a></td></tr>
+                <tr><td><strong>Woodford</strong></td><td><a href="https://www.facebook.com/groups/franklincountyscottcountywoodfordcountykentucky" target="_blank" rel="noopener">Woodford County</a></td></tr>
             </tbody>
         </table>
 
@@ -447,15 +510,15 @@
             <a href="#topic-private">Private State</a>
             <a href="#topic-public">Public State</a>
             <a href="#topic-sales">Sales</a>
-            <a href="#topic-general">General & Misc</a>
+            <a href="#topic-general">General &amp; Misc</a>
         </div>
 
-        <h3 id="topic-dna" class="letter-header">DNA & Genealogy Research <a href="#" class="top-link">Back to Top ↑</a></h3>
+        <h3 id="topic-dna" class="letter-header">DNA &amp; Genealogy Research <a href="#" class="top-link">Back to Top ↑</a></h3>
         <ul>
             <li><a href="https://www.facebook.com/groups/586924011435193" target="_blank" rel="noopener">Kentucky DNA and Genealogy Research</a></li>
         </ul>
 
-        <h3 id="topic-feuds" class="letter-header">Historical Feuds & Local Lore <a href="#" class="top-link">Back to Top ↑</a></h3>
+        <h3 id="topic-feuds" class="letter-header">Historical Feuds &amp; Local Lore <a href="#" class="top-link">Back to Top ↑</a></h3>
         <ul>
             <li><a href="https://www.facebook.com/groups/kentuckysfeuds" target="_blank" rel="noopener">Kentucky's Feuds</a></li>
             <li><a href="https://www.facebook.com/groups/kentuckytalltales" target="_blank" rel="noopener">Kentucky Tall Tales and Folklore</a></li>
@@ -479,7 +542,7 @@
             <li><a href="https://www.facebook.com/groups/kentuckygenealogyitemsforsale" target="_blank" rel="noopener">Kentucky Genealogy Items For Sale KHGN INC</a></li>
         </ul>
 
-        <h3 id="topic-general" class="letter-header">General & Miscellaneous <a href="#" class="top-link">Back to Top ↑</a></h3>
+        <h3 id="topic-general" class="letter-header">General &amp; Miscellaneous <a href="#" class="top-link">Back to Top ↑</a></h3>
         <ul>
             <li><a href="https://www.facebook.com/groups/cemeteriesofkentucky" target="_blank" rel="noopener">Cemeteries of Kentucky</a></li>
             <li><a href="https://www.facebook.com/groups/kentuckybeautythroughpictures" target="_blank" rel="noopener">Kentucky Beauty Through Pictures</a></li>
@@ -487,5 +550,25 @@
         </ul>
     </section>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nav = document.querySelector(".site-nav");
+            const toggle = document.querySelector(".site-nav-toggle");
+            const links = document.querySelector(".site-nav-links");
+            if (!nav || !toggle || !links) {
+                return;
+            }
+            toggle.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+            links.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    toggle.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
 </body>
 </html>
