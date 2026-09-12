@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Road to Kentucky</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
+    display:flex; justify-content:center; padding:28px 16px 60px;
+  }
+  .app{ width:100%; max-width:780px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{ font-size:13px; letter-spacing:.03em; color:var(--brass-bright); margin-bottom:4px; }
+  .masthead h1{ font-family:'Rye', serif; font-weight:400; font-size:clamp(26px,5vw,40px); margin:0; text-shadow:0 2px 0 var(--walnut-deep); }
+  .masthead .sub{ font-size:12.5px; color:var(--parchment); opacity:.7; margin-top:4px; }
+
+  .chapter-tabs{ display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; }
+  .chapter-tab{
+    flex:1; min-width:130px; background:var(--walnut-deep); border:1px solid var(--line); border-radius:10px;
+    padding:9px 10px; text-align:center; opacity:.5;
+  }
+  .chapter-tab.active{ border-color:var(--brass); background:rgba(176,141,87,0.12); opacity:1; }
+  .chapter-tab.done{ opacity:.85; border-color:var(--sage); }
+  .chapter-tab .ct-name{ font-family:'Rye', serif; font-size:13.5px; }
+  .chapter-tab .ct-range{ font-size:9.5px; color:var(--parchment-dim); margin-top:2px; }
+
+  .trail-wrap{ background:var(--walnut-deep); border:1px solid var(--line); border-radius:14px; padding:18px 14px 10px; margin-bottom:20px; overflow-x:auto; }
+  .trail{ display:flex; align-items:center; min-width:700px; position:relative; padding:0 6px; }
+  .trail-line{ position:absolute; left:26px; right:26px; top:15px; height:3px; background:var(--line); z-index:0; }
+  .trail-line-fill{ position:absolute; left:26px; top:15px; height:3px; background:var(--brass); z-index:1; transition:width .5s ease; }
+  .stop{ flex:1; display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
+  .stop-dot{
+    width:30px; height:30px; border-radius:50%; background:var(--walnut); border:3px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--parchment-dim);
+  }
+  .stop.done .stop-dot{ background:var(--sage); border-color:var(--sage-bright); color:var(--walnut-deep); }
+  .stop.current .stop-dot{ background:var(--brass); border-color:var(--brass-bright); color:var(--walnut-deep); box-shadow:0 0 0 4px rgba(176,141,87,0.25); }
+  .stop-label{ font-size:9.5px; margin-top:6px; color:var(--parchment-dim); opacity:.7; }
+
+  .card{ background:var(--parchment); color:var(--ink); border-radius:16px; padding:28px 26px; box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .4s ease; }
+  @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  .card.correction{ background:#EAD9CE; }
+
+  .character-row{ display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; }
+  .portrait{ width:76px; height:76px; flex-shrink:0; border-radius:10px; border:2px solid var(--ink); background:var(--walnut); }
+  .char-meta{ flex:1; }
+  .char-name{ font-family:'Rye', serif; font-size:22px; margin:0 0 2px; color:var(--ink); }
+  .char-role{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#6B5A42; margin:0 0 8px; }
+
+  .body-text{ font-size:15.5px; line-height:1.6; margin:0 0 18px; }
+  .scenario-box{
+    background:rgba(0,0,0,0.06); border-left:4px solid var(--brass); padding:14px 16px;
+    border-radius:6px; font-size:14.5px; line-height:1.55; margin-bottom:20px; font-style:italic;
+  }
+
+  .primary-btn{
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
+    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+  }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .secondary-btn{
+    background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
+    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+  }
+
+  .q-num{ font-size:12px; font-weight:700; color:var(--rust); letter-spacing:.03em; margin-bottom:6px; }
+  .q-prompt{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .options{ display:flex; flex-direction:column; gap:8px; }
+  .option{
+    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:11px 14px;
+    font-size:14.5px; font-family:inherit; cursor:pointer; color:var(--ink); transition:all .12s ease;
+  }
+  .option:hover{ border-color:var(--brass); }
+  .option.selected{ border-color:var(--ink); background:#F5EBD6; font-weight:600; }
+  .option.correct{ border-color:var(--sage); background:#DCE9D6; }
+  .option.incorrect{ border-color:var(--rust); background:#F2D9D4; }
+  .option:disabled{ cursor:default; }
+
+  .feedback-banner{ display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:8px; font-size:14px; font-weight:700; margin-bottom:16px; }
+  .feedback-banner.pass{ background:#DCE9D6; color:#3C5533; }
+  .feedback-banner.fail{ background:#F2D9D4; color:#7A2E23; }
+
+  .final-question{ background:rgba(0,0,0,0.05); border-radius:10px; padding:16px; margin-top:6px; }
+
+  .footer-note{ text-align:center; font-size:11.5px; color:var(--parchment-dim); opacity:.55; margin-top:18px; line-height:1.5; }
+
+  .complete-screen{ text-align:center; }
+  .complete-screen .badge{
+    width:90px; height:90px; margin:0 auto 16px; border-radius:50%; background:var(--brass);
+    display:flex; align-items:center; justify-content:center; font-size:40px;
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="masthead">
+    <div class="eyebrow">KHGN HISTORICAL JOURNEY SERIES</div>
+    <h1>The Road to Kentucky</h1>
+    <div class="sub">From an agent's promise in Ireland to a homestead in Kentucky</div>
+  </div>
+
+  <div class="chapter-tabs" id="chapter-tabs"></div>
+  <div class="trail-wrap"><div class="trail" id="trail"></div></div>
+  <div id="stage"></div>
+
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc. — a composite story illustrating a common path many Kentucky settlers actually followed.<br>
+    Missing the final question at any stop sends you back to the beginning of the journey.
+  </div>
+</div>
+
+<script>
+const TOTAL_STOPS = 12;
+
+/* ---------- Character portraits ---------- */
+const AGENT_KANE_SVG = `<svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="76" rx="10" fill="#3A2E1C"/>
+  <circle cx="38" cy="30" r="13" fill="#D9B98C"/>
+  <path d="M24 25 Q38 15 52 25 L52 20 Q38 12 24 20 Z" fill="#221A12"/>
+  <path d="M18 66 Q38 44 58 66 Z" fill="#5C4A34"/>
+  <rect x="24" y="50" width="28" height="4" rx="2" fill="#D4AF6A"/>
+  <rect x="30" y="56" width="16" height="10" fill="#EDE0C8" stroke="#221A12" stroke-width="1"/>
+</svg>`;
+
+const CAPTAIN_BYRNE_SVG = `<svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="76" rx="10" fill="#1C2A38"/>
+  <path d="M20 26 Q38 8 56 26 L56 20 L48 14 L28 14 L20 20 Z" fill="#0F1A24"/>
+  <circle cx="38" cy="32" r="13" fill="#D9B98C"/>
+  <path d="M20 66 Q38 42 56 66 Z" fill="#1F3A52"/>
+  <rect x="26" y="52" width="24" height="6" rx="2" fill="#D4AF6A"/>
+  <circle cx="38" cy="20" r="2.5" fill="#D4AF6A"/>
+</svg>`;
+
+const LAND_MANAGER_SVG = `<svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="76" rx="10" fill="#2E2418"/>
+  <circle cx="38" cy="30" r="13" fill="#C99B6E"/>
+  <path d="M24 24 Q38 12 52 24 L52 20 Q38 10 24 20 Z" fill="#3A2E20"/>
+  <path d="M18 66 Q38 44 58 66 Z" fill="#5C4530"/>
+  <rect x="22" y="48" width="32" height="18" rx="2" fill="#EDE0C8" stroke="#221A12" stroke-width="1"/>
+  <line x1="27" y1="53" x2="49" y2="53" stroke="#221A12" stroke-width="1"/>
+  <line x1="27" y1="58" x2="49" y2="58" stroke="#221A12" stroke-width="1"/>
+  <line x1="27" y1="63" x2="40" y2="63" stroke="#221A12" stroke-width="1"/>
+</svg>`;
+
+const CAPTAIN_MARSH_SVG = `<svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="76" rx="10" fill="#22301F"/>
+  <path d="M18 28 Q38 8 58 28 L58 22 Q38 6 18 22 Z" fill="#1A2A18"/>
+  <circle cx="42" cy="20" r="2.5" fill="#D4AF6A"/>
+  <circle cx="38" cy="32" r="13" fill="#D9B98C"/>
+  <path d="M18 66 Q38 44 58 66 Z" fill="#3A5232"/>
+  <rect x="30" y="46" width="16" height="20" fill="#2F4429"/>
+  <line x1="30" y1="50" x2="46" y2="50" stroke="#D4AF6A" stroke-width="1.5"/>
+  <line x1="30" y1="58" x2="46" y2="58" stroke="#D4AF6A" stroke-width="1.5"/>
+</svg>`;
+
+/* ---------- Chapters and stops ---------- */
+const CHAPTERS = [
+  { name: "The Agent's Promise", range: [1,2], guideName: "Mr. Kane", guideRole: "Land Agent", guideSvg: AGENT_KANE_SVG },
+  { name: "The Crossing", range: [3,4], guideName: "Captain Byrne", guideRole: "Ship's Captain", guideSvg: CAPTAIN_BYRNE_SVG },
+  { name: "The Indenture", range: [5,8], guideName: "Mr. Ashford", guideRole: "Land Manager, Virginia Land Company", guideSvg: LAND_MANAGER_SVG },
+  { name: "The Muster & the Patent", range: [9,12], guideName: "Captain Marsh", guideRole: "Virginia Militia Officer", guideSvg: CAPTAIN_MARSH_SVG }
+];
+
+function chapterForStop(stop){
+  return CHAPTERS.find(c => stop >= c.range[0] && stop <= c.range[1]) || CHAPTERS[0];
+}
+
+const STOPS = [
+  {
+    title: "The Agent's Promise",
+    scenario: `Mr. Kane, a land agent working on commission for shipping merchants and colonial recruiters, travels the Irish countryside making his pitch. He speaks to farmers who have endured recent crop failures and lean harvests, families whose land and civil rights are constrained under Ireland's Penal Laws restricting Catholics and Presbyterian Dissenters alike, and younger sons like Conor — who, under the custom of primogeniture, stand to inherit nothing at all once their father's estate passes whole to an elder brother. To all of them, Kane offers the same vision: cheap land, personal freedom, and the chance to own property outright in America — in exchange for working off the cost of passage once they arrive.`,
+    prompt: "Which combination of factors most realistically drove someone like Conor to accept Kane's offer?",
+    options: [
+      "A mix of push factors at home — crop failures, religious and civil restrictions, and no inheritance under primogeniture, which left the family estate entirely to the eldest son — combined with the pull of possible land ownership and personal freedom in America.",
+      "Only a taste for adventure, with no real hardship at home motivating him at all.",
+      "Irish law directly ordered all tenant farmers to emigrate regardless of their circumstances.",
+      "Religious restrictions were the only factor; economic hardship and land scarcity played no role whatsoever."
+    ], correct: 0
+  },
+  {
+    title: "Signing Before Sailing",
+    scenario: `Before Conor ever boards a ship, Kane has him sign a preliminary agreement obligating him to a period of service in America once he lands, in exchange for passage being arranged on his behalf.`,
+    prompt: "Why did agents like Kane secure this agreement before emigrants ever left Ireland?",
+    options: [
+      "It locked in the emigrant's obligation early, giving the agent — and the shipping and colonial interests he worked for — assurance that the cost of passage would eventually be recovered through the emigrant's labor abroad.",
+      "Irish law required every traveler to sign an employment contract before leaving the country.",
+      "It guaranteed the emigrant free passage with no future obligation of any kind.",
+      "The agreement was purely ceremonial and carried no real binding weight."
+    ], correct: 0
+  },
+  {
+    title: "The Atlantic Crossing",
+    scenario: `The crossing takes six to ten weeks aboard Captain Byrne's ship. Conor cannot pay the fare himself, so the cost of the voyage becomes a debt — an indenture — that he must work off once he reaches America.`,
+    prompt: "Why did the cost of the voyage itself become the source of Conor's contractual debt?",
+    options: [
+      "Because he couldn't pay the fare upfront, the captain covered the cost of passage, creating an obligation — the indenture — to be repaid through labor once Conor reached America.",
+      "The voyage was entirely free, and the indenture arose from an unrelated Irish land dispute.",
+      "Ship captains never charged any fare at all before the Revolutionary War.",
+      "The indenture was a fee owed directly to the Irish government, unrelated to the voyage."
+    ], correct: 0
+  },
+  {
+    title: "Sold at Auction",
+    scenario: `Upon arrival, Captain Byrne auctions off the indenture contracts of Conor and his fellow passengers to recover his costs. Local buyers — craftsmen, farmers, and land managers — bid for the right to the emigrant's labor for a set term.`,
+    prompt: "What determined how long Conor would remain bound under his indenture?",
+    options: [
+      "The length of service was generally tied to the size of the debt owed for passage and other costs, negotiated and finalized as part of the auction sale.",
+      "All indenture contracts were exactly one year, regardless of the debt owed.",
+      "The length was decided randomly by drawing lots at the dock.",
+      "Indenture terms were fixed permanently and could never be set at auction."
+    ], correct: 0
+  },
+  {
+    title: "Purchased at Auction",
+    scenario: `Mr. Ashford, a land manager for the Virginia Land Company needing skilled labor for company lands, purchases Conor's indenture contract at auction. In exchange for years of labor, Ashford is now obligated under the contract's terms to provide Conor with food, dwelling, and clothing, and to see that he is taught a trade.`,
+    prompt: "What did the indenture contract obligate Ashford, as the purchaser, to provide?",
+    options: [
+      "Food, dwelling, clothing, and training in a trade, in exchange for Conor's years of labor.",
+      "Nothing at all — obligations under the indenture flowed only from servant to master.",
+      "A cash wage paid weekly, with no other provisions required.",
+      "Free passage back to Ireland at any time Conor requested it."
+    ], correct: 0
+  },
+  {
+    title: "Apprentice to the Trade",
+    scenario: `Ashford assigns Conor to work under a master carpenter on company land. As the newest and least experienced hand, Conor begins as an apprentice carpenter, learning the fundamentals of the trade under close supervision.`,
+    prompt: "What did it mean for Conor to begin as an 'apprentice carpenter'?",
+    options: [
+      "He occupied the least experienced tier in a structured trade hierarchy, learning fundamentals under a more experienced craftsman before advancing further.",
+      "'Apprentice' meant he was fully qualified and equal in skill to the master carpenter.",
+      "Apprentices were paid the highest wages in the trade hierarchy.",
+      "The apprentice tier had no connection to skill level or experience at all."
+    ], correct: 0
+  },
+  {
+    title: "Journeyman",
+    scenario: `After several years of steady work and improving skill, Conor advances from apprentice to journeyman carpenter — no longer a beginner, but not yet recognized as a master of the craft. He can now work with more independence, though often still under a master's oversight or on a master's projects.`,
+    prompt: "What distinguishes a 'journeyman' from an 'apprentice' and a 'master' in this trade hierarchy?",
+    options: [
+      "A journeyman has moved beyond basic training and can work with more independence, but has not yet achieved the full recognized skill and standing of a master craftsman.",
+      "A journeyman is a beginner with less skill than an apprentice.",
+      "Journeyman and master are simply two names for the exact same skill level.",
+      "The journeyman tier only ever existed in trades unrelated to carpentry."
+    ], correct: 0
+  },
+  {
+    title: "Fulfilling the Indenture",
+    scenario: `As Conor's term nears its end, Ashford must fulfill the remaining terms of the indenture contract — providing Conor's promised freedom dues and formally releasing him from service, now a trained, though not yet master-level, tradesman.`,
+    prompt: "What did completing the indenture term typically mean for a servant like Conor?",
+    options: [
+      "Legal release from bound service, along with promised freedom dues, while still leaving him short of land, savings, or the top tier of his trade.",
+      "Automatic promotion to master carpenter regardless of actual skill or time served.",
+      "Immediate ownership of the land he had worked on for Ashford.",
+      "A requirement to begin an entirely new, separate indenture contract."
+    ], correct: 0
+  },
+  {
+    title: "A Faster Path",
+    scenario: `With his indenture not yet fully paid, Conor learns that his original contract included a provision allowing enlistment in the Virginia militia to satisfy the remaining debt — far more quickly than continuing years of trade labor.`,
+    prompt: "How did military enlistment relate to Conor's original indenture contract?",
+    options: [
+      "The indenture contract itself included a provision allowing military enlistment to satisfy the remaining debt far more quickly than continuing years of labor.",
+      "Enlistment had no connection whatsoever to the indenture contract's terms.",
+      "Enlistment automatically voided the indenture contract without satisfying any of its terms.",
+      "Only Ashford, not Conor, was permitted to fulfill the indenture through enlistment."
+    ], correct: 0
+  },
+  {
+    title: "Service in the Revolution",
+    scenario: `Conor enlists and serves through several campaigns of the Revolutionary War — long marches, scarce supplies, and combat — service that Virginia's government records carefully for the purpose of future compensation.`,
+    prompt: "Why did it matter that Conor's military service was carefully documented at the time?",
+    options: [
+      "Documentation of service was later required to prove eligibility for the land bounty promised under the indenture contract's military clause.",
+      "Military records were purely ceremonial and had no practical use afterward.",
+      "Only officers' service was ever recorded; enlisted soldiers received no documentation at all.",
+      "Service records were routinely destroyed immediately after the war ended."
+    ], correct: 0
+  },
+  {
+    title: "The Patent Written Into the Contract",
+    scenario: `Because his original indenture contract included the military service clause, Conor's completed enlistment does double duty: it satisfies his remaining debt to Ashford, and it entitles him, under that same contract, to a land bounty warrant — a military patent — for acreage in the Virginia Military District, in what would become Kentucky. Like most such warrants, his is fully transferable: he could sell it outright to a land speculator or a family member instead of ever traveling west himself. What he decides to do with it is still ahead of him.`,
+    prompt: "Why is it significant that the land bounty was written into the original indenture contract, rather than being a separate, unrelated opportunity?",
+    options: [
+      "It meant Conor's path to freedom, trade skill, and land ownership were all connected through a single continuous legal arrangement, rather than three unrelated strokes of luck.",
+      "It meant the land bounty had nothing to do with his military service at all.",
+      "It meant Ashford, not Conor, received the land bounty instead.",
+      "It meant the indenture contract became void the moment Conor enlisted."
+    ], correct: 0
+  }
+];
+
+/* ---------- State ---------- */
+let currentStop = 0; // 0 = intro
+let quizAnswers = {};
+let chosenEnding = null; // null | 'settle' | 'sell'
+
+function renderChapterTabs(){
+  const wrap = document.getElementById('chapter-tabs');
+  wrap.innerHTML = '';
+  CHAPTERS.forEach(ch => {
+    const isActive = currentStop >= ch.range[0] && currentStop <= ch.range[1];
+    const isDone = currentStop > ch.range[1];
+    const tab = document.createElement('div');
+    tab.className = 'chapter-tab' + (isActive ? ' active' : '') + (isDone ? ' done' : '');
+    tab.innerHTML = `<div class="ct-name">${ch.name}</div><div class="ct-range">Stops ${ch.range[0]}–${ch.range[1]}</div>`;
+    wrap.appendChild(tab);
+  });
+}
+
+function renderTrail(){
+  const trail = document.getElementById('trail');
+  trail.innerHTML = '';
+  const line = document.createElement('div'); line.className = 'trail-line'; trail.appendChild(line);
+  const fill = document.createElement('div'); fill.className = 'trail-line-fill';
+  const pct = currentStop === 0 ? 0 : ((currentStop-1) / (TOTAL_STOPS-1)) * 100;
+  fill.style.width = pct + '%';
+  trail.appendChild(fill);
+  for(let i=1;i<=TOTAL_STOPS;i++){
+    const stop = document.createElement('div');
+    stop.className = 'stop';
+    if(i < currentStop) stop.classList.add('done');
+    if(i === currentStop) stop.classList.add('current');
+    const dot = document.createElement('div'); dot.className = 'stop-dot';
+    dot.textContent = i < currentStop ? '✓' : i;
+    const label = document.createElement('div'); label.className = 'stop-label';
+    label.textContent = 'Stop '+i;
+    stop.appendChild(dot); stop.appendChild(label);
+    trail.appendChild(stop);
+  }
+}
+
+function resetJourney(){ currentStop = 0; quizAnswers = {}; chosenEnding = null; render(); }
+function startJourney(){ currentStop = 1; render(); }
+
+function renderIntro(){
+  const ch = CHAPTERS[0];
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${ch.guideSvg}</div>
+      <div class="char-meta">
+        <p class="char-name">${ch.guideName}</p>
+        <p class="char-role">${ch.guideRole}</p>
+      </div>
+    </div>
+    <p class="body-text">
+      "A word, friend, if you've a moment. What follows isn't one man's story alone — it's the story
+      of thousands who left Ireland behind: hard harvests, harder laws, and no land left to inherit.
+      They left with nothing but a promise and a debt, and found, years later, that the very same
+      contract that bound them also carried the seed of their freedom — a trade, a uniform, and in
+      the end, land of their own in a place called Kentucky. It started, as these things often did,
+      with someone like me making an offer worth signing for. Let's begin there."
+    </p>
+    <button class="primary-btn" onclick="startJourney()">Begin the Journey</button>
+  </div>`;
+}
+
+function renderStop(stopIndex){
+  const stop = STOPS[stopIndex-1];
+  const ch = chapterForStop(stopIndex);
+  const answered = quizAnswers[stopIndex] !== undefined;
+  let html = `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${ch.guideSvg}</div>
+      <div class="char-meta">
+        <p class="char-name">${stop.title}</p>
+        <p class="char-role">${ch.guideName} · Stop ${stopIndex} of ${TOTAL_STOPS}</p>
+      </div>
+    </div>
+    <div class="scenario-box">${stop.scenario}</div>
+    <div class="q-num">QUESTION</div>
+    <p class="q-prompt">${stop.prompt}</p>
+    <div class="options">`;
+
+  stop.options.forEach((opt, oi) => {
+    const picked = quizAnswers[stopIndex];
+    let cls = 'option';
+    if(answered){
+      if(oi === stop.correct) cls += ' correct';
+      else if(oi === picked) cls += ' incorrect';
+    } else if(picked === oi){
+      cls += ' selected';
+    }
+    html += `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="selectAnswer(${stopIndex},${oi})">${opt}</button>`;
+  });
+  html += `</div>`;
+
+  if(!answered){
+    html += `<button class="primary-btn" style="margin-top:16px;" onclick="submitAnswer(${stopIndex})">Submit Answer</button>`;
+  } else {
+    const correct = quizAnswers[stopIndex] === stop.correct;
+    const isLast = stopIndex === TOTAL_STOPS;
+    if(correct){
+      html += `<div class="feedback-banner pass">✓ Correct — the journey continues.</div>
+      <button class="primary-btn" onclick="advance()">${isLast ? 'Complete the Journey' : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+    } else {
+      html += `<div class="feedback-banner fail">⚠ Not quite. ${ch.guideName} would like a word.</div>
+      <button class="primary-btn" onclick="goToCorrection(${stopIndex})">Hear ${ch.guideName} Out</button>`;
+    }
+  }
+  html += `</div>`;
+  return html;
+}
+
+function renderCorrection(stopIndex){
+  const stop = STOPS[stopIndex-1];
+  const ch = chapterForStop(stopIndex);
+  return `
+  <div class="card correction">
+    <div class="character-row">
+      <div class="portrait">${ch.guideSvg}</div>
+      <div class="char-meta">
+        <p class="char-name">${ch.guideName}</p>
+        <p class="char-role">A Moment of Correction</p>
+      </div>
+    </div>
+    <p class="body-text">
+      "Not quite as it happened. History's worth getting right — the people who lived it deserve that
+      much. Let me ask you again, plainly this time."
+    </p>
+    <div class="final-question">
+      <div class="q-num">ONE MORE TRY</div>
+      <p class="q-prompt">${stop.prompt}</p>
+      <div class="options" id="final-options">
+        ${stop.options.map((opt,oi) => `<button class="option" onclick="answerFinal(${stopIndex},${oi})">${opt}</button>`).join('')}
+      </div>
+    </div>
+    <div id="final-result"></div>
+  </div>`;
+}
+
+function renderChoiceOrEnding(){
+  const ch = chapterForStop(12);
+  if(!chosenEnding){
+    return `
+    <div class="card">
+      <div class="character-row">
+        <div class="portrait">${ch.guideSvg}</div>
+        <div class="char-meta">
+          <p class="char-name">The Patent in Hand</p>
+          <p class="char-role">${ch.guideName} · Stop 12 of ${TOTAL_STOPS}</p>
+        </div>
+      </div>
+      <p class="body-text">
+        "The patent is yours now, Conor — proof enough to sell to the highest bidder, or a claim
+        you could ride west and settle yourself. Land agents and speculators are already circling,
+        offering hard coin today for paper that might take years of hard labor to turn into a
+        working farm. What'll it be?"
+      </p>
+      <button class="primary-btn" onclick="chooseEnding('settle')">Keep the Patent — Ride to Kentucky and Settle It</button>
+      <button class="secondary-btn" onclick="chooseEnding('sell')">Sell the Patent to a Speculator</button>
+    </div>`;
+  }
+  if(chosenEnding === 'settle'){
+    return `
+    <div class="card complete-screen">
+      <div class="badge">🏡</div>
+      <p class="char-name" style="font-size:26px;">A Kentucky Landowner</p>
+      <p class="body-text" style="text-align:left;">
+        Conor travels to Kentucky, surveys his bounty land, builds a house, and clears a garden
+        plot to satisfy the settlement requirement attached to his patent. He is now a landowner,
+        a veteran, and a permanent resident of Kentucky — an indenture begun years before with an
+        agent's promise in Ireland, finally paid in full through every stage of the journey.
+      </p>
+      <p class="body-text" style="text-align:left;">
+        It's worth remembering, though, that this was one outcome among several: a great many
+        veterans instead sold their warrants to land speculators or relatives and never set foot
+        on the land themselves — which is exactly why land speculation became such a large and
+        controversial business on the Kentucky frontier.
+      </p>
+      <button class="primary-btn" onclick="chooseEnding('sell')">What if he'd sold the patent instead?</button>
+      <button class="secondary-btn" onclick="resetJourney()">Walk the Whole Journey Again</button>
+    </div>`;
+  }
+  return `
+    <div class="card complete-screen">
+      <div class="badge">📜</div>
+      <p class="char-name" style="font-size:26px;">The Speculator's Offer</p>
+      <p class="body-text" style="text-align:left;">
+        Conor decides the sure thing is better than the gamble. He sells his patent to a land
+        speculator working out of Richmond for a lump sum — good money by the standards of a
+        jobbing journeyman carpenter. He never travels to Kentucky at all. Instead, he uses the
+        proceeds to set up his own small carpentry shop in a growing Virginia town, eventually
+        earning full recognition as a master carpenter in his own right.
+      </p>
+      <p class="body-text" style="text-align:left;">
+        The acreage he once held on paper is surveyed, settled, and eventually farmed — but by
+        someone else entirely, a family who bought the land from the speculator years later, with
+        no idea a soldier named Conor ever held the original claim. This, too, was a common
+        outcome: warrants changed hands constantly, and the men whose service earned them often
+        never saw the land at all.
+      </p>
+      <button class="primary-btn" onclick="chooseEnding('settle')">What if he'd kept and settled the patent instead?</button>
+      <button class="secondary-btn" onclick="resetJourney()">Walk the Whole Journey Again</button>
+    </div>`;
+}
+
+function chooseEnding(which){
+  chosenEnding = which;
+  render();
+}
+
+function render(){
+  renderChapterTabs();
+  renderTrail();
+  const stage = document.getElementById('stage');
+  if(currentStop === 0){
+    stage.innerHTML = renderIntro();
+  } else if(currentStop === TOTAL_STOPS){
+    stage.innerHTML = renderChoiceOrEnding();
+  } else if(currentStop < TOTAL_STOPS){
+    stage.innerHTML = renderStop(currentStop);
+  }
+}
+
+function selectAnswer(stopIndex, optIndex){
+  quizAnswers[stopIndex] = optIndex;
+  render();
+}
+
+function submitAnswer(stopIndex){ render(); }
+
+function advance(){ currentStop += 1; render(); }
+
+function goToCorrection(stopIndex){
+  document.getElementById('stage').innerHTML = renderCorrection(stopIndex);
+}
+
+function answerFinal(stopIndex, chosenIndex){
+  const stop = STOPS[stopIndex-1];
+  const resultDiv = document.getElementById('final-result');
+  const buttons = document.querySelectorAll('#final-options .option');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if(i === stop.correct) btn.classList.add('correct');
+    else if(i === chosenIndex) btn.classList.add('incorrect');
+  });
+  if(chosenIndex === stop.correct){
+    const isLast = stopIndex === TOTAL_STOPS;
+    resultDiv.innerHTML = `<div class="feedback-banner pass" style="margin-top:14px;">✓ That's it exactly.</div>
+    <button class="primary-btn" onclick="advance()">${isLast ? 'Complete the Journey' : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+  } else {
+    resultDiv.innerHTML = `<div class="feedback-banner fail" style="margin-top:14px;">✗ Still not quite. Back to the beginning of the journey.</div>
+    <button class="primary-btn" onclick="resetJourney()">Return to the Dock</button>`;
+  }
+}
+
+render();
+</script>
+</body>
+</html>w
