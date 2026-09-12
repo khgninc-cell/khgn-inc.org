@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Same Name, Wrong Man</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A; --amber:#C4922E;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
+    display:flex; justify-content:center; padding:28px 16px 60px;
+  }
+  .wrap{ width:100%; max-width:760px; }
+  .back-link{ display:inline-block; color:var(--brass-bright); text-decoration:none; font-size:13px; font-weight:600; margin-bottom:16px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{ font-size:12.5px; letter-spacing:.04em; color:var(--brass-bright); text-transform:uppercase; margin-bottom:6px; }
+  .masthead h1{ font-family:'Rye', serif; font-weight:400; font-size:clamp(24px,4.5vw,34px); margin:0; text-shadow:0 2px 0 var(--walnut-deep); }
+  .masthead .sub{ font-size:13px; color:var(--parchment-dim); margin-top:6px; }
+
+  .stepper{ display:flex; gap:6px; margin-bottom:20px; }
+  .step{
+    flex:1; text-align:center; padding:9px 4px; border-radius:8px; font-size:11.5px; font-weight:700;
+    background:var(--walnut-deep); border:1px solid var(--line); color:var(--parchment-dim); opacity:.5;
+  }
+  .step.active{ opacity:1; border-color:var(--brass); color:var(--brass-bright); }
+  .step.done{ opacity:.85; border-color:var(--sage); color:var(--sage-bright); }
+
+  .card{
+    background:var(--parchment); color:var(--ink); border-radius:16px; padding:30px 28px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .35s ease;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  .card h2{ font-family:'Rye', serif; font-weight:400; font-size:22px; margin:0 0 12px; }
+  .card p{ font-size:15px; line-height:1.65; margin:0 0 14px; }
+  .card p.legend{ font-style:italic; background:rgba(0,0,0,0.05); padding:12px 14px; border-left:4px solid var(--brass); border-radius:6px; }
+
+  .disclaimer-box{
+    font-size:12.5px; line-height:1.6; color:#5A4A34; background:rgba(176,141,87,0.12);
+    border:1px solid var(--brass); border-radius:8px; padding:12px 14px; margin-bottom:18px;
+  }
+
+  .candidate-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
+  .candidate{
+    border:2px solid #D8C7A3; border-radius:10px; padding:14px; cursor:pointer; transition:all .15s ease;
+  }
+  .candidate:hover{ border-color:var(--brass); }
+  .candidate.chosen{ border-color:var(--rust); background:#F5E5DE; }
+  .candidate h3{ font-family:'Rye', serif; font-size:16px; margin:0 0 6px; }
+  .candidate ul{ margin:0; padding-left:18px; font-size:13px; line-height:1.5; }
+
+  .evidence-grid{ display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+  .evidence-card{
+    border:2px solid #D8C7A3; border-radius:10px; padding:12px 14px; cursor:pointer; transition:all .12s ease;
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .evidence-card:hover{ border-color:var(--brass); }
+  .evidence-card.picked{ border-color:var(--rust); background:#F5E5DE; }
+  .evidence-card .check{
+    width:20px; height:20px; border-radius:5px; border:2px solid #B7A78E; flex-shrink:0; margin-top:2px;
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:#fff;
+  }
+  .evidence-card.picked .check{ background:var(--rust); border-color:var(--rust); }
+  .evidence-card .ev-title{ font-weight:700; font-size:14.5px; margin-bottom:3px; }
+  .evidence-card .ev-desc{ font-size:13px; line-height:1.5; color:#4A3A28; }
+
+  .challenge-box{
+    border:2px solid var(--rust); background:#F5E5DE; border-radius:10px; padding:16px; margin-bottom:18px;
+  }
+  .challenge-box .ch-label{ font-size:11px; font-weight:800; letter-spacing:.04em; color:var(--rust); text-transform:uppercase; margin-bottom:6px; }
+  .challenge-box p{ margin:0 0 12px; }
+  .response-row{ display:flex; flex-direction:column; gap:8px; }
+  .resp-btn{
+    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:11px 14px;
+    font-size:14px; font-family:inherit; cursor:pointer; color:var(--ink);
+  }
+  .resp-btn:hover{ border-color:var(--brass); }
+  .resolve-picker{ margin-top:10px; padding:12px; background:#fff; border-radius:8px; border:1px solid #D8C7A3; }
+  .resolve-picker button{
+    display:block; width:100%; text-align:left; background:#F5EBD6; border:1px solid #D8C7A3; border-radius:6px;
+    padding:9px 12px; margin-bottom:6px; font-size:13.5px; cursor:pointer; font-family:inherit;
+  }
+  .resolve-picker button:hover{ border-color:var(--brass); }
+
+  .outcome-banner{
+    padding:10px 12px; border-radius:8px; font-size:13.5px; font-weight:700; margin-top:10px;
+  }
+  .outcome-banner.good{ background:#DCE9D6; color:#3C5533; }
+  .outcome-banner.ok{ background:#FBF0D9; color:#7A5A10; }
+  .outcome-banner.bad{ background:#F2D9D4; color:#7A2E23; }
+
+  .primary-btn{
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
+    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+  }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .primary-btn:disabled{ background:#B7A78E; cursor:not-allowed; }
+  .secondary-btn{
+    background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
+    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+  }
+
+  .verdict-badge{
+    text-align:center; font-family:'Rye', serif; font-size:30px; padding:18px; border-radius:12px; margin-bottom:16px;
+  }
+  .verdict-badge.proven{ background:#DCE9D6; color:#3C5533; }
+  .verdict-badge.probable{ background:#E9E3C9; color:#6B5A20; }
+  .verdict-badge.possible{ background:#FBF0D9; color:#7A5A10; }
+  .verdict-badge.disproven{ background:#F2D9D4; color:#7A2E23; }
+
+  .next-step-box{
+    background:rgba(0,0,0,0.04); border-radius:8px; padding:14px 16px; margin-top:16px; font-size:13.5px; line-height:1.6;
+  }
+  .next-step-box a{ color:var(--rust); font-weight:700; }
+
+  .footer-note{ text-align:center; font-size:11.5px; color:var(--parchment-dim); opacity:.6; margin-top:22px; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="game-portal.html">&larr; Back to Green Pasture</a>
+  <div class="masthead">
+    <div class="eyebrow">Practice Your Skills · Case 1 of 4</div>
+    <h1>Same Name, Wrong Man</h1>
+    <div class="sub">A genealogical proof-argument workbench</div>
+  </div>
+  <div class="stepper" id="stepper"></div>
+  <div id="stage"></div>
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc. — this exercise builds the habit of honest proof argument.
+    It does not teach citation formatting, paleography, or jurisdiction-specific record law.
+  </div>
+</div>
+
+<script>
+const STEPS = ["Hypothesis", "Evidence", "Cross-Examination", "Verdict"];
+let currentStep = 0;
+
+const CANDIDATES = {
+  A: {
+    name: "William Hartley of Madison County",
+    facts: ["Born c. 1793", "Married Sarah Combs, 1815", "Farmer near the Kentucky River", "Died 1861"]
+  },
+  B: {
+    name: "William Hartley of Garrard County",
+    facts: ["Born c. 1798", "Married Nancy Estill, 1822", "Farmer in Garrard County", "Died 1870"]
+  }
+};
+const CORRECT_CANDIDATE = "A";
+
+const EVIDENCE = [
+  { id: "pension", title: "War of 1812 Pension File", supports: "A",
+    desc: "William Hartley, private in a Kentucky militia company, residence listed as Madison County. Pension filed 1855." },
+  { id: "census1850", title: "1850 Census, Madison County", supports: "A",
+    desc: "William Hartley, age 57, farmer. Household includes John (33), Elizabeth (30), Thomas (28). Land valued at $2,200, Kentucky River precinct." },
+  { id: "marriageA", title: "Marriage Bond, 1815", supports: "A",
+    desc: "William Hartley to Sarah Combs, recorded in the Madison County Clerk's Office." },
+  { id: "will", title: "Last Will & Testament, 1861", supports: "A",
+    desc: "William Hartley of Madison County. Names wife Sarah and children John, Elizabeth, and Thomas." },
+  { id: "taxlist", title: "Tax List, 1830, Madison County", supports: "A",
+    desc: "\"William Hartley, 1 tithe, 150 acres.\" No family details or other identifying information given." },
+  { id: "census1850B", title: "1850 Census, Garrard County", supports: "B",
+    desc: "William Hartley, age 52, farmer. Household includes Mary (20) and William Jr. (18)." },
+  { id: "marriageB", title: "Marriage Bond, 1822", supports: "B",
+    desc: "William Hartley to Nancy Estill, recorded in the Garrard County Clerk's Office." },
+  { id: "findagrave", title: "Find A Grave Memorial", supports: "B",
+    desc: "\"William Hartley (1798–1870), Garrard County, husband of Nancy (Estill) Hartley.\" User-submitted, unsourced." }
+];
+
+const CHALLENGES = [
+  {
+    id: "identity",
+    text: "A second William Hartley — born around the same time, in neighboring Garrard County — also has a documented marriage and family. How do you know your evidence is actually about your man, and not him?",
+    correctMove: "resolve",
+    correctEvidenceIds: ["pension", "will"]
+  },
+  {
+    id: "weaktax",
+    text: "The 1830 Tax List you may have cited lists only a name and acreage — no family details, no unique identifiers. Does this actually prove which William Hartley it refers to?",
+    correctMove: "concede",
+    relatedEvidenceId: "taxlist"
+  },
+  {
+    id: "findagraveweak",
+    text: "If you leaned on a Find A Grave memorial anywhere in your reasoning: that page is user-submitted, not a primary source. Does it deserve independent weight in your case?",
+    correctMove: "concede",
+    relatedEvidenceId: "findagrave"
+  }
+];
+
+let hypothesis = null;
+let pickedEvidence = new Set();
+let challengeOutcomes = {};
+let currentChallengeIdx = 0;
+
+function renderStepper(){
+  const wrap = document.getElementById('stepper');
+  wrap.innerHTML = STEPS.map((s,i) => {
+    let cls = 'step';
+    if(i < currentStep) cls += ' done';
+    if(i === currentStep) cls += ' active';
+    return `<div class="${cls}">${i+1}. ${s}</div>`;
+  }).join('');
+}
+
+function renderHypothesis(){
+  return `
+  <div class="card">
+    <div class="disclaimer-box">
+      <strong>Before you start:</strong> this exercise builds the habit of honest proof argument — testing your
+      own conclusion instead of just defending it. It does not teach source citation formatting, paleography,
+      or jurisdiction-specific record law. Think of it as practice for the mindset, not a substitute for the
+      full discipline.
+    </div>
+    <h2>The Family Legend</h2>
+    <p class="legend">"Family tradition says your ancestor was William Hartley of Madison County, Kentucky — that
+    he fought in the War of 1812 and later kept a farm near the Kentucky River. Beyond that, nobody remembers
+    much more: not his wife's name, not his birth year, nothing definite."</p>
+    <p>Your research has turned up <strong>two men named William Hartley</strong>, both living in the same
+    general area around the same time. Before looking at any records in detail, which one is your working
+    hypothesis?</p>
+    <div class="candidate-row" id="candidate-row"></div>
+    <button class="primary-btn" id="hyp-continue" disabled onclick="confirmHypothesis()">Continue with This Hypothesis</button>
+  </div>`;
+}
+
+function wireHypothesisCard(){
+  const row = document.getElementById('candidate-row');
+  row.innerHTML = Object.entries(CANDIDATES).map(([key, c]) => `
+    <div class="candidate" id="cand-${key}" onclick="pickHypothesis('${key}')">
+      <h3>${c.name}</h3>
+      <ul>${c.facts.map(f => `<li>${f}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+function pickHypothesis(key){
+  hypothesis = key;
+  document.querySelectorAll('.candidate').forEach(el => el.classList.remove('chosen'));
+  document.getElementById('cand-'+key).classList.add('chosen');
+  document.getElementById('hyp-continue').disabled = false;
+}
+
+function confirmHypothesis(){
+  currentStep = 1;
+  render();
+}
+
+function renderEvidence(){
+  return `
+  <div class="card">
+    <h2>Build Your Case</h2>
+    <p>You're working from the hypothesis that your ancestor is <strong>${CANDIDATES[hypothesis].name}</strong>.
+    Review the records below and select every piece you believe genuinely supports your case. Choose carefully —
+    you'll need to defend these choices in a moment.</p>
+    <div class="evidence-grid" id="evidence-grid"></div>
+    <button class="primary-btn" id="ev-continue" disabled onclick="confirmEvidence()">Present My Case</button>
+  </div>`;
+}
+
+function wireEvidenceCard(){
+  const grid = document.getElementById('evidence-grid');
+  grid.innerHTML = EVIDENCE.map(e => `
+    <div class="evidence-card" id="ev-${e.id}" onclick="toggleEvidence('${e.id}')">
+      <div class="check">${pickedEvidence.has(e.id) ? '✓' : ''}</div>
+      <div>
+        <div class="ev-title">${e.title}</div>
+        <div class="ev-desc">${e.desc}</div>
+      </div>
+    </div>`).join('');
+  updateEvidenceContinueBtn();
+}
+
+function toggleEvidence(id){
+  if(pickedEvidence.has(id)) pickedEvidence.delete(id);
+  else pickedEvidence.add(id);
+  document.getElementById('ev-'+id).classList.toggle('picked');
+  const check = document.querySelector('#ev-'+id+' .check');
+  check.textContent = pickedEvidence.has(id) ? '✓' : '';
+  updateEvidenceContinueBtn();
+}
+
+function updateEvidenceContinueBtn(){
+  document.getElementById('ev-continue').disabled = pickedEvidence.size === 0;
+}
+
+function confirmEvidence(){
+  currentStep = 2;
+  currentChallengeIdx = 0;
+  render();
+}
+
+function renderCrossExam(){
+  const ch = CHALLENGES[currentChallengeIdx];
+  const outcome = challengeOutcomes[ch.id];
+  return `
+  <div class="card">
+    <h2>Cross-Examination (${currentChallengeIdx+1} of ${CHALLENGES.length})</h2>
+    <p>Your case so far: <strong>${[...pickedEvidence].map(id => EVIDENCE.find(e=>e.id===id).title).join(', ') || '(no evidence selected)'}</strong></p>
+    <div class="challenge-box">
+      <div class="ch-label">Challenge</div>
+      <p>${ch.text}</p>
+      ${!outcome ? `
+      <div class="response-row">
+        <button class="resp-btn" onclick="openResolvePicker('${ch.id}')">Resolve it — I have evidence that answers this directly</button>
+        <button class="resp-btn" onclick="respondChallenge('${ch.id}','concede')">Concede — this is a fair point I can't currently answer</button>
+        <button class="resp-btn" onclick="respondChallenge('${ch.id}','flag')">Flag for more research — I'm not sure yet</button>
+      </div>
+      <div id="resolve-picker-${ch.id}"></div>
+      ` : renderChallengeOutcome(ch, outcome)}
+    </div>
+    ${outcome ? `<button class="primary-btn" onclick="nextChallenge()">${currentChallengeIdx+1 === CHALLENGES.length ? 'See Case Summary' : 'Next Challenge'}</button>` : ''}
+  </div>`;
+}
+
+function openResolvePicker(challengeId){
+  render();
+  const picker = document.getElementById('resolve-picker-'+challengeId);
+  const options = [...pickedEvidence].map(id => EVIDENCE.find(e=>e.id===id));
+  if(options.length === 0){
+    picker.innerHTML = `<div class="resolve-picker"><p style="margin:0; font-size:13px;">You didn't select any evidence to point to. Try Concede or Flag instead.</p></div>`;
+    return;
+  }
+  picker.innerHTML = `<div class="resolve-picker">
+    <p style="margin-bottom:8px; font-weight:700; font-size:13px;">Which piece of your evidence resolves this?</p>
+    ${options.map(e => `<button onclick="resolveWith('${challengeId}','${e.id}')">${e.title}</button>`).join('')}
+  </div>`;
+}
+
+function resolveWith(challengeId, evidenceId){
+  const ch = CHALLENGES.find(c => c.id === challengeId);
+  const isCorrect = ch.correctEvidenceIds && ch.correctEvidenceIds.includes(evidenceId);
+  challengeOutcomes[challengeId] = isCorrect ? 'resolved-correct' : 'resolved-wrong';
+  render();
+}
+
+function respondChallenge(challengeId, move){
+  challengeOutcomes[challengeId] = move === 'concede' ? 'conceded' : 'flagged';
+  render();
+}
+
+function renderChallengeOutcome(ch, outcome){
+  if(outcome === 'resolved-correct'){
+    return `<div class="outcome-banner good">✓ Well argued — that evidence directly answers the challenge.</div>`;
+  }
+  if(outcome === 'resolved-wrong'){
+    return `<div class="outcome-banner bad">✗ That evidence doesn't actually resolve this challenge — it's not specific enough to rule out the alternative. A careful reviewer would catch this.</div>`;
+  }
+  if(outcome === 'conceded'){
+    const good = ch.correctMove === 'concede';
+    return `<div class="outcome-banner ${good ? 'good' : 'ok'}">${good ? '✓ Good instinct — honestly conceding a weak point is exactly the right move here.' : '⚠ You conceded a point that actually had a strong answer available. Worth reconsidering next time.'}</div>`;
+  }
+  if(outcome === 'flagged'){
+    return `<div class="outcome-banner ok">⚑ Flagged for more research — an honest "not yet," but it keeps your case from claiming full proof until it's resolved.</div>`;
+  }
+  return '';
+}
+
+function nextChallenge(){
+  currentChallengeIdx++;
+  if(currentChallengeIdx >= CHALLENGES.length){
+    currentStep = 3;
+  }
+  render();
+}
+
+function computeVerdict(){
+  if(hypothesis !== CORRECT_CANDIDATE){
+    return { level: 'disproven', title: 'Disproven Upon Review' };
+  }
+  const identityOutcome = challengeOutcomes['identity'];
+  const taxOutcome = challengeOutcomes['weaktax'];
+  const gaOutcome = challengeOutcomes['findagraveweak'];
+
+  const identityHandledWell = identityOutcome === 'resolved-correct';
+  const weakPointsHandledWell =
+    (taxOutcome === 'conceded' || taxOutcome === 'flagged') &&
+    (gaOutcome === 'conceded' || gaOutcome === 'flagged');
+  const anyOverclaimed = taxOutcome === 'resolved-wrong' || gaOutcome === 'resolved-wrong' || identityOutcome === 'resolved-wrong';
+
+  if(identityHandledWell && weakPointsHandledWell && !anyOverclaimed){
+    return { level: 'proven', title: 'Proven' };
+  }
+  if(identityHandledWell && !weakPointsHandledWell){
+    return { level: 'probable', title: 'Probable' };
+  }
+  if(!identityHandledWell){
+    return { level: 'possible', title: 'Possible' };
+  }
+  return { level: 'probable', title: 'Probable' };
+}
+
+function renderVerdict(){
+  const v = computeVerdict();
+  let explanation = '';
+  if(v.level === 'disproven'){
+    explanation = `You built a case for William Hartley of Garrard County — but the family legend's specific
+    detail ("fought in the War of 1812... farm near the Kentucky River") only matches William Hartley of
+    <strong>Madison County</strong>. This is exactly the confirmation-bias trap the source guide warns about:
+    picking a candidate early and building support for them, rather than testing which candidate the strongest
+    evidence actually points to.`;
+  } else if(v.level === 'proven'){
+    explanation = `You correctly identified William Hartley of Madison County, backed it with evidence specific
+    enough to rule out the other candidate (the pension file, the matching will), and you didn't overclaim the
+    weak, non-identifying evidence (the bare tax list, the unsourced Find A Grave page). This is what a
+    genuinely defensible proof argument looks like.`;
+  } else if(v.level === 'probable'){
+    explanation = `You correctly identified the right man and answered the core identity challenge well — but
+    somewhere along the way you leaned too hard on evidence that doesn't actually carry that kind of weight (a
+    bare tax list entry, or an unsourced online memorial). A careful reviewer would ask you to soften those
+    claims.`;
+  } else {
+    explanation = `You picked the correct candidate, but when directly challenged on how you know the records
+    are actually about him and not the other William Hartley, you weren't able to answer with evidence specific
+    enough to rule out the alternative. The case is plausible, but not yet proven.`;
+  }
+
+  return `
+  <div class="card">
+    <h2>Your Verdict</h2>
+    <div class="verdict-badge ${v.level}">${v.title}</div>
+    <p>${explanation}</p>
+    <div class="next-step-box">
+      This exercise practices the <em>habit</em> of honest proof argument — it doesn't teach source citation
+      formatting, paleography, or state-specific record law. For the full professional standard this is based
+      on, see the <a href="https://bcgcertification.org/" target="_blank" rel="noopener">Board for Certification
+      of Genealogists</a>.
+    </div>
+    <button class="secondary-btn" onclick="resetCase()">Try This Case Again</button>
+  </div>`;
+}
+
+function resetCase(){
+  currentStep = 0;
+  hypothesis = null;
+  pickedEvidence = new Set();
+  challengeOutcomes = {};
+  currentChallengeIdx = 0;
+  render();
+}
+
+function render(){
+  renderStepper();
+  const stage = document.getElementById('stage');
+  if(currentStep === 0){
+    stage.innerHTML = renderHypothesis();
+    wireHypothesisCard();
+  } else if(currentStep === 1){
+    stage.innerHTML = renderEvidence();
+    wireEvidenceCard();
+  } else if(currentStep === 2){
+    stage.innerHTML = renderCrossExam();
+  } else {
+    stage.innerHTML = renderVerdict();
+  }
+}
+
+render();
+</script>
+</body>
+</html>
