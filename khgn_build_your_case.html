@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your Case: The KHGN Suggested Trial Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
+    display:flex; justify-content:center; padding:28px 16px 60px;
+  }
+  .wrap{ width:100%; max-width:800px; }
+  .back-link{ display:inline-block; color:var(--brass-bright); text-decoration:none; font-size:13px; font-weight:600; margin-bottom:16px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{ font-size:12.5px; letter-spacing:.04em; color:var(--brass-bright); text-transform:uppercase; margin-bottom:6px; }
+  .masthead h1{ font-family:'Rye', serif; font-weight:400; font-size:clamp(24px,4.5vw,32px); margin:0; text-shadow:0 2px 0 var(--walnut-deep); }
+  .masthead .sub{ font-size:13px; color:var(--parchment-dim); margin-top:6px; }
+
+  .stepper{ display:flex; gap:6px; margin-bottom:20px; }
+  .step{
+    flex:1; text-align:center; padding:9px 4px; border-radius:8px; font-size:11.5px; font-weight:700;
+    background:var(--walnut-deep); border:1px solid var(--line); color:var(--parchment-dim); opacity:.5;
+  }
+  .step.active{ opacity:1; border-color:var(--brass); color:var(--brass-bright); }
+  .step.done{ opacity:.85; border-color:var(--sage); color:var(--sage-bright); }
+
+  .card{
+    background:var(--parchment); color:var(--ink); border-radius:16px; padding:30px 28px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .35s ease;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  .card h2{ font-family:'Rye', serif; font-weight:400; font-size:22px; margin:0 0 8px; }
+  .card .level-desc{ font-size:14px; line-height:1.6; color:#4A3A28; margin:0 0 20px; }
+
+  .disclaimer-box{
+    font-size:12px; line-height:1.6; color:#5A4A34; background:rgba(176,141,87,0.12);
+    border:1px solid var(--brass); border-radius:8px; padding:10px 12px; margin-bottom:18px;
+  }
+
+  .thesis-explainer{
+    font-size:13px; line-height:1.6; color:#4A3A28; background:rgba(0,0,0,0.04);
+    border-radius:8px; padding:12px 14px; margin-bottom:20px;
+  }
+  .thesis-builder{
+    background:rgba(0,0,0,0.03); border:1.5px solid #D8C7A3; border-radius:10px;
+    padding:16px; margin-bottom:18px;
+  }
+  .thesis-builder-label{ font-weight:700; font-size:14.5px; margin-bottom:8px; }
+  .thesis-row{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .thesis-connector{ font-size:13px; font-style:italic; color:#6B5A42; white-space:nowrap; flex-shrink:0; min-width:80px; }
+  .thesis-row input[type="text"]{ flex:1; }
+  .thesis-preview{
+    margin-top:10px; padding:10px 12px; background:#fff; border-radius:6px; border:1px dashed #D8C7A3;
+    font-size:13.5px; font-style:italic; color:var(--ink); line-height:1.5;
+  }
+  .preview-placeholder{ color:#B0A08C; font-style:normal; }
+
+  .field-block{ margin-bottom:20px; }
+  .field-label{ font-weight:700; font-size:14px; margin-bottom:4px; display:block; }
+  .field-hint{ font-size:12.5px; color:#6B5A42; margin-bottom:8px; font-style:italic; }
+  input[type="text"], textarea, select{
+    width:100%; font-family:inherit; font-size:14.5px; padding:10px 12px; border:2px solid #D8C7A3;
+    border-radius:8px; background:#fff; color:var(--ink); resize:vertical;
+  }
+  textarea{ min-height:110px; line-height:1.55; }
+  input[type="text"]:focus, textarea:focus, select:focus{ outline:none; border-color:var(--brass); }
+  .word-count{ font-size:11.5px; color:#8A7A68; text-align:right; margin-top:3px; }
+  .word-count.ok{ color:var(--sage); }
+
+  .evidence-item{ border:1.5px dashed #D8C7A3; border-radius:10px; padding:14px; margin-bottom:12px; position:relative; }
+  .evidence-item .remove-btn{
+    position:absolute; top:8px; right:10px; background:none; border:none; color:var(--rust); font-weight:700;
+    cursor:pointer; font-size:13px;
+  }
+  .add-evidence-btn{
+    background:transparent; border:2px dashed var(--brass); color:#6B5A42; border-radius:8px;
+    padding:10px 16px; font-size:13.5px; font-weight:700; cursor:pointer; width:100%; margin-bottom:20px;
+  }
+  .add-evidence-btn:hover{ background:rgba(176,141,87,0.08); }
+
+  .primary-btn{
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
+    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+  }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .primary-btn:disabled{ background:#B7A78E; cursor:not-allowed; }
+  .secondary-btn{
+    background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
+    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+  }
+
+  .doc-preview{
+    background:#fff; border:1px solid #D8C7A3; border-radius:10px; padding:20px 22px; margin-bottom:20px;
+    max-height:400px; overflow-y:auto; font-size:13.5px; line-height:1.7;
+  }
+  .doc-preview h3{ font-family:'Rye', serif; font-weight:400; font-size:16px; margin:18px 0 6px; color:var(--rust); }
+  .doc-preview h3:first-child{ margin-top:0; }
+  .doc-preview p{ margin:0 0 10px; white-space:pre-wrap; }
+
+  .verdict-badge{
+    text-align:center; font-family:'Rye', serif; font-size:26px; padding:14px; border-radius:12px; margin-bottom:16px;
+  }
+  .verdict-badge.proven{ background:#DCE9D6; color:#3C5533; }
+  .verdict-badge.probable{ background:#E9E3C9; color:#6B5A20; }
+  .verdict-badge.possible{ background:#FBF0D9; color:#7A5A10; }
+  .verdict-badge.undetermined{ background:#F2D9D4; color:#7A2E23; }
+
+  .feedback-box{
+    background:rgba(0,0,0,0.04); border-radius:10px; padding:16px 18px; margin-top:16px; font-size:14px; line-height:1.65;
+  }
+  .feedback-box h4{ font-family:'Rye', serif; font-weight:400; font-size:16px; margin:0 0 8px; }
+  .typing{ display:flex; gap:4px; padding:10px 0; }
+  .typing span{ width:7px; height:7px; border-radius:50%; background:var(--brass); animation:bounce 1.2s infinite ease-in-out; }
+  .typing span:nth-child(2){ animation-delay:.15s; }
+  .typing span:nth-child(3){ animation-delay:.3s; }
+  @keyframes bounce{ 0%,80%,100%{ transform:translateY(0); opacity:.5; } 40%{ transform:translateY(-4px); opacity:1; } }
+
+  .next-step-box{
+    background:rgba(0,0,0,0.04); border-radius:8px; padding:14px 16px; margin-top:16px; font-size:13px; line-height:1.6;
+  }
+  .next-step-box a{ color:var(--rust); font-weight:700; }
+
+  .footer-note{ text-align:center; font-size:11.5px; color:var(--parchment-dim); opacity:.6; margin-top:22px; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="game-portal.html">&larr; Back to Green Pasture</a>
+  <div class="masthead">
+    <div class="eyebrow">Practice Your Skills</div>
+    <h1>Build Your Case</h1>
+    <div class="sub">Practicing the KHGN Suggested Trial Framework with your own research</div>
+  </div>
+  <div class="stepper" id="stepper"></div>
+  <div id="stage"></div>
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc. — a self-directed practice framework, not coursework or
+    an accredited credential. Not affiliated with the Board for Certification of Genealogists.
+  </div>
+</div>
+
+<script>
+const STEPS = ["Opening", "Testimony & Evidence", "Closing", "Verdict"];
+let currentLevel = 0;
+
+const caseData = {
+  question: "",
+  forClaim: "",
+  forReason: "",
+  againstClaim: "",
+  againstReason: "",
+  evidence: [""], // each item is a combined argument+rebuttal paragraph
+  closingFor: "",
+  closingAgainst: "",
+  verdict: "",
+  verdictReasoning: "",
+  reopenCriteria: ""
+};
+
+function countWords(str){
+  return str.trim().split(/\s+/).filter(Boolean).length;
+}
+
+function renderStepper(){
+  const wrap = document.getElementById('stepper');
+  wrap.innerHTML = STEPS.map((s,i) => {
+    let cls = 'step';
+    if(i < currentLevel) cls += ' done';
+    if(i === currentLevel) cls += ' active';
+    return `<div class="${cls}">${i+1}. ${s}</div>`;
+  }).join('');
+}
+
+/* ---------- Level 1: Opening ---------- */
+function renderLevel1(){
+  return `
+  <div class="card">
+    <h2>Level 1: Opening Statement</h2>
+    <p class="level-desc">Before you decide what you believe, state the case for your leading candidate or theory —
+    and the honest case for the strongest alternative. No conclusion yet. Just two fair theses.</p>
+    <div class="disclaimer-box">
+      This exercise builds the habit of honest proof argument. It is not coursework, a credential, or a
+      substitute for the Board for Certification of Genealogists' official standard.
+    </div>
+    <div class="thesis-explainer">
+      <strong>What's a thesis?</strong> A thesis is simply a claim plus your reason for believing it, in one
+      sentence: <em>"[This] is true, because [this]."</em> The two boxes below build that sentence for you —
+      just fill in the claim and the reason, and they'll combine automatically.
+    </div>
+    <div class="field-block">
+      <label class="field-label">Your Research Question</label>
+      <div class="field-hint">e.g. "Was John Smith of Madison County, born ~1790, the son of William Smith who served in the Virginia militia?"</div>
+      <input type="text" id="f-question" value="${escapeAttr(caseData.question)}" oninput="updateField('question', this.value)">
+    </div>
+
+    <div class="thesis-builder">
+      <div class="thesis-builder-label">The Case FOR Your Leading Theory</div>
+      <div class="thesis-row">
+        <span class="thesis-connector">I believe</span>
+        <input type="text" id="f-forClaim" placeholder="e.g. William Hartley of Madison County is my ancestor"
+          value="${escapeAttr(caseData.forClaim)}" oninput="updateThesisField('forClaim', this.value)">
+      </div>
+      <div class="thesis-row">
+        <span class="thesis-connector">because</span>
+        <input type="text" id="f-forReason" placeholder="e.g. his War of 1812 pension file matches the family legend's specific detail"
+          value="${escapeAttr(caseData.forReason)}" oninput="updateThesisField('forReason', this.value)">
+      </div>
+      <div class="thesis-preview" id="preview-for">${buildThesisPreview(caseData.forClaim, caseData.forReason)}</div>
+    </div>
+
+    <div class="thesis-builder">
+      <div class="thesis-builder-label">The Honest Case AGAINST It (or for the Alternative)</div>
+      <div class="field-hint">Give the strongest real version of the opposing case — not a straw man.</div>
+      <div class="thesis-row">
+        <span class="thesis-connector">It could instead be true that</span>
+        <input type="text" id="f-againstClaim" placeholder="e.g. William Hartley of Garrard County is actually my ancestor"
+          value="${escapeAttr(caseData.againstClaim)}" oninput="updateThesisField('againstClaim', this.value)">
+      </div>
+      <div class="thesis-row">
+        <span class="thesis-connector">because</span>
+        <input type="text" id="f-againstReason" placeholder="e.g. he also lived nearby with a documented family of the same era"
+          value="${escapeAttr(caseData.againstReason)}" oninput="updateThesisField('againstReason', this.value)">
+      </div>
+      <div class="thesis-preview" id="preview-against">${buildThesisPreview(caseData.againstClaim, caseData.againstReason, true)}</div>
+    </div>
+
+    <button class="primary-btn" onclick="goToLevel(1)">Continue to Testimony &amp; Evidence</button>
+  </div>`;
+}
+
+function buildThesisPreview(claim, reason, isAgainst){
+  if(!claim && !reason) return '<span class="preview-placeholder">Your combined thesis will appear here as you type…</span>';
+  const lead = isAgainst ? 'It could instead be true that' : 'I believe';
+  return `"${lead} ${claim || '…'}, because ${reason || '…'}."`;
+}
+
+function updateThesisField(key, val){
+  caseData[key] = val;
+  const isAgainst = key.startsWith('against');
+  const claim = isAgainst ? caseData.againstClaim : caseData.forClaim;
+  const reason = isAgainst ? caseData.againstReason : caseData.forReason;
+  const previewEl = document.getElementById(isAgainst ? 'preview-against' : 'preview-for');
+  if(previewEl) previewEl.innerHTML = buildThesisPreview(claim, reason, isAgainst);
+}
+
+/* ---------- Level 2: Testimony, Rebuttal & Evidence ---------- */
+function renderLevel2(){
+  let evidenceHtml = caseData.evidence.map((text, i) => `
+    <div class="evidence-item">
+      ${caseData.evidence.length > 1 ? `<button class="remove-btn" onclick="removeEvidence(${i})">✕ Remove</button>` : ''}
+      <label class="field-label">Evidence Paragraph ${i+1}</label>
+      <div class="field-hint">Present the evidence, argue what it supports, AND raise its own strongest rebuttal — all in one paragraph.</div>
+      <textarea oninput="updateEvidence(${i}, this.value)">${text}</textarea>
+      <div class="word-count" id="wc-evidence-${i}"></div>
+    </div>`).join('');
+
+  return `
+  <div class="card">
+    <h2>Level 2: Testimony, Rebuttal &amp; Evidence</h2>
+    <p class="level-desc">Present your evidence one piece at a time. For each piece, argue its case and immediately
+    question it yourself — don't save the doubts for later.</p>
+    <div id="evidence-list">${evidenceHtml}</div>
+    <button class="add-evidence-btn" onclick="addEvidence()">+ Add Another Piece of Evidence</button>
+    <button class="primary-btn" onclick="goToLevel(2)">Continue to Closing Argument</button>
+    <button class="secondary-btn" onclick="goToLevel(0)">Back to Opening</button>
+  </div>`;
+}
+
+function addEvidence(){
+  caseData.evidence.push("");
+  render();
+}
+function removeEvidence(i){
+  caseData.evidence.splice(i,1);
+  render();
+}
+function updateEvidence(i, val){
+  caseData.evidence[i] = val;
+  updateWordCount('evidence-'+i, val, 25);
+}
+
+/* ---------- Level 3: Closing ---------- */
+function renderLevel3(){
+  return `
+  <div class="card">
+    <h2>Level 3: Closing Argument</h2>
+    <p class="level-desc">Without re-reading your opening statement, restate the strongest version of both sides,
+    fairly, one more time — in your own words.</p>
+    <div class="field-block">
+      <label class="field-label">Closing: The Case For</label>
+      <textarea id="f-closingFor" oninput="updateField('closingFor', this.value)">${caseData.closingFor}</textarea>
+      <div class="word-count" id="wc-closingFor"></div>
+    </div>
+    <div class="field-block">
+      <label class="field-label">Closing: The Case Against</label>
+      <div class="field-hint">If you can't fairly restate this side, that's worth noticing before you render a verdict.</div>
+      <textarea id="f-closingAgainst" oninput="updateField('closingAgainst', this.value)">${caseData.closingAgainst}</textarea>
+      <div class="word-count" id="wc-closingAgainst"></div>
+    </div>
+    <button class="primary-btn" onclick="goToLevel(3)">Continue to the Verdict</button>
+    <button class="secondary-btn" onclick="goToLevel(1)">Back to Testimony &amp; Evidence</button>
+  </div>`;
+}
+
+/* ---------- Level 4: Verdict ---------- */
+function renderLevel4(){
+  return `
+  <div class="card">
+    <h2>Level 4: The Verdict</h2>
+    <p class="level-desc">Render your determination — confident, but held in a standing state of appeal. Nothing
+    here is ever fully closed.</p>
+    <div class="field-block">
+      <label class="field-label">Your Verdict</label>
+      <select id="f-verdict" onchange="updateField('verdict', this.value)">
+        <option value="">Choose a verdict…</option>
+        <option value="proven" ${caseData.verdict==='proven'?'selected':''}>Proven</option>
+        <option value="probable" ${caseData.verdict==='probable'?'selected':''}>Probable</option>
+        <option value="possible" ${caseData.verdict==='possible'?'selected':''}>Possible</option>
+        <option value="undetermined" ${caseData.verdict==='undetermined'?'selected':''}>Undetermined</option>
+      </select>
+    </div>
+    <div class="field-block">
+      <label class="field-label">Your Reasoning</label>
+      <textarea id="f-verdictReasoning" oninput="updateField('verdictReasoning', this.value)">${caseData.verdictReasoning}</textarea>
+      <div class="word-count" id="wc-verdictReasoning"></div>
+    </div>
+    <div class="field-block">
+      <label class="field-label">What Would Reopen This Case?</label>
+      <div class="field-hint">Be specific — what new evidence would be strong enough to change your verdict?</div>
+      <textarea id="f-reopenCriteria" oninput="updateField('reopenCriteria', this.value)">${caseData.reopenCriteria}</textarea>
+      <div class="word-count" id="wc-reopenCriteria"></div>
+    </div>
+    <button class="primary-btn" onclick="finalizeCase()">Finalize My Case</button>
+    <button class="secondary-btn" onclick="goToLevel(2)">Back to Closing</button>
+  </div>`;
+}
+
+/* ---------- Final compiled document + AI feedback ---------- */
+function compileDocument(){
+  const forThesis = `I believe ${caseData.forClaim || '…'}, because ${caseData.forReason || '…'}.`;
+  const againstThesis = `It could instead be true that ${caseData.againstClaim || '…'}, because ${caseData.againstReason || '…'}.`;
+  let doc = `RESEARCH QUESTION\n${caseData.question}\n\n`;
+  doc += `OPENING STATEMENT\nCase For:\n${forThesis}\n\nCase Against:\n${againstThesis}\n\n`;
+  doc += `TESTIMONY, REBUTTAL & EVIDENCE\n`;
+  caseData.evidence.forEach((e,i) => { doc += `Evidence ${i+1}:\n${e}\n\n`; });
+  doc += `CLOSING ARGUMENT\nCase For:\n${caseData.closingFor}\n\nCase Against:\n${caseData.closingAgainst}\n\n`;
+  doc += `VERDICT: ${caseData.verdict ? caseData.verdict.toUpperCase() : '(not selected)'}\nReasoning:\n${caseData.verdictReasoning}\n\nWhat Would Reopen This Case:\n${caseData.reopenCriteria}\n`;
+  return doc;
+}
+
+function renderFinal(){
+  const v = caseData.verdict || 'undetermined';
+  return `
+  <div class="card">
+    <h2>Your Compiled Case</h2>
+    <div class="verdict-badge ${v}">${v.charAt(0).toUpperCase()+v.slice(1)}</div>
+    <div class="doc-preview">
+      <h3>Opening Statement</h3>
+      <p><strong>For:</strong> ${escapeHtml('I believe ' + (caseData.forClaim||'…') + ', because ' + (caseData.forReason||'…') + '.')}</p>
+      <p><strong>Against:</strong> ${escapeHtml('It could instead be true that ' + (caseData.againstClaim||'…') + ', because ' + (caseData.againstReason||'…') + '.')}</p>
+      <h3>Testimony, Rebuttal &amp; Evidence</h3>
+      ${caseData.evidence.map((e,i) => `<p><strong>Evidence ${i+1}:</strong> ${escapeHtml(e) || '(blank)'}</p>`).join('')}
+      <h3>Closing Argument</h3>
+      <p><strong>For:</strong> ${escapeHtml(caseData.closingFor) || '(blank)'}</p>
+      <p><strong>Against:</strong> ${escapeHtml(caseData.closingAgainst) || '(blank)'}</p>
+      <h3>Verdict</h3>
+      <p><strong>${v.charAt(0).toUpperCase()+v.slice(1)}.</strong> ${escapeHtml(caseData.verdictReasoning) || '(blank)'}</p>
+      <p><strong>Would reopen if:</strong> ${escapeHtml(caseData.reopenCriteria) || '(blank)'}</p>
+    </div>
+    <button class="primary-btn" onclick="downloadCase()">⬇ Download My Case</button>
+    <button class="secondary-btn" onclick="requestFeedback()" id="feedback-btn">Get Feedback on My Case</button>
+    <div id="feedback-area"></div>
+    <div class="next-step-box">
+      This exercise practices the habit of honest proof argument. For the full professional standard it's
+      inspired by, see the <a href="https://bcgcertification.org/" target="_blank" rel="noopener">Board for
+      Certification of Genealogists</a>.
+    </div>
+    <button class="secondary-btn" onclick="startOver()">Start a New Case</button>
+  </div>`;
+}
+
+function downloadCase(){
+  const content = compileDocument();
+  const blob = new Blob([content], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'my-genealogical-case.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+async function requestFeedback(){
+  const btn = document.getElementById('feedback-btn');
+  const area = document.getElementById('feedback-area');
+  btn.disabled = true;
+  area.innerHTML = `<div class="feedback-box"><div class="typing"><span></span><span></span><span></span></div></div>`;
+
+  const prompt = `You are a supportive but honest genealogy research mentor reviewing a self-written proof argument, built using this framework: Opening Statement (thesis for and against), Testimony/Rebuttal/Evidence (paragraphs combining argument and self-rebuttal), Closing Argument (restating both sides fairly), and a Verdict (calibrated confidence, held open to appeal).
+
+Review the case below. Give constructive feedback in under 250 words covering: (1) whether the opening fairly presented both sides, (2) whether the evidence paragraphs genuinely included honest rebuttals or just argued one-sided, (3) whether the closing fairly restated both sides, (4) whether the verdict is calibrated to the actual strength of the case. Be encouraging but honest — if something is one-sided or under-developed, say so plainly and suggest one concrete improvement. Do not use markdown formatting, just plain text paragraphs.
+
+THE CASE:
+${compileDocument()}`;
+
+  try{
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 600,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await response.json();
+    const textBlock = (data.content || []).find(b => b.type === 'text');
+    const feedback = textBlock ? textBlock.text : "No feedback was returned. Please try again.";
+    area.innerHTML = `<div class="feedback-box"><h4>Mentor Feedback</h4><p style="white-space:pre-wrap;">${escapeHtml(feedback)}</p></div>`;
+  } catch(err){
+    area.innerHTML = `<div class="feedback-box"><h4>Feedback Unavailable</h4><p>Something went wrong reaching the feedback service. You can still download your case and review it yourself against the framework.</p></div>`;
+    console.error('Feedback error:', err);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Get Feedback Again';
+  }
+}
+
+function startOver(){
+  caseData.question = ""; caseData.forClaim = ""; caseData.forReason = "";
+  caseData.againstClaim = ""; caseData.againstReason = "";
+  caseData.evidence = [""]; caseData.closingFor = ""; caseData.closingAgainst = "";
+  caseData.verdict = ""; caseData.verdictReasoning = ""; caseData.reopenCriteria = "";
+  currentLevel = 0;
+  render();
+}
+
+/* ---------- Shared helpers ---------- */
+function escapeHtml(str){
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escapeAttr(str){
+  return (str || '').replace(/"/g,'&quot;');
+}
+function updateField(key, val){
+  caseData[key] = val;
+  updateWordCount(key, val, 20);
+}
+function updateWordCount(key, val, min){
+  const el = document.getElementById('wc-'+key);
+  if(!el) return;
+  const n = countWords(val);
+  el.textContent = `${n} word${n===1?'':'s'}`;
+  el.classList.toggle('ok', n >= min);
+}
+function goToLevel(n){
+  currentLevel = n;
+  render();
+}
+function finalizeCase(){
+  currentLevel = 4;
+  render();
+}
+
+function render(){
+  renderStepper();
+  const stage = document.getElementById('stage');
+  if(currentLevel === 0) stage.innerHTML = renderLevel1();
+  else if(currentLevel === 1) stage.innerHTML = renderLevel2();
+  else if(currentLevel === 2) stage.innerHTML = renderLevel3();
+  else if(currentLevel === 3) stage.innerHTML = renderLevel4();
+  else stage.innerHTML = renderFinal();
+
+  // initialize word counts for visible fields
+  ['closingFor','closingAgainst','verdictReasoning','reopenCriteria'].forEach(k => {
+    if(caseData[k] !== undefined) updateWordCount(k, caseData[k], 20);
+  });
+  caseData.evidence.forEach((e,i) => updateWordCount('evidence-'+i, e, 25));
+}
+
+render();
+</script>
+</body>
+</html>
