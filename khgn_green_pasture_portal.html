@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Pasture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A; --blue:#3B7BB0; --blue-bright:#5B9BD0;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
+  }
+  /* --- Header nav --- */
+  header{
+    background:var(--walnut-deep); border-bottom:1px solid var(--line);
+    padding:0 20px; display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:10;
+  }
+  .site-name{ font-family:'Rye', serif; font-size:20px; color:var(--brass-bright); padding:14px 0; }
+  nav{ display:flex; gap:4px; }
+  nav a{
+    display:block; padding:16px 18px; color:var(--parchment); text-decoration:none;
+    font-size:14px; font-weight:600; border-bottom:3px solid transparent; transition:all .15s ease;
+  }
+  nav a:hover{ color:var(--brass-bright); }
+  nav a.active{ border-bottom-color:var(--brass); color:var(--brass-bright); }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:36px 20px 60px; }
+  .hero{ text-align:center; margin-bottom:44px; }
+  .hero .eyebrow{ font-size:13px; letter-spacing:.05em; color:var(--brass-bright); margin-bottom:6px; text-transform:uppercase; }
+  .hero h1{ font-family:'Rye', serif; font-weight:400; font-size:clamp(32px,6vw,48px); margin:0 0 12px; text-shadow:0 2px 0 var(--walnut-deep); }
+  .hero p{ font-size:16px; line-height:1.6; color:var(--parchment-dim); max-width:620px; margin:0 auto; }
+
+  .category-section{ margin-bottom:44px; }
+  .category-header{ display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .category-dot{ width:14px; height:14px; border-radius:4px; flex-shrink:0; }
+  .category-dot.blue{ background:var(--blue-bright); }
+  .category-dot.teal{ background:var(--sage-bright); }
+  .category-title{ font-family:'Rye', serif; font-size:24px; font-weight:400; }
+  .category-desc{ font-size:13.5px; color:var(--parchment-dim); margin:2px 0 0; }
+
+  .card-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px; }
+  .card{
+    background:var(--parchment); color:var(--ink); border-radius:14px; padding:22px;
+    text-decoration:none; display:block; transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 6px 16px rgba(0,0,0,0.25); border-top:4px solid var(--brass);
+  }
+  .card.blue-accent{ border-top-color:var(--blue); }
+  .card.teal-accent{ border-top-color:var(--sage); }
+  .card:hover{ transform:translateY(-3px); box-shadow:0 10px 24px rgba(0,0,0,0.35); }
+  .card h3{ font-family:'Rye', serif; font-weight:400; font-size:20px; margin:0 0 8px; color:var(--ink); }
+  .card p{ font-size:13.5px; line-height:1.55; color:#4A3A28; margin:0 0 12px; }
+  .card .tag{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.04em;
+    text-transform:uppercase; padding:3px 10px; border-radius:12px; background:rgba(0,0,0,0.06); color:#6B5A42;
+  }
+  .card .cta{ font-size:12.5px; font-weight:700; color:var(--rust); margin-top:10px; display:block; }
+
+  .mission-note{
+    background:var(--walnut-deep); border:1px solid var(--line); border-radius:14px;
+    padding:22px 26px; margin-top:8px; font-size:13.5px; line-height:1.65; color:var(--parchment-dim);
+  }
+  .mission-note strong{ color:var(--brass-bright); }
+
+  .footer-note{ text-align:center; font-size:12px; color:var(--parchment-dim); opacity:.6; margin-top:40px; line-height:1.6; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="site-name">KHGN</div>
+  <nav>
+    <a href="khgn_training_program.html">Training</a>
+    <a href="#" class="active">Green Pasture</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Kentucky History &amp; Genealogy Network, Inc.</div>
+    <h1>Green Pasture</h1>
+    <p>Free genealogy education and Kentucky history, open to everyone — no login, no cost. Explore real research methods and real stories, told honestly.</p>
+  </div>
+
+  <div class="category-section">
+    <div class="category-header">
+      <div class="category-dot teal"></div>
+      <div>
+        <div class="category-title">Getting Started</div>
+        <p class="category-desc">New to genealogy research? Start here — no experience needed</p>
+      </div>
+    </div>
+    <div class="card-row">
+      <div class="card teal-accent" style="opacity:.6; cursor:default;">
+        <span class="tag">Coming Soon</span>
+        <h3>Getting Started in Genealogy</h3>
+        <p>The true beginner's on-ramp — how to read a census record, what a marriage bond is, and how to begin building your own family tree.</p>
+        <span class="cta">Coming soon →</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-header">
+      <div class="category-dot blue"></div>
+      <div>
+        <div class="category-title">Volunteer Training</div>
+        <p class="category-desc">Required learning for KHGN volunteers, moderators, and field workers</p>
+      </div>
+    </div>
+    <div class="card-row">
+      <a class="card blue-accent" href="khgn_training_program.html">
+        <span class="tag">Gated · 4 Levels</span>
+        <h3>KHGN Field Training</h3>
+        <p>PII, copyright &amp; terms of use, legal record release dates, and conflicts of interest — the rules every KHGN volunteer needs to know.</p>
+        <span class="cta">Begin training →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-header">
+      <div class="category-dot teal"></div>
+      <div>
+        <div class="category-title">Story Trails</div>
+        <p class="category-desc">Narrative history games — play through a journey, no account needed</p>
+      </div>
+    </div>
+    <div class="card-row">
+      <a class="card teal-accent" href="khgn_road_to_kentucky.html">
+        <span class="tag">Branching Story</span>
+        <h3>The Road to Kentucky</h3>
+        <p>From an agent's promise in Ireland to a Kentucky homestead — indenture, war, and land, with a choice at the end that changes everything.</p>
+        <span class="cta">Start the journey →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-header">
+      <div class="category-dot teal"></div>
+      <div>
+        <div class="category-title">Practice Your Skills</div>
+        <p class="category-desc">Interactive tools that let you practice real research methods — start with the guide, then the guided example, then your own case</p>
+      </div>
+    </div>
+    <div class="card-row">
+      <a class="card teal-accent" href="khgn_proof_standard_guide.html">
+        <span class="tag">1. Research Method</span>
+        <h3>Building a Genealogical Proof Argument</h3>
+        <p>Think like a trial lawyer about your own family tree — evidence, cross-examination, and an honest verdict.</p>
+        <span class="cta">Read the guide →</span>
+      </a>
+      <a class="card teal-accent" href="khgn_suggested_trial_framework.html">
+        <span class="tag">2. The Trial Framework</span>
+        <h3>The KHGN Suggested Trial Framework</h3>
+        <p>The full structure behind the exercises below — Opening Statements, Testimony &amp; Rebuttal, Closing Arguments, and a Verdict that's never fully closed.</p>
+        <span class="cta">Read the framework →</span>
+      </a>
+      <a class="card teal-accent" href="khgn_case_study_1_same_name.html">
+        <span class="tag">3. Guided Example</span>
+        <h3>Same Name, Wrong Man</h3>
+        <p>Practice the framework on a real case study — two men, same name, same county. Pick the right one and defend your reasoning.</p>
+        <span class="cta">Try the case →</span>
+      </a>
+      <a class="card teal-accent" href="khgn_build_your_case.html">
+        <span class="tag">4. Your Own Research</span>
+        <h3>Build Your Case</h3>
+        <p>Apply the framework to your own family history — write your case, get honest feedback, and download what you build.</p>
+        <span class="cta">Start building →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="category-section">
+    <div class="category-header">
+      <div class="category-dot teal"></div>
+      <div>
+        <div class="category-title">Dignified History</div>
+        <p class="category-desc">Serious history, told without gamification — the harder parts of the record</p>
+      </div>
+    </div>
+    <div class="card-row">
+      <a class="card teal-accent" href="khgn_roads_between_stations.html">
+        <span class="tag">Serious Reading</span>
+        <h3>Roads Between the Stations</h3>
+        <p>How Kentucky's early turnpikes were built, and an honest look at who built them.</p>
+        <span class="cta">Read the article →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="mission-note">
+    <strong>Why Green Pasture is free:</strong> Genealogy education is too often paid, fragmented, or
+    locked behind course fees. KHGN believes free, well-built, honest genealogy education — both how
+    to research responsibly and the real texture of Kentucky's history, including its hardest parts —
+    is worth building for everyone, not selling to a few.
+  </div>
+
+</div>
+
+<div class="footer-note">
+  Kentucky History &amp; Genealogy Network, Inc. — Green Pasture is a free public resource. No account or login required.
+</div>
+
+</body>
+</html>
