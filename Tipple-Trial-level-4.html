@@ -1,1 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KHGN Training — Level 4: Inurement & Commercial/Personal Gain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
+    display:flex; justify-content:center; padding:28px 16px 60px;
+  }
+  .app{ width:100%; max-width:760px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{ font-size:13px; letter-spacing:0.03em; color:var(--brass-bright); margin-bottom:4px; }
+  .masthead h1{
+    font-family:'Rye', serif; font-weight:400; font-size:clamp(24px,5vw,34px);
+    margin:0; color:var(--parchment); text-shadow:0 2px 0 var(--walnut-deep);
+  }
+  .masthead .level-sub{ font-size:14px; color:var(--parchment-dim); margin-top:4px; }
+  .portal-link{
+    display:inline-block; margin-top:12px; font-size:13px; font-weight:700;
+    color:var(--walnut-deep); background:var(--brass-bright); text-decoration:none;
+    padding:8px 16px; border-radius:20px; transition:background .15s ease;
+  }
+  .portal-link:hover{ background:var(--brass); }
+
+  .trail-wrap{
+    background:var(--walnut-deep); border:1px solid var(--line); border-radius:14px;
+    padding:18px 14px 10px; margin-bottom:20px; overflow-x:auto;
+  }
+  .trail{ display:flex; align-items:center; min-width:640px; position:relative; padding:0 6px; }
+  .trail-line{ position:absolute; left:26px; right:26px; top:15px; height:3px; background:var(--line); z-index:0; }
+  .trail-line-fill{ position:absolute; left:26px; top:15px; height:3px; background:var(--brass); z-index:1; transition:width .5s ease; }
+  .stop{ flex:1; display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
+  .stop-dot{
+    width:32px; height:32px; border-radius:50%; background:var(--walnut);
+    border:3px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:var(--parchment-dim); transition:all .3s ease;
+  }
+  .stop.done .stop-dot{ background:var(--sage); border-color:var(--sage-bright); color:var(--walnut-deep); }
+  .stop.current .stop-dot{
+    background:var(--brass); border-color:var(--brass-bright); color:var(--walnut-deep);
+    box-shadow:0 0 0 4px rgba(176,141,87,0.25);
+  }
+  .stop-label{ font-size:10px; margin-top:6px; color:var(--parchment-dim); opacity:.7; }
+
+  .card{
+    background:var(--parchment); color:var(--ink); border-radius:16px; padding:28px 26px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .4s ease;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  .card.sheriff{ background:#EAD9CE; }
+
+  .character-row{ display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; }
+  .portrait{ width:76px; height:76px; flex-shrink:0; border-radius:10px; border:2px solid var(--ink); background:var(--walnut); }
+  .char-meta{ flex:1; }
+  .char-name{ font-family:'Rye', serif; font-size:22px; margin:0 0 2px; color:var(--ink); }
+  .char-role{ font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:#6B5A42; margin:0 0 8px; }
+  .narration-btn{
+    display:inline-flex; align-items:center; gap:6px; background:var(--ink); color:var(--parchment);
+    border:none; border-radius:20px; padding:6px 14px; font-size:12px; font-weight:600; cursor:pointer;
+  }
+  .narration-btn:hover{ background:#3a2c1e; }
+
+  .body-text{ font-size:15.5px; line-height:1.6; margin:0 0 18px; }
+  .scenario-box{
+    background:rgba(0,0,0,0.06); border-left:4px solid var(--brass); padding:14px 16px;
+    border-radius:6px; font-size:14.5px; line-height:1.55; margin-bottom:20px; font-style:italic;
+  }
+  .gotcha-badge{
+    display:inline-block; background:var(--rust); color:#fff; font-size:10px; font-weight:700;
+    letter-spacing:.04em; padding:3px 9px; border-radius:12px; margin-bottom:8px;
+  }
+
+  .primary-btn{
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
+    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+  }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .primary-btn:disabled{
+    background:var(--walnut-deep); color:var(--brass-bright); opacity:1; cursor:not-allowed;
+    border:1px solid var(--brass);
+  }
+  .secondary-btn{
+    background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
+    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+  }
+
+  .question-block{ margin-bottom:20px; }
+  .q-num{ font-size:12px; font-weight:700; color:var(--rust); letter-spacing:.03em; margin-bottom:6px; }
+  .q-prompt{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .options{ display:flex; flex-direction:column; gap:8px; }
+  .option{
+    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:11px 14px;
+    font-size:14.5px; font-family:inherit; cursor:pointer; color:var(--ink); transition:all .12s ease;
+  }
+  .option:hover{ border-color:var(--brass); }
+  .option.selected{ border-color:var(--ink); background:#F5EBD6; font-weight:600; }
+  .option.correct{ border-color:var(--sage); background:#DCE9D6; }
+  .option.incorrect{ border-color:var(--rust); background:#F2D9D4; }
+  .option:disabled{ cursor:default; }
+
+  .feedback-banner{
+    display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:8px;
+    font-size:14px; font-weight:700; margin-bottom:16px;
+  }
+  .feedback-banner.pass{ background:#DCE9D6; color:#3C5533; }
+  .feedback-banner.fail{ background:#F2D9D4; color:#7A2E23; }
+
+  .final-question{ background:rgba(0,0,0,0.05); border-radius:10px; padding:16px; margin-top:6px; }
+
+  .footer-note{ text-align:center; font-size:13px; color:var(--parchment); margin-top:18px; line-height:1.6; }
+  .footer-note strong{ color:var(--brass-bright); }
+
+  .complete-screen{ text-align:center; }
+  .complete-screen .badge{
+    width:90px; height:90px; margin:0 auto 16px; border-radius:50%; background:var(--sage);
+    display:flex; align-items:center; justify-content:center; font-size:40px;
+  }
+  .program-complete .badge{ background:var(--brass); }
+  #volunteer-form-hook{
+    border:2px dashed var(--line); border-radius:10px; padding:22px; margin-top:18px;
+    background:rgba(0,0,0,0.04); font-size:13px; color:#6B5A42; text-align:center;
+  }
+
+  .article-content{
+    max-height:440px; overflow-y:auto; background:#fff; border:1px solid #D8C7A3;
+    border-radius:10px; padding:18px 20px; margin-bottom:16px; font-size:14px; line-height:1.65;
+  }
+  .article-content h2{ font-family:'Rye', serif; font-size:22px; margin:0 0 4px; color:var(--ink); }
+  .article-content h3{ font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:#6B5A42; margin:0 0 10px; font-weight:600; }
+  .article-content h4{ font-size:17px; margin:18px 0 6px; color:var(--rust); font-family:'Rye', serif; font-weight:400; }
+  .article-content p{ margin:0 0 12px; }
+  .article-content ul, .article-content ol{ margin:0 0 12px; padding-left:22px; }
+  .article-content li{ margin-bottom:6px; }
+  .article-content blockquote{
+    margin:12px 0; padding:10px 14px; border-left:4px solid var(--brass);
+    background:rgba(176,141,87,0.08); font-style:italic; color:#4A3A28;
+  }
+  .article-content hr{ border:none; border-top:1px solid #E0D0AC; margin:18px 0; }
+  .gate-status{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; font-size:13px; color:#6B5A42; }
+  .gate-row{ transition:color .2s ease; }
+  .gate-row.gate-done{ color:var(--sage); font-weight:700; }
+  .gate-explainer{
+    font-size:12.5px; color:#6B5A42; background:rgba(0,0,0,0.04); border-radius:8px;
+    padding:10px 12px; margin-bottom:14px; line-height:1.5; font-style:italic;
+  }
+  .completion-disclaimer{
+    text-align:left; font-size:14px; line-height:1.65; color:var(--ink); font-weight:500;
+    background:#F2D9D4; border:1.5px solid var(--rust); border-radius:8px; padding:14px 16px; margin:16px 0;
+  }
+  .completion-disclaimer strong{ color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="masthead">
+    <div class="eyebrow">KHGN FIELD TRAINING · COMMUNITY ADVISORY TRACK</div>
+    <h1>Level 4: Inurement & Commercial/Personal Gain</h1>
+    <a class="portal-link" href="https://khgn-inc.org/game-portal.html">&larr; Back to Game Portal</a>
+    <div class="level-sub">Guided by The Village Court Clerk</div>
+  </div>
+
+  <div class="trail-wrap" id="trail-wrap"><div class="trail" id="trail"></div></div>
+  <div id="stage"></div>
+
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc. — Volunteer Field Training Program<br>
+    Failing the Sheriff's final chance at any waypoint returns you to the start of this level.<br><br>
+    <strong>This training is an internal educational orientation for KHGN volunteers only.</strong>
+    It is not an accredited certification, professional credential, or license of any kind, and
+    completion does not represent legal advice or KHGN's endorsement as an accrediting body.
+    <br><br>
+    <a href="#" onclick="resetProgress(); return false;" style="color:var(--brass-bright); text-decoration:underline; font-size:12px;">Reset this level's progress on this device</a>
+  </div>
+</div>
+
+<script>
+const TOTAL_STOPS = 12;
+const LEVEL_ID = 4;
+const LEVEL_TOPIC = "Inurement & Commercial/Personal Gain";
+const GUIDE_NAME = "The Village Court Clerk";
+const GUIDE_ROLE = "Trail Guide";
+const GUIDE_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#2B231C\"/>\n  <circle cx=\"38\" cy=\"30\" r=\"13\" fill=\"#C99B6E\"/>\n  <path d=\"M26 24 Q38 14 50 24 L50 20 Q38 12 26 20 Z\" fill=\"#221A12\"/>\n  <path d=\"M20 66 Q38 44 56 66 Z\" fill=\"#3A3A4A\"/>\n  <rect x=\"26\" y=\"50\" width=\"24\" height=\"16\" rx=\"1\" fill=\"#EDE0C8\" stroke=\"#221A12\" stroke-width=\"1\"/>\n  <line x1=\"29\" y1=\"54\" x2=\"47\" y2=\"54\" stroke=\"#A63D2F\" stroke-width=\"1.4\"/>\n  <line x1=\"29\" y1=\"58\" x2=\"47\" y2=\"58\" stroke=\"#221A12\" stroke-width=\"1\"/>\n  <line x1=\"29\" y1=\"62\" x2=\"40\" y2=\"62\" stroke=\"#221A12\" stroke-width=\"1\"/>\n</svg>";
+const SHERIFF_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#3A231C\"/>\n  <path d=\"M18 30 Q38 4 58 30 L58 20 Q38 -2 18 20 Z\" fill=\"#4A2E22\"/>\n  <circle cx=\"38\" cy=\"32\" r=\"13\" fill=\"#C99B6E\"/>\n  <path d=\"M28 44 L48 44 L44 62 L32 62 Z\" fill=\"#5B3A2A\"/>\n  <polygon points=\"38,50 40,54 44,54 41,57 42,61 38,58 34,61 35,57 32,54 36,54\"\n    fill=\"#D4AF6A\" stroke=\"#2B211A\" stroke-width=\"0.6\"/>\n  <path d=\"M27 32 Q38 38 49 32\" stroke=\"#3A231C\" stroke-width=\"2\" fill=\"none\"/>\n</svg>";
+const INTRO_TEXT = "\"Step into my office. As a nonprofit, KHGN's resources, records, and volunteer labor exist for the public benefit — not for the private gain of any one person, however well-connected. Using our platform, our data, or our name for personal or commercial advantage is called inurement, and it can jeopardize the organization's entire nonprofit status. Let's make sure every trainee understands exactly where that line sits.\"";
+const ARTICLE_MD = "# Understanding Inurement and Private Gain\n### A Field Guide for KHGN Volunteers, Moderators, and Field Workers\n\n*Level 4 Reading — Kentucky History & Genealogy Network, Inc.*\n\n---\n\n## Why This Level Exists\n\nThe first three levels of this training protect the people whose stories and records KHGN handles: the living relatives named in a post, the researchers whose work carries copyright, the individuals whose records aren't legally releasable yet. This level protects something different — the organization itself, and the public trust it was built on.\n\nKHGN is a nonprofit. That single fact carries real legal weight. In exchange for tax-exempt status, favorable treatment, and the public's willingness to donate time and money, a nonprofit makes an implicit promise: **its resources, its name, and its opportunities exist to serve its stated public mission — not to enrich any individual connected to it.**\n\nWhen that promise is broken, the legal term for it is **inurement** — allowing the organization's net earnings or resources to benefit a private individual. A closely related concept is **private benefit** — using the organization's platform, reputation, or assets to advantage someone personally or commercially, even without a direct transfer of money. Both are treated seriously by nonprofit law, because both threaten the fundamental bargain a 501(c)(3) organization makes with the public.\n\nThis reading is general education, not legal advice. If you ever suspect an actual inurement or private-benefit situation is happening — not just a training scenario — that's a matter for the Board and the Community Advisory Committee, not something to handle informally.\n\n---\n\n## Part One: What Inurement Actually Means\n\n\"Inurement\" sounds like dense legal jargon, but the underlying idea is simple: **no part of a nonprofit's net earnings may benefit a private individual, especially someone considered an \"insider\"** — a board member, officer, key employee, major donor, or someone closely connected to any of them.\n\nThis doesn't mean nonprofits can't pay anyone. Reasonable compensation for real work, reimbursement for actual expenses, and legitimate vendor payments are all normal and lawful. The problem arises when the benefit is:\n\n- **Disproportionate** to any real service provided\n- **Not available on the same terms to the general public or membership**\n- **Tied to someone's insider position** rather than to a fair transaction\n\nThe classic historical example is a nonprofit whose founder pays himself an enormous, unjustified salary, or whose board quietly awards contracts to companies owned by board members' relatives at inflated prices. But inurement in a modern volunteer organization is often much smaller and much less dramatic than that — which is exactly why it's easy to miss.\n\n---\n\n## Part Two: What This Looks Like in a Volunteer Organization Like KHGN\n\nYou don't need a corporate embezzlement scheme to have an inurement problem. Some patterns that are far more common — and far easier for a volunteer to stumble into without bad intent:\n\n### 1. Using the Organization's Platform for Personal Business\nA board member or volunteer with administrative access to KHGN's social media groups, forums, or mailing lists uses that access to promote their own private business — a professional genealogy research service, a photography studio, a travel agency, a self-published book — under the appearance of an official KHGN announcement. Even if the person genuinely believes they're just "sharing something useful with the community," this uses an asset that belongs to the organization (its audience, its credibility, its platform) for private commercial gain.\n\n### 2. Steering Organizational Opportunities to Oneself or Family\nIf KHGN needs a service — printing, web design, event catering, research assistance — and a volunteer or board member arranges for the contract to go to their own business, or a close relative's business, without the same open comparison given to other options, that's a private-benefit concern, regardless of whether the price was technically "fair."\n\n### 3. Using Donor or Membership Data for Personal Advantage\nContact lists, donor records, and volunteer databases exist to serve KHGN's mission. Using that same list to promote a personal side business, solicit customers, or advance a private project is a misuse of an organizational asset, separate from — but often overlapping with — the PII concerns covered in Level 1.\n\n### 4. Accepting Personal Perks Tied to Organizational Position\nIf a volunteer's access to historical archives, county records, or KHGN's reputation is used to negotiate personal deals, discounts, or opportunities that wouldn't be available to them as a private citizen, that's a private benefit flowing from an organizational role.\n\n### 5. Blurring Personal and Organizational Fundraising\nSoliciting donations "for KHGN" that are actually directed toward a volunteer's personal expenses, a side project not authorized by the Board, or an unrelated cause is a serious inurement and trust violation — even when the underlying cause seems sympathetic.\n\n---\n\n## Part Three: Why "I Wasn't Trying to Cheat Anyone" Isn't the Test\n\nMost real-world inurement problems in small nonprofits don't come from someone twirling a mustache and plotting to loot the treasury. They come from people who see an opportunity that feels harmless — "I'll just mention my business, it's relevant to the group anyway" — and don't stop to separate their personal interest from the organization's.\n\nThe legal and ethical test isn't whether someone *intended* harm. It's whether:\n\n1. **An insider received a benefit** (money, opportunity, access, promotion) **connected to their position**, and\n2. **That benefit wasn't available on equal terms to others**, or **wasn't a fair exchange for value actually provided.**\n\nIf both are true, it's an inurement or private-benefit concern — regardless of good intentions.\n\n---\n\n## Part Four: What's at Stake\n\nFor an organization, sustained or serious inurement violations can jeopardize **tax-exempt status itself** — the IRS can revoke a 501(c)(3)'s exemption for inurement violations, and in more serious cases, insiders who benefited improperly can face personal excise-tax penalties under what's known as "intermediate sanctions."\n\nBut beyond the legal exposure, there's something more immediate for an organization like KHGN: **donor and volunteer trust**. People give their time, their family records, and sometimes their money to KHGN because they believe it exists to serve Kentucky's genealogical and historical community — not to serve any individual's private interests. A single visible incident of a board member or volunteer using KHGN's platform for personal gain can do lasting damage to that trust, even if it's resolved quickly.\n\n---\n\n## Part Five: What to Do If You See This Happening\n\nAs with the earlier levels, your job as a moderator or field worker isn't to be the final legal judge — it's to recognize the pattern and route it correctly.\n\n1. **Recognize the pattern**: an insider benefiting personally, commercially, or reputationally through their KHGN access or position.\n2. **Don't confront it publicly or informally as a personal accusation.** This is a governance matter, not a moderation call you should make solo.\n3. **Escalate to the Community Advisory Committee**, who can bring it to the Board — the only body with the authority to review, decide, and act on matters like this, per KHGN's governance structure.\n4. **Document what you observed factually**, without speculating about motive. What was posted, by whom, when, and what personal benefit it appeared to provide.\n\n---\n\n## A Closing Thought\n\nThis level exists to protect something you can't see in any single post the way you can see a PII violation or a copyright infringement — the long-term integrity of the organization every other level exists to serve. Every dollar, every volunteer hour, and every piece of community trust that KHGN holds is held *for* the mission, not for any one person's benefit — including yours, if you ever find yourself in a position where the line gets blurry.\n\nWhen you're ready, continue to the Level 4 trail, where the Village Court Clerk will walk you through real scenarios testing exactly this judgment.\n\n---\n\n*This material is intended for internal KHGN training purposes and reflects organizational best practices. It is not a substitute for formal legal advice. Questions about specific situations should be directed to the Community Advisory Committee and, where appropriate, the Board.*";
+const QUIZZES = [{"title":"The Board Member's Side Business","scenario":"A board member of a nonprofit environmental group uses the organization's official public discussion board to heavily promote their private, for-profit eco-tourism travel agency, posting daily commercial tour packages and booking links under the guise of organizational announcements.","questions":[{"prompt":"What conflict of interest and private benefit violation has occurred?","options":["Utilizing an organizational public discussion platform for personal commercial self-promotion and private financial gain violates nonprofit ethics and benefit rules.","Nonprofit board members retain absolute rights to advertise personal travel agencies on organizational boards.","The board member is compliant provided they offer a ten percent discount to fellow members.","The issue is restricted to a typographical error in the travel package pricing schedule."],"correct":0}]},{"title":"The Self-Published Book Plug","gotcha":true,"scenario":"A community member on the KHGN social platform posts about a local historical event and mentions their newly published local history book. They note that while the book is a commercial product sold for personal royalties, reading it will give members a \"deep appreciation\" for the community's heritage.","questions":[{"prompt":"What core compliance issue or 'gotcha' regarding self-promotion has occurred?","options":["Even when content is educationally relevant or locally focused, using the platform to drive commercial sales for personal financial gain constitutes an improper private benefit.","Promoting a book is fully compliant as long as the author includes a brief historical anecdote in the post text.","Authors are completely exempt from self-promotion limits if their book references community history.","The issue is restricted exclusively to a missing preview chapter link in the post body."],"correct":0}]},{"title":"The Records Handling Fee","gotcha":true,"scenario":"A regular forum user posts an offer providing free research services to fellow members who are building family trees. However, they require users to pay a fixed \"shipping and handling fee\" for digital PDF files of public census and marriage records they copy from free government archives.","questions":[{"prompt":"What deceptive 'gotcha' scenario regarding public records monetization has taken place?","options":["Charging fees — even disguised as administrative or shipping costs — for the distribution of publicly available government records violates community trust and fair-use norms.","Charging digital handling fees for public records is fully legal as long as the records themselves were originally free.","Forum users have absolute rights to monetize public records through arbitrary document delivery fees.","The problem is limited strictly to a typographical error in the digital delivery timeframe."],"correct":0}]},{"title":"The Personal Cemetery Fundraiser","gotcha":true,"scenario":"A dedicated volunteer posts an urgent fundraising request on the KHGN community board, asking members to send money via a personal electronic payment handle for \"essential maintenance and upkeep\" of a historic local cemetery plot where early pioneers are buried.","questions":[{"prompt":"What compliance failure or borderline violation has been triggered by this post?","options":["Soliciting funds for external projects — even community-minded causes like cemetery upkeep — into personal payment accounts without institutional oversight violates fundraising and anti-fraud rules.","Independent fundraising for historical cemeteries is automatically permitted on all nonprofit community boards.","The post is fully compliant because cemetery upkeep is a charitable and benevolent community endeavor.","The issue is restricted to a minor formatting error in the personal payment handle link."],"correct":0}]},{"title":"The Comment-Section Discount Funnel","gotcha":true,"scenario":"A professional photographer posts a stunning gallery of local landscape photos on the KHGN platform. In the comments, when users compliment the work, the photographer drops a link to their commercial booking site, offering discounted portrait sessions exclusively to KHGN members.","questions":[{"prompt":"What borderline self-promotion 'gotcha' is demonstrated here?","options":["Leveraging community engagement by posting creative work as a backdoor funnel to advertise commercial services and discount packages breaches anti-spam and self-promotion policies.","Photographers are legally encouraged to offer member-only discounts on their commercial services within community threads.","The post is fully compliant because the initial photo gallery shared on the platform was free to view.","The infraction is limited solely to a missing copyright watermark on the landscape images."],"correct":0}]},{"title":"The Paywalled Public Record Index","gotcha":true,"scenario":"A user posts a curated index of historical divorce and land records on the community board. They state the database is free to search, but block access to the actual record transcriptions behind a tiered \"premium subscriber\" paywall operated by their personal side business.","questions":[{"prompt":"What policy violation occurs in this paywalled data sharing setup?","options":["Using a community platform to drive traffic toward a personal paid subscription service built on public records exploits the network for private commercial gain.","Community users are allowed to gate any database they compile behind a commercial paywall.","The post is fully compliant because the initial index search feature is provided free of charge.","The issue is restricted exclusively to a broken stylesheet path on the subscriber login page."],"correct":0}]},{"title":"The Undisclosed Referral Commission","gotcha":true,"scenario":"A long-time forum contributor writes a glowing product review for a local tax preparation software tool. They disclose that they received a free copy of the software from the vendor, but omit the fact that they earn a cash commission for every user who signs up using their unique referral code.","questions":[{"prompt":"What subtle ethical and transparency 'gotcha' has been committed?","options":["Failing to disclose hidden financial incentives and referral commissions while posting positive product reviews misleads members and violates commercial transparency standards.","Reviewers are never required to disclose financial commissions as long as they received the product for free.","The review is fully compliant because tax preparation software is a useful tool for community members.","The problem is limited strictly to a missing version number in the software review title."],"correct":0}]},{"title":"The Courier Expense Request","gotcha":true,"scenario":"A member posts a request for donations to help cover the \"gas and courier expenses\" required to drive to the county archives, copy dozens of 19th-century probate wills, and mail physical paper copies to interested local history hobbyists.","questions":[{"prompt":"What unauthorized solicitation boundary has been crossed in this post?","options":["Requesting reimbursement or donations for personal travel and copying expenses related to public records creates an unauthorized commercial transaction loop within the community platform.","Members are permitted to request travel expense reimbursements for any historical research project they undertake.","The post is fully compliant because historical wills are public domain documents.","The issue is restricted to a minor calculation error in the estimated mileage total."],"correct":0}]},{"title":"The Signature Banner Ad","gotcha":true,"scenario":"A local business owner creates a helpful, informative discussion thread about small business tax strategies, but intentionally signs off every reply using their corporate title and a signature banner that reads: \"Need expert accounting? Visit my firm's paid booking page here.\"","questions":[{"prompt":"What subtle self-promotion violation is present in this signature setup?","options":["Utilizing persistent signature banners and professional titles to perpetually advertise a commercial advisory service constitutes unauthorized passive self-promotion.","Business owners are entitled to include commercial booking links in their forum signatures on any platform.","The thread is fully compliant because the core tax advice provided in the body text was accurate.","The infraction is limited solely to a font size discrepancy in the signature banner text."],"correct":0}]},{"title":"The Webinar Bait-and-Switch","gotcha":true,"scenario":"A member posts an announcement about a free community webinar on genealogy research. However, during the live webinar hosted via an external link, attendees are heavily pressured to purchase the presenter's expensive, proprietary software package required to execute the techniques shown.","questions":[{"prompt":"What deceptive 'bait-and-switch' self-promotion violation has occurred?","options":["Promoting a free educational event on the community platform only to upsell attendees on proprietary commercial products constitutes deceptive marketing and self-promotion.","Presenters are legally allowed to sell any software package they want at the end of a free webinar.","The community post is fully compliant because the initial webinar announcement advertised free admission.","The issue is restricted exclusively to a broken video stream link in the event room."],"correct":0}]},{"title":"The Venmo PDF","gotcha":true,"scenario":"A forum user copies hundreds of birth and marriage transcriptions from a subscription-only genealogy website, pastes them into a KHGN discussion thread, and adds a note stating: \"If you want the clean PDF formatting and citation index, send $5 to my personal Venmo.\"","questions":[{"prompt":"What dual compliance violation involving copyright and monetization is demonstrated?","options":["Republishing copyrighted data sourced from external paid platforms while attempting to monetize the output via personal payment handles violates intellectual property and anti-profiteering rules.","Users have absolute freedom to redistribute any data they find online and charge whatever fees they choose.","The post is fully compliant because the user added custom PDF formatting to the copied records.","The problem is limited strictly to a typographical error in the Venmo handle username."],"correct":0}]},{"title":"The 'Volunteer' Print Shop","gotcha":true,"scenario":"A community member posts an offer to design custom digital family tree charts for other users. They clarify that the design work is done \"strictly on a volunteer basis,\" but require clients to pay a mandatory printing and courier fee through their private online print shop.","questions":[{"prompt":"What borderline commercial 'gotcha' has been triggered by this service offer?","options":["Framing a commercial printing service as a voluntary favor while routing mandatory payments through a private retail shop bypasses platform commerce restrictions.","Members are fully permitted to run private print shops as long as the initial design labor is labeled as voluntary.","The post is compliant because custom family tree charts are useful visual aids for genealogy enthusiasts.","The issue is restricted to a minor delay in the print shop's shipping confirmation emails."],"correct":0}]}];
+const SHERIFF_SPEECH = "Hold on now. What you just approved would've caused real harm — this is exactly the kind of mistake that damages trust, exposes people to risk, and puts this organization's credibility on the line. I'm going to give you one more chance to get it right. Answer true this time, and you'll walk on. Answer false, and you're headed back to the start of this level.";
+
+function renderMarkdown(md){
+  const lines = md.split('\n');
+  let html = '';
+  let listBuffer = [];
+  let listType = null;
+  function flushList(){
+    if(listBuffer.length){
+      html += `<${listType}>` + listBuffer.map(li => `<li>${li}</li>`).join('') + `</${listType}>`;
+      listBuffer = [];
+      listType = null;
+    }
+  }
+  function inline(text){
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  }
+  lines.forEach(raw => {
+    const line = raw.trim();
+    if(line === ''){ flushList(); return; }
+    if(line === '---'){ flushList(); html += '<hr>'; return; }
+    let m;
+    if((m = line.match(/^### (.*)/))){ flushList(); html += `<h4>${inline(m[1])}</h4>`; return; }
+    if((m = line.match(/^## (.*)/))){ flushList(); html += `<h3>${inline(m[1])}</h3>`; return; }
+    if((m = line.match(/^# (.*)/))){ flushList(); html += `<h2>${inline(m[1])}</h2>`; return; }
+    if((m = line.match(/^> (.*)/))){ flushList(); html += `<blockquote>${inline(m[1])}</blockquote>`; return; }
+    if((m = line.match(/^- (.*)/))){ if(listType !== 'ul'){ flushList(); listType = 'ul'; } listBuffer.push(inline(m[1])); return; }
+    if((m = line.match(/^\d+\.\s(.*)/))){ if(listType !== 'ol'){ flushList(); listType = 'ol'; } listBuffer.push(inline(m[1])); return; }
+    flushList();
+    html += `<p>${inline(line)}</p>`;
+  });
+  flushList();
+  return html;
+}
+
+let currentStop = 0;
+let quizAnswers = {};
+let quizSubmitted = {};
+let gateUnlocked = false;
+let gateScrolledToEnd = false;
+let gateStarted = false;
+
+function loadGateUnlocked(){
+  try { return localStorage.getItem('khgn_gate_passed_level_' + LEVEL_ID) === 'true'; }
+  catch(e) { return false; }
+}
+function saveGatePassed(){
+  try { localStorage.setItem('khgn_gate_passed_level_' + LEVEL_ID, 'true'); }
+  catch(e) { /* storage unavailable — gate just won't persist across reloads for this user */ }
+}
+
+function levelKey(stop){ return LEVEL_ID + '-' + stop; }
+
+function renderTrail(){
+  const trail = document.getElementById('trail');
+  trail.innerHTML = '';
+  const line = document.createElement('div'); line.className = 'trail-line'; trail.appendChild(line);
+  const fill = document.createElement('div'); fill.className = 'trail-line-fill';
+  const pct = currentStop === 0 ? 0 : ((currentStop-1) / (TOTAL_STOPS-1)) * 100;
+  fill.style.width = pct + '%';
+  trail.appendChild(fill);
+  for(let i=1;i<=TOTAL_STOPS;i++){
+    const stop = document.createElement('div');
+    stop.className = 'stop';
+    if(i < currentStop) stop.classList.add('done');
+    if(i === currentStop) stop.classList.add('current');
+    const dot = document.createElement('div'); dot.className = 'stop-dot';
+    dot.textContent = i < currentStop ? '✓' : i;
+    const label = document.createElement('div'); label.className = 'stop-label';
+    label.textContent = 'Stop '+i;
+    stop.appendChild(dot); stop.appendChild(label);
+    trail.appendChild(stop);
+  }
+}
+
+function resetLevel(){
+  const prefix = LEVEL_ID + '-';
+  Object.keys(quizAnswers).forEach(k => { if(k.startsWith(prefix)) delete quizAnswers[k]; });
+  Object.keys(quizSubmitted).forEach(k => { if(k.startsWith(prefix)) delete quizSubmitted[k]; });
+  currentStop = 0;
+  render();
+}
+
+function startLevel(){
+  currentStop = 1;
+  render();
+}
+
+function renderIntro(){
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">${GUIDE_NAME}</p>
+        <p class="char-role">${GUIDE_ROLE} · Level ${LEVEL_ID}: ${LEVEL_TOPIC}</p>
+        <button class="narration-btn" onclick="speakIntro(this)">🔊 Read Aloud</button>
+      </div>
+    </div>
+    <p class="body-text">${INTRO_TEXT}</p>
+    <button class="primary-btn" onclick="startLevel()">Begin the Trail</button>
+  </div>
+  <div class="footer-note" style="margin-top:14px;">
+    The "Read Aloud" button uses your browser's built-in text-to-speech voice — no recorded audio needed.
+  </div>`;
+}
+
+function renderQuiz(stopIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const key = levelKey(stopIndex);
+  const answered = !!quizSubmitted[key];
+  let html = `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">${quiz.title}</p>
+        <p class="char-role">Level ${LEVEL_ID} · Trail Stop ${stopIndex} of ${TOTAL_STOPS}</p>
+      </div>
+    </div>
+    ${quiz.gotcha ? '<span class="gotcha-badge">⚠ BORDERLINE CASE</span>' : ''}
+    <div class="scenario-box">${quiz.scenario}</div>
+  `;
+
+  quiz.questions.forEach((q, qi) => {
+    const picked = quizAnswers[key]?.[qi];
+    html += `<div class="question-block">
+      <div class="q-num">QUESTION ${qi+1} OF ${quiz.questions.length}</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options">`;
+    q.options.forEach((opt, oi) => {
+      let cls = 'option';
+      if(answered){
+        if(oi === q.correct) cls += ' correct';
+        else if(oi === picked) cls += ' incorrect';
+      } else if(picked === oi){
+        cls += ' selected';
+      }
+      html += `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="selectAnswer(${stopIndex},${qi},${oi})">${opt}</button>`;
+    });
+    html += `</div></div>`;
+  });
+
+  if(!answered){
+    const allPicked = quiz.questions.every((_,qi) => quizAnswers[key]?.[qi] !== undefined);
+    html += `<button class="primary-btn" ${allPicked ? '' : 'disabled'} onclick="submitQuiz(${stopIndex})">Submit Answers</button>`;
+  } else {
+    const numCorrect = quiz.questions.filter((q,qi) => quizAnswers[key][qi] === q.correct).length;
+    const passed = numCorrect === quiz.questions.length;
+    if(passed){
+      const isLastStop = stopIndex === TOTAL_STOPS;
+      html += `<div class="feedback-banner pass">✓ All correct — the trail continues.</div>
+      <button class="primary-btn" onclick="advanceAfterPass()">${isLastStop ? 'Finish Level ' + LEVEL_ID : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+    } else {
+      html += `<div class="feedback-banner fail">⚠ ${quiz.questions.length - numCorrect} answer(s) missed. Sheriff Vance would like a word.</div>
+      <button class="primary-btn" onclick="goToSheriff(${stopIndex})">Face Sheriff Vance</button>`;
+    }
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function renderSheriff(stopIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const key = levelKey(stopIndex);
+  const missedIndex = quiz.questions.findIndex((q,qi) => quizAnswers[key][qi] !== q.correct);
+  const q = quiz.questions[missedIndex];
+
+  return `
+  <div class="card sheriff">
+    <div class="character-row">
+      <div class="portrait">${SHERIFF_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Sheriff Vance</p>
+        <p class="char-role">Compliance &amp; Consequences</p>
+        <button class="narration-btn" onclick="speakSheriff(this)">🔊 Read Aloud</button>
+      </div>
+    </div>
+    <p class="body-text">
+      "Hold on now. What you just approved would've caused real harm — this is exactly the kind of
+      mistake that damages trust, exposes people to risk, and puts this organization's credibility
+      on the line. I'm going to give you one more chance to get it right. Answer true this time, and
+      you'll walk on. Answer false, and you're headed back to the start of this level."
+    </p>
+    <div class="final-question">
+      <div class="q-num">FINAL CHANCE</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options" id="final-options">
+        ${q.options.map((opt,oi) => `<button class="option" onclick="answerFinal(${stopIndex},${missedIndex},${oi})">${opt}</button>`).join('')}
+      </div>
+    </div>
+    <div id="final-result"></div>
+  </div>`;
+}
+
+function checkArticleScroll(){
+  const el = document.getElementById('article-scroll');
+  if(!el) return;
+  if(el.scrollTop + el.clientHeight >= el.scrollHeight - 20){
+    gateScrolledToEnd = true;
+  }
+  updateGateStatus();
+}
+
+function updateGateStatus(){
+  const scrollEl = document.getElementById('scroll-indicator');
+  const btn = document.getElementById('gate-continue-btn');
+  if(!scrollEl) return;
+  scrollEl.textContent = (gateScrolledToEnd ? '✓' : '○') + ' Scroll to the end of the reading';
+  scrollEl.classList.toggle('gate-done', gateScrolledToEnd);
+  if(btn){
+    btn.disabled = !gateScrolledToEnd;
+    btn.textContent = gateScrolledToEnd ? 'Continue to the Trail' : '🔒 Locked — scroll to the end to continue';
+  }
+}
+
+function renderGate(){
+  const articleHtml = renderMarkdown(ARTICLE_MD);
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Required Reading</p>
+        <p class="char-role">Level ${LEVEL_ID}: ${LEVEL_TOPIC}</p>
+      </div>
+    </div>
+    <div class="article-content" id="article-scroll" onscroll="checkArticleScroll()">
+      ${articleHtml}
+    </div>
+    <div class="gate-status">
+      <div class="gate-row" id="scroll-indicator">○ Scroll to the end of the reading</div>
+    </div>
+    <p class="gate-explainer">
+      The button below will light up once you've reached the end of the reading.
+    </p>
+    <button class="primary-btn" id="gate-continue-btn" disabled onclick="passGate()">Continue to the Trail</button>
+  </div>`;
+}
+
+function passGate(){
+  gateUnlocked = true;
+  saveGatePassed();
+  currentStop = 0;
+  render();
+}
+
+function render(){
+  const stage = document.getElementById('stage');
+  const trailWrap = document.getElementById('trail-wrap');
+
+  if(!gateUnlocked){
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderGate();
+    if(!gateStarted){
+      gateScrolledToEnd = false;
+      gateStarted = true;
+      updateGateStatus();
+    } else {
+      updateGateStatus();
+    }
+    return;
+  }
+  trailWrap.style.display = '';
+
+  renderTrail();
+  if(currentStop === 0){
+    stage.innerHTML = renderIntro();
+  } else if(currentStop <= TOTAL_STOPS){
+    stage.innerHTML = renderQuiz(currentStop);
+  } else {
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderLevelCompleteReal();
+  }
+}
+
+function renderLevelCompleteReal(){
+  return `
+  <div class="card complete-screen program-complete">
+    <div class="badge">🏅</div>
+    <p class="char-name" style="font-size:26px;">Level 4 Complete</p>
+    <p class="body-text">You've cleared all 12 waypoints of ${LEVEL_TOPIC}. One last step stands between you and your Tipple Trial badge: a short Final Review pulling questions from all four levels.</p>
+    <a href="Tipple-Trial-final-quiz.html" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box;">Continue to Final Review</a>
+    <button class="secondary-btn" onclick="resetLevel()">Replay This Level</button>
+  </div>`;
+}
+
+function selectAnswer(stopIndex, qIndex, optIndex){
+  const key = levelKey(stopIndex);
+  if(!quizAnswers[key]) quizAnswers[key] = {};
+  quizAnswers[key][qIndex] = optIndex;
+  render();
+}
+
+function submitQuiz(stopIndex){
+  const key = levelKey(stopIndex);
+  quizSubmitted[key] = true;
+  render();
+}
+
+function advanceAfterPass(){
+  currentStop += 1;
+  render();
+}
+
+function goToSheriff(stopIndex){
+  document.getElementById('stage').innerHTML = renderSheriff(stopIndex);
+}
+
+function answerFinal(stopIndex, questionIndex, chosenIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const q = quiz.questions[questionIndex];
+  const resultDiv = document.getElementById('final-result');
+  const buttons = document.querySelectorAll('#final-options .option');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if(i === q.correct) btn.classList.add('correct');
+    else if(i === chosenIndex) btn.classList.add('incorrect');
+  });
+  if(chosenIndex === q.correct){
+    const isLastStop = stopIndex === TOTAL_STOPS;
+    resultDiv.innerHTML = `<div class="feedback-banner pass" style="margin-top:14px;">✓ Corrected. Sheriff Vance nods and steps aside.</div>
+    <button class="primary-btn" onclick="advanceAfterPass()">${isLastStop ? 'Finish Level ' + LEVEL_ID : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+  } else {
+    resultDiv.innerHTML = `<div class="feedback-banner fail" style="margin-top:14px;">✗ Still not right. Back to the start of this level.</div>
+    <button class="primary-btn" onclick="resetLevel()">Return to Trailhead</button>`;
+  }
+}
+
+function toggleSpeech(text, btn){
+  if(!('speechSynthesis' in window)){
+    alert("This browser doesn't support text-to-speech. Try Chrome, Edge, or Safari instead.");
+    return;
+  }
+  if(window.speechSynthesis.speaking){
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.narration-btn').forEach(b => { b.textContent = '🔊 Read Aloud'; });
+    return;
+  }
+  const clean = text.replace(/^"|"$/g, '').replace(/\s+/g, ' ').trim();
+  const utterance = new SpeechSynthesisUtterance(clean);
+  utterance.rate = 0.95;
+  if(btn){
+    btn.textContent = '⏸ Stop Reading';
+    utterance.onend = () => { btn.textContent = '🔊 Read Aloud'; };
+    utterance.onerror = () => { btn.textContent = '🔊 Read Aloud'; };
+  }
+  window.speechSynthesis.speak(utterance);
+}
+
+function speakIntro(btn){ toggleSpeech(INTRO_TEXT, btn); }
+function speakSheriff(btn){ toggleSpeech(SHERIFF_SPEECH, btn); }
+
+function resetProgress(){
+  if(!confirm('This will clear this level\'s reading-gate progress on this device. Continue?')) return;
+  try { localStorage.removeItem('khgn_gate_passed_level_' + LEVEL_ID); } catch(e) {}
+  gateUnlocked = false;
+  currentStop = 0;
+  quizAnswers = {};
+  quizSubmitted = {};
+  gateScrolledToEnd = false;
+  gateStarted = false;
+  render();
+}
+
+gateUnlocked = loadGateUnlocked();
+render();
+</script>
+</body>
 
