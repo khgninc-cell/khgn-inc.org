@@ -230,7 +230,6 @@
 
 <script>
 const TOTAL_STOPS = 12;
-const MIN_READ_SECONDS = 50 * 60; // Staff: adjust the required reading time (in seconds) here.
 
 /* ---------- Approved gate articles (Levels 1–4), stored as Markdown and rendered at runtime ---------- */
 const ARTICLES = {
@@ -1477,10 +1476,8 @@ function saveGatePassed(levelId){
 }
 
 let gateUnlocked = [false, false, false, false]; // has the reading gate been passed for this level? (overwritten below once LEVELS exists)
-let gateTimerInterval = null;
-let gateElapsedSeconds = 0;
 let gateScrolledToEnd = false;
-let gateTimerStartedFor = null; // which level index the currently-running timer belongs to
+let gateTimerStartedFor = null; // which level index the gate is currently tracking scroll progress for
 
 function levelKey(stop){ return currentLevelIdx + '-' + stop; }
 
@@ -1697,29 +1694,12 @@ function renderGate(){
     </div>
     <div class="gate-status">
       <div class="gate-row" id="scroll-indicator">○ Scroll to the end of the reading</div>
-      <div class="gate-row" id="timer-indicator">○ Reading time: 00:00 / ${String(Math.floor(MIN_READ_SECONDS/60)).padStart(2,'0')}:00</div>
     </div>
     <p class="gate-explainer">
-      This isn't broken — the trail deliberately stays locked until you've spent real time with the
-      reading and reached the end. The button below will light up on its own once both boxes above are checked.
+      The button below will light up once you've reached the end of the reading.
     </p>
     <button class="primary-btn" id="gate-continue-btn" disabled onclick="passGate()">Continue to the Trail</button>
   </div>`;
-}
-
-function startGateTimer(){
-  clearGateTimer();
-  gateElapsedSeconds = 0;
-  gateScrolledToEnd = false;
-  updateGateStatus();
-  gateTimerInterval = setInterval(() => {
-    gateElapsedSeconds++;
-    updateGateStatus();
-  }, 1000);
-}
-
-function clearGateTimer(){
-  if(gateTimerInterval){ clearInterval(gateTimerInterval); gateTimerInterval = null; }
 }
 
 function checkArticleScroll(){
@@ -1733,40 +1713,17 @@ function checkArticleScroll(){
 
 function updateGateStatus(){
   const scrollEl = document.getElementById('scroll-indicator');
-  const timerEl = document.getElementById('timer-indicator');
   const btn = document.getElementById('gate-continue-btn');
-  if(!scrollEl || !timerEl) return; // screen has moved on
+  if(!scrollEl) return; // screen has moved on
   scrollEl.textContent = (gateScrolledToEnd ? '✓' : '○') + ' Scroll to the end of the reading';
   scrollEl.classList.toggle('gate-done', gateScrolledToEnd);
-  const mm = String(Math.floor(gateElapsedSeconds/60)).padStart(2,'0');
-  const ss = String(gateElapsedSeconds%60).padStart(2,'0');
-  const totalMin = String(Math.floor(MIN_READ_SECONDS/60)).padStart(2,'0');
-  const timeDone = gateElapsedSeconds >= MIN_READ_SECONDS;
-  timerEl.textContent = (timeDone ? '✓' : '○') + ` Reading time: ${mm}:${ss} / ${totalMin}:00`;
-  timerEl.classList.toggle('gate-done', timeDone);
-  const unlocked = gateScrolledToEnd && timeDone;
   if(btn){
-    btn.disabled = !unlocked;
-    if(unlocked){
-      btn.textContent = 'Continue to the Trail';
-    } else if(!gateScrolledToEnd && !timeDone){
-      const remaining = MIN_READ_SECONDS - gateElapsedSeconds;
-      const rmm = String(Math.floor(remaining/60)).padStart(2,'0');
-      const rss = String(remaining%60).padStart(2,'0');
-      btn.textContent = `🔒 Locked — scroll down & wait ${rmm}:${rss}`;
-    } else if(!gateScrolledToEnd){
-      btn.textContent = '🔒 Locked — scroll to the end to continue';
-    } else {
-      const remaining = MIN_READ_SECONDS - gateElapsedSeconds;
-      const rmm = String(Math.floor(remaining/60)).padStart(2,'0');
-      const rss = String(remaining%60).padStart(2,'0');
-      btn.textContent = `🔒 Locked — unlocks in ${rmm}:${rss}`;
-    }
+    btn.disabled = !gateScrolledToEnd;
+    btn.textContent = gateScrolledToEnd ? 'Continue to the Trail' : '🔒 Locked — scroll to the end to continue';
   }
 }
 
 function passGate(){
-  clearGateTimer();
   gateUnlocked[currentLevelIdx] = true;
   saveGatePassed(LEVELS[currentLevelIdx].id);
   currentStop = 0;
@@ -1783,16 +1740,16 @@ function render(){
     trailWrap.style.display = 'none';
     stage.innerHTML = renderGate();
     if(gateTimerStartedFor !== currentLevelIdx){
-      // First time landing on this level's gate this session — start counting from zero.
-      startGateTimer();
+      // First time landing on this level's gate this session — reset scroll progress.
+      gateScrolledToEnd = false;
       gateTimerStartedFor = currentLevelIdx;
+      updateGateStatus();
     } else {
-      // Already counting for this level (e.g. re-clicking its own tab) — just refresh the display, don't reset progress.
+      // Already on this level's gate (e.g. re-clicking its own tab) — just refresh the display, don't reset progress.
       updateGateStatus();
     }
     return;
   }
-  clearGateTimer();
   trailWrap.style.display = '';
 
   renderTrail();
@@ -1892,7 +1849,7 @@ function speakSheriff(btn){
   toggleSpeech(SHERIFF_SPEECH, btn);
 }
 
-gateUnlocked = loadGateUnlocked(); // restore any levels whose 50-minute reading was already completed on this device
+gateUnlocked = loadGateUnlocked(); // restore any levels whose reading was already completed (scrolled through) on this device
 render();
 </script>
 </body>
