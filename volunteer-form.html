@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteer with KHGN — Kentucky History &amp; Genealogy Network</title>
+<meta name="description" content="Volunteer with the Kentucky History & Genealogy Network, Inc. after completing the Tipple Trial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --line:#4A392A; --muted:#6B5A42;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; display:flex; justify-content:center; padding:28px 16px 60px;
+    background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', Arial, sans-serif;
+  }
+  .app{ width:100%; max-width:720px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{ font-size:13px; letter-spacing:0.03em; color:var(--brass-bright); margin-bottom:4px; }
+  .masthead h1{ font-family:'Rye', Georgia, serif; font-weight:400; font-size:clamp(26px,5vw,36px); margin:0; text-shadow:0 2px 0 var(--walnut-deep); }
+  .masthead p{ font-size:15px; color:var(--parchment-dim); margin:8px auto 0; max-width:560px; line-height:1.55; }
+  .portal-link{ display:inline-block; margin-top:14px; font-size:13px; font-weight:700; color:var(--walnut-deep); background:var(--brass-bright); text-decoration:none; padding:8px 16px; border-radius:20px; }
+  .portal-link:hover{ background:var(--brass); }
+  .badge-wrap{ text-align:center; margin:0 0 18px; }
+  .badge-wrap img{ max-width:100%; width:360px; height:auto; border-radius:12px; border:1px solid var(--line); }
+  .card{ background:var(--parchment); color:var(--ink); border-radius:16px; padding:28px 26px; box-shadow:0 10px 30px rgba(0,0,0,0.35); }
+  .card h2{ font-family:'Rye', Georgia, serif; font-weight:400; font-size:22px; margin:0 0 6px; }
+  .card .intro{ font-size:14.5px; line-height:1.6; color:var(--muted); margin:0 0 20px; }
+  .field{ margin-bottom:16px; }
+  label, legend{ display:block; font-size:14px; font-weight:700; margin-bottom:6px; }
+  .req{ color:var(--rust); }
+  .hint{ font-weight:400; color:var(--muted); font-size:12.5px; }
+  input[type=text], input[type=email], input[type=tel], select, textarea{
+    width:100%; font:inherit; font-size:15px; color:var(--ink); background:#fff;
+    border:2px solid #D8C7A3; border-radius:8px; padding:10px 12px;
+  }
+  textarea{ min-height:110px; resize:vertical; }
+  input:focus, select:focus, textarea:focus{ outline:none; border-color:var(--brass); }
+  fieldset{ border:none; padding:0; margin:0 0 16px; }
+  .checks{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:8px; }
+  .check{ display:flex; gap:8px; align-items:flex-start; font-weight:500; font-size:14px; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:9px 11px; cursor:pointer; margin:0; }
+  .check input{ margin-top:2px; accent-color:var(--rust); }
+  .privacy{ font-size:13px; line-height:1.6; background:rgba(0,0,0,0.05); border-left:4px solid var(--brass); border-radius:6px; padding:12px 14px; margin:4px 0 16px; }
+  .consent{ display:flex; gap:10px; align-items:flex-start; font-size:14px; margin-bottom:18px; }
+  .consent input{ margin-top:3px; accent-color:var(--rust); }
+  .primary-btn{ background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px; font:inherit; font-size:15px; font-weight:700; cursor:pointer; width:100%; }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .primary-btn:disabled{ opacity:.6; cursor:wait; }
+  button:focus-visible, a:focus-visible, .check:focus-within{ outline:3px solid var(--brass-bright); outline-offset:2px; }
+  .status{ margin-top:14px; font-size:14px; font-weight:700; border-radius:8px; padding:12px 14px; display:none; }
+  .status.ok{ display:block; background:#DCE9D6; color:#3C5533; }
+  .status.err{ display:block; background:#F2D9D4; color:#7A2E23; }
+  .hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  .footer-note{ text-align:center; font-size:13px; color:var(--parchment); margin-top:18px; line-height:1.6; }
+  .footer-note strong{ color:var(--brass-bright); }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="masthead">
+    <div class="eyebrow">KHGN FIELD TRAINING</div>
+    <h1>Volunteer with KHGN</h1>
+    <p>You've completed the Tipple Trial, KHGN's core training for every volunteer. You can start right away as a Community Steward, and choose a path for further training in the area that interests you most.</p>
+    <a class="portal-link" href="https://khgn-inc.org/game-portal.html">&larr; Back to Game Portal</a>
+  </div>
+
+  <div class="badge-wrap" id="badge-wrap">
+    <img src="volunteer-badge.png" alt="Tipple Trial completion badge" onerror="document.getElementById('badge-wrap').style.display='none'">
+  </div>
+
+  <div class="card">
+    <h2>Volunteer interest form</h2>
+    <p class="intro">Fields marked <span class="req">*</span> are required. A KHGN administrator will review your submission and contact you about next steps.</p>
+
+    <form id="volunteer-form" novalidate>
+      <div class="field">
+        <label for="name">Full name <span class="req">*</span></label>
+        <input type="text" id="name" name="name" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="phone">Phone <span class="hint">(optional)</span></label>
+        <input type="tel" id="phone" name="phone" autocomplete="tel">
+      </div>
+      <div class="field">
+        <label for="county">Your Kentucky county of interest <span class="req">*</span></label>
+        <select id="county" name="county" required>
+          <option value="">Choose a county</option>
+          <option value="Statewide / No preference">Statewide / No preference</option>
+          <option value="Outside Kentucky">I live outside Kentucky</option>
+        </select>
+      </div>
+      <fieldset>
+        <legend>Start volunteering now</legend>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="roles" value="Community Steward"> <span><strong>Yes, I'd like to volunteer as a Community Steward</strong><br><span class="hint">Helps keep KHGN groups welcoming and trustworthy by spotting and reporting posts that break group rules. The Tipple Trial qualifies you for this role.</span></span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Choose a path for further training <span class="hint">(choose any that interest you)</span></legend>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="paths" value="Contributor"> <span><strong>Contributor</strong><br><span class="hint">Building and formatting quality posts</span></span></label>
+          <label class="check"><input type="checkbox" name="paths" value="Record Recovery"> <span><strong>Record Recovery</strong><br><span class="hint">Finding and transcribing historical records</span></span></label>
+          <label class="check"><input type="checkbox" name="paths" value="Digital Archiving"> <span><strong>Digital Archiving</strong><br><span class="hint">Preserving and organizing digital collections</span></span></label>
+          <label class="check"><input type="checkbox" name="paths" value="Communications"> <span><strong>Communications</strong><br><span class="hint">Outreach, social media, and member engagement</span></span></label>
+          <label class="check"><input type="checkbox" name="paths" value="Operations"> <span><strong>Operations</strong><br><span class="hint">Group management and day-to-day coordination</span></span></label>
+          <label class="check"><input type="checkbox" name="paths" value="Fundraising and Development"> <span><strong>Fundraising and Development</strong><br><span class="hint">Grants, donations, and partnerships</span></span></label>
+          <label class="check"><input type="checkbox" name="paths" value="Technical Workforce Development"> <span><strong>Technical Workforce Development</strong><br><span class="hint">Tools, technology, and training support</span></span></label>
+          <label class="check"><input type="checkbox" name="paths" value="Training and Mentoring"> <span><strong>Training and Mentoring</strong><br><span class="hint">Helping new volunteers learn their roles</span></span></label>
+          <label class="check"><input type="checkbox" name="paths" value="Committee Oversight"> <span><strong>Committee Oversight</strong><br><span class="hint">Serving on a KHGN oversight committee</span></span></label>
+          <label class="check"><input type="checkbox" name="paths" value="Not sure yet"> <span><strong>Not sure yet</strong><br><span class="hint">We'll help you find a good fit</span></span></label>
+        </div>
+        <p class="hint" style="margin:8px 0 0;">Each path has its own training. Many advanced roles and their training open up after you gain experience and volunteer time with KHGN, so choosing a path now tells us where you'd like to grow. A KHGN administrator will help you with the next step.</p>
+      </fieldset>
+      <div class="field">
+        <label for="message">Anything you'd like us to know? <span class="hint">(optional)</span></label>
+        <textarea id="message" name="message" placeholder="Experience, availability, questions..."></textarea>
+      </div>
+
+      <div class="hp" aria-hidden="true">
+        <label for="website">Leave this field empty</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="privacy">
+        <strong>Your privacy:</strong> KHGN uses the information on this form only to contact you about volunteering.
+        We do not sell or share it with outside parties, and you can ask us to delete it at any time by contacting
+        <a href="mailto:khgnscout@gmail.com">khgnscout@gmail.com</a>.
+        <a href="volunteer-privacy.html">Read our full privacy notice.</a>
+      </div>
+      <label class="consent">
+        <input type="checkbox" id="consent" required>
+        <span>I am 20 years of age or older, and I agree that KHGN may contact me about volunteering using the information above. <span class="req">*</span></span>
+      </label>
+
+      <button type="submit" class="primary-btn" id="submit-btn">Send volunteer interest</button>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc.<br>
+    <strong>Completing the Tipple Trial is a free educational program, not an accredited certification.</strong>
+  </div>
+</div>
+
+<script>
+// SETUP: To receive submissions by email through Formspree, create a free form at formspree.io
+// and paste its endpoint between the quotes, e.g. "https://formspree.io/f/abcdwxyz".
+// While it is empty, the form opens the visitor's email app with their answers filled in.
+const FORM_ENDPOINT = "";
+const CONTACT_EMAIL = "khgnscout@gmail.com";
+
+// The 120 Kentucky counties, added to the county list when the page loads.
+const COUNTIES = ["Adair","Allen","Anderson","Ballard","Barren","Bath","Bell","Boone","Bourbon","Boyd","Boyle","Bracken","Breathitt","Breckinridge","Bullitt","Butler","Caldwell","Calloway","Campbell","Carlisle","Carroll","Carter","Casey","Christian","Clark","Clay","Clinton","Crittenden","Cumberland","Daviess","Edmonson","Elliott","Estill","Fayette","Fleming","Floyd","Franklin","Fulton","Gallatin","Garrard","Grant","Graves","Grayson","Green","Greenup","Hancock","Hardin","Harlan","Harrison","Hart","Henderson","Henry","Hickman","Hopkins","Jackson","Jefferson","Jessamine","Johnson","Kenton","Knott","Knox","Larue","Laurel","Lawrence","Lee","Leslie","Letcher","Lewis","Lincoln","Livingston","Logan","Lyon","McCracken","McCreary","McLean","Madison","Magoffin","Marion","Marshall","Martin","Mason","Meade","Menifee","Mercer","Metcalfe","Monroe","Montgomery","Morgan","Muhlenberg","Nelson","Nicholas","Ohio","Oldham","Owen","Owsley","Pendleton","Perry","Pike","Powell","Pulaski","Robertson","Rockcastle","Rowan","Russell","Scott","Shelby","Simpson","Spencer","Taylor","Todd","Trigg","Trimble","Union","Warren","Washington","Wayne","Webster","Whitley","Wolfe","Woodford"];
+const countySelect = document.getElementById('county');
+const lastOptions = countySelect.querySelector('option[value="Statewide / No preference"]');
+COUNTIES.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; countySelect.insertBefore(o, lastOptions); });
+
+const form = document.getElementById('volunteer-form');
+const statusEl = document.getElementById('status');
+const btn = document.getElementById('submit-btn');
+
+function showStatus(msg, ok){
+  statusEl.textContent = msg;
+  statusEl.className = 'status ' + (ok ? 'ok' : 'err');
+}
+
+function collect(){
+  return {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    phone: form.phone.value.trim(),
+    county: form.county.value,
+    roles: [...form.querySelectorAll('input[name=roles]:checked')].map(c => c.value).join(', '),
+    paths: [...form.querySelectorAll('input[name=paths]:checked')].map(c => c.value).join(', '),
+    message: form.message.value.trim()
+  };
+}
+
+function validate(d){
+  if(!d.name) return 'Please enter your name.';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return 'Please enter a valid email address.';
+  if(!d.county) return 'Please choose a county.';
+  if(!d.roles && !d.paths) return 'Please choose the Community Steward role, a training path, or both.';
+  if(!document.getElementById('consent').checked) return 'Please check the consent box so we can contact you.';
+  return '';
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if(form.website.value) return; // spam trap
+  const d = collect();
+  const problem = validate(d);
+  if(problem){ showStatus(problem, false); return; }
+
+  if(!FORM_ENDPOINT){
+    const body = `Name: ${d.name}\nEmail: ${d.email}\nPhone: ${d.phone || '-'}\nCounty: ${d.county}\nStart as Community Steward: ${d.roles ? 'Yes' : 'No'}\nTraining paths: ${d.paths || 'None selected'}\n\n${d.message}`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Volunteer: ' + d.name + (d.roles ? ' (Community Steward)' : ''))}&body=${encodeURIComponent(body)}`;
+    showStatus('Your email app should open with your answers filled in. Press Send there to finish.', true);
+    return;
+  }
+
+  btn.disabled = true; btn.textContent = 'Sending...';
+  try{
+    const res = await fetch(FORM_ENDPOINT, {
+      method:'POST',
+      headers:{ 'Accept':'application/json', 'Content-Type':'application/json' },
+      body: JSON.stringify({ ...d, _subject: 'Volunteer: ' + d.name + (d.roles ? ' (Community Steward)' : '') })
+    });
+    if(!res.ok) throw new Error('Request failed');
+    form.reset();
+    showStatus('Thank you! Your volunteer interest was sent. A KHGN administrator will be in touch.', true);
+  }catch(err){
+    showStatus('Something went wrong sending the form. Please try again, or email us at ' + CONTACT_EMAIL + '.', false);
+  }finally{
+    btn.disabled = false; btn.textContent = 'Send volunteer interest';
+  }
+});
+</script>
+</body>
+</html>
