@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KHGN Training — Level 4: Commercial Self-Promotion &amp; Conflict of Interest</title>
+<meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -203,6 +204,24 @@ const GUIDE_ROLE = "Trail Guide";
 // Paste the web address of KHGN's filed Conflict of Interest Statement between the quotes.
 // While it's empty, no link is shown.
 const COI_POLICY_URL = "";
+// Level lock: keep false until Levels 1 to 3 also save their completion, then change to true.
+const REQUIRE_PREVIOUS_LEVEL = false;
+function markLevelComplete(){
+  try { localStorage.setItem('khgn_level_complete_' + LEVEL_ID, 'true'); } catch(e) {}
+}
+function previousLevelDone(){
+  if(LEVEL_ID === 1) return true;
+  try { return localStorage.getItem('khgn_level_complete_' + (LEVEL_ID - 1)) === 'true'; }
+  catch(e) { return true; }
+}
+function renderLocked(){
+  return `
+  <div class="card">
+    <p class="char-name">This trail isn't open yet</p>
+    <p class="body-text">The Tipple Trial is walked in order. Finish Level ${LEVEL_ID - 1} first, and this level will open for you on this device.</p>
+    <a href="https://khgn-inc.org/tipple-trial.html" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box;">Start at Level 1</a>
+  </div>`;
+}
 const GUIDE_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#2B231C\"/>\n  <circle cx=\"38\" cy=\"30\" r=\"13\" fill=\"#C99B6E\"/>\n  <path d=\"M26 24 Q38 14 50 24 L50 20 Q38 12 26 20 Z\" fill=\"#221A12\"/>\n  <path d=\"M20 66 Q38 44 56 66 Z\" fill=\"#3A3A4A\"/>\n  <rect x=\"26\" y=\"50\" width=\"24\" height=\"16\" rx=\"1\" fill=\"#EDE0C8\" stroke=\"#221A12\" stroke-width=\"1\"/>\n  <line x1=\"29\" y1=\"54\" x2=\"47\" y2=\"54\" stroke=\"#A63D2F\" stroke-width=\"1.4\"/>\n  <line x1=\"29\" y1=\"58\" x2=\"47\" y2=\"58\" stroke=\"#221A12\" stroke-width=\"1\"/>\n  <line x1=\"29\" y1=\"62\" x2=\"40\" y2=\"62\" stroke=\"#221A12\" stroke-width=\"1\"/>\n</svg>";
 const SHERIFF_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#3A231C\"/>\n  <path d=\"M18 30 Q38 4 58 30 L58 20 Q38 -2 18 20 Z\" fill=\"#4A2E22\"/>\n  <circle cx=\"38\" cy=\"32\" r=\"13\" fill=\"#C99B6E\"/>\n  <path d=\"M28 44 L48 44 L44 62 L32 62 Z\" fill=\"#5B3A2A\"/>\n  <polygon points=\"38,50 40,54 44,54 41,57 42,61 38,58 34,61 35,57 32,54 36,54\"\n    fill=\"#D4AF6A\" stroke=\"#2B211A\" stroke-width=\"0.6\"/>\n  <path d=\"M27 32 Q38 38 49 32\" stroke=\"#3A231C\" stroke-width=\"2\" fill=\"none\"/>\n</svg>";
 const INTRO_TEXT = "\"Step into my office. Everything posted in a KHGN group looks like it carries KHGN's approval. That's why this level matters: no sales and no promotion of any kind, from anyone, however worthy the cause. You'll also learn to spot the spammers and the clever tricks, and what to do when your own interests get tangled up with your volunteer role. Let's walk the trail.\"";
@@ -464,6 +483,12 @@ function render(){
   const stage = document.getElementById('stage');
   const trailWrap = document.getElementById('trail-wrap');
 
+  if(REQUIRE_PREVIOUS_LEVEL && !previousLevelDone()){
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderLocked();
+    return;
+  }
+
   if(!gateUnlocked){
     trailWrap.style.display = 'none';
     stage.innerHTML = renderGate();
@@ -488,6 +513,7 @@ function render(){
 }
 
 function renderLevelCompleteReal(){
+  markLevelComplete();
   return `
   <div class="card complete-screen program-complete">
     <div class="badge">🏅</div>
