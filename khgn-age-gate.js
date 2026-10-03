@@ -1,5 +1,5 @@
 /* ==================================================================
-   KHGN Inc. — Age Gate for the Game Portal and training games
+   KHGN Inc. — Age Gate for the Trailhead and training games
    ------------------------------------------------------------------
    HOW TO INSTALL
    1. Upload this file to the main folder of the website, next to
@@ -9,7 +9,7 @@
       as high in the <head> as possible:
 
       <script src="/khgn-age-gate.js"></script>
-      <noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Game Portal.";display:block;padding:40px 24px;font:18px/1.5 system-ui,sans-serif}</style></noscript>
+      <noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui,sans-serif}</style></noscript>
 
    A visitor who passes the gate once is not asked again on the other
    game pages until they close the browser tab.
@@ -79,7 +79,7 @@
         '<p class="kg-org">KHGN Inc.</p>' +
         '<div id="kg-ask">' +
           '<h1 id="kg-title">Before you continue</h1>' +
-          '<p>Enter your date of birth to open the Game Portal.</p>' +
+          '<p>Enter your date of birth to open the Trailhead.</p>' +
           '<form id="kg-form" novalidate>' +
             '<fieldset>' +
               '<legend>Date of birth</legend>' +
@@ -94,7 +94,7 @@
         '</div>' +
         '<div id="kg-denied" hidden>' +
           '<h1 id="kg-denied-title" tabindex="-1">This area isn\'t available</h1>' +
-          '<p>The Game Portal is for visitors ' + MIN_AGE + ' and older. You\'re welcome to keep browsing the rest of our website.</p>' +
+          '<p>The Trailhead is for visitors ' + MIN_AGE + ' and older. You\'re welcome to keep browsing the rest of our website.</p>' +
           '<a class="kg-home" href="' + HOME_URL + '">Go to the home page</a>' +
         '</div>' +
       '</div>';
