@@ -7,7 +7,403 @@
 <title>KHGN Training — Final Review</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https:/<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KHGN Training — Final Review</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
+    display:flex; justify-content:center; padding:28px 16px 60px;
+  }
+  .app{ width:100%; max-width:760px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{ font-size:13px; letter-spacing:0.03em; color:var(--brass-bright); margin-bottom:4px; }
+  .masthead h1{
+    font-family:'Rye', serif; font-weight:400; font-size:clamp(24px,5vw,34px);
+    margin:0; color:var(--parchment); text-shadow:0 2px 0 var(--walnut-deep);
+  }
+  .masthead .level-sub{ font-size:14px; color:var(--parchment-dim); margin-top:4px; }
+  .portal-link{
+    display:inline-block; margin-top:12px; font-size:13px; font-weight:700;
+    color:var(--walnut-deep); background:var(--brass-bright); text-decoration:none;
+    padding:8px 16px; border-radius:20px; transition:background .15s ease;
+  }
+  .portal-link:hover{ background:var(--brass); }
+
+  .card{
+    background:var(--parchment); color:var(--ink); border-radius:16px; padding:28px 26px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .4s ease;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  .card.sheriff{ background:#EAD9CE; }
+
+  .character-row{ display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; }
+  .portrait{ width:76px; height:76px; flex-shrink:0; border-radius:10px; border:2px solid var(--ink); background:var(--walnut); }
+  .char-meta{ flex:1; }
+  .char-name{ font-family:'Rye', serif; font-size:22px; margin:0 0 2px; color:var(--ink); }
+  .char-role{ font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:#6B5A42; margin:0 0 8px; }
+
+  .body-text{ font-size:15.5px; line-height:1.6; margin:0 0 18px; }
+  .scenario-box{
+    background:rgba(0,0,0,0.06); border-left:4px solid var(--brass); padding:14px 16px;
+    border-radius:6px; font-size:14.5px; line-height:1.55; margin-bottom:20px; font-style:italic;
+  }
+
+  .primary-btn{
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
+    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+  }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .primary-btn:disabled{
+    background:var(--walnut-deep); color:var(--brass-bright); opacity:1; cursor:not-allowed;
+    border:1px solid var(--brass);
+  }
+  .secondary-btn{
+    background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
+    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+  }
+  button:focus-visible, a:focus-visible{ outline:3px solid var(--brass-bright); outline-offset:2px; }
+
+  .question-block{ margin-bottom:20px; }
+  .q-num{ font-size:12px; font-weight:700; color:var(--rust); letter-spacing:.03em; margin-bottom:6px; }
+  .q-prompt{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .options{ display:flex; flex-direction:column; gap:8px; }
+  .option{
+    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:11px 14px;
+    font-size:14.5px; font-family:inherit; cursor:pointer; color:var(--ink); transition:all .12s ease;
+  }
+  .option:hover{ border-color:var(--brass); }
+  .option.selected{ border-color:var(--ink); background:#F5EBD6; font-weight:600; }
+  .option.correct{ border-color:var(--sage); background:#DCE9D6; }
+  .option.incorrect{ border-color:var(--rust); background:#F2D9D4; }
+  .option:disabled{ cursor:default; }
+
+  .feedback-banner{
+    display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:8px;
+    font-size:14px; font-weight:700; margin-bottom:16px;
+  }
+  .feedback-banner.pass{ background:#DCE9D6; color:#3C5533; }
+  .feedback-banner.fail{ background:#F2D9D4; color:#7A2E23; }
+
+  .final-question{ background:rgba(0,0,0,0.05); border-radius:10px; padding:16px; margin-top:6px; }
+
+  .footer-note{ text-align:center; font-size:13px; color:var(--parchment); margin-top:18px; line-height:1.6; }
+  .footer-note strong{ color:var(--brass-bright); }
+
+  .complete-screen{ text-align:center; }
+  .completion-disclaimer{
+    text-align:left; font-size:14px; line-height:1.65; color:var(--ink); font-weight:500;
+    background:#F2D9D4; border:1.5px solid var(--rust); border-radius:8px; padding:14px 16px; margin:16px 0;
+  }
+  .completion-disclaimer strong{ color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="masthead">
+    <div class="eyebrow">KHGN FIELD TRAINING · COMMUNITY ADVISORY TRACK</div>
+    <h1>Final Review</h1>
+    <a class="portal-link" href="https://khgn-inc.org/game-portal.html">&larr; Back to the Trailhead</a>
+    <div class="level-sub">16 questions covering all four levels</div>
+  </div>
+
+  <div id="stage"></div>
+
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc. — Volunteer Field Training Program<br>
+    Missing a question twice in a row restarts the Final Review from question 1.<br><br>
+    <strong>This training is a free educational program offered by KHGN.</strong>
+    It is not an accredited certification, professional credential, or license of any kind, and
+    completion does not represent legal advice or KHGN's endorsement as an accrediting body.
+  </div>
+</div>
+
+<script>
+const SHERIFF_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#3A231C\"/>\n  <path d=\"M18 30 Q38 4 58 30 L58 20 Q38 -2 18 20 Z\" fill=\"#4A2E22\"/>\n  <circle cx=\"38\" cy=\"32\" r=\"13\" fill=\"#C99B6E\"/>\n  <path d=\"M28 44 L48 44 L44 62 L32 62 Z\" fill=\"#5B3A2A\"/>\n  <polygon points=\"38,50 40,54 44,54 41,57 42,61 38,58 34,61 35,57 32,54 36,54\"\n    fill=\"#D4AF6A\" stroke=\"#2B211A\" stroke-width=\"0.6\"/>\n  <path d=\"M27 32 Q38 38 49 32\" stroke=\"#3A231C\" stroke-width=\"2\" fill=\"none\"/>\n</svg>";
+const FINAL_EXAM = [{"level": 1, "title": "The Anniversary Post", "scenario": "A volunteer shares a post to celebrate a family's 100th anniversary in the county. It includes a scanned letter with a living descendant's full name, current home address, and cell phone number, posted \"so cousins can reach out.\"", "prompt": "What is the core PII problem with this post?", "options": ["The letter is too old to be interesting", "It doesn't mention the county name", "It shares a living person's contact information publicly", "The photo quality is too low"], "correct": 2}, {"level": 1, "title": "The Funeral Home Notice", "scenario": "A modern obituary, originally posted by a funeral home, is copied in full into a KHGN research thread. It lists the deceased's children and grandchildren by name, their current cities, and one grandchild's employer — all standard for a funeral notice, \"already public since the funeral home posted it.\"", "prompt": "Why is 'the funeral home already published it' not a complete defense?", "options": ["It is a complete defense — nothing more to consider", "Publishing for a funeral notice's original audience differs from indefinite redistribution in a searchable database", "Funeral homes are never allowed to publish obituaries", "Obituaries are only about the deceased, so this doesn't apply"], "correct": 1}, {"level": 1, "title": "The Service Record", "scenario": "A member wants to post her living uncle's military discharge papers from 1972 to honor his service. The papers include his Social Security number and home of record.", "prompt": "What needs to happen first?", "options": ["Nothing, since papers from 1972 are old enough to be public", "Blur his signature only", "Remove his Social Security number completely, and confirm he's comfortable with his service details being shared", "Post only the second page"], "correct": 2}, {"level": 1, "title": "The Class Reunion Roster", "scenario": "A volunteer uploads a 2015 class reunion roster to a county group \"for the archive.\" It lists every classmate's current city, phone number, and email address.", "prompt": "What's the right approach?", "options": ["Remove the phone numbers, email addresses, and current cities before anything is shared", "Post it, since classmates already shared the information with each other", "Post it only in a private group", "Keep only the phone numbers, since they're the most useful"], "correct": 0}, {"level": 2, "title": "The Society Newsletter", "scenario": "A member pastes a county historical society's full newsletter article into a KHGN group, with a small link to the society at the end.", "prompt": "What's the better approach?", "options": ["Leave it, since a link was included", "Remove the link so the post is shorter", "Summarize the article's key facts in her own words and link to the original", "Copy only the first half of the article"], "correct": 2}, {"level": 2, "title": "The Missing Watermark", "scenario": "A cemetery photo shared in a county group shows signs that the photographer's watermark was cropped out before posting.", "prompt": "What should a moderator take from this?", "options": ["Nothing, since headstones are public", "Cropped photos are always allowed", "The photo is fine if it's high quality", "A removed watermark or credit is a red flag that someone else's work has been stripped of attribution"], "correct": 3}, {"level": 2, "title": "The Subscription Transcriptions", "scenario": "A member copies dozens of transcriptions from a paid genealogy website into a public thread so others can see them free.", "prompt": "Which rule does this break?", "options": ["None, since names and dates are facts", "The website's terms of use, which typically forbid bulk copying and redistribution", "Only Facebook's rules", "Only the rule against long posts"], "correct": 1}, {"level": 2, "title": "The 1929 Clipping", "scenario": "A member asks whether she can share a 1929 Kentucky newspaper article about her great-grandfather.", "prompt": "What's the answer?", "options": ["No, newspaper articles are always copyrighted", "Only with the newspaper's written permission", "Yes, works published in the United States in 1930 or earlier are in the public domain, and citing the newspaper is still good practice", "Only if she retypes it"], "correct": 2}, {"level": 3, "title": "The Census Rumor", "scenario": "A member says she found her family in the 1960 U.S. census online.", "prompt": "What should a moderator know?", "options": ["That's expected, since census records open after 60 years", "Census records are released only to family members", "The 1960 census isn't released until 2032 under the 72-year rule, so the record is likely something else and is worth checking", "Census records are never released"], "correct": 2}, {"level": 3, "title": "The Open Record", "scenario": "A member legally orders a Kentucky death certificate for a relative who died in 2018. It lists the cause of death and a living spouse's address.", "prompt": "What's the right approach to sharing it?", "options": ["Post it in full, since Kentucky allowed her to order it", "Share the genealogical facts, but leave out the cause of death and the living spouse's address", "Never mention the death", "Post it only in a private group"], "correct": 1}, {"level": 3, "title": "The Sealed Original", "scenario": "A member has obtained, by court order, an adopted relative's original Kentucky birth certificate naming a birth parent.", "prompt": "How should this be handled?", "options": ["Post the birth parent's name to help the search", "Post only the birth parent's town", "Treat it as high-sensitivity and escalate, since the people named may not have consented to being found", "Post it after the relative's death"], "correct": 2}, {"level": 3, "title": "The Pre-1958 Marriage", "scenario": "A member can't find her grandparents' 1948 Kentucky marriage record at the state Office of Vital Statistics.", "prompt": "Where should she look?", "options": ["The county clerk in the county where the license was issued, since the state's central marriage records begin in June 1958", "The Circuit Court Clerk", "Nowhere, since earlier records were destroyed", "The National Archives"], "correct": 0}, {"level": 4, "title": "The Bookseller's Comment", "scenario": "Under a member's post about a county courthouse fire, an account comments recommending a county history book, with a Barnes & Noble link.", "prompt": "Which rule applies?", "options": ["It's allowed, because Barnes & Noble is a well-known bookstore rather than a private seller.", "Any link to a place where something can be bought counts as a sale, whatever the store, so the comment comes down.", "It's allowed, because the no-sales rule covers posts but not comments.", "It's allowed as long as the commenter isn't the book's author."], "correct": 1}, {"level": 4, "title": "The Shipping Fee", "scenario": "A member offers original 1920s family photos free to any descendant: \"Just send $12 for shipping to my PayPal.\"", "prompt": "Is this post allowed?", "options": ["Yes, since the photos themselves are free.", "Yes, as long as the member posts a shipping receipt afterward.", "It's allowed if the request is moved to the comments.", "No. Any request for money, including postage or reimbursement, is treated as a sale."], "correct": 3}, {"level": 4, "title": "The Enthusiastic Officers", "scenario": "A post offers a historical society's calendar for $15. Within minutes, several accounts comment on what a great price it is. All of them list themselves as officers of that society.", "prompt": "What is this, and what should a moderator do?", "options": ["Coordinated promotion with an undisclosed conflict of interest: remove the post and comments and escalate to an administrator.", "Genuine enthusiasm from real readers, so leave it up.", "Post a public warning naming the society.", "Remove the comments but leave the post."], "correct": 0}, {"level": 4, "title": "The Moderator's Society", "scenario": "A moderator who serves as treasurer of a local historical society is asked to review a post from that society. The post sells nothing.", "prompt": "What should the moderator do?", "options": ["Approve it quickly, since nothing is being sold.", "Reject it to avoid any appearance of favoritism.", "Disclose the connection and let another moderator make the decision.", "Approve it, since an officer knows the content best."], "correct": 2}];
+
+let examIndex = 0;
+let examPicked = undefined;
+let examAnswered = false;
+let examPassed = false;
+
+function renderExamQuestion(){
+  const item = FINAL_EXAM[examIndex];
+  const answered = examAnswered;
+  let html = `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${SHERIFF_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Final Review — Question ${examIndex+1} of ${FINAL_EXAM.length}</p>
+        <p class="char-role">From Level ${item.level}: ${item.title}</p>
+      </div>
+    </div>
+    <div class="scenario-box">${item.scenario}</div>
+    <div class="question-block">
+      <p class="q-prompt">${item.prompt}</p>
+      <div class="options">`;
+  item.options.forEach((opt, oi) => {
+    let cls = 'option';
+    if(answered){
+      if(examPicked === item.correct && oi === item.correct) cls += ' correct';
+      else if(oi === examPicked && examPicked !== item.correct) cls += ' incorrect';
+    } else if(examPicked === oi){
+      cls += ' selected';
+    }
+    html += `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="examSelectAnswer(${oi})">${opt}</button>`;
+  });
+  html += `</div></div>`;
+
+  if(!answered){
+    html += `<button class="primary-btn" ${examPicked===undefined ? 'disabled' : ''} onclick="examSubmit()">Submit Answer</button>`;
+  } else if(examPicked === item.correct){
+    const isLast = examIndex === FINAL_EXAM.length - 1;
+    html += `<div class="feedback-banner pass">✓ Correct.</div>
+    <button class="primary-btn" onclick="examNext()">${isLast ? 'Finish Final Review' : 'Next Question'}</button>`;
+  } else {
+    html += `<div class="feedback-banner fail">⚠ Not quite. Sheriff Vance would like a word.</div>
+    <button class="primary-btn" onclick="examGoToSheriff()">Face Sheriff Vance</button>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+function examSelectAnswer(oi){
+  if(examAnswered) return;
+  examPicked = oi;
+  render();
+}
+
+function examSubmit(){
+  examAnswered = true;
+  render();
+}
+
+function examNext(){
+  if(examIndex === FINAL_EXAM.length - 1){
+    examPassed = true;
+    render();
+    return;
+  }
+  examIndex += 1;
+  examPicked = undefined;
+  examAnswered = false;
+  render();
+}
+
+function examGoToSheriff(){
+  document.getElementById('stage').innerHTML = renderExamSheriff();
+}
+
+function renderExamSheriff(){
+  const item = FINAL_EXAM[examIndex];
+  return `
+  <div class="card sheriff">
+    <div class="character-row">
+      <div class="portrait">${SHERIFF_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Sheriff Vance</p>
+        <p class="char-role">Compliance &amp; Consequences</p>
+      </div>
+    </div>
+    <p class="body-text">
+      "Hold on now — that one's not quite right. This Final Review is here to make sure the whole
+      trail sank in, not just the parts right before this. Let's give it one more look."
+    </p>
+    <div class="scenario-box">${item.scenario}</div>
+    <div class="final-question">
+      <p class="q-prompt">${item.prompt}</p>
+      <div class="options" id="exam-final-options">
+        ${item.options.map((opt,oi) => `<button class="option" onclick="examAnswerFinal(${oi})">${opt}</button>`).join('')}
+      </div>
+    </div>
+    <div id="exam-final-result"></div>
+  </div>`;
+}
+
+function examAnswerFinal(oi){
+  const item = FINAL_EXAM[examIndex];
+  const resultDiv = document.getElementById('exam-final-result');
+  const buttons = document.querySelectorAll('#exam-final-options .option');
+  buttons.forEach((btn,i) => {
+    btn.disabled = true;
+    if(i === item.correct) btn.classList.add('correct');
+    else if(i === oi) btn.classList.add('incorrect');
+  });
+  if(oi === item.correct){
+    const isLast = examIndex === FINAL_EXAM.length - 1;
+    resultDiv.innerHTML = `<div class="feedback-banner pass" style="margin-top:14px;">✓ Corrected.</div>
+    <button class="primary-btn" onclick="examNext()">${isLast ? 'Finish Final Review' : 'Next Question'}</button>`;
+  } else {
+    resultDiv.innerHTML = `<div class="feedback-banner fail" style="margin-top:14px;">✗ Still not right. Back to the start of the Final Review.</div>
+    <button class="primary-btn" onclick="examRestart()">Restart Final Review</button>`;
+  }
+}
+
+function examRestart(){
+  examIndex = 0;
+  examPicked = undefined;
+  examAnswered = false;
+  examPassed = false;
+  render();
+}
+
+// ===== Tipple Trial completion badge (drawn in the browser, no image file needed) =====
+// To reuse for another training, change these four settings.
+const BADGE = {
+  training: "The Tipple Trial",
+  subtitle: "KHGN core training",
+  ribbon: "#A63D2F",
+  ribbonDark: "#7A2E23"
+};
+const VOLUNTEER_URL = "https://khgn-inc.org/volunteer-form.html";
+
+function renderComplete(){
+  setTimeout(drawBadge, 0);
+  return `
+  <div class="card complete-screen">
+    <p class="char-name" style="font-size:26px;">Program Complete</p>
+    <p class="body-text">You've cleared all four levels and the Final Review of the Tipple Trial, KHGN's core training for every volunteer. Completing it qualifies you to volunteer as a <strong>Community Steward</strong>, helping keep KHGN groups welcoming and trustworthy, and opens the door to further training in a Community Journey.</p>
+    <canvas id="badge-canvas" width="1200" height="1200" role="img" aria-label="Tipple Trial completion badge" style="width:100%; max-width:420px; height:auto; display:block; margin:0 auto 16px; border-radius:12px;"></canvas>
+    <button class="primary-btn" onclick="downloadBadge()" style="margin-bottom:10px;">Download My Badge</button>
+    <a href="${VOLUNTEER_URL}" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box; margin-bottom:10px;">Volunteer as a Community Steward</a>
+    <div class="completion-disclaimer">
+      <strong>Please note:</strong> this badge reflects completion of a free KHGN educational program only.
+      It is <strong>not</strong> an accredited certification, professional credential, or license.
+    </div>
+    <button class="secondary-btn" onclick="examRestart()">Retake the Final Review</button>
+  </div>`;
+}
+
+async function drawBadge(){
+  const canvas = document.getElementById('badge-canvas');
+  if(!canvas) return;
+  try { await Promise.all([document.fonts.load('60px Rye'), document.fonts.load('500 40px "Public Sans"')]); } catch(e) {}
+  const ctx = canvas.getContext('2d');
+  const S = 560 / 205;
+  const X = x => 600 + (x - 340) * S;
+  const Y = y => 600 + (y - 245) * S;
+  const L = v => v * S;
+  const circle = (x, y, r, fill) => { ctx.beginPath(); ctx.arc(X(x), Y(y), L(r), 0, Math.PI * 2); ctx.fillStyle = fill; ctx.fill(); };
+  const poly = (pts, fill) => { ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(X(x), Y(y)) : ctx.moveTo(X(x), Y(y))); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); };
+  const line = (x1, y1, x2, y2, color, w) => { ctx.beginPath(); ctx.moveTo(X(x1), Y(y1)); ctx.lineTo(X(x2), Y(y2)); ctx.strokeStyle = color; ctx.lineWidth = L(w); ctx.stroke(); };
+  const fitText = (text, font, size, maxWidth) => { let s = size; ctx.font = `${font.replace('SIZE', s)}`; while(ctx.measureText(text).width > maxWidth && s > 10){ s -= 1; ctx.font = font.replace('SIZE', s); } };
+
+  ctx.clearRect(0, 0, 1200, 1200);
+  ctx.fillStyle = '#1C140F';
+  ctx.fillRect(0, 0, 1200, 1200);
+
+  circle(340, 245, 205, '#B08D57');
+  circle(340, 245, 193, '#2B211A');
+  ctx.beginPath(); ctx.arc(X(340), Y(245), L(181), 0, Math.PI * 2); ctx.strokeStyle = '#D4AF6A'; ctx.lineWidth = L(1.5); ctx.stroke();
+
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+  if('letterSpacing' in ctx) ctx.letterSpacing = '8px';
+  ctx.fillStyle = '#D4AF6A';
+  ctx.font = `500 ${Math.round(L(14))}px "Public Sans", Arial, sans-serif`;
+  const topW = ctx.measureText('KHGN FIELD TRAINING').width + 40;
+  ctx.fillStyle = '#2B211A';
+  ctx.fillRect(X(340) - topW / 2, Y(62), topW, L(24));
+  ctx.fillStyle = '#D4AF6A';
+  ctx.fillText('KHGN FIELD TRAINING', X(340), Y(80));
+  if('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+
+  circle(340, 195, 112, '#D4AF6A');
+  ctx.save();
+  ctx.beginPath(); ctx.arc(X(340), Y(195), L(108), 0, Math.PI * 2); ctx.clip();
+  ctx.fillStyle = '#EDE0C8'; ctx.fillRect(X(220), Y(80), L(240), L(240));
+  circle(385, 140, 16, '#E0B86A');
+  poly([[220,215],[270,160],[305,195],[345,140],[395,200],[425,170],[460,205],[460,320],[220,320]], '#8FA07E');
+  poly([[220,245],[262,205],[300,238],[300,320],[220,320]], '#4A392A');
+  poly([[360,238],[398,210],[460,245],[460,320],[360,320]], '#4A392A');
+  ctx.fillStyle = '#F7F2E8'; ctx.fillRect(X(300), Y(228), L(60), L(70));
+  [[310,232,296],[322,230,298],[336,231,297],[350,232,296]].forEach(([x, a, b]) => line(x, a, x, b, '#B9C9D6', 2));
+  ctx.beginPath(); ctx.ellipse(X(330), Y(300), L(52), L(10), 0, 0, Math.PI * 2); ctx.fillStyle = '#DCE6EC'; ctx.fill();
+  ctx.fillStyle = '#6B8A5C'; ctx.fillRect(X(220), Y(296), L(240), L(30));
+  [[410,232,410,192],[440,236,440,192],[404,192,446,192],[410,212,440,212],[410,232,440,192]].forEach(([a, b, c, d]) => line(a, b, c, d, '#221A12', 3));
+  ctx.fillStyle = '#221A12'; ctx.fillRect(X(398), Y(178), L(54), L(14));
+  ctx.restore();
+  ctx.beginPath(); ctx.arc(X(340), Y(195), L(108), 0, Math.PI * 2); ctx.strokeStyle = '#221A12'; ctx.lineWidth = L(2); ctx.stroke();
+
+  poly([[150,312],[180,312],[180,362],[150,362],[166,337]], BADGE.ribbonDark);
+  poly([[530,312],[500,312],[500,362],[530,362],[514,337]], BADGE.ribbonDark);
+  ctx.fillStyle = BADGE.ribbon; ctx.fillRect(X(172), Y(302), L(336), L(52));
+
+  ctx.fillStyle = '#FFF8EC';
+  ctx.textBaseline = 'middle';
+  fitText('Completed: ' + BADGE.training, 'SIZEpx Rye, Georgia, serif', Math.round(L(19)), L(312));
+  ctx.fillText('Completed: ' + BADGE.training, X(340), Y(329));
+
+  const monthYear = new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' });
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = '#D4AF6A';
+  fitText(`${BADGE.subtitle} \u00B7 ${monthYear}`, '500 SIZEpx "Public Sans", Arial, sans-serif', Math.round(L(15)), L(210));
+  ctx.fillText(`${BADGE.subtitle} \u00B7 ${monthYear}`, X(340), Y(385));
+  ctx.fillStyle = '#E0D0AC';
+  ctx.font = `${Math.round(L(12))}px "Public Sans", Arial, sans-serif`;
+  ctx.fillText('Non-accredited training', X(340), Y(410));
+}
+
+function downloadBadge(){
+  const canvas = document.getElementById('badge-canvas');
+  if(!canvas) return;
+  const link = document.createElement('a');
+  link.download = 'tipple-trial-badge.png';
+  link.href = canvas.toDataURL('image/png');
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+// ===== end of badge code =====
+
+// Final Review lock: change to true once Level 4's completion marker has been live for a while.
+const REQUIRE_LEVEL_4 = false;
+function level4Done(){
+  try { return localStorage.getItem('khgn_level_complete_4') === 'true'; }
+  catch(e) { return true; }
+}
+function render(){
+  const stage = document.getElementById('stage');
+  if(REQUIRE_LEVEL_4 && !level4Done()){
+    stage.innerHTML = `
+    <div class="card">
+      <p class="char-name">The Final Review isn't open yet</p>
+      <p class="body-text">Finish all four levels of the Tipple Trial first, and the Final Review will open for you on this device.</p>
+      <a href="https://khgn-inc.org/tipple-trial.html" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box;">Start at Level 1</a>
+    </div>`;
+    return;
+  }
+  if(examPassed){
+    stage.innerHTML = renderComplete();
+  } else {
+    stage.innerHTML = renderExamQuestion();
+  }
+}
+
+render();
+</script>
+</body>
+</html>
+/fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
