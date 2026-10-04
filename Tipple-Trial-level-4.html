@@ -4,7 +4,621 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KHGN Training — Level 4: Commercial Self-Promotion &amp; Conflict of Interest</title>
+<meta name="robots"<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KHGN Training — Level 4: Commercial Self-Promotion &amp; Conflict of Interest</title>
 <meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
+    display:flex; justify-content:center; padding:28px 16px 60px;
+  }
+  .app{ width:100%; max-width:760px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{ font-size:13px; letter-spacing:0.03em; color:var(--brass-bright); margin-bottom:4px; }
+  .masthead h1{
+    font-family:'Rye', serif; font-weight:400; font-size:clamp(24px,5vw,34px);
+    margin:0; color:var(--parchment); text-shadow:0 2px 0 var(--walnut-deep);
+  }
+  .masthead .level-sub{ font-size:14px; color:var(--parchment-dim); margin-top:4px; }
+  .portal-link{
+    display:inline-block; margin-top:12px; font-size:13px; font-weight:700;
+    color:var(--walnut-deep); background:var(--brass-bright); text-decoration:none;
+    padding:8px 16px; border-radius:20px; transition:background .15s ease;
+  }
+  .portal-link:hover{ background:var(--brass); }
+
+  .trail-wrap{
+    background:var(--walnut-deep); border:1px solid var(--line); border-radius:14px;
+    padding:18px 14px 10px; margin-bottom:20px; overflow-x:auto;
+  }
+  .trail{ display:flex; align-items:center; min-width:640px; position:relative; padding:0 6px; }
+  .trail-line{ position:absolute; left:26px; right:26px; top:15px; height:3px; background:var(--line); z-index:0; }
+  .trail-line-fill{ position:absolute; left:26px; top:15px; height:3px; background:var(--brass); z-index:1; transition:width .5s ease; }
+  .stop{ flex:1; display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
+  .stop-dot{
+    width:32px; height:32px; border-radius:50%; background:var(--walnut);
+    border:3px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:var(--parchment-dim); transition:all .3s ease;
+  }
+  .stop.done .stop-dot{ background:var(--sage); border-color:var(--sage-bright); color:var(--walnut-deep); }
+  .stop.current .stop-dot{
+    background:var(--brass); border-color:var(--brass-bright); color:var(--walnut-deep);
+    box-shadow:0 0 0 4px rgba(176,141,87,0.25);
+  }
+  .stop-label{ font-size:10px; margin-top:6px; color:var(--parchment-dim); opacity:.7; }
+
+  .card{
+    background:var(--parchment); color:var(--ink); border-radius:16px; padding:28px 26px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .4s ease;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){ .card{ animation:none; } }
+  .card.sheriff{ background:#EAD9CE; }
+
+  .character-row{ display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; }
+  .portrait{ width:76px; height:76px; flex-shrink:0; border-radius:10px; border:2px solid var(--ink); background:var(--walnut); }
+  .char-meta{ flex:1; }
+  .char-name{ font-family:'Rye', serif; font-size:22px; margin:0 0 2px; color:var(--ink); }
+  .char-role{ font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:#6B5A42; margin:0 0 8px; }
+  .narration-btn{
+    display:inline-flex; align-items:center; gap:6px; background:var(--ink); color:var(--parchment);
+    border:none; border-radius:20px; padding:6px 14px; font-size:12px; font-weight:600; cursor:pointer;
+  }
+  .narration-btn:hover{ background:#3a2c1e; }
+
+  .body-text{ font-size:15.5px; line-height:1.6; margin:0 0 18px; }
+  .scenario-box{
+    background:rgba(0,0,0,0.06); border-left:4px solid var(--brass); padding:14px 16px;
+    border-radius:6px; font-size:14.5px; line-height:1.55; margin-bottom:20px; font-style:italic;
+  }
+  .gotcha-badge{
+    display:inline-block; background:var(--rust); color:#fff; font-size:10px; font-weight:700;
+    letter-spacing:.04em; padding:3px 9px; border-radius:12px; margin-bottom:8px;
+  }
+
+  .primary-btn{
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
+    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+  }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .primary-btn:disabled{
+    background:var(--walnut-deep); color:var(--brass-bright); opacity:1; cursor:not-allowed;
+    border:1px solid var(--brass);
+  }
+  .secondary-btn{
+    background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
+    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+  }
+  button:focus-visible, a:focus-visible{ outline:3px solid var(--brass-bright); outline-offset:2px; }
+
+  .question-block{ margin-bottom:20px; }
+  .q-num{ font-size:12px; font-weight:700; color:var(--rust); letter-spacing:.03em; margin-bottom:6px; }
+  .q-prompt{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .options{ display:flex; flex-direction:column; gap:8px; }
+  .option{
+    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:11px 14px;
+    font-size:14.5px; font-family:inherit; cursor:pointer; color:var(--ink); transition:all .12s ease;
+  }
+  .option:hover{ border-color:var(--brass); }
+  .option.selected{ border-color:var(--ink); background:#F5EBD6; font-weight:600; }
+  .option.correct{ border-color:var(--sage); background:#DCE9D6; }
+  .option.incorrect{ border-color:var(--rust); background:#F2D9D4; }
+  .option:disabled{ cursor:default; }
+
+  .feedback-banner{
+    display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:8px;
+    font-size:14px; font-weight:700; margin-bottom:16px;
+  }
+  .feedback-banner.pass{ background:#DCE9D6; color:#3C5533; }
+  .feedback-banner.fail{ background:#F2D9D4; color:#7A2E23; }
+  .explain{
+    font-size:14px; line-height:1.6; background:#fff; border:1px solid #D8C7A3;
+    border-radius:8px; padding:12px 14px; margin-bottom:16px;
+  }
+  .explain strong{ color:var(--ink); }
+
+  .final-question{ background:rgba(0,0,0,0.05); border-radius:10px; padding:16px; margin-top:6px; }
+
+  .footer-note{ text-align:center; font-size:13px; color:var(--parchment); margin-top:18px; line-height:1.6; }
+  .footer-note strong{ color:var(--brass-bright); }
+
+  .complete-screen{ text-align:center; }
+  .complete-screen .badge{
+    width:90px; height:90px; margin:0 auto 16px; border-radius:50%; background:var(--sage);
+    display:flex; align-items:center; justify-content:center; font-size:40px;
+  }
+  .program-complete .badge{ background:var(--brass); }
+  #volunteer-form-hook{
+    border:2px dashed var(--line); border-radius:10px; padding:22px; margin-top:18px;
+    background:rgba(0,0,0,0.04); font-size:13px; color:#6B5A42; text-align:center;
+  }
+
+  .article-content{
+    max-height:440px; overflow-y:auto; background:#fff; border:1px solid #D8C7A3;
+    border-radius:10px; padding:18px 20px; margin-bottom:16px; font-size:14px; line-height:1.65;
+  }
+  .article-content h2{ font-family:'Rye', serif; font-size:22px; margin:0 0 4px; color:var(--ink); }
+  .article-content h3{ font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:#6B5A42; margin:0 0 10px; font-weight:600; }
+  .article-content h4{ font-size:17px; margin:18px 0 6px; color:var(--rust); font-family:'Rye', serif; font-weight:400; }
+  .article-content p{ margin:0 0 12px; }
+  .article-content ul, .article-content ol{ margin:0 0 12px; padding-left:22px; }
+  .article-content li{ margin-bottom:6px; }
+  .article-content blockquote{
+    margin:12px 0; padding:10px 14px; border-left:4px solid var(--brass);
+    background:rgba(176,141,87,0.08); font-style:italic; color:#4A3A28;
+  }
+  .article-content hr{ border:none; border-top:1px solid #E0D0AC; margin:18px 0; }
+  .coi-link{ display:block; font-size:13.5px; font-weight:700; color:var(--rust); margin:-4px 0 14px; }
+  .gate-status{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; font-size:13px; color:#6B5A42; }
+  .gate-row{ transition:color .2s ease; }
+  .gate-row.gate-done{ color:var(--sage); font-weight:700; }
+  .gate-explainer{
+    font-size:12.5px; color:#6B5A42; background:rgba(0,0,0,0.04); border-radius:8px;
+    padding:10px 12px; margin-bottom:14px; line-height:1.5; font-style:italic;
+  }
+  .completion-disclaimer{
+    text-align:left; font-size:14px; line-height:1.65; color:var(--ink); font-weight:500;
+    background:#F2D9D4; border:1.5px solid var(--rust); border-radius:8px; padding:14px 16px; margin:16px 0;
+  }
+  .completion-disclaimer strong{ color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="masthead">
+    <div class="eyebrow">KHGN FIELD TRAINING · COMMUNITY ADVISORY TRACK</div>
+    <h1>Level 4: Commercial Self-Promotion &amp; Conflict of Interest</h1>
+    <a class="portal-link" href="https://khgn-inc.org/game-portal.html">&larr; Back to the Trailhead</a>
+    <div class="level-sub">Guided by The Village Court Clerk</div>
+  </div>
+
+  <div class="trail-wrap" id="trail-wrap"><div class="trail" id="trail"></div></div>
+  <div id="stage"></div>
+
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc. — Volunteer Field Training Program<br>
+    Failing the Sheriff's final chance at any waypoint returns you to the start of this level.<br><br>
+    <strong>This training is a free educational program offered by KHGN.</strong>
+    It is not an accredited certification, professional credential, or license of any kind, and
+    completion does not represent legal advice or KHGN's endorsement as an accrediting body.
+    <br><br>
+    <a href="#" onclick="resetProgress(); return false;" style="color:var(--brass-bright); text-decoration:underline; font-size:12px;">Reset this level's progress on this device</a>
+  </div>
+</div>
+
+<script>
+const TOTAL_STOPS = 12;
+const LEVEL_ID = 4;
+const LEVEL_TOPIC = "Commercial Self-Promotion & Conflict of Interest";
+const GUIDE_NAME = "The Village Court Clerk";
+const GUIDE_ROLE = "Trail Guide";
+// Paste the web address of KHGN's filed Conflict of Interest Statement between the quotes.
+// While it's empty, no link is shown.
+const COI_POLICY_URL = "";
+// Level lock: keep false until Levels 1 to 3 all save their completion, then change to true.
+const REQUIRE_PREVIOUS_LEVEL = false;
+function markLevelComplete(){
+  try { localStorage.setItem('khgn_level_complete_' + LEVEL_ID, 'true'); } catch(e) {}
+}
+function previousLevelDone(){
+  if(LEVEL_ID === 1) return true;
+  try { return localStorage.getItem('khgn_level_complete_' + (LEVEL_ID - 1)) === 'true'; }
+  catch(e) { return true; }
+}
+function renderLocked(){
+  return `
+  <div class="card">
+    <p class="char-name">This trail isn't open yet</p>
+    <p class="body-text">The Tipple Trial is walked in order. Finish Level ${LEVEL_ID - 1} first, and this level will open for you on this device.</p>
+    <a href="https://khgn-inc.org/tipple-trial.html" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box;">Start at Level 1</a>
+  </div>`;
+}
+const GUIDE_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#2B231C\"/>\n  <circle cx=\"38\" cy=\"30\" r=\"13\" fill=\"#C99B6E\"/>\n  <path d=\"M26 24 Q38 14 50 24 L50 20 Q38 12 26 20 Z\" fill=\"#221A12\"/>\n  <path d=\"M20 66 Q38 44 56 66 Z\" fill=\"#3A3A4A\"/>\n  <rect x=\"26\" y=\"50\" width=\"24\" height=\"16\" rx=\"1\" fill=\"#EDE0C8\" stroke=\"#221A12\" stroke-width=\"1\"/>\n  <line x1=\"29\" y1=\"54\" x2=\"47\" y2=\"54\" stroke=\"#A63D2F\" stroke-width=\"1.4\"/>\n  <line x1=\"29\" y1=\"58\" x2=\"47\" y2=\"58\" stroke=\"#221A12\" stroke-width=\"1\"/>\n  <line x1=\"29\" y1=\"62\" x2=\"40\" y2=\"62\" stroke=\"#221A12\" stroke-width=\"1\"/>\n</svg>";
+const SHERIFF_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#3A231C\"/>\n  <path d=\"M18 30 Q38 4 58 30 L58 20 Q38 -2 18 20 Z\" fill=\"#4A2E22\"/>\n  <circle cx=\"38\" cy=\"32\" r=\"13\" fill=\"#C99B6E\"/>\n  <path d=\"M28 44 L48 44 L44 62 L32 62 Z\" fill=\"#5B3A2A\"/>\n  <polygon points=\"38,50 40,54 44,54 41,57 42,61 38,58 34,61 35,57 32,54 36,54\"\n    fill=\"#D4AF6A\" stroke=\"#2B211A\" stroke-width=\"0.6\"/>\n  <path d=\"M27 32 Q38 38 49 32\" stroke=\"#3A231C\" stroke-width=\"2\" fill=\"none\"/>\n</svg>";
+const INTRO_TEXT = "\"Step into my office. Everything posted in a KHGN group looks like it carries KHGN's approval. That's why this level matters: no sales and no promotion of any kind, from anyone, however worthy the cause. You'll also learn to spot the spammers and the clever tricks, and what to do when your own interests get tangled up with your volunteer role. Let's walk the trail.\"";
+const ARTICLE_MD = "# Commercial Self-Promotion and Conflict of Interest\n### A Field Guide for KHGN Volunteers, Moderators, and Field Workers\n\n*Level 4 Reading — Kentucky History & Genealogy Network, Inc.*\n\n---\n\n## Why This Level Exists\n\nThe first three levels protect the people whose stories and records KHGN handles: living relatives, the creators of copyrighted work, and individuals whose records aren't yet releasable. This level protects something different: the trust members place in KHGN itself.\n\nIt comes down to one principle:\n\n> Anything posted in a KHGN group appears to carry KHGN's approval.\n\nSales posts never say \"KHGN does not endorse this.\" They leave members to assume it. So when something is sold in a KHGN group, the seller is borrowing KHGN's credibility, whether they mean to or not. If a member then has a bad experience, they may blame KHGN.\n\nThat's why KHGN's rule is simple: **no sales or promotion of any kind, no matter who posts it or how worthy the cause.**\n\n---\n\n## Part A: The No-Sales Rule\n\n### What Counts as a Sale\n\nA post doesn't need a price or the word \"sale\" to be commercial. All of the following are sales or solicitations:\n\n- A post or comment offering anything for a price, including books, crafts, food, photos, or services\n- **Any link to a place where something can be bought**, whether that's Amazon, Walmart, Barnes & Noble, eBay, Etsy, a publisher's store, or an author's website with a \"buy\" button\n- Affiliate or referral links, where the poster earns money when someone buys\n- Digital copies of books, such as PDFs sent by email or download links\n- Paid research, lookup, or record-retrieval services\n- Requests for money of any kind, including donations sent to a personal payment account\n- Requests for **postage, shipping, handling, copying costs, or \"reimbursement\"** in exchange for documents, letters, photos, or other items, even when the poster says they're \"not selling\" them\n\n\"Reimbursement\" deserves special attention. Someone may post old letters or photos and say they only want them to go to family, for the cost of shipping. Some of these posters genuinely mean it, but others run this as a business, charging \"postage\" on every item. KHGN has no way to tell the difference, and money changes hands either way. So the label doesn't matter: **a request for money is treated as a sale, whatever it's called.**\n\nDon't memorize a list of stores. Ask one question about any link: **can a person buy something there?** If yes, it isn't allowed.\n\n### What Is Allowed\n\nThe rule is about selling, not about the topic. Members may:\n\n- Cite a book as a source by giving its title, author, and year, or point to a library catalog or WorldCat listing instead of a store\n- Share their own research freely, including research from a book they wrote, as long as nothing is offered for sale\n- Ask questions such as \"Does anyone know who maintains this cemetery?\"\n\n### No Exceptions, Including Books\n\nKHGN doesn't allow sales anywhere on its platforms, including books. Authors are always welcome to share their research and to cite their own books as sources, as long as nothing is offered for sale: no prices, no purchase links, and no \"message me for a copy.\"\n\n**Digital copies deserve a special warning.** Sellers sometimes offer PDF or other digital copies of books by email or download. Beyond being a sale, this is often a copyright violation, because only the author or rights holder can authorize copies, and a book being out of print doesn't mean it's free to copy.\n\nApplying the rule to everyone also answers the most common complaint: \"You let them post, so why not me?\" No one may sell, so the rule is the same for every member and every author.\n\n### Why No Exceptions for Good Causes\n\nSome of the hardest cases involve organizations and causes that fit KHGN's mission: a museum demonstrating its restored gristmill, then advertising its fresh cornmeal, or a volunteer raising money to mow a pioneer cemetery. The content may be valuable, but the rule doesn't change. KHGN can't verify where money goes, and allowing one worthy seller invites every other seller to argue their cause is worthy too.\n\nOften the best response is to **separate the heritage from the sale**. The history of the mill and photos of the grinding process are welcome. The price list is not.\n\n---\n\n## Recognizing Spam\n\nMost sales posts in KHGN groups don't come from genuine members. They come from spammers promoting products. Watch for these signs:\n\n- **Comments that don't fit the conversation.** A member asks about a great-grandfather's burial, and a reply recommends a book with a link.\n- **Seasonal or emotional hooks**, such as \"This would make a great Christmas gift!\" or \"Perfect for your family's history!\"\n- **The same message repeated** under many posts or in many groups\n- **The account itself:** recently created, few friends, no Kentucky connection, or a profile that exists only to promote products\n- **Following members or messaging them directly** after they post\n\nSpam appears in both posts and comments. Comments are often the spammer's first choice, because they get less attention.\n\n### Coordinated Promotion\n\nA more sophisticated tactic uses several accounts working together. One account posts a book and its price, and within minutes several others comment: \"Wow, only $25! Such a great buy!\" Members read that as independent praise. In real cases, the commenters have all been from the same organization, promoting its own products.\n\nWarning signs include:\n\n- Several enthusiastic comments bunched together right after the post\n- Praise focused on the price or the deal rather than the content\n- Similar wording across supposedly different people\n- Profiles listing the same organization, workplace, or officer roles\n\nCoordinated promotion is both a sale and an undisclosed conflict of interest, since the people praising the product stand to benefit from it.\n\n---\n\n## What to Do\n\nYour job is to recognize the pattern and respond the right way for the situation.\n\n1. **A genuine member who made a mistake:** Remove the post or comment and explain the rule kindly. Suggest reposting the historical content, or the research behind a book, without the sales pitch.\n2. **A spam account:** Remove the post or comments, remove and block the account, and report it to Facebook.\n3. **An organization, or coordinated promotion:** Remove the post and the coordinated comments, then escalate to an administrator. Organizations such as historical societies and museums may be valuable partners, so an administrator handles them consistently and diplomatically.\n4. **Not sure?** Escalate to an administrator rather than deciding alone.\n\nNever accuse a person or organization publicly. Remove the content, then follow the steps above.\n\n---\n\n## Part B: Conflict of Interest\n\nA conflict of interest exists when a volunteer's personal interests, or those of their family, friends, or other organizations they belong to, could affect how they carry out their KHGN role.\n\n**KHGN's filed Conflict of Interest Statement is the official policy.** This section summarizes how it applies to everyday volunteer work. Where the two differ, the filed statement governs.\n\n### Common Situations\n\n- Moderating a post, dispute, or report involving a relative or close friend\n- Reviewing or approving content from an organization you belong to, such as a historical society where you serve as an officer\n- Using your KHGN role, or your access to members, to promote your own research services, projects, or products\n\n### What to Do\n\n1. **Recognize it.** Ask yourself whether someone watching might reasonably doubt your fairness.\n2. **Disclose it.** Tell another moderator or an administrator about the connection.\n3. **Step aside.** Hand the decision to someone without the conflict.\n\nHaving a conflict of interest isn't wrong. Everyone has family, friends, and outside interests. What matters is disclosing it and stepping aside, so that every decision stays fair and is seen to be fair.\n\nSerious matters, such as someone using KHGN's name, platform, or member information for personal gain, go to the Community Advisory Committee and, where appropriate, the Board.\n\n---\n\n## A Closing Thought\n\nNonprofits are generally expected to use their resources for their public mission, not for the private benefit of any business or individual. Every rule in this level serves that purpose: KHGN's groups, its name, and its members' trust exist for Kentucky's history and genealogy community, not for anyone's personal gain.\n\nWhen you're ready, continue to the Level 4 trail, where the Village Court Clerk will walk you through real scenarios.\n\n---\n\n*This material is provided for KHGN training purposes and reflects organizational practice. It is general information, not legal advice.*";
+const QUIZZES = [{"title": "The Friendly Recommendation", "gotcha": false, "scenario": "A longtime member posts in the Pulaski County group: \"This is the best history of Pulaski County churches I've found!\" and includes an Amazon link to the book. The member didn't write it.", "questions": [{"prompt": "What should the moderator do?", "options": ["Leave it up, since the member isn't the author and earns nothing from the recommendation.", "Leave it up, but ask the member to swap the Amazon link for a Barnes &amp; Noble link.", "Remove it, since any link to a place where the book can be bought counts as a sale, and invite the member to repost with the title, author, and a library or WorldCat listing.", "Remove it and ban the member for advertising."], "correct": 2, "explain": "Any purchase link counts as a sale, from any store, however the post is worded. The link could even be an affiliate link that pays the poster. This member made an honest mistake, so the right response is to remove the post and help them share the book the right way, not to ban them."}]}, {"title": "The Author in the Discussion", "gotcha": false, "scenario": "In a discussion about a historic flood, a longtime member shares details from her own research and names her published book on the flood as her source. She includes no price, no link, and no offer to sell.", "questions": [{"prompt": "Is this post acceptable?", "options": ["Yes. She's sharing knowledge and citing her source, and nothing is offered for sale.", "No. Authors may never mention their own books in KHGN groups.", "No. Any post that mentions a book counts as a sale.", "Only if she first discloses how much she earns in royalties."], "correct": 0, "explain": "The rule is about selling, not about books. Citing a book as a source, even one you wrote, is welcome when nothing is offered for sale. Genuine authors in KHGN groups share their knowledge this way all the time."}]}, {"title": "The New Release", "gotcha": false, "scenario": "A member posts in the Clay County group: \"My new book on Clay County families is out! $25, message me for a copy.\"", "questions": [{"prompt": "What should the moderator do?", "options": ["Leave it up, because local history books support KHGN's mission.", "Leave it up as long as the price is reasonable.", "Remove it, block the member, and report the account to Facebook.", "Remove it and kindly explain the no-sales rule, inviting the author to share the book's research and cite the book as a source, without a price or offer to sell."], "correct": 3, "explain": "This is a genuine member, so the response is to remove and explain, not to block. KHGN allows no sales anywhere, including books, but authors are welcome to share their research and cite their books. Blocking and reporting are for spam accounts, not members who made a mistake."}]}, {"title": "The Holiday Gift Comment", "gotcha": true, "scenario": "Under a member's post about her family Bible, an account you've never seen comments, \"This would make a great Christmas gift for your family!\" with a Walmart link. The same comment appears under several other posts. The profile is a few weeks old and shows no Kentucky connection.", "questions": [{"prompt": "What should the moderator do?", "options": ["Reply politely and ask them to repost it as a new post instead.", "Remove the comments, remove and block the account, and report it to Facebook.", "Leave it, since comments are between the commenter and the member.", "Remove only the link and leave the comment in place."], "correct": 1, "explain": "Every warning sign is here: an off-topic comment, a holiday hook, a purchase link, repeated messages, and a new account with no local connection. That's spam, not a member's mistake, so don't redirect it. Remove, block, and report."}]}, {"title": "The Chorus of Praise", "gotcha": true, "scenario": "A post offers a local history book for $25. Within ten minutes, three accounts comment: \"Only $25? Such a great buy!\" Their profiles show that all three are officers of the same historical society that published the book.", "questions": [{"prompt": "What should the moderator do?", "options": ["Leave it up, since the commenters are simply enthusiastic readers.", "Post a public warning in the group naming the society.", "Remove the post and the coordinated comments, then escalate to an administrator to contact the society.", "Remove the original post but leave the comments, since they sell nothing themselves."], "correct": 2, "explain": "This is coordinated promotion: a sale dressed up as independent praise, with an undisclosed conflict of interest. Remove the post and comments. Because an organization is involved, an administrator handles the follow-up consistently and diplomatically. Never accuse anyone publicly."}]}, {"title": "The Gristmill Demonstration", "gotcha": true, "scenario": "A museum posts wonderful photos and history of its restored gristmill grinding corn, and ends with: \"Fresh stone-ground cornmeal available in our gift shop, $6 a bag!\"", "questions": [{"prompt": "What should the moderator do?", "options": ["Leave it up, since museums are nonprofits too.", "Remove it and invite the museum to repost the history and photos without the sales pitch.", "Leave it up, since the history outweighs one sentence of advertising.", "Remove it and block the museum's account."], "correct": 1, "explain": "A good cause or historical subject doesn't change the rule. The post is advertising. The best response separates the heritage from the sale: the mill's history is welcome, and the price list isn't. The museum is a legitimate organization, so blocking would be the wrong response."}]}, {"title": "The Cemetery Appeal", "gotcha": true, "scenario": "A volunteer posts an urgent request for members to send money through her personal Cash App to pay for mowing an overgrown pioneer cemetery.", "questions": [{"prompt": "What should the moderator do?", "options": ["Leave it up, since cemetery upkeep supports KHGN's mission.", "Leave it up as long as she posts receipts afterward.", "Allow it once a year for each cemetery.", "Remove it, since requests for money are solicitations, and KHGN can't verify where donations go."], "correct": 3, "explain": "Requests for money fall under the no-sales rule, however sympathetic the cause. KHGN has no way to verify where the money goes, and fundraising posts are easy for scammers to imitate. A question like \"Does anyone know who maintains this cemetery?\" would be perfectly fine."}]}, {"title": "The Postage Request", "gotcha": true, "scenario": "A member posts photos of old letters and a family Bible: \"I'm not selling these, I just want them to go to family. Any descendant can have them for the cost of postage and shipping, $15 through PayPal.\"", "questions": [{"prompt": "What should the moderator do?", "options": ["Remove it, since a request for postage or shipping is still a request for money and is treated as a sale, however it's described.", "Leave it up, since the poster clearly states the items aren't for sale.", "Leave it up as long as the shipping cost seems reasonable.", "Leave it up, since family items are a special case."], "correct": 0, "explain": "Calling a payment \"postage\" or \"reimbursement\" doesn't change what it is. Some people run this as a business, charging shipping on every item they post. KHGN can't tell a genuine offer from a business, so the rule applies to everyone: any request for money is treated as a sale."}]}, {"title": "The PDF Bargain", "gotcha": true, "scenario": "In a county group, a seller offers digital PDF copies of a well-known, out-of-print Kentucky county history for $5 each, delivered by email. The seller isn't the book's author.", "questions": [{"prompt": "What should the moderator do?", "options": ["Leave it up, since it's a Kentucky history book.", "Remove it, since no sales are allowed, and selling copies of someone else's book may also violate copyright.", "Leave it up, since out-of-print books are free to copy.", "Leave it up as long as buyers know transactions are at their own risk."], "correct": 1, "explain": "Any sale breaks KHGN's rules, and this one has a second problem: copying and selling someone else's book is often a copyright violation, since only the author or rights holder can authorize copies. Out of print doesn't mean out of copyright."}]}, {"title": "The \"Why Me?\" Complaint", "gotcha": false, "scenario": "A member whose sale post was removed messages the moderator: \"I've seen other people sell things here. Why me?\"", "questions": [{"prompt": "Which answer best explains the rule?", "options": ["Moderators decide case by case which sales are worthwhile.", "The member didn't pay a posting fee.", "Anything posted in a KHGN group appears to carry KHGN's approval, so no sales are allowed from anyone, and any others that slipped through will be removed too.", "Facebook doesn't allow sales in any group."], "correct": 2, "explain": "The rule exists because posts in KHGN groups appear to carry KHGN's approval. Applying it to everyone, with no exceptions, is what makes it fair. If other sales slipped through, they'll be removed too."}]}, {"title": "The Family Dispute", "gotcha": false, "scenario": "A moderator is asked to review a reported post. The post was written by the moderator's cousin, who is in an argument with another member.", "questions": [{"prompt": "What should the moderator do?", "options": ["Disclose the family connection and hand the decision to another moderator.", "Handle it personally, since knowing the cousin helps with understanding the context.", "Quietly dismiss the report to avoid family trouble.", "Rule against the cousin to prove there's no favoritism."], "correct": 0, "explain": "This is a conflict of interest. Whatever the moderator decides, someone could reasonably doubt its fairness, even a ruling against the cousin. The answer is to recognize it, disclose it, and step aside."}]}, {"title": "The Side Business", "gotcha": true, "scenario": "A moderator notices members asking for research help in the group, then privately messages several of them to offer the moderator's own paid research service.", "questions": [{"prompt": "How should this be understood?", "options": ["It's acceptable, because the messages were private, not in the group.", "It's acceptable as long as the moderator offers a KHGN member discount.", "It's acceptable as long as the moderator also volunteers in the group.", "It's a conflict of interest, because the moderator is using a KHGN role and access to members for personal gain, and it should be escalated."], "correct": 3, "explain": "Moving the offer into private messages doesn't change what's happening. The moderator found these customers through a KHGN role. Using KHGN's platform or members for personal gain is a serious matter for an administrator, the Community Advisory Committee, or the Board."}]}];
+const SHERIFF_SPEECH = "\"Hold on now. The call you just made would have let a sale slip through, or let a conflict of interest go unchecked. Either one chips away at the trust members place in this organization. I'm going to give you one more chance. Choose correctly this time, and you'll walk on. Choose wrong, and you're headed back to the start of this level.\"";
+
+function renderMarkdown(md){
+  const lines = md.split('\n');
+  let html = '';
+  let listBuffer = [];
+  let listType = null;
+  function flushList(){
+    if(listBuffer.length){
+      html += `<${listType}>` + listBuffer.map(li => `<li>${li}</li>`).join('') + `</${listType}>`;
+      listBuffer = [];
+      listType = null;
+    }
+  }
+  function inline(text){
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  }
+  lines.forEach(raw => {
+    const line = raw.trim();
+    if(line === ''){ flushList(); return; }
+    if(line === '---'){ flushList(); html += '<hr>'; return; }
+    let m;
+    if((m = line.match(/^### (.*)/))){ flushList(); html += `<h4>${inline(m[1])}</h4>`; return; }
+    if((m = line.match(/^## (.*)/))){ flushList(); html += `<h3>${inline(m[1])}</h3>`; return; }
+    if((m = line.match(/^# (.*)/))){ flushList(); html += `<h2>${inline(m[1])}</h2>`; return; }
+    if((m = line.match(/^> (.*)/))){ flushList(); html += `<blockquote>${inline(m[1])}</blockquote>`; return; }
+    if((m = line.match(/^- (.*)/))){ if(listType !== 'ul'){ flushList(); listType = 'ul'; } listBuffer.push(inline(m[1])); return; }
+    if((m = line.match(/^\d+\.\s(.*)/))){ if(listType !== 'ol'){ flushList(); listType = 'ol'; } listBuffer.push(inline(m[1])); return; }
+    flushList();
+    html += `<p>${inline(line)}</p>`;
+  });
+  flushList();
+  return html;
+}
+
+let currentStop = 0;
+let quizAnswers = {};
+let quizSubmitted = {};
+let gateUnlocked = false;
+let gateScrolledToEnd = false;
+let gateStarted = false;
+
+function loadGateUnlocked(){
+  try { return localStorage.getItem('khgn_gate_passed_level_' + LEVEL_ID) === 'true'; }
+  catch(e) { return false; }
+}
+function saveGatePassed(){
+  try { localStorage.setItem('khgn_gate_passed_level_' + LEVEL_ID, 'true'); }
+  catch(e) { /* storage unavailable — gate just won't persist across reloads for this user */ }
+}
+
+function levelKey(stop){ return LEVEL_ID + '-' + stop; }
+
+function renderTrail(){
+  const trail = document.getElementById('trail');
+  trail.innerHTML = '';
+  const line = document.createElement('div'); line.className = 'trail-line'; trail.appendChild(line);
+  const fill = document.createElement('div'); fill.className = 'trail-line-fill';
+  const pct = currentStop === 0 ? 0 : ((currentStop-1) / (TOTAL_STOPS-1)) * 100;
+  fill.style.width = pct + '%';
+  trail.appendChild(fill);
+  for(let i=1;i<=TOTAL_STOPS;i++){
+    const stop = document.createElement('div');
+    stop.className = 'stop';
+    if(i < currentStop) stop.classList.add('done');
+    if(i === currentStop) stop.classList.add('current');
+    const dot = document.createElement('div'); dot.className = 'stop-dot';
+    dot.textContent = i < currentStop ? '✓' : i;
+    const label = document.createElement('div'); label.className = 'stop-label';
+    label.textContent = 'Stop '+i;
+    stop.appendChild(dot); stop.appendChild(label);
+    trail.appendChild(stop);
+  }
+}
+
+function resetLevel(){
+  const prefix = LEVEL_ID + '-';
+  Object.keys(quizAnswers).forEach(k => { if(k.startsWith(prefix)) delete quizAnswers[k]; });
+  Object.keys(quizSubmitted).forEach(k => { if(k.startsWith(prefix)) delete quizSubmitted[k]; });
+  currentStop = 0;
+  render();
+}
+
+function startLevel(){
+  currentStop = 1;
+  render();
+}
+
+function renderIntro(){
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">${GUIDE_NAME}</p>
+        <p class="char-role">${GUIDE_ROLE} · Level ${LEVEL_ID}: ${LEVEL_TOPIC}</p>
+        <button class="narration-btn" onclick="speakIntro(this)">🔊 Read Aloud</button>
+      </div>
+    </div>
+    <p class="body-text">${INTRO_TEXT}</p>
+    <button class="primary-btn" onclick="startLevel()">Begin the Trail</button>
+  </div>
+  <div class="footer-note" style="margin-top:14px;">
+    The "Read Aloud" button uses your browser's built-in text-to-speech voice — no recorded audio needed.
+  </div>`;
+}
+
+function renderQuiz(stopIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const key = levelKey(stopIndex);
+  const answered = !!quizSubmitted[key];
+  const passed = answered && quiz.questions.every((q,qi) => quizAnswers[key][qi] === q.correct);
+  let html = `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">${quiz.title}</p>
+        <p class="char-role">Level ${LEVEL_ID} · Trail Stop ${stopIndex} of ${TOTAL_STOPS}</p>
+      </div>
+    </div>
+    ${quiz.gotcha ? '<span class="gotcha-badge">⚠ BORDERLINE CASE</span>' : ''}
+    <div class="scenario-box">${quiz.scenario}</div>
+  `;
+
+  quiz.questions.forEach((q, qi) => {
+    const picked = quizAnswers[key]?.[qi];
+    html += `<div class="question-block">
+      <div class="q-num">QUESTION ${qi+1} OF ${quiz.questions.length}</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options">`;
+    q.options.forEach((opt, oi) => {
+      let cls = 'option';
+      if(answered){
+        // Reveal the correct answer only on a pass, so the Sheriff's second chance is a real retry.
+        if(passed && oi === q.correct) cls += ' correct';
+        else if(!passed && oi === picked && picked !== q.correct) cls += ' incorrect';
+      } else if(picked === oi){
+        cls += ' selected';
+      }
+      html += `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="selectAnswer(${stopIndex},${qi},${oi})">${opt}</button>`;
+    });
+    html += `</div></div>`;
+  });
+
+  if(!answered){
+    const allPicked = quiz.questions.every((_,qi) => quizAnswers[key]?.[qi] !== undefined);
+    html += `<button class="primary-btn" ${allPicked ? '' : 'disabled'} onclick="submitQuiz(${stopIndex})">Submit Answers</button>`;
+  } else {
+    const numCorrect = quiz.questions.filter((q,qi) => quizAnswers[key][qi] === q.correct).length;
+    if(passed){
+      const isLastStop = stopIndex === TOTAL_STOPS;
+      html += `<div class="feedback-banner pass">✓ All correct — the trail continues.</div>
+      ${quiz.questions.map(q => q.explain ? `<div class="explain"><strong>Why:</strong> ${q.explain}</div>` : '').join('')}
+      <button class="primary-btn" onclick="advanceAfterPass()">${isLastStop ? 'Finish Level ' + LEVEL_ID : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+    } else {
+      html += `<div class="feedback-banner fail">⚠ ${quiz.questions.length - numCorrect} answer(s) missed. Sheriff Vance would like a word.</div>
+      <button class="primary-btn" onclick="goToSheriff(${stopIndex})">Face Sheriff Vance</button>`;
+    }
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function renderSheriff(stopIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const key = levelKey(stopIndex);
+  const missedIndex = quiz.questions.findIndex((q,qi) => quizAnswers[key][qi] !== q.correct);
+  const q = quiz.questions[missedIndex];
+
+  return `
+  <div class="card sheriff">
+    <div class="character-row">
+      <div class="portrait">${SHERIFF_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Sheriff Vance</p>
+        <p class="char-role">Compliance &amp; Consequences</p>
+        <button class="narration-btn" onclick="speakSheriff(this)">🔊 Read Aloud</button>
+      </div>
+    </div>
+    <p class="body-text">${SHERIFF_SPEECH}</p>
+    <div class="scenario-box">${quiz.scenario}</div>
+    <div class="final-question">
+      <div class="q-num">FINAL CHANCE</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options" id="final-options">
+        ${q.options.map((opt,oi) => `<button class="option" onclick="answerFinal(${stopIndex},${missedIndex},${oi})">${opt}</button>`).join('')}
+      </div>
+    </div>
+    <div id="final-result"></div>
+  </div>`;
+}
+
+function checkArticleScroll(){
+  const el = document.getElementById('article-scroll');
+  if(!el) return;
+  if(el.scrollTop + el.clientHeight >= el.scrollHeight - 20){
+    gateScrolledToEnd = true;
+  }
+  updateGateStatus();
+}
+
+function updateGateStatus(){
+  const scrollEl = document.getElementById('scroll-indicator');
+  const btn = document.getElementById('gate-continue-btn');
+  if(!scrollEl) return;
+  scrollEl.textContent = (gateScrolledToEnd ? '✓' : '○') + ' Scroll to the end of the reading';
+  scrollEl.classList.toggle('gate-done', gateScrolledToEnd);
+  if(btn){
+    btn.disabled = !gateScrolledToEnd;
+    btn.textContent = gateScrolledToEnd ? 'Continue to the Trail' : '🔒 Locked — scroll to the end to continue';
+  }
+}
+
+function renderGate(){
+  const articleHtml = renderMarkdown(ARTICLE_MD);
+  const coiLink = COI_POLICY_URL
+    ? `<a class="coi-link" href="${COI_POLICY_URL}" target="_blank" rel="noopener">Read KHGN's filed Conflict of Interest Statement</a>`
+    : '';
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Required Reading</p>
+        <p class="char-role">Level ${LEVEL_ID}: ${LEVEL_TOPIC}</p>
+      </div>
+    </div>
+    <div class="article-content" id="article-scroll" onscroll="checkArticleScroll()">
+      ${articleHtml}
+    </div>
+    ${coiLink}
+    <div class="gate-status">
+      <div class="gate-row" id="scroll-indicator">○ Scroll to the end of the reading</div>
+    </div>
+    <p class="gate-explainer">
+      The button below will light up once you've reached the end of the reading.
+    </p>
+    <button class="primary-btn" id="gate-continue-btn" disabled onclick="passGate()">Continue to the Trail</button>
+  </div>`;
+}
+
+function passGate(){
+  gateUnlocked = true;
+  saveGatePassed();
+  currentStop = 0;
+  render();
+}
+
+function render(){
+  const stage = document.getElementById('stage');
+  const trailWrap = document.getElementById('trail-wrap');
+
+  if(REQUIRE_PREVIOUS_LEVEL && !previousLevelDone()){
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderLocked();
+    return;
+  }
+
+  if(!gateUnlocked){
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderGate();
+    if(!gateStarted){
+      gateScrolledToEnd = false;
+      gateStarted = true;
+    }
+    updateGateStatus();
+    return;
+  }
+  trailWrap.style.display = '';
+
+  renderTrail();
+  if(currentStop === 0){
+    stage.innerHTML = renderIntro();
+  } else if(currentStop <= TOTAL_STOPS){
+    stage.innerHTML = renderQuiz(currentStop);
+  } else {
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderLevelCompleteReal();
+  }
+}
+
+function renderLevelCompleteReal(){
+  markLevelComplete();
+  return `
+  <div class="card complete-screen program-complete">
+    <div class="badge">🏅</div>
+    <p class="char-name" style="font-size:26px;">Level 4 Complete</p>
+    <p class="body-text">You've cleared all 12 waypoints of ${LEVEL_TOPIC}. One last step stands between you and your Tipple Trial badge: a short Final Review pulling questions from all four levels.</p>
+    <a href="Tipple-Trial-final-quiz.html" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box;">Continue to Final Review</a>
+    <button class="secondary-btn" onclick="resetLevel()">Replay This Level</button>
+  </div>`;
+}
+
+function selectAnswer(stopIndex, qIndex, optIndex){
+  const key = levelKey(stopIndex);
+  if(!quizAnswers[key]) quizAnswers[key] = {};
+  quizAnswers[key][qIndex] = optIndex;
+  render();
+}
+
+function submitQuiz(stopIndex){
+  const key = levelKey(stopIndex);
+  quizSubmitted[key] = true;
+  render();
+}
+
+function advanceAfterPass(){
+  currentStop += 1;
+  render();
+}
+
+function goToSheriff(stopIndex){
+  document.getElementById('stage').innerHTML = renderSheriff(stopIndex);
+}
+
+function answerFinal(stopIndex, questionIndex, chosenIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const q = quiz.questions[questionIndex];
+  const resultDiv = document.getElementById('final-result');
+  const buttons = document.querySelectorAll('#final-options .option');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if(i === q.correct) btn.classList.add('correct');
+    else if(i === chosenIndex) btn.classList.add('incorrect');
+  });
+  const why = q.explain ? `<div class="explain" style="margin-top:14px;"><strong>Why:</strong> ${q.explain}</div>` : '';
+  if(chosenIndex === q.correct){
+    const isLastStop = stopIndex === TOTAL_STOPS;
+    resultDiv.innerHTML = `<div class="feedback-banner pass" style="margin-top:14px;">✓ Corrected. Sheriff Vance nods and steps aside.</div>
+    ${why}
+    <button class="primary-btn" onclick="advanceAfterPass()">${isLastStop ? 'Finish Level ' + LEVEL_ID : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+  } else {
+    resultDiv.innerHTML = `<div class="feedback-banner fail" style="margin-top:14px;">✗ Still not right. Back to the start of this level.</div>
+    ${why}
+    <button class="primary-btn" onclick="resetLevel()">Return to Trailhead</button>`;
+  }
+}
+
+function toggleSpeech(text, btn){
+  if(!('speechSynthesis' in window)){
+    alert("This browser doesn't support text-to-speech. Try Chrome, Edge, or Safari instead.");
+    return;
+  }
+  if(window.speechSynthesis.speaking){
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.narration-btn').forEach(b => { b.textContent = '🔊 Read Aloud'; });
+    return;
+  }
+  const clean = text.replace(/^"|"$/g, '').replace(/\s+/g, ' ').trim();
+  const utterance = new SpeechSynthesisUtterance(clean);
+  utterance.rate = 0.95;
+  if(btn){
+    btn.textContent = '⏸ Stop Reading';
+    utterance.onend = () => { btn.textContent = '🔊 Read Aloud'; };
+    utterance.onerror = () => { btn.textContent = '🔊 Read Aloud'; };
+  }
+  window.speechSynthesis.speak(utterance);
+}
+
+function speakIntro(btn){ toggleSpeech(INTRO_TEXT, btn); }
+function speakSheriff(btn){ toggleSpeech(SHERIFF_SPEECH, btn); }
+
+function resetProgress(){
+  if(!confirm('This will clear this level\'s reading-gate progress on this device. Continue?')) return;
+  try { localStorage.removeItem('khgn_gate_passed_level_' + LEVEL_ID); } catch(e) {}
+  gateUnlocked = false;
+  currentStop = 0;
+  quizAnswers = {};
+  quizSubmitted = {};
+  gateScrolledToEnd = false;
+  gateStarted = false;
+  render();
+}
+
+gateUnlocked = loadGateUnlocked();
+render();
+</script>
+</body>
+</html>
+ content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
