@@ -6,7 +6,606 @@
 <title>KHGN Training — Level 2: Copyright & Terms of Use</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style><!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KHGN Training — Level 2: Copyright &amp; Terms of Use</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
+    display:flex; justify-content:center; padding:28px 16px 60px;
+  }
+  .app{ width:100%; max-width:760px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{ font-size:13px; letter-spacing:0.03em; color:var(--brass-bright); margin-bottom:4px; }
+  .masthead h1{
+    font-family:'Rye', serif; font-weight:400; font-size:clamp(24px,5vw,34px);
+    margin:0; color:var(--parchment); text-shadow:0 2px 0 var(--walnut-deep);
+  }
+  .masthead .level-sub{ font-size:14px; color:var(--parchment-dim); margin-top:4px; }
+  .portal-link{
+    display:inline-block; margin-top:12px; font-size:13px; font-weight:700;
+    color:var(--walnut-deep); background:var(--brass-bright); text-decoration:none;
+    padding:8px 16px; border-radius:20px; transition:background .15s ease;
+  }
+  .portal-link:hover{ background:var(--brass); }
+
+  .trail-wrap{
+    background:var(--walnut-deep); border:1px solid var(--line); border-radius:14px;
+    padding:18px 14px 10px; margin-bottom:20px; overflow-x:auto;
+  }
+  .trail{ display:flex; align-items:center; min-width:640px; position:relative; padding:0 6px; }
+  .trail-line{ position:absolute; left:26px; right:26px; top:15px; height:3px; background:var(--line); z-index:0; }
+  .trail-line-fill{ position:absolute; left:26px; top:15px; height:3px; background:var(--brass); z-index:1; transition:width .5s ease; }
+  .stop{ flex:1; display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
+  .stop-dot{
+    width:32px; height:32px; border-radius:50%; background:var(--walnut);
+    border:3px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:var(--parchment-dim); transition:all .3s ease;
+  }
+  .stop.done .stop-dot{ background:var(--sage); border-color:var(--sage-bright); color:var(--walnut-deep); }
+  .stop.current .stop-dot{
+    background:var(--brass); border-color:var(--brass-bright); color:var(--walnut-deep);
+    box-shadow:0 0 0 4px rgba(176,141,87,0.25);
+  }
+  .stop-label{ font-size:10px; margin-top:6px; color:var(--parchment-dim); opacity:.7; }
+
+  .card{
+    background:var(--parchment); color:var(--ink); border-radius:16px; padding:28px 26px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .4s ease;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  .card.sheriff{ background:#EAD9CE; }
+
+  .character-row{ display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; }
+  .portrait{ width:76px; height:76px; flex-shrink:0; border-radius:10px; border:2px solid var(--ink); background:var(--walnut); }
+  .char-meta{ flex:1; }
+  .char-name{ font-family:'Rye', serif; font-size:22px; margin:0 0 2px; color:var(--ink); }
+  .char-role{ font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:#6B5A42; margin:0 0 8px; }
+  .narration-btn{
+    display:inline-flex; align-items:center; gap:6px; background:var(--ink); color:var(--parchment);
+    border:none; border-radius:20px; padding:6px 14px; font-size:12px; font-weight:600; cursor:pointer;
+  }
+  .narration-btn:hover{ background:#3a2c1e; }
+
+  .body-text{ font-size:15.5px; line-height:1.6; margin:0 0 18px; }
+  .scenario-box{
+    background:rgba(0,0,0,0.06); border-left:4px solid var(--brass); padding:14px 16px;
+    border-radius:6px; font-size:14.5px; line-height:1.55; margin-bottom:20px; font-style:italic;
+  }
+  .gotcha-badge{
+    display:inline-block; background:var(--rust); color:#fff; font-size:10px; font-weight:700;
+    letter-spacing:.04em; padding:3px 9px; border-radius:12px; margin-bottom:8px;
+  }
+
+  .primary-btn{
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
+    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+  }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .primary-btn:disabled{
+    background:var(--walnut-deep); color:var(--brass-bright); opacity:1; cursor:not-allowed;
+    border:1px solid var(--brass);
+  }
+  .secondary-btn{
+    background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
+    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+  }
+
+  .question-block{ margin-bottom:20px; }
+  .q-num{ font-size:12px; font-weight:700; color:var(--rust); letter-spacing:.03em; margin-bottom:6px; }
+  .q-prompt{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .options{ display:flex; flex-direction:column; gap:8px; }
+  .option{
+    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:11px 14px;
+    font-size:14.5px; font-family:inherit; cursor:pointer; color:var(--ink); transition:all .12s ease;
+  }
+  .option:hover{ border-color:var(--brass); }
+  .option.selected{ border-color:var(--ink); background:#F5EBD6; font-weight:600; }
+  .option.correct{ border-color:var(--sage); background:#DCE9D6; }
+  .option.incorrect{ border-color:var(--rust); background:#F2D9D4; }
+  .option:disabled{ cursor:default; }
+
+  .feedback-banner{
+    display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:8px;
+    font-size:14px; font-weight:700; margin-bottom:16px;
+  }
+  .feedback-banner.pass{ background:#DCE9D6; color:#3C5533; }
+  .feedback-banner.fail{ background:#F2D9D4; color:#7A2E23; }
+
+  .final-question{ background:rgba(0,0,0,0.05); border-radius:10px; padding:16px; margin-top:6px; }
+  .explain{
+    font-size:14px; line-height:1.6; background:#fff; border:1px solid #D8C7A3;
+    border-radius:8px; padding:12px 14px; margin-bottom:16px;
+  }
+  .explain strong{ color:var(--ink); }
+
+  .footer-note{ text-align:center; font-size:13px; color:var(--parchment); margin-top:18px; line-height:1.6; }
+  .footer-note strong{ color:var(--brass-bright); }
+
+  .complete-screen{ text-align:center; }
+  .complete-screen .badge{
+    width:90px; height:90px; margin:0 auto 16px; border-radius:50%; background:var(--sage);
+    display:flex; align-items:center; justify-content:center; font-size:40px;
+  }
+
+  .article-content{
+    max-height:440px; overflow-y:auto; background:#fff; border:1px solid #D8C7A3;
+    border-radius:10px; padding:18px 20px; margin-bottom:16px; font-size:14px; line-height:1.65;
+  }
+  .article-content h2{ font-family:'Rye', serif; font-size:22px; margin:0 0 4px; color:var(--ink); }
+  .article-content h3{ font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:#6B5A42; margin:0 0 10px; font-weight:600; }
+  .article-content h4{ font-size:17px; margin:18px 0 6px; color:var(--rust); font-family:'Rye', serif; font-weight:400; }
+  .article-content p{ margin:0 0 12px; }
+  .article-content ul, .article-content ol{ margin:0 0 12px; padding-left:22px; }
+  .article-content li{ margin-bottom:6px; }
+  .article-content blockquote{
+    margin:12px 0; padding:10px 14px; border-left:4px solid var(--brass);
+    background:rgba(176,141,87,0.08); font-style:italic; color:#4A3A28;
+  }
+  .article-content hr{ border:none; border-top:1px solid #E0D0AC; margin:18px 0; }
+  .gate-status{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; font-size:13px; color:#6B5A42; }
+  .gate-row{ transition:color .2s ease; }
+  .gate-row.gate-done{ color:var(--sage); font-weight:700; }
+  .gate-explainer{
+    font-size:12.5px; color:#6B5A42; background:rgba(0,0,0,0.04); border-radius:8px;
+    padding:10px 12px; margin-bottom:14px; line-height:1.5; font-style:italic;
+  }
+  button:focus-visible, a:focus-visible{ outline:3px solid var(--brass-bright); outline-offset:2px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="masthead">
+    <div class="eyebrow">KHGN FIELD TRAINING · COMMUNITY ADVISORY TRACK</div>
+    <h1>Level 2: Copyright &amp; Terms of Use</h1>
+    <a class="portal-link" href="https://khgn-inc.org/game-portal.html">&larr; Back to the Trailhead</a>
+    <div class="level-sub">Guided by The Teacher</div>
+  </div>
+
+  <div class="trail-wrap" id="trail-wrap"><div class="trail" id="trail"></div></div>
+  <div id="stage"></div>
+
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc. — Volunteer Field Training Program<br>
+    Failing the Sheriff's final chance at any waypoint returns you to the start of this level.<br><br>
+    <strong>This training is a free educational program offered by KHGN.</strong>
+    It is not an accredited certification, professional credential, or license of any kind, and
+    completion does not represent legal advice or KHGN's endorsement as an accrediting body.
+    <br><br>
+    <a href="#" onclick="resetProgress(); return false;" style="color:var(--brass-bright); text-decoration:underline; font-size:12px;">Reset this level's progress on this device</a>
+  </div>
+</div>
+
+<script>
+const TOTAL_STOPS = 12;
+const LEVEL_ID = 2;
+const LEVEL_TOPIC = "Copyright & Terms of Use";
+const GUIDE_NAME = "The Teacher";
+const GUIDE_ROLE = "Trail Guide";
+const NEXT_URL = "Tipple-Trial-level-3.html";
+const NEXT_LABEL = "Continue to Level 3";
+const COMPLETE_TEXT = "You've cleared all 12 waypoints of Copyright & Terms of Use. Level 3: Legal Release Dates for Records awaits.";
+
+// Level lock: keep false until Levels 1 to 3 all save their completion, then change to true.
+const REQUIRE_PREVIOUS_LEVEL = false;
+function markLevelComplete(){
+  try { localStorage.setItem('khgn_level_complete_' + LEVEL_ID, 'true'); } catch(e) {}
+}
+function previousLevelDone(){
+  if(LEVEL_ID === 1) return true;
+  try { return localStorage.getItem('khgn_level_complete_' + (LEVEL_ID - 1)) === 'true'; }
+  catch(e) { return true; }
+}
+function renderLocked(){
+  return `
+  <div class="card">
+    <p class="char-name">This trail isn't open yet</p>
+    <p class="body-text">The Tipple Trial is walked in order. Finish Level ${LEVEL_ID - 1} first, and this level will open for you on this device.</p>
+    <a href="https://khgn-inc.org/tipple-trial.html" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box;">Start at Level 1</a>
+  </div>`;
+}
+
+const GUIDE_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#2E2A1C\"/>\n  <circle cx=\"38\" cy=\"30\" r=\"13\" fill=\"#E3C09A\"/>\n  <path d=\"M25 24 Q38 12 51 24 L51 20 Q38 10 25 20 Z\" fill=\"#3A2E20\"/>\n  <rect x=\"28\" y=\"27\" width=\"20\" height=\"6\" rx=\"1\" fill=\"#221A12\" opacity=\"0.7\"/>\n  <path d=\"M20 66 Q38 46 56 66 Z\" fill=\"#4A5A4A\"/>\n  <rect x=\"16\" y=\"52\" width=\"20\" height=\"14\" rx=\"1\" fill=\"#EDE0C8\" stroke=\"#221A12\" stroke-width=\"1\"/>\n  <line x1=\"19\" y1=\"56\" x2=\"33\" y2=\"56\" stroke=\"#221A12\" stroke-width=\"1\"/>\n  <line x1=\"19\" y1=\"60\" x2=\"33\" y2=\"60\" stroke=\"#221A12\" stroke-width=\"1\"/>\n</svg>";
+const SHERIFF_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#3A231C\"/>\n  <path d=\"M18 30 Q38 4 58 30 L58 20 Q38 -2 18 20 Z\" fill=\"#4A2E22\"/>\n  <circle cx=\"38\" cy=\"32\" r=\"13\" fill=\"#C99B6E\"/>\n  <path d=\"M28 44 L48 44 L44 62 L32 62 Z\" fill=\"#5B3A2A\"/>\n  <polygon points=\"38,50 40,54 44,54 41,57 42,61 38,58 34,61 35,57 32,54 36,54\"\n    fill=\"#D4AF6A\" stroke=\"#2B211A\" stroke-width=\"0.6\"/>\n  <path d=\"M27 32 Q38 38 49 32\" stroke=\"#3A231C\" stroke-width=\"2\" fill=\"none\"/>\n</svg>";
+const INTRO_TEXT = "\"Welcome to the schoolhouse. Here we study a different kind of trust: the trust between a researcher and the work of others. Old records, transcriptions, photographs, and even other researchers' family trees can carry copyright or terms-of-use restrictions. Reusing them without permission — even with good intentions — can cause real harm to the people and institutions who preserved them. Twelve lessons await. Study well.\"";
+const ARTICLE_MD = "# Understanding Copyright and Terms of Use\n### A Field Guide for KHGN Volunteers, Moderators, and Field Workers\n\n*Level 2 Reading — Kentucky History & Genealogy Network, Inc.*\n\n> *\"The only person who isn't required to cite their sources was Adam.\"*\n\n---\n\n## Why This Matters for a Genealogy Organization\n\nGenealogy is a field built almost entirely on other people's work: transcriptions someone else painstakingly typed out, photographs someone else took or preserved, indexes someone else compiled, family trees someone else researched over years or decades. That's not a criticism — it's simply how the field functions. Nearly everything a researcher touches was created, gathered, or curated by somebody.\n\nThat reality is exactly why copyright and terms-of-use literacy matters so much for KHGN. Every time a volunteer shares a record, reposts a photo, or copies text into a forum thread, they're making a decision — often without realizing it — about whether that material is theirs to redistribute. Get it wrong often enough, and KHGN risks damaging relationships with the very archives, publishers, and fellow researchers whose cooperation the whole genealogy community depends on.\n\nThis reading isn't legal advice, and copyright law has real nuance that varies by country and by specific fact pattern. But by the end of it, you should be able to recognize the common patterns of copyright and terms-of-use violations well enough to catch them before they become a problem for KHGN.\n\n---\n\n## Part One: What Copyright Actually Protects\n\nCopyright protects **original creative expression** — the specific way someone wrote, photographed, arranged, or presented something. It does not protect **facts** themselves.\n\nThis distinction matters enormously in genealogy work:\n\n- A person's birth date, the fact that a marriage occurred, or the names on a census page are **facts**. Facts, by themselves, are not copyrightable.\n- The specific **wording** of an article discussing that birth, a **photograph** of a gravestone, or a **transcription's particular formatting and annotations** can be copyrighted, because those involve someone's original creative or organizational effort.\n\nThe practical result: you can generally state that \"John Smith was born in 1850 in Madison County\" freely, because that's a fact. You cannot generally copy, word-for-word, someone else's article *about* John Smith's life, or their specific photograph of his headstone, without considering copyright.\n\n### Public Domain: What's Free to Use\n\nCopyright doesn't last forever. Once it expires, a work enters the **public domain**, and anyone may share it freely. A few rules of thumb are especially useful in genealogy:\n\n- **Older published works:** as of 2026, works published in the United States in 1930 or earlier are in the public domain, and another year joins them each January 1. A 1925 newspaper clipping can be shared freely.\n- **U.S. government records:** records created by the federal government, such as census schedules, aren't protected by copyright at all.\n- **But the copy you found may have its own rules.** A subscription website's scans and transcriptions of a public record come with its terms of use, even when the record itself is free. Getting the same record from a free public source, such as the National Archives, avoids that problem.\n- **Unpublished works are different.** Private letters, diaries, and family snapshots that were never published follow different rules and are often protected much longer. When in doubt, ask the family or owner, and always credit the source.\n\nCiting your source is good practice even for public domain material, because it helps other researchers verify your work.\n\n---\n\n## Part Two: Common Violation Patterns\n\n### 1. Copying Full Text Instead of Summarizing\nOne of the most frequent mistakes is treating \"I gave credit\" as the same thing as \"I had permission.\" Copying an entire article, blog post, or write-up — even with a source link at the bottom — usually goes well beyond what's legally protected as fair use for commentary or discussion. A tiny attribution link doesn't fix a full-text reproduction.\n\n**The pattern to watch for:** long blocks of copied text, especially 1,000+ words lifted wholesale from somewhere else, with only a small citation. The fix is almost always to summarize the key facts in your own words and link to the original for anyone who wants the full piece.\n\n### 2. Downloading and Re-Hosting Images\nFinding an image online and downloading it to host directly on KHGN's own platform — rather than linking to where it lives — strips away the context (and often the copyright notice) the original creator attached to it. This applies to photographs, infographics, illustrations, and scanned documents alike. Even when there's no ill intent, re-hosting someone else's image as if it were freely available material is a common violation.\n\n### 3. Removing Watermarks, Metadata, or Attribution\nStripping a creator's watermark, embedded metadata, or credit line before redistributing their work compounds a copyright issue into something closer to deliberate misattribution. This is true even if the person doing it genuinely believes the material is \"probably fine to share\" — removing identifying marks is itself a red flag that should trigger extra caution, not less.\n\n### 4. Treating \"License\" as All-or-Nothing\nNot everything online is either \"fully copyrighted, don't touch\" or \"totally free, use however.\" Many creators publish under specific licenses — Creative Commons variants, for instance — that allow some uses but not others. A license that permits non-commercial sharing does not automatically permit commercial use, even if the material is otherwise freely viewable. Before reusing licensed material, check exactly what the license permits rather than assuming a license means \"anything goes.\"\n\n### 5. Open-Source Software and Attribution Requirements\nThis applies less to day-to-day genealogy posts and more to KHGN's technical side — but it's worth knowing. Open-source code libraries often come with license terms that require keeping the original license file and copyright notice intact in anything built using them. Deleting those files and re-publishing the resulting software as fully proprietary violates the license's terms, regardless of how much the code was modified.\n\n### 6. Scraping and Bulk-Copying Content\nAutomatically or manually pulling large volumes of content — reviews, articles, photo galleries, compiled data — from other websites and republishing it natively (rather than linking out) is a pattern that shows up in commercial contexts but is worth recognizing in community platforms too. Bulk reproduction of someone else's compiled work, even when individual facts within it are public, can still infringe on the effort and originality of how that compilation was assembled.\n\n### 7. Reproducing \"Almost All\" of a Source and Calling It Commentary\nFair use exists to protect genuine commentary, criticism, and analysis — but it has real limits tied to how much of the original was used and how transformative the new use is. Copying 90%, 95%, or more of someone else's proprietary writing or data, and adding only a thin layer of commentary on top, does not qualify as fair use no matter how the post is framed. If a \"review\" or \"analysis\" is mostly the original material with a light coat of paint, it's reproduction, not commentary.\n\n### 8. Using Copyrighted Material Without Any Transformation\nReposting someone else's copyrighted content in full — a video, an image, a full article — without adding meaningful new commentary, analysis, or creative transformation generally fails the test that makes reuse legally defensible. The bar isn't \"I said something before or after it\" — it's whether the new post genuinely adds substantial original value rather than simply re-presenting the original work.\n\n---\n\n## Part Three: Terms of Use — A Different (But Related) Problem\n\nCopyright law governs what you're legally allowed to do with someone's creative work. **Terms of use** are a separate, contractual layer — the rules a specific platform or website sets for how its content and services can be used, which you agree to (often without reading) when you use that platform.\n\nThis distinction matters because **content can be both copyright-compliant and still violate a platform's terms of use**, or vice versa. A few patterns specific to terms-of-use violations:\n\n- **Bypassing paywalls or access restrictions.** Sharing a workaround, script, or method that lets people access paid or subscription-only content for free violates the platform's terms, separate from any copyright question about the content itself.\n- **Violating a platform's stated redistribution rules**, even for content that might otherwise seem shareable. Many genealogy subscription sites, for instance, explicitly prohibit bulk downloading or redistributing their transcriptions and indexes, even though the underlying facts (names, dates) aren't copyrightable on their own. Their terms of service still bind anyone who created an account and agreed to them.\n- **Automated scraping tools** that violate a site's explicit terms prohibiting automated access, even when the scraped content itself might not raise a separate copyright issue.\n\n**The practical takeaway:** always consider two separate questions — \"Do I have the right to use this content under copyright law?\" and \"Am I following the rules of the platform I got it from?\" A post can fail either test independently.\n\n---\n\n## Part Four: Your Role as a Moderator and Field Worker\n\n- **Summarize, don't reproduce.** When in doubt, describe what a source says in your own words and link to it, rather than copying the source's own text or images.\n- **Check the license before assuming.** If material is labeled with a specific license (Creative Commons or otherwise), read what it actually permits rather than treating any license as a blanket \"free to use.\"\n- **Watch for stripped attribution.** A missing watermark, missing credit line, or missing source link on content that looks professionally made is worth a second look before it's approved.\n- **Distinguish facts from expression.** Genealogical facts can be freely shared and restated. The specific writing, photography, or compiled presentation of those facts usually cannot be, without permission.\n- **When something feels like \"too much\" copied material, it probably is.** There's no need to calculate an exact percentage — if a post is mostly someone else's original work with a thin layer of commentary on top, treat it as a likely violation and ask the poster to revise it.\n\n---\n\n## A Closing Thought\n\nNone of this is meant to make you afraid to reference other people's research — genealogy simply doesn't work without building on prior work. The goal is making sure KHGN builds on that work the right way: crediting it, linking to it, summarizing rather than reproducing it, and respecting the licenses and terms creators and platforms have set. Doing this consistently is what keeps KHGN in good standing with the archives, publishers, and fellow researchers this whole field depends on.\n\nWhen you're ready, continue to the Level 2 trail, where the Teacher will walk you through real scenarios testing exactly this judgment.\n\n---\n\n*This material is provided for KHGN training purposes and reflects organizational best practices. It is not a substitute for formal legal advice. Questions about specific situations should be directed to the Community Advisory Committee.*";
+const QUIZZES = [{"title": "The Copied Article", "scenario": "A member copies a county historical society's entire 2,000-word article about a local family into a KHGN group, with \"Source: County Historical Society\" in small text at the bottom.", "questions": [{"prompt": "What should the moderator do?", "options": ["Approve it, since the source is credited", "Ask the member to summarize the key facts in their own words and link to the original article", "Approve it, since historical societies want their work shared", "Remove the source line so the post looks cleaner"], "correct": 1, "explain": "Giving credit isn't the same as having permission. Copying a whole article usually goes far beyond fair use, even with a source line. Summarizing the facts and linking to the original shares the information and sends readers to the society that did the work."}]}, {"title": "The Family History Book", "scenario": "A member finds her great-grandparents' birth and marriage dates in a published family history book and wants to share them in her county group.", "questions": [{"prompt": "What's the right way to share this?", "options": ["Photograph and post the book's full chapter about the family", "Don't share anything, since the book is copyrighted", "State the dates and facts in her own words and cite the book as her source", "Copy the author's paragraphs but change a few words"], "correct": 2, "explain": "Facts like birth and marriage dates aren't protected by copyright, so they can be shared freely. The author's own writing is protected. Stating the facts in your own words and citing the book respects the author while sharing the history."}]}, {"title": "The Re-Hosted Photo", "scenario": "A member finds a historic photo of a county courthouse on a museum's website, downloads it, and uploads it to a KHGN group as a new post with no mention of where it came from.", "questions": [{"prompt": "What's the problem?", "options": ["Downloading and re-posting someone else's image without permission or credit removes it from its source and may violate copyright", "There's no problem, since the courthouse is a public building", "The only problem is that the photo should have been cropped", "It's fine as long as nobody complains"], "correct": 0, "explain": "The building may be public, but the photograph belongs to whoever took or holds the rights to it. Re-hosting it without credit strips away its source. Linking to the museum's page, or asking permission and crediting it, is the right approach."}]}, {"title": "The Cropped Credit", "scenario": "A member reposts a headstone photo taken by a volunteer cemetery photographer, but crops out the photographer's name and watermark first \"so it looks cleaner.\"", "questions": [{"prompt": "How should the moderator view this?", "options": ["It's fine, since headstones are public", "It's fine, since the photo is now edited", "It's fine if the member took a screenshot instead of downloading", "Removing the photographer's name or watermark is a red flag: it strips credit from someone else's work and should not be approved"], "correct": 3, "explain": "The headstone is public, but the photograph is the photographer's work. Cropping out a name or watermark turns a sharing question into misattribution. A missing credit line is a signal to take a closer look, not a sign that the image is free to use."}], "gotcha": true}, {"title": "The Licensed Photo", "scenario": "A member posts a courthouse photo from Wikimedia Commons, where it's shared under a Creative Commons license that requires crediting the photographer. The post includes no credit.", "questions": [{"prompt": "What should the member do?", "options": ["Delete it, since licensed photos can never be shared", "Add the credit the license requires, such as the photographer's name and the license", "Nothing, since Creative Commons means free to use any way", "Replace the photo with a screenshot of it"], "correct": 1, "explain": "Creative Commons licenses allow sharing, but on conditions. Many require crediting the creator, and some forbid commercial use or changes. Reading what the license actually requires, and following it, makes the post compliant."}]}, {"title": "The 1925 Newspaper", "scenario": "A member wants to share a clipping from a 1925 Kentucky newspaper about a family wedding, and asks whether it's allowed.", "questions": [{"prompt": "What's the best answer?", "options": ["No, newspapers are always copyrighted", "Only if the newspaper gives written permission", "Yes. Works published in the United States in 1930 or earlier are now in the public domain, so it can be shared, and citing the newspaper is still good practice", "Only if the member retypes it by hand"], "correct": 2, "explain": "Copyright doesn't last forever. As of 2026, works published in the United States in 1930 or earlier are in the public domain, and another year joins them each January 1. Knowing this keeps volunteers from blocking material that's free to share."}], "gotcha": true}, {"title": "The Subscription Index", "scenario": "A member copies 300 transcribed records from a paid genealogy subscription website and pastes them into a KHGN group thread so others don't have to pay.", "questions": [{"prompt": "What's the issue?", "options": ["Bulk copying a subscription site's transcriptions likely violates its terms of use, even though individual facts aren't copyrighted", "There's no issue, since names and dates are facts", "It's fine because the member paid for the subscription", "It's fine if the thread is in a private group"], "correct": 0, "explain": "This is a terms-of-use problem, separate from copyright. Subscription sites usually forbid bulk copying and redistribution, and every member agreed to those terms when signing up. Sharing an individual fact you found, with a citation, is very different from re-publishing the site's collection."}]}, {"title": "The Shared Login", "scenario": "A member posts a shared username and password for a paid records website, along with a trick to get around its paywall, \"to help everyone research for free.\"", "questions": [{"prompt": "What should the moderator do?", "options": ["Approve it, since it helps genealogy research", "Approve it, but ask members to use the login sparingly", "Ask the website for permission after approving it", "Remove it: sharing logins or ways around a paywall violates the website's terms, however good the intention"], "correct": 3, "explain": "Even well-meant workarounds violate the platform's terms of use and can harm services the genealogy community depends on. Pointing members to free resources, such as public libraries that offer genealogy databases, is a helpful alternative."}], "gotcha": true}, {"title": "The Researcher's Tree", "scenario": "A member copies the detailed life stories another researcher wrote in an online family tree and posts them in a KHGN group as her own work.", "questions": [{"prompt": "What's the right approach?", "options": ["It's fine, since family trees are public", "It's fine if she changes the names", "She can share the facts, but should summarize in her own words and credit the researcher whose writing it is", "She should copy the stories but delete the researcher's name"], "correct": 2, "explain": "The facts in a tree can be shared, but the researcher's written narratives are their own creative work. Presenting them as your own is plagiarism, and copying them in full may infringe copyright. Summarizing and giving credit honors the research."}]}, {"title": "The \"Review\"", "scenario": "A member posts a \"review\" of a new county history book that reproduces most of its chapters word for word, with a few sentences of her own opinion between them.", "questions": [{"prompt": "How should this be treated?", "options": ["As fair commentary, since she added opinions", "As reproduction, not commentary: copying most of a book with a thin layer of opinion isn't protected, so she should summarize and quote only brief passages", "As fine, since the book is about public history", "As fine if she links to where the book is sold"], "correct": 1, "explain": "Fair use protects genuine commentary, but how much is copied matters a great deal. A real review describes the book and quotes brief passages. A post that's mostly the author's own text is a reproduction, however it's labeled. Linking to a store would also break KHGN's no-sales rule."}], "gotcha": true}, {"title": "The Census Image", "scenario": "A member downloads a 1900 census page image from a paid subscription website and shares it in a county group, saying \"census records are public.\"", "questions": [{"prompt": "What's the most accurate response?", "options": ["She's right, so anything about the census can be shared from anywhere", "Census records can never be shared", "Only the transcription can be shared, never the image", "The census itself is a public government record, but the subscription site's terms may restrict sharing its images, so linking or using a free public source like the National Archives is safer"], "correct": 3, "explain": "U.S. government records like the census aren't protected by copyright. But a company's scanned images come with its terms of use, which members agree to. The same record from a free public source can usually be shared without that problem."}], "gotcha": true}, {"title": "The Obituary Collection", "scenario": "A volunteer wants to copy every obituary from a local funeral home's website into a KHGN collection, so the community has them all in one place.", "questions": [{"prompt": "What's the best guidance?", "options": ["Don't bulk copy the obituaries: their text is someone else's writing, the site's terms may forbid it, and they contain living relatives' details. Extract the genealogical facts or link to the originals instead", "Copy them all, since obituaries are public", "Copy them, but only from the last five years", "Copy them, but remove the funeral home's name"], "correct": 0, "explain": "Obituaries are written by families or funeral homes, so their wording belongs to someone. Bulk copying can also violate the website's terms. And as Level 1 taught, obituaries list living survivors. Recording the facts that matter and linking to the source covers all three concerns."}]}];
+const SHERIFF_SPEECH = "\"Hold on now. The call you just made would have shared someone else's work in a way that isn't ours to share. That's exactly the kind of mistake that damages the trust archives and researchers place in this organization. I'm going to give you one more chance. Choose correctly this time, and you'll walk on. Choose wrong, and you're headed back to the start of this level.\"";
+
+
+function renderMarkdown(md){
+  const lines = md.split('\n');
+  let html = '';
+  let listBuffer = [];
+  let listType = null;
+  function flushList(){
+    if(listBuffer.length){
+      html += `<${listType}>` + listBuffer.map(li => `<li>${li}</li>`).join('') + `</${listType}>`;
+      listBuffer = [];
+      listType = null;
+    }
+  }
+  function inline(text){
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  }
+  lines.forEach(raw => {
+    const line = raw.trim();
+    if(line === ''){ flushList(); return; }
+    if(line === '---'){ flushList(); html += '<hr>'; return; }
+    let m;
+    if((m = line.match(/^### (.*)/))){ flushList(); html += `<h4>${inline(m[1])}</h4>`; return; }
+    if((m = line.match(/^## (.*)/))){ flushList(); html += `<h3>${inline(m[1])}</h3>`; return; }
+    if((m = line.match(/^# (.*)/))){ flushList(); html += `<h2>${inline(m[1])}</h2>`; return; }
+    if((m = line.match(/^> (.*)/))){ flushList(); html += `<blockquote>${inline(m[1])}</blockquote>`; return; }
+    if((m = line.match(/^- (.*)/))){ if(listType !== 'ul'){ flushList(); listType = 'ul'; } listBuffer.push(inline(m[1])); return; }
+    if((m = line.match(/^\d+\.\s(.*)/))){ if(listType !== 'ol'){ flushList(); listType = 'ol'; } listBuffer.push(inline(m[1])); return; }
+    flushList();
+    html += `<p>${inline(line)}</p>`;
+  });
+  flushList();
+  return html;
+}
+
+let currentStop = 0;
+let quizAnswers = {};
+let quizSubmitted = {};
+let gateUnlocked = false;
+let gateScrolledToEnd = false;
+let gateStarted = false;
+
+function loadGateUnlocked(){
+  try { return localStorage.getItem('khgn_gate_passed_level_' + LEVEL_ID) === 'true'; }
+  catch(e) { return false; }
+}
+function saveGatePassed(){
+  try { localStorage.setItem('khgn_gate_passed_level_' + LEVEL_ID, 'true'); }
+  catch(e) { /* storage unavailable: the gate just won't persist across reloads */ }
+}
+
+function levelKey(stop){ return LEVEL_ID + '-' + stop; }
+
+function renderTrail(){
+  const trail = document.getElementById('trail');
+  trail.innerHTML = '';
+  const line = document.createElement('div'); line.className = 'trail-line'; trail.appendChild(line);
+  const fill = document.createElement('div'); fill.className = 'trail-line-fill';
+  const pct = currentStop === 0 ? 0 : ((currentStop-1) / (TOTAL_STOPS-1)) * 100;
+  fill.style.width = pct + '%';
+  trail.appendChild(fill);
+  for(let i=1;i<=TOTAL_STOPS;i++){
+    const stop = document.createElement('div');
+    stop.className = 'stop';
+    if(i < currentStop) stop.classList.add('done');
+    if(i === currentStop) stop.classList.add('current');
+    const dot = document.createElement('div'); dot.className = 'stop-dot';
+    dot.textContent = i < currentStop ? '✓' : i;
+    const label = document.createElement('div'); label.className = 'stop-label';
+    label.textContent = 'Stop '+i;
+    stop.appendChild(dot); stop.appendChild(label);
+    trail.appendChild(stop);
+  }
+}
+
+function resetLevel(){
+  const prefix = LEVEL_ID + '-';
+  Object.keys(quizAnswers).forEach(k => { if(k.startsWith(prefix)) delete quizAnswers[k]; });
+  Object.keys(quizSubmitted).forEach(k => { if(k.startsWith(prefix)) delete quizSubmitted[k]; });
+  currentStop = 0;
+  render();
+}
+
+function startLevel(){
+  currentStop = 1;
+  render();
+}
+
+function renderIntro(){
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">${GUIDE_NAME}</p>
+        <p class="char-role">${GUIDE_ROLE} · Level ${LEVEL_ID}: ${LEVEL_TOPIC}</p>
+        <button class="narration-btn" onclick="speakIntro(this)">🔊 Read Aloud</button>
+      </div>
+    </div>
+    <p class="body-text">${INTRO_TEXT}</p>
+    <button class="primary-btn" onclick="startLevel()">Begin the Trail</button>
+  </div>
+  <div class="footer-note" style="margin-top:14px;">
+    The "Read Aloud" button uses your browser's built-in text-to-speech voice — no recorded audio needed.
+  </div>`;
+}
+
+function renderQuiz(stopIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const key = levelKey(stopIndex);
+  const answered = !!quizSubmitted[key];
+  const allRight = answered && quiz.questions.every((qq, i2) => quizAnswers[key][i2] === qq.correct);
+  let html = `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">${quiz.title}</p>
+        <p class="char-role">Level ${LEVEL_ID} · Trail Stop ${stopIndex} of ${TOTAL_STOPS}</p>
+      </div>
+    </div>
+    ${quiz.gotcha ? '<span class="gotcha-badge">⚠ BORDERLINE CASE</span>' : ''}
+    <div class="scenario-box">${quiz.scenario}</div>
+  `;
+
+  quiz.questions.forEach((q, qi) => {
+    const picked = quizAnswers[key]?.[qi];
+    html += `<div class="question-block">
+      <div class="q-num">QUESTION ${qi+1} OF ${quiz.questions.length}</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options">`;
+    q.options.forEach((opt, oi) => {
+      let cls = 'option';
+      if(answered){
+        if(allRight && oi === q.correct) cls += ' correct';
+        else if(!allRight && oi === picked && picked !== q.correct) cls += ' incorrect';
+      } else if(picked === oi){
+        cls += ' selected';
+      }
+      html += `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="selectAnswer(${stopIndex},${qi},${oi})">${opt}</button>`;
+    });
+    html += `</div></div>`;
+  });
+
+  if(!answered){
+    const allPicked = quiz.questions.every((_,qi) => quizAnswers[key]?.[qi] !== undefined);
+    html += `<button class="primary-btn" ${allPicked ? '' : 'disabled'} onclick="submitQuiz(${stopIndex})">Submit Answers</button>`;
+  } else {
+    const numCorrect = quiz.questions.filter((q,qi) => quizAnswers[key][qi] === q.correct).length;
+    if(allRight){
+      const isLastStop = stopIndex === TOTAL_STOPS;
+      html += `<div class="feedback-banner pass">✓ All correct — the trail continues.</div>
+      ${quiz.questions.map(q => q.explain ? `<div class="explain"><strong>Why:</strong> ${q.explain}</div>` : '').join('')}
+      <button class="primary-btn" onclick="advanceAfterPass()">${isLastStop ? 'Finish Level ' + LEVEL_ID : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+    } else {
+      html += `<div class="feedback-banner fail">⚠ ${quiz.questions.length - numCorrect} answer(s) missed. Sheriff Vance would like a word.</div>
+      <button class="primary-btn" onclick="goToSheriff(${stopIndex})">Face Sheriff Vance</button>`;
+    }
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function renderSheriff(stopIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const key = levelKey(stopIndex);
+  const missedIndex = quiz.questions.findIndex((q,qi) => quizAnswers[key][qi] !== q.correct);
+  const q = quiz.questions[missedIndex];
+
+  return `
+  <div class="card sheriff">
+    <div class="character-row">
+      <div class="portrait">${SHERIFF_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Sheriff Vance</p>
+        <p class="char-role">Compliance &amp; Consequences</p>
+        <button class="narration-btn" onclick="speakSheriff(this)">🔊 Read Aloud</button>
+      </div>
+    </div>
+    <p class="body-text">${SHERIFF_SPEECH}</p>
+    <div class="scenario-box">${quiz.scenario}</div>
+    <div class="final-question">
+      <div class="q-num">FINAL CHANCE</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options" id="final-options">
+        ${q.options.map((opt,oi) => `<button class="option" onclick="answerFinal(${stopIndex},${missedIndex},${oi})">${opt}</button>`).join('')}
+      </div>
+    </div>
+    <div id="final-result"></div>
+  </div>`;
+}
+
+function checkArticleScroll(){
+  const el = document.getElementById('article-scroll');
+  if(!el) return;
+  if(el.scrollTop + el.clientHeight >= el.scrollHeight - 20){
+    gateScrolledToEnd = true;
+  }
+  updateGateStatus();
+}
+
+function updateGateStatus(){
+  const scrollEl = document.getElementById('scroll-indicator');
+  const btn = document.getElementById('gate-continue-btn');
+  if(!scrollEl) return;
+  scrollEl.textContent = (gateScrolledToEnd ? '✓' : '○') + ' Scroll to the end of the reading';
+  scrollEl.classList.toggle('gate-done', gateScrolledToEnd);
+  if(btn){
+    btn.disabled = !gateScrolledToEnd;
+    btn.textContent = gateScrolledToEnd ? 'Continue to the Trail' : '🔒 Locked — scroll to the end to continue';
+  }
+}
+
+function renderGate(){
+  const articleHtml = renderMarkdown(ARTICLE_MD);
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Required Reading</p>
+        <p class="char-role">Level ${LEVEL_ID}: ${LEVEL_TOPIC}</p>
+      </div>
+    </div>
+    <div class="article-content" id="article-scroll" onscroll="checkArticleScroll()">
+      ${articleHtml}
+    </div>
+    <div class="gate-status">
+      <div class="gate-row" id="scroll-indicator">○ Scroll to the end of the reading</div>
+    </div>
+    <p class="gate-explainer">
+      The button below will light up once you've reached the end of the reading.
+    </p>
+    <button class="primary-btn" id="gate-continue-btn" disabled onclick="passGate()">Continue to the Trail</button>
+  </div>`;
+}
+
+function passGate(){
+  gateUnlocked = true;
+  saveGatePassed();
+  currentStop = 0;
+  render();
+}
+
+function render(){
+  const stage = document.getElementById('stage');
+  const trailWrap = document.getElementById('trail-wrap');
+
+  if(REQUIRE_PREVIOUS_LEVEL && !previousLevelDone()){
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderLocked();
+    return;
+  }
+
+  if(!gateUnlocked){
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderGate();
+    if(!gateStarted){
+      gateScrolledToEnd = false;
+      gateStarted = true;
+    }
+    updateGateStatus();
+    return;
+  }
+  trailWrap.style.display = '';
+
+  renderTrail();
+  if(currentStop === 0){
+    stage.innerHTML = renderIntro();
+  } else if(currentStop <= TOTAL_STOPS){
+    stage.innerHTML = renderQuiz(currentStop);
+  } else {
+    stage.innerHTML = renderLevelCompleteReal();
+  }
+}
+
+function renderLevelCompleteReal(){
+  markLevelComplete();
+  return `
+  <div class="card complete-screen">
+    <div class="badge">🏅</div>
+    <p class="char-name" style="font-size:26px;">Level ${LEVEL_ID} Complete</p>
+    <p class="body-text">${COMPLETE_TEXT}</p>
+    <a href="${NEXT_URL}" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box;">${NEXT_LABEL}</a>
+    <button class="secondary-btn" onclick="resetLevel()">Replay This Level</button>
+  </div>`;
+}
+
+function selectAnswer(stopIndex, qIndex, optIndex){
+  const key = levelKey(stopIndex);
+  if(!quizAnswers[key]) quizAnswers[key] = {};
+  quizAnswers[key][qIndex] = optIndex;
+  render();
+}
+
+function submitQuiz(stopIndex){
+  const key = levelKey(stopIndex);
+  quizSubmitted[key] = true;
+  render();
+}
+
+function advanceAfterPass(){
+  currentStop += 1;
+  render();
+}
+
+function goToSheriff(stopIndex){
+  document.getElementById('stage').innerHTML = renderSheriff(stopIndex);
+}
+
+function answerFinal(stopIndex, questionIndex, chosenIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const q = quiz.questions[questionIndex];
+  const resultDiv = document.getElementById('final-result');
+  const buttons = document.querySelectorAll('#final-options .option');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if(i === q.correct) btn.classList.add('correct');
+    else if(i === chosenIndex) btn.classList.add('incorrect');
+  });
+  const why = q.explain ? `<div class="explain" style="margin-top:14px;"><strong>Why:</strong> ${q.explain}</div>` : '';
+  if(chosenIndex === q.correct){
+    const isLastStop = stopIndex === TOTAL_STOPS;
+    resultDiv.innerHTML = `<div class="feedback-banner pass" style="margin-top:14px;">✓ Corrected. Sheriff Vance nods and steps aside.</div>
+    ${why}
+    <button class="primary-btn" onclick="advanceAfterPass()">${isLastStop ? 'Finish Level ' + LEVEL_ID : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+  } else {
+    resultDiv.innerHTML = `<div class="feedback-banner fail" style="margin-top:14px;">✗ Still not right. Back to the start of this level.</div>
+    ${why}
+    <button class="primary-btn" onclick="resetLevel()">Return to Trailhead</button>`;
+  }
+}
+
+function toggleSpeech(text, btn){
+  if(!('speechSynthesis' in window)){
+    alert("This browser doesn't support text-to-speech. Try Chrome, Edge, or Safari instead.");
+    return;
+  }
+  if(window.speechSynthesis.speaking){
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.narration-btn').forEach(b => { b.textContent = '🔊 Read Aloud'; });
+    return;
+  }
+  const clean = text.replace(/^"|"$/g, '').replace(/\s+/g, ' ').trim();
+  const utterance = new SpeechSynthesisUtterance(clean);
+  utterance.rate = 0.95;
+  if(btn){
+    btn.textContent = '⏸ Stop Reading';
+    utterance.onend = () => { btn.textContent = '🔊 Read Aloud'; };
+    utterance.onerror = () => { btn.textContent = '🔊 Read Aloud'; };
+  }
+  window.speechSynthesis.speak(utterance);
+}
+
+function speakIntro(btn){ toggleSpeech(INTRO_TEXT, btn); }
+function speakSheriff(btn){ toggleSpeech(SHERIFF_SPEECH, btn); }
+
+function resetProgress(){
+  if(!confirm('This will clear this level\'s reading-gate progress on this device. Continue?')) return;
+  try { localStorage.removeItem('khgn_gate_passed_level_' + LEVEL_ID); } catch(e) {}
+  gateUnlocked = false;
+  currentStop = 0;
+  quizAnswers = {};
+  quizSubmitted = {};
+  gateScrolledToEnd = false;
+  gateStarted = false;
+  render();
+}
+
+gateUnlocked = loadGateUnlocked();
+render();
+</script>
+</body>
+</html>
+
   :root{
     --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
     --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
