@@ -3,7 +3,606 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KHGN Training — Level 3: Legal Release Date<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KHGN Training — Level 3: Legal Release Dates for Records</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
+    display:flex; justify-content:center; padding:28px 16px 60px;
+  }
+  .app{ width:100%; max-width:760px; }
+  .masthead{ text-align:center; margin-bottom:18px; }
+  .masthead .eyebrow{ font-size:13px; letter-spacing:0.03em; color:var(--brass-bright); margin-bottom:4px; }
+  .masthead h1{
+    font-family:'Rye', serif; font-weight:400; font-size:clamp(24px,5vw,34px);
+    margin:0; color:var(--parchment); text-shadow:0 2px 0 var(--walnut-deep);
+  }
+  .masthead .level-sub{ font-size:14px; color:var(--parchment-dim); margin-top:4px; }
+  .portal-link{
+    display:inline-block; margin-top:12px; font-size:13px; font-weight:700;
+    color:var(--walnut-deep); background:var(--brass-bright); text-decoration:none;
+    padding:8px 16px; border-radius:20px; transition:background .15s ease;
+  }
+  .portal-link:hover{ background:var(--brass); }
+
+  .trail-wrap{
+    background:var(--walnut-deep); border:1px solid var(--line); border-radius:14px;
+    padding:18px 14px 10px; margin-bottom:20px; overflow-x:auto;
+  }
+  .trail{ display:flex; align-items:center; min-width:640px; position:relative; padding:0 6px; }
+  .trail-line{ position:absolute; left:26px; right:26px; top:15px; height:3px; background:var(--line); z-index:0; }
+  .trail-line-fill{ position:absolute; left:26px; top:15px; height:3px; background:var(--brass); z-index:1; transition:width .5s ease; }
+  .stop{ flex:1; display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
+  .stop-dot{
+    width:32px; height:32px; border-radius:50%; background:var(--walnut);
+    border:3px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:var(--parchment-dim); transition:all .3s ease;
+  }
+  .stop.done .stop-dot{ background:var(--sage); border-color:var(--sage-bright); color:var(--walnut-deep); }
+  .stop.current .stop-dot{
+    background:var(--brass); border-color:var(--brass-bright); color:var(--walnut-deep);
+    box-shadow:0 0 0 4px rgba(176,141,87,0.25);
+  }
+  .stop-label{ font-size:10px; margin-top:6px; color:var(--parchment-dim); opacity:.7; }
+
+  .card{
+    background:var(--parchment); color:var(--ink); border-radius:16px; padding:28px 26px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .4s ease;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  .card.sheriff{ background:#EAD9CE; }
+
+  .character-row{ display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; }
+  .portrait{ width:76px; height:76px; flex-shrink:0; border-radius:10px; border:2px solid var(--ink); background:var(--walnut); }
+  .char-meta{ flex:1; }
+  .char-name{ font-family:'Rye', serif; font-size:22px; margin:0 0 2px; color:var(--ink); }
+  .char-role{ font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:#6B5A42; margin:0 0 8px; }
+  .narration-btn{
+    display:inline-flex; align-items:center; gap:6px; background:var(--ink); color:var(--parchment);
+    border:none; border-radius:20px; padding:6px 14px; font-size:12px; font-weight:600; cursor:pointer;
+  }
+  .narration-btn:hover{ background:#3a2c1e; }
+
+  .body-text{ font-size:15.5px; line-height:1.6; margin:0 0 18px; }
+  .scenario-box{
+    background:rgba(0,0,0,0.06); border-left:4px solid var(--brass); padding:14px 16px;
+    border-radius:6px; font-size:14.5px; line-height:1.55; margin-bottom:20px; font-style:italic;
+  }
+  .gotcha-badge{
+    display:inline-block; background:var(--rust); color:#fff; font-size:10px; font-weight:700;
+    letter-spacing:.04em; padding:3px 9px; border-radius:12px; margin-bottom:8px;
+  }
+
+  .primary-btn{
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
+    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+  }
+  .primary-btn:hover{ background:var(--rust-bright); }
+  .primary-btn:disabled{
+    background:var(--walnut-deep); color:var(--brass-bright); opacity:1; cursor:not-allowed;
+    border:1px solid var(--brass);
+  }
+  .secondary-btn{
+    background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
+    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+  }
+
+  .question-block{ margin-bottom:20px; }
+  .q-num{ font-size:12px; font-weight:700; color:var(--rust); letter-spacing:.03em; margin-bottom:6px; }
+  .q-prompt{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .options{ display:flex; flex-direction:column; gap:8px; }
+  .option{
+    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:11px 14px;
+    font-size:14.5px; font-family:inherit; cursor:pointer; color:var(--ink); transition:all .12s ease;
+  }
+  .option:hover{ border-color:var(--brass); }
+  .option.selected{ border-color:var(--ink); background:#F5EBD6; font-weight:600; }
+  .option.correct{ border-color:var(--sage); background:#DCE9D6; }
+  .option.incorrect{ border-color:var(--rust); background:#F2D9D4; }
+  .option:disabled{ cursor:default; }
+
+  .feedback-banner{
+    display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:8px;
+    font-size:14px; font-weight:700; margin-bottom:16px;
+  }
+  .feedback-banner.pass{ background:#DCE9D6; color:#3C5533; }
+  .feedback-banner.fail{ background:#F2D9D4; color:#7A2E23; }
+
+  .final-question{ background:rgba(0,0,0,0.05); border-radius:10px; padding:16px; margin-top:6px; }
+  .explain{
+    font-size:14px; line-height:1.6; background:#fff; border:1px solid #D8C7A3;
+    border-radius:8px; padding:12px 14px; margin-bottom:16px;
+  }
+  .explain strong{ color:var(--ink); }
+
+  .footer-note{ text-align:center; font-size:13px; color:var(--parchment); margin-top:18px; line-height:1.6; }
+  .footer-note strong{ color:var(--brass-bright); }
+
+  .complete-screen{ text-align:center; }
+  .complete-screen .badge{
+    width:90px; height:90px; margin:0 auto 16px; border-radius:50%; background:var(--sage);
+    display:flex; align-items:center; justify-content:center; font-size:40px;
+  }
+
+  .article-content{
+    max-height:440px; overflow-y:auto; background:#fff; border:1px solid #D8C7A3;
+    border-radius:10px; padding:18px 20px; margin-bottom:16px; font-size:14px; line-height:1.65;
+  }
+  .article-content h2{ font-family:'Rye', serif; font-size:22px; margin:0 0 4px; color:var(--ink); }
+  .article-content h3{ font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:#6B5A42; margin:0 0 10px; font-weight:600; }
+  .article-content h4{ font-size:17px; margin:18px 0 6px; color:var(--rust); font-family:'Rye', serif; font-weight:400; }
+  .article-content p{ margin:0 0 12px; }
+  .article-content ul, .article-content ol{ margin:0 0 12px; padding-left:22px; }
+  .article-content li{ margin-bottom:6px; }
+  .article-content blockquote{
+    margin:12px 0; padding:10px 14px; border-left:4px solid var(--brass);
+    background:rgba(176,141,87,0.08); font-style:italic; color:#4A3A28;
+  }
+  .article-content hr{ border:none; border-top:1px solid #E0D0AC; margin:18px 0; }
+  .gate-status{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; font-size:13px; color:#6B5A42; }
+  .gate-row{ transition:color .2s ease; }
+  .gate-row.gate-done{ color:var(--sage); font-weight:700; }
+  .gate-explainer{
+    font-size:12.5px; color:#6B5A42; background:rgba(0,0,0,0.04); border-radius:8px;
+    padding:10px 12px; margin-bottom:14px; line-height:1.5; font-style:italic;
+  }
+  button:focus-visible, a:focus-visible{ outline:3px solid var(--brass-bright); outline-offset:2px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="masthead">
+    <div class="eyebrow">KHGN FIELD TRAINING · COMMUNITY ADVISORY TRACK</div>
+    <h1>Level 3: Legal Release Dates for Records</h1>
+    <a class="portal-link" href="https://khgn-inc.org/game-portal.html">&larr; Back to the Trailhead</a>
+    <div class="level-sub">Guided by The Scholar</div>
+  </div>
+
+  <div class="trail-wrap" id="trail-wrap"><div class="trail" id="trail"></div></div>
+  <div id="stage"></div>
+
+  <div class="footer-note">
+    Kentucky History &amp; Genealogy Network, Inc. — Volunteer Field Training Program<br>
+    Failing the Sheriff's final chance at any waypoint returns you to the start of this level.<br><br>
+    <strong>This training is a free educational program offered by KHGN.</strong>
+    It is not an accredited certification, professional credential, or license of any kind, and
+    completion does not represent legal advice or KHGN's endorsement as an accrediting body.
+    <br><br>
+    <a href="#" onclick="resetProgress(); return false;" style="color:var(--brass-bright); text-decoration:underline; font-size:12px;">Reset this level's progress on this device</a>
+  </div>
+</div>
+
+<script>
+const TOTAL_STOPS = 12;
+const LEVEL_ID = 3;
+const LEVEL_TOPIC = "Legal Release Dates for Records";
+const GUIDE_NAME = "The Scholar";
+const GUIDE_ROLE = "Trail Guide";
+const NEXT_URL = "Tipple-Trial-level-4.html";
+const NEXT_LABEL = "Continue to Level 4";
+const COMPLETE_TEXT = "You've cleared all 12 waypoints of Legal Release Dates for Records. Level 4: Commercial Self-Promotion & Conflict of Interest awaits.";
+
+// Level lock: keep false until Levels 1 to 3 all save their completion, then change to true.
+const REQUIRE_PREVIOUS_LEVEL = false;
+function markLevelComplete(){
+  try { localStorage.setItem('khgn_level_complete_' + LEVEL_ID, 'true'); } catch(e) {}
+}
+function previousLevelDone(){
+  if(LEVEL_ID === 1) return true;
+  try { return localStorage.getItem('khgn_level_complete_' + (LEVEL_ID - 1)) === 'true'; }
+  catch(e) { return true; }
+}
+function renderLocked(){
+  return `
+  <div class="card">
+    <p class="char-name">This trail isn't open yet</p>
+    <p class="body-text">The Tipple Trial is walked in order. Finish Level ${LEVEL_ID - 1} first, and this level will open for you on this device.</p>
+    <a href="https://khgn-inc.org/tipple-trial.html" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box;">Start at Level 1</a>
+  </div>`;
+}
+
+const GUIDE_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#241E2A\"/>\n  <circle cx=\"38\" cy=\"30\" r=\"13\" fill=\"#D9B98C\"/>\n  <path d=\"M23 26 Q38 6 53 26 L53 30 Q38 14 23 30 Z\" fill=\"#EDE0C8\"/>\n  <path d=\"M18 66 Q38 42 58 66 Z\" fill=\"#5A4A6A\"/>\n  <ellipse cx=\"38\" cy=\"58\" rx=\"16\" ry=\"4\" fill=\"#B08D57\" opacity=\"0.5\"/>\n  <rect x=\"30\" y=\"52\" width=\"16\" height=\"4\" rx=\"2\" fill=\"#D4AF6A\"/>\n</svg>";
+const SHERIFF_SVG = "<svg viewBox=\"0 0 76 76\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect width=\"76\" height=\"76\" rx=\"10\" fill=\"#3A231C\"/>\n  <path d=\"M18 30 Q38 4 58 30 L58 20 Q38 -2 18 20 Z\" fill=\"#4A2E22\"/>\n  <circle cx=\"38\" cy=\"32\" r=\"13\" fill=\"#C99B6E\"/>\n  <path d=\"M28 44 L48 44 L44 62 L32 62 Z\" fill=\"#5B3A2A\"/>\n  <polygon points=\"38,50 40,54 44,54 41,57 42,61 38,58 34,61 35,57 32,54 36,54\"\n    fill=\"#D4AF6A\" stroke=\"#2B211A\" stroke-width=\"0.6\"/>\n  <path d=\"M27 32 Q38 38 49 32\" stroke=\"#3A231C\" stroke-width=\"2\" fill=\"none\"/>\n</svg>";
+const INTRO_TEXT = "\"Every record has its season. Census records, vital records, and court files each become public at different times — some after decades, some sooner, some not at all without special permission. Sharing a record before its legal release date isn't just a technicality; it can violate real privacy law. Let us study the calendar of records together.\"";
+const ARTICLE_MD = "# Understanding Legal Release Dates for Records\n### A Field Guide for KHGN Volunteers, Moderators, and Field Workers\n\n*Level 3 Reading — Kentucky History & Genealogy Network, Inc.*\n\n---\n\n## Why \"Old\" Doesn't Automatically Mean \"Public\"\n\nOne of the most persistent misunderstandings in genealogy work is the assumption that a record becomes fair game the moment it feels historical. A document from 1955 *feels* old. A court file from 1998 *feels* like ancient history to a researcher who's used to working with 19th-century census pages. But feeling old and being legally releasable are two entirely different things.\n\nGovernments and institutions set specific **release dates** — sometimes called embargo periods, restriction periods, or closure periods — for different categories of records. These dates exist for a reason: they balance the historical and genealogical value of a record against the privacy interests of the people named in it, many of whom may still be alive decades after the record was created.\n\nAs a KHGN volunteer, moderator, or field worker, your job isn't to memorize every jurisdiction's exact rule — that's genuinely difficult even for professionals, since rules vary by record type, by state, and sometimes by county. Your job is to recognize **when a record type is the kind that has a release date at all**, and to know to check before assuming a record is fair to share, publish, or index.\n\nThis reading is not a substitute for legal advice, and rules described here are general patterns, not guarantees for every jurisdiction. When in doubt, escalate to the Community Advisory Committee before publishing.\n\n---\n\n## Part One: Why Release Dates Exist\n\nRelease dates aren't bureaucratic red tape for its own sake. They reflect a real trade-off:\n\n- **Too short a restriction period**, and living people's sensitive information (health details in death records, financial details in probate, family conflict in divorce filings) becomes exposed while they or their close family are still alive to be affected by it.\n- **Too long a restriction period**, and legitimate historical and genealogical research is blocked long after any real privacy interest has faded.\n\nMost record-keeping systems try to strike a balance by tying release to either a **fixed number of years after creation** or a **fixed number of years after the event** (like a person's death). Genealogists benefit enormously from this system once they understand it — but only if they respect the boundary while it's still in effect.\n\n---\n\n## Part Two: The Big Example — U.S. Federal Census Records\n\nThe most famous release-date rule in American genealogy is the **72-year rule** governing U.S. federal census records. Census records are sealed for 72 years from the date they were collected, specifically to protect the privacy of the individuals who answered detailed personal questions — such as income, health conditions, and household relationships — under a promise of confidentiality from the Census Bureau. As of 2026, the most recent released census is 1950, which opened in 2022. The 1960 census is scheduled for release in 2032.\n\nThis means:\n\n- As of any given year, only census records from **72 years and earlier** are publicly released.\n- A researcher cannot access the \"next\" census release early, no matter how motivated, connected, or well-intentioned they are.\n- Once released, census records become a cornerstone of genealogical research precisely because the waiting period has already resolved the privacy concern for the vast majority of people named in them.\n\nThe lesson for KHGN volunteers: **just because a nearby census year \"feels\" like it should be available doesn't mean it is.** Always confirm the actual most recently released census year rather than assuming based on how much time feels like it \"should\" have passed.\n\n---\n\n## Part Three: Vital Records — Births, Deaths, Marriages, and Divorces\n\nVital records are where release-date confusion causes the most real-world problems for genealogy volunteers, because **the rules vary significantly by state, and sometimes by the specific type of vital record.**\n\n### Birth Records\nBirth certificates are often the most tightly restricted vital record, because they can remain relevant to identity, inheritance, and even fraud prevention for a person's entire life. Many states restrict access to a birth record for **decades** after the birth — sometimes 75–100 years, sometimes tied to whether the person is confirmed deceased — precisely because the person named may still be alive and the record contains sensitive identifying details.\n\n### Death Records\nDeath records are generally released sooner than birth records, since the core privacy concern (protecting a living person's data) is different once someone has died. However, many states still impose a waiting period — commonly in the range of 25–50 years — before death certificates become fully open to the public, partly because death records can include sensitive information about cause of death, and surviving family members may still be living.\n\n### Marriage and Divorce Records\nMarriage records are often released on a shorter timeline than birth or death records, since the core details (names, date, location) are less sensitive. Divorce records, however, frequently contain far more sensitive material — financial disputes, custody arrangements, allegations — and are often restricted longer or require special access procedures even after the \"public\" date has technically passed.\n\n**The pattern to remember:** the more personally sensitive the content of a record type tends to be, the longer and stricter its typical release period — but the specific number of years is not universal, and Kentucky's rules may differ from a neighboring state's. Always verify the current rule for the specific state and record type rather than assuming a number from memory or from a different state's system.\n\n### Kentucky's Rules\n\nKentucky handles vital records differently from many states, which is exactly why checking the actual rule matters:\n\n- **Where records live.** Statewide registration of births and deaths began on January 1, 1911. The state Office of Vital Statistics holds marriage and divorce records only from June 1958 onward. Earlier marriage records are kept by the county clerk where the license was issued, and divorce records by the Circuit Court Clerk that granted the decree.\n- **Certified copies are widely available.** Kentucky generally treats birth and death certificates as open records: a requester who provides enough information to identify the record and pays the fee can usually order a certified copy, whether or not they're family. Access rules can change, so confirm with the Office of Vital Statistics.\n- **Indexes are open.** State law makes basic registries of births and deaths, such as a name, date, and county, open to public inspection, which is why Kentucky birth and death indexes are such useful research tools.\n- **Adoption records are the major exception.** When an adoption is finalized, the original birth certificate is sealed and can be opened only by court order.\n\n**The most important lesson:** in Kentucky, being *able* to obtain a record legally is not the same as it being *right* to post it. A certificate anyone can order may still describe living people, and the PII rules from Level 1 decide what KHGN shares.\n\n---\n\n## Part Four: Court, Legal, and Adoption Records\n\n### General Court Records\nMany civil and criminal court records become public relatively quickly, since court proceedings are often open by design. But **sealed records** — cases involving minors, certain family law matters, or cases a judge has specifically ordered sealed — remain closed regardless of how much time has passed, unless a court unseals them.\n\n### Probate Records\nProbate records (wills, estate settlements) are genealogically valuable and often become public on a shorter timeline than vital records, but can still contain sensitive financial and family details about living heirs.\n\n### Adoption Records\nAdoption records deserve special mention because they combine a **legal restriction** with a **serious ethical dimension**. In many jurisdictions, original birth certificates and adoption records remain sealed indefinitely, or are only unsealed through a specific legal process — sometimes requiring the consent of the parties involved, sometimes only through a court order, and sometimes never for older cases. Even where records have technically become accessible under evolving state laws, the underlying relationships often involve people who never consented to being found or identified. Treat any adoption-related record as high-sensitivity regardless of its formal release status, and escalate rather than publish independently.\n\n### Military and Government Personnel Records\nSome military records are surprisingly public once a servicemember is deceased and enough time has passed, while others — particularly those containing Social Security numbers or medical information — remain restricted regardless of age. As covered in Level 1's PII training, a DD-214 for a living veteran is not open to the public, however old the paper looks. Military personnel records held by the National Archives generally become open archival records 62 years after a service member leaves the military.\n\n---\n\n## Part Five: A Practical Framework for KHGN Volunteers\n\nYou are not expected to be a records-law expert. You are expected to follow a simple, repeatable process:\n\n1. **Identify the record type.** Is this a census record, a birth/death/marriage/divorce record, a court file, a probate file, an adoption-related record, or a government personnel record? Each category has different rules.\n\n2. **Ask whether a release date applies at all.** Not every record type has a waiting period — plenty of historical materials (newspapers, city directories, church records depending on the denomination's own policies) don't carry a government-imposed embargo. But when a record originates from a government vital-records office, court, or federal agency, assume a release date exists until you've confirmed otherwise.\n\n3. **Check the current rule for the correct jurisdiction.** Don't assume a number you remember from a different state, a different record type, or an outdated source. Rules change over time as legislatures update them.\n\n4. **When a record involves adoption, sealed court proceedings, or clearly sensitive personal history, treat it as restricted regardless of its formal age**, and escalate to the Community Advisory Committee rather than making the call solo.\n\n5. **When in doubt, don't publish yet.** As with PII, it is far easier to release a record a little later, once confirmed, than to walk back a record that was shared prematurely.\n\n---\n\n## Part Six: Why This Matters Beyond Compliance\n\nEvery time KHGN correctly respects a record's release date, it reinforces something bigger than avoiding a technical violation: it protects the organization's credibility with the very institutions — county clerks, state archives, historical societies — that genealogy research depends on. Archives and record offices are far more willing to work cooperatively with organizations that have a demonstrated track record of handling records responsibly. A single embarrassing incident of publishing a record before its legal release date can damage relationships that took years to build.\n\nYour careful judgment here isn't just about following a rule. It's about being the kind of organization that institutions trust enough to keep opening their doors to.\n\n---\n\n## A Closing Thought\n\nRelease dates can feel like an obstacle to good research, especially when a record you need sits just a few years on the wrong side of a waiting period. But these rules exist because someone, at some point, decided that a real person's privacy interest was worth protecting for a defined period of time — and that judgment deserves respect, even when it's inconvenient.\n\nWhen you're ready, continue to the Level 3 trail, where you'll apply this framework to real-world scenarios involving the Scholar's specialty: knowing not just what a record says, but when it was truly meant to be seen.\n\n---\n\n*This material is provided for KHGN training purposes and reflects organizational best practices. It is not a substitute for formal legal advice. Rules described here vary by jurisdiction and record type and may change over time. Questions about specific records should be directed to the Community Advisory Committee.*";
+const QUIZZES = [{"title": "The Next Census", "scenario": "A member posts: \"The 1960 census should be online by now, since it's over 60 years old. Has anyone found their family in it?\"", "questions": [{"prompt": "What's the accurate answer?", "options": ["Yes, census records open after 60 years", "No. Census records are sealed for 72 years, so the most recent released census is 1950, and the 1960 census is scheduled for release in 2032", "Yes, but only to family members", "No, census records are never released"], "correct": 1, "explain": "The 72-year rule is fixed. The 1950 census was released in 2022, and the 1960 census will follow in 2032. Confirming the actual release date, rather than guessing from how old a record feels, is the habit this level teaches."}]}, {"title": "The Recent Death Certificate", "scenario": "A member orders a Kentucky death certificate for her uncle, who died in 2016, and wants to post a full scan. It shows his cause of death and his widow's current address as the informant.", "questions": [{"prompt": "What's the best guidance?", "options": ["Post the full scan, since Kentucky let her order it", "Never mention the death at all", "Share the genealogical facts, such as names, dates, and place, but leave out the cause of death and the widow's address", "Post it only after 100 years"], "correct": 2, "explain": "Kentucky treats death certificates as open records, so ordering one was legal. But being able to obtain a record isn't the same as it being right to post every detail. The widow is living, and a recent cause of death is sensitive for close family. Level 1's PII rules decide what gets shared."}], "gotcha": true}, {"title": "The Cousin's Birth Certificate", "scenario": "A member orders a Kentucky birth certificate for a living cousin born in 1985 and wants to post it in a family research thread.", "questions": [{"prompt": "What should the moderator do?", "options": ["Hold the post: the cousin is living, so the certificate's details are PII, whether or not it could be legally ordered", "Approve it, since Kentucky lets people order birth certificates", "Approve it if the post is in a private group", "Approve it after removing only the certificate number"], "correct": 0, "explain": "The question for KHGN isn't only whether a record can be obtained, but whether sharing it exposes a living person. A living cousin's birth details belong to the cousin. Without their agreement, the certificate stays out of the group."}]}, {"title": "The Original Birth Certificate", "scenario": "Through a court order, a member has obtained her adopted father's original Kentucky birth certificate, which names his birth mother. She wants to post the birth mother's name to find relatives.", "questions": [{"prompt": "What's the right handling?", "options": ["Post it, since a court released it to her", "Post it, but only the birth mother's last name", "Ask the group whether anyone objects first", "Treat it as high-sensitivity and escalate: original birth certificates of adopted people are sealed in Kentucky for good reason, and the people named may never have consented to being found"], "correct": 3, "explain": "In Kentucky, an adopted person's original birth certificate is sealed and opened only by court order. A court releasing it to one person doesn't make it right to publish. Adoption-related identifications are escalated, and any contact happens privately and with consent."}], "gotcha": true}, {"title": "The 1952 Marriage Record", "scenario": "A member asks where to find her grandparents' 1952 Kentucky marriage record. The state Office of Vital Statistics told her it has no record.", "questions": [{"prompt": "Where should she look?", "options": ["Nowhere, since records from before 1958 were destroyed", "With the county clerk in the county where the marriage license was issued, since the state's central marriage records only begin in June 1958", "With the Circuit Court Clerk", "With the National Archives"], "correct": 1, "explain": "Kentucky's state office began keeping marriage and divorce records in June 1958. Earlier marriage records are held by the county clerk where the license was issued. Knowing where records live is as useful as knowing when they open."}]}, {"title": "The Divorce File", "scenario": "A member gets copies of her parents' 1990 divorce file from the Circuit Court Clerk. Both parents are living, and the file includes custody arguments and financial details. She wants to post it to document the family timeline.", "questions": [{"prompt": "What's the best guidance?", "options": ["Post the whole file, since court records are public", "Post only the financial pages", "Note the divorce and its date if it matters to the timeline, but don't post the file's personal details about living people", "Wait until the file is 50 years old, then post everything"], "correct": 2, "explain": "Divorce files can be public court records, but they're among the most sensitive records there are. With both parents living, the fact of the divorce may be useful history, while custody and finances are deeply personal. Share the event, not the file."}], "gotcha": true}, {"title": "The Juvenile Case", "scenario": "A member finds a scanned 1970s juvenile court file online, involving a relative who is still living, and wants to share it because \"it's 50 years old now.\"", "questions": [{"prompt": "How should this be handled?", "options": ["Share it, since 50 years is long enough", "Share it with the relative's name blurred", "Share it only in a private group", "Don't share it: sealed records, including juvenile cases, stay closed regardless of age unless a court unseals them"], "correct": 3, "explain": "Sealed court records don't open with time. A sealed file appearing online doesn't make it public, and the person involved is living. This is exactly the case where age gives no permission at all."}], "gotcha": true}, {"title": "The Veteran's Service File", "scenario": "A member wants to request the full military service file of her great-grandfather, who left the Army in 1946 and died in 1980.", "questions": [{"prompt": "What's accurate?", "options": ["Military personnel files held by the National Archives generally become open archival records 62 years after a service member leaves the military, so his file is open", "Military files are closed forever", "Only his widow could ever request it", "It opens 100 years after his death"], "correct": 0, "explain": "The National Archives' 62-year rule opened his file in 2008. That's very different from a living veteran's DD-214, which Level 1 covered: the person, and how long ago they left the service, both matter."}]}, {"title": "The Church Register", "scenario": "A member wants to share a page from a church baptism register from 1975, but another member says church records \"can't be shared for 100 years.\"", "questions": [{"prompt": "What's the most accurate answer?", "options": ["The 100-year rule applies to all church records", "Church records can always be shared freely", "Church records carry no government release date, but the church's own policy may apply, and anyone baptized in 1975 is likely living, so their details are PII", "Only clergy may share church records"], "correct": 2, "explain": "Not every record has a legal waiting period. Church registers, newspapers, and city directories usually don't, though a church may set its own rules. The real question here is privacy: people baptized in 1975 are mostly living, so Level 1 applies."}], "gotcha": true}, {"title": "The Recent Will", "scenario": "A member gets a copy of a will probated in 2019 from the county court. It names the living heirs and lists what each one inherited, including bank accounts.", "questions": [{"prompt": "What's appropriate to share?", "options": ["Everything, since probate records are public", "Nothing, since wills are sealed", "Only the bank account details", "The genealogical facts, such as the deceased's name, dates, and the family relationships, but not the living heirs' financial details"], "correct": 3, "explain": "Probated wills generally become public court records, which is why they're so useful to genealogists. But a recent will describes living people's inheritances. Recording the relationships while leaving out their finances keeps the research and protects the heirs."}]}, {"title": "The Death Index", "scenario": "A member cites a free online Kentucky death index showing a relative's name, date of death, and county, and another member asks whether that's allowed.", "questions": [{"prompt": "What's the answer?", "options": ["Indexes can never be shared", "Indexes like this are generally fine to cite: Kentucky law makes the registry of deaths, showing the name, date, and county of death, an open record", "Only the county can be shared", "Indexes are allowed only after 100 years"], "correct": 1, "explain": "Kentucky law opens a basic registry of deaths, with the name, date, and county, to public inspection. Indexes like this are a legitimate, valuable starting point, and citing them is good research practice."}]}, {"title": "The Out-of-State Record", "scenario": "A member finds an Ohio birth record from 1965 and isn't sure whether it can be shared.", "questions": [{"prompt": "What's the best first step?", "options": ["Assume Kentucky's rules apply everywhere", "Post it, since it's from another state", "Identify the record type, check whether a release date applies under that state's current rules, and since the person may be living, treat the details as PII until confirmed", "Delete it"], "correct": 2, "explain": "Rules differ from state to state, and a number remembered from Kentucky may not hold in Ohio. Following the level's steps, and remembering that a person born in 1965 is likely living, leads to the right decision."}]}];
+const SHERIFF_SPEECH = "\"Hold on now. The call you just made would have shared a record that wasn't ready to be seen, or exposed living people through it. That's exactly the kind of mistake that costs this organization the trust of the archives and families we depend on. I'm going to give you one more chance. Choose correctly this time, and you'll walk on. Choose wrong, and you're headed back to the start of this level.\"";
+
+
+function renderMarkdown(md){
+  const lines = md.split('\n');
+  let html = '';
+  let listBuffer = [];
+  let listType = null;
+  function flushList(){
+    if(listBuffer.length){
+      html += `<${listType}>` + listBuffer.map(li => `<li>${li}</li>`).join('') + `</${listType}>`;
+      listBuffer = [];
+      listType = null;
+    }
+  }
+  function inline(text){
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  }
+  lines.forEach(raw => {
+    const line = raw.trim();
+    if(line === ''){ flushList(); return; }
+    if(line === '---'){ flushList(); html += '<hr>'; return; }
+    let m;
+    if((m = line.match(/^### (.*)/))){ flushList(); html += `<h4>${inline(m[1])}</h4>`; return; }
+    if((m = line.match(/^## (.*)/))){ flushList(); html += `<h3>${inline(m[1])}</h3>`; return; }
+    if((m = line.match(/^# (.*)/))){ flushList(); html += `<h2>${inline(m[1])}</h2>`; return; }
+    if((m = line.match(/^> (.*)/))){ flushList(); html += `<blockquote>${inline(m[1])}</blockquote>`; return; }
+    if((m = line.match(/^- (.*)/))){ if(listType !== 'ul'){ flushList(); listType = 'ul'; } listBuffer.push(inline(m[1])); return; }
+    if((m = line.match(/^\d+\.\s(.*)/))){ if(listType !== 'ol'){ flushList(); listType = 'ol'; } listBuffer.push(inline(m[1])); return; }
+    flushList();
+    html += `<p>${inline(line)}</p>`;
+  });
+  flushList();
+  return html;
+}
+
+let currentStop = 0;
+let quizAnswers = {};
+let quizSubmitted = {};
+let gateUnlocked = false;
+let gateScrolledToEnd = false;
+let gateStarted = false;
+
+function loadGateUnlocked(){
+  try { return localStorage.getItem('khgn_gate_passed_level_' + LEVEL_ID) === 'true'; }
+  catch(e) { return false; }
+}
+function saveGatePassed(){
+  try { localStorage.setItem('khgn_gate_passed_level_' + LEVEL_ID, 'true'); }
+  catch(e) { /* storage unavailable: the gate just won't persist across reloads */ }
+}
+
+function levelKey(stop){ return LEVEL_ID + '-' + stop; }
+
+function renderTrail(){
+  const trail = document.getElementById('trail');
+  trail.innerHTML = '';
+  const line = document.createElement('div'); line.className = 'trail-line'; trail.appendChild(line);
+  const fill = document.createElement('div'); fill.className = 'trail-line-fill';
+  const pct = currentStop === 0 ? 0 : ((currentStop-1) / (TOTAL_STOPS-1)) * 100;
+  fill.style.width = pct + '%';
+  trail.appendChild(fill);
+  for(let i=1;i<=TOTAL_STOPS;i++){
+    const stop = document.createElement('div');
+    stop.className = 'stop';
+    if(i < currentStop) stop.classList.add('done');
+    if(i === currentStop) stop.classList.add('current');
+    const dot = document.createElement('div'); dot.className = 'stop-dot';
+    dot.textContent = i < currentStop ? '✓' : i;
+    const label = document.createElement('div'); label.className = 'stop-label';
+    label.textContent = 'Stop '+i;
+    stop.appendChild(dot); stop.appendChild(label);
+    trail.appendChild(stop);
+  }
+}
+
+function resetLevel(){
+  const prefix = LEVEL_ID + '-';
+  Object.keys(quizAnswers).forEach(k => { if(k.startsWith(prefix)) delete quizAnswers[k]; });
+  Object.keys(quizSubmitted).forEach(k => { if(k.startsWith(prefix)) delete quizSubmitted[k]; });
+  currentStop = 0;
+  render();
+}
+
+function startLevel(){
+  currentStop = 1;
+  render();
+}
+
+function renderIntro(){
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">${GUIDE_NAME}</p>
+        <p class="char-role">${GUIDE_ROLE} · Level ${LEVEL_ID}: ${LEVEL_TOPIC}</p>
+        <button class="narration-btn" onclick="speakIntro(this)">🔊 Read Aloud</button>
+      </div>
+    </div>
+    <p class="body-text">${INTRO_TEXT}</p>
+    <button class="primary-btn" onclick="startLevel()">Begin the Trail</button>
+  </div>
+  <div class="footer-note" style="margin-top:14px;">
+    The "Read Aloud" button uses your browser's built-in text-to-speech voice — no recorded audio needed.
+  </div>`;
+}
+
+function renderQuiz(stopIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const key = levelKey(stopIndex);
+  const answered = !!quizSubmitted[key];
+  const allRight = answered && quiz.questions.every((qq, i2) => quizAnswers[key][i2] === qq.correct);
+  let html = `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">${quiz.title}</p>
+        <p class="char-role">Level ${LEVEL_ID} · Trail Stop ${stopIndex} of ${TOTAL_STOPS}</p>
+      </div>
+    </div>
+    ${quiz.gotcha ? '<span class="gotcha-badge">⚠ BORDERLINE CASE</span>' : ''}
+    <div class="scenario-box">${quiz.scenario}</div>
+  `;
+
+  quiz.questions.forEach((q, qi) => {
+    const picked = quizAnswers[key]?.[qi];
+    html += `<div class="question-block">
+      <div class="q-num">QUESTION ${qi+1} OF ${quiz.questions.length}</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options">`;
+    q.options.forEach((opt, oi) => {
+      let cls = 'option';
+      if(answered){
+        if(allRight && oi === q.correct) cls += ' correct';
+        else if(!allRight && oi === picked && picked !== q.correct) cls += ' incorrect';
+      } else if(picked === oi){
+        cls += ' selected';
+      }
+      html += `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="selectAnswer(${stopIndex},${qi},${oi})">${opt}</button>`;
+    });
+    html += `</div></div>`;
+  });
+
+  if(!answered){
+    const allPicked = quiz.questions.every((_,qi) => quizAnswers[key]?.[qi] !== undefined);
+    html += `<button class="primary-btn" ${allPicked ? '' : 'disabled'} onclick="submitQuiz(${stopIndex})">Submit Answers</button>`;
+  } else {
+    const numCorrect = quiz.questions.filter((q,qi) => quizAnswers[key][qi] === q.correct).length;
+    if(allRight){
+      const isLastStop = stopIndex === TOTAL_STOPS;
+      html += `<div class="feedback-banner pass">✓ All correct — the trail continues.</div>
+      ${quiz.questions.map(q => q.explain ? `<div class="explain"><strong>Why:</strong> ${q.explain}</div>` : '').join('')}
+      <button class="primary-btn" onclick="advanceAfterPass()">${isLastStop ? 'Finish Level ' + LEVEL_ID : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+    } else {
+      html += `<div class="feedback-banner fail">⚠ ${quiz.questions.length - numCorrect} answer(s) missed. Sheriff Vance would like a word.</div>
+      <button class="primary-btn" onclick="goToSheriff(${stopIndex})">Face Sheriff Vance</button>`;
+    }
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function renderSheriff(stopIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const key = levelKey(stopIndex);
+  const missedIndex = quiz.questions.findIndex((q,qi) => quizAnswers[key][qi] !== q.correct);
+  const q = quiz.questions[missedIndex];
+
+  return `
+  <div class="card sheriff">
+    <div class="character-row">
+      <div class="portrait">${SHERIFF_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Sheriff Vance</p>
+        <p class="char-role">Compliance &amp; Consequences</p>
+        <button class="narration-btn" onclick="speakSheriff(this)">🔊 Read Aloud</button>
+      </div>
+    </div>
+    <p class="body-text">${SHERIFF_SPEECH}</p>
+    <div class="scenario-box">${quiz.scenario}</div>
+    <div class="final-question">
+      <div class="q-num">FINAL CHANCE</div>
+      <p class="q-prompt">${q.prompt}</p>
+      <div class="options" id="final-options">
+        ${q.options.map((opt,oi) => `<button class="option" onclick="answerFinal(${stopIndex},${missedIndex},${oi})">${opt}</button>`).join('')}
+      </div>
+    </div>
+    <div id="final-result"></div>
+  </div>`;
+}
+
+function checkArticleScroll(){
+  const el = document.getElementById('article-scroll');
+  if(!el) return;
+  if(el.scrollTop + el.clientHeight >= el.scrollHeight - 20){
+    gateScrolledToEnd = true;
+  }
+  updateGateStatus();
+}
+
+function updateGateStatus(){
+  const scrollEl = document.getElementById('scroll-indicator');
+  const btn = document.getElementById('gate-continue-btn');
+  if(!scrollEl) return;
+  scrollEl.textContent = (gateScrolledToEnd ? '✓' : '○') + ' Scroll to the end of the reading';
+  scrollEl.classList.toggle('gate-done', gateScrolledToEnd);
+  if(btn){
+    btn.disabled = !gateScrolledToEnd;
+    btn.textContent = gateScrolledToEnd ? 'Continue to the Trail' : '🔒 Locked — scroll to the end to continue';
+  }
+}
+
+function renderGate(){
+  const articleHtml = renderMarkdown(ARTICLE_MD);
+  return `
+  <div class="card">
+    <div class="character-row">
+      <div class="portrait">${GUIDE_SVG}</div>
+      <div class="char-meta">
+        <p class="char-name">Required Reading</p>
+        <p class="char-role">Level ${LEVEL_ID}: ${LEVEL_TOPIC}</p>
+      </div>
+    </div>
+    <div class="article-content" id="article-scroll" onscroll="checkArticleScroll()">
+      ${articleHtml}
+    </div>
+    <div class="gate-status">
+      <div class="gate-row" id="scroll-indicator">○ Scroll to the end of the reading</div>
+    </div>
+    <p class="gate-explainer">
+      The button below will light up once you've reached the end of the reading.
+    </p>
+    <button class="primary-btn" id="gate-continue-btn" disabled onclick="passGate()">Continue to the Trail</button>
+  </div>`;
+}
+
+function passGate(){
+  gateUnlocked = true;
+  saveGatePassed();
+  currentStop = 0;
+  render();
+}
+
+function render(){
+  const stage = document.getElementById('stage');
+  const trailWrap = document.getElementById('trail-wrap');
+
+  if(REQUIRE_PREVIOUS_LEVEL && !previousLevelDone()){
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderLocked();
+    return;
+  }
+
+  if(!gateUnlocked){
+    trailWrap.style.display = 'none';
+    stage.innerHTML = renderGate();
+    if(!gateStarted){
+      gateScrolledToEnd = false;
+      gateStarted = true;
+    }
+    updateGateStatus();
+    return;
+  }
+  trailWrap.style.display = '';
+
+  renderTrail();
+  if(currentStop === 0){
+    stage.innerHTML = renderIntro();
+  } else if(currentStop <= TOTAL_STOPS){
+    stage.innerHTML = renderQuiz(currentStop);
+  } else {
+    stage.innerHTML = renderLevelCompleteReal();
+  }
+}
+
+function renderLevelCompleteReal(){
+  markLevelComplete();
+  return `
+  <div class="card complete-screen">
+    <div class="badge">🏅</div>
+    <p class="char-name" style="font-size:26px;">Level ${LEVEL_ID} Complete</p>
+    <p class="body-text">${COMPLETE_TEXT}</p>
+    <a href="${NEXT_URL}" class="primary-btn" style="display:block; text-align:center; text-decoration:none; box-sizing:border-box;">${NEXT_LABEL}</a>
+    <button class="secondary-btn" onclick="resetLevel()">Replay This Level</button>
+  </div>`;
+}
+
+function selectAnswer(stopIndex, qIndex, optIndex){
+  const key = levelKey(stopIndex);
+  if(!quizAnswers[key]) quizAnswers[key] = {};
+  quizAnswers[key][qIndex] = optIndex;
+  render();
+}
+
+function submitQuiz(stopIndex){
+  const key = levelKey(stopIndex);
+  quizSubmitted[key] = true;
+  render();
+}
+
+function advanceAfterPass(){
+  currentStop += 1;
+  render();
+}
+
+function goToSheriff(stopIndex){
+  document.getElementById('stage').innerHTML = renderSheriff(stopIndex);
+}
+
+function answerFinal(stopIndex, questionIndex, chosenIndex){
+  const quiz = QUIZZES[stopIndex-1];
+  const q = quiz.questions[questionIndex];
+  const resultDiv = document.getElementById('final-result');
+  const buttons = document.querySelectorAll('#final-options .option');
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if(i === q.correct) btn.classList.add('correct');
+    else if(i === chosenIndex) btn.classList.add('incorrect');
+  });
+  const why = q.explain ? `<div class="explain" style="margin-top:14px;"><strong>Why:</strong> ${q.explain}</div>` : '';
+  if(chosenIndex === q.correct){
+    const isLastStop = stopIndex === TOTAL_STOPS;
+    resultDiv.innerHTML = `<div class="feedback-banner pass" style="margin-top:14px;">✓ Corrected. Sheriff Vance nods and steps aside.</div>
+    ${why}
+    <button class="primary-btn" onclick="advanceAfterPass()">${isLastStop ? 'Finish Level ' + LEVEL_ID : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+  } else {
+    resultDiv.innerHTML = `<div class="feedback-banner fail" style="margin-top:14px;">✗ Still not right. Back to the start of this level.</div>
+    ${why}
+    <button class="primary-btn" onclick="resetLevel()">Return to Trailhead</button>`;
+  }
+}
+
+function toggleSpeech(text, btn){
+  if(!('speechSynthesis' in window)){
+    alert("This browser doesn't support text-to-speech. Try Chrome, Edge, or Safari instead.");
+    return;
+  }
+  if(window.speechSynthesis.speaking){
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.narration-btn').forEach(b => { b.textContent = '🔊 Read Aloud'; });
+    return;
+  }
+  const clean = text.replace(/^"|"$/g, '').replace(/\s+/g, ' ').trim();
+  const utterance = new SpeechSynthesisUtterance(clean);
+  utterance.rate = 0.95;
+  if(btn){
+    btn.textContent = '⏸ Stop Reading';
+    utterance.onend = () => { btn.textContent = '🔊 Read Aloud'; };
+    utterance.onerror = () => { btn.textContent = '🔊 Read Aloud'; };
+  }
+  window.speechSynthesis.speak(utterance);
+}
+
+function speakIntro(btn){ toggleSpeech(INTRO_TEXT, btn); }
+function speakSheriff(btn){ toggleSpeech(SHERIFF_SPEECH, btn); }
+
+function resetProgress(){
+  if(!confirm('This will clear this level\'s reading-gate progress on this device. Continue?')) return;
+  try { localStorage.removeItem('khgn_gate_passed_level_' + LEVEL_ID); } catch(e) {}
+  gateUnlocked = false;
+  currentStop = 0;
+  quizAnswers = {};
+  quizSubmitted = {};
+  gateScrolledToEnd = false;
+  gateStarted = false;
+  render();
+}
+
+gateUnlocked = loadGateUnlocked();
+render();
+</script>
+</body>
+</html>
+s for Records</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
