@@ -213,6 +213,7 @@
         }
         .status.open { background: #DDE8D6; color: #2F5224; }
         .status.soon { background: #E9DCC2; color: #6A4E22; }
+        .status.enroll { background: #E4D3B0; color: #5A3B14; }
         .stop-module { font-size: 13.5px; font-weight: 700; color: #6A4E22; margin-top: 2px; }
         .stop-desc { font-size: 14px; line-height: 1.55; color: #4A3A28; margin: 6px 0 0; }
         .stop-req { font-size: 13px; line-height: 1.5; color: #5C4A33; margin: 6px 0 0; }
@@ -223,7 +224,7 @@
             padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A; white-space: nowrap;
         }
         .banners-note {
-            display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px;
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px;
         }
         .banners-note div {
             background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px;
@@ -239,6 +240,70 @@
             .stop { gap: 14px; }
         }
 
+
+        /* Leadership tracks */
+        .foundation {
+            display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+            background: var(--walnut-deep); border: 1px solid var(--brass); border-radius: 10px; padding: 16px 22px; margin-bottom: 22px;
+        }
+        .foundation-label { font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); }
+        .foundation-title { font-family: 'Rye', serif; font-size: 20px; color: var(--parchment); margin-top: 2px; }
+        .tracks { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 24px; align-items: start; }
+        .track-list { display: flex; flex-direction: column; gap: 10px; position: sticky; top: 88px; }
+        .track-tab {
+            display: flex; flex-direction: column; gap: 3px; text-align: left; width: 100%;
+            padding: 14px 16px; border-radius: 10px; cursor: pointer; font: inherit;
+            background: var(--walnut-deep); color: var(--parchment); border: 1.5px solid var(--line);
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .track-tab:hover { border-color: var(--brass); }
+        .track-tab[aria-selected="true"] { background: var(--parchment); color: var(--ink); border-color: var(--brass-bright); box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .track-name { font-family: 'Rye', serif; font-size: 18px; line-height: 1.25; }
+        .track-parent { font-size: 12.5px; font-weight: 600; color: var(--parchment-dim); }
+        .track-tab[aria-selected="true"] .track-parent { color: #6A4E22; }
+        .track-roles { font-size: 13px; line-height: 1.45; color: var(--parchment-dim); margin-top: 4px; }
+        .track-roles strong { color: var(--brass-bright); }
+        .track-tab[aria-selected="true"] .track-roles { color: #4A3A28; }
+        .track-tab[aria-selected="true"] .track-roles strong { color: #7A3A1E; }
+        .track-tab.is-soon .track-roles { font-style: italic; }
+        .track-panel { background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 24px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .track-panel[hidden] { display: none; }
+        .panel-head { border-bottom: 1px solid #CDBB98; padding-bottom: 14px; margin-bottom: 16px; }
+        .panel-title { font-family: 'Rye', serif; font-weight: 400; font-size: 26px; margin: 0; color: var(--ink); }
+        .panel-parent { margin: 2px 0 0; font-size: 13px; font-weight: 700; color: #6A4E22; }
+        .panel-desc { margin: 8px 0 0; font-size: 15px; line-height: 1.6; color: #4A3A28; }
+        .levels { display: flex; flex-direction: column; gap: 10px; }
+        .lvl { background: #F6EDDB; border: 1px solid #CDBB98; border-radius: 8px; }
+        .lvl summary {
+            display: flex; align-items: center; gap: 12px; padding: 12px 14px; cursor: pointer; list-style: none;
+        }
+        .lvl summary::-webkit-details-marker { display: none; }
+        .lvl summary::after { content: "+"; margin-left: auto; font-size: 22px; font-weight: 700; color: #6A4E22; line-height: 1; }
+        .lvl[open] summary::after { content: "–"; }
+        .lvl-num {
+            flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: 'Rye', serif; font-size: 16px; background: var(--brass-bright); color: var(--walnut-deep);
+        }
+        .lvl-soon .lvl-num { background: #D9C8A6; color: #6A4E22; }
+        .lvl-title { font-family: 'Rye', serif; font-size: 18px; color: var(--ink); }
+        .lvl-body { padding: 0 14px 16px 60px; }
+        .lvl-body .stop-module { margin-top: 0; }
+        .lvl-body .game-btn { margin-top: 12px; }
+        .lvl-body .muted {
+            display: inline-block; margin-top: 12px; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A;
+        }
+        .soon-panel p { margin: 0 0 14px; font-size: 15px; line-height: 1.6; color: #4A3A28; }
+        @media (max-width: 760px) {
+            .tracks { grid-template-columns: 1fr; gap: 16px; }
+            .track-list { position: static; flex-direction: row; overflow-x: auto; gap: 8px; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+            .track-tab { flex: 0 0 auto; width: auto; max-width: 230px; scroll-snap-align: start; padding: 10px 14px; }
+            .track-roles, .track-parent { display: none; }
+            .track-name { font-size: 16px; white-space: nowrap; }
+            .track-panel { padding: 18px; }
+            .lvl-body { padding: 0 14px 16px 14px; }
+            .lvl-title { font-size: 16px; }
+        }
         .overview { border-top: 1px solid var(--line); padding-top: 40px; }
         .overview h2 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; color: var(--parchment); margin-bottom: 15px; }
         .overview p { font-size: 16px; line-height: 1.7; color: var(--parchment-dim); }
@@ -311,73 +376,169 @@
             <div class="category-header">
                 <div class="category-dot brass"></div>
                 <div>
-                    <h2 class="category-title" id="path-title" style="margin:0">The Volunteer Leadership Path</h2>
-                    <p class="category-desc">Six levels, each building on the one before</p>
+                    <h2 class="category-title" id="path-title" style="margin:0">Volunteer Leadership Paths</h2>
+                    <p class="category-desc">Choose a subcommittee to see its full curriculum</p>
                 </div>
             </div>
-            <p class="path-intro">Every KHGN volunteer leader starts at the same trailhead. Each level adds new skills and responsibilities, and each comes with a banner to mark what you've accomplished. Volunteer roles only: leadership levels are unpaid and lead to greater responsibility within KHGN's volunteer network.</p>
+            <p class="path-intro">Each KHGN subcommittee has its own path, and each level comes with a banner to mark what you've accomplished. Volunteer roles only: leadership levels are unpaid and lead to greater responsibility within KHGN's volunteer network. Level 1 is open to everyone; Levels 2 and up are offered in KHGN's private training area to enrolled volunteers.</p>
 
-            <ol class="trail">
-                <li class="stop">
-                    <div class="marker" aria-hidden="true">1</div>
-                    <div class="stop-card">
-                        <div class="stop-head"><span class="stop-title">Community Steward</span><span class="status open">Available</span></div>
-                        <div class="stop-module">The Tipple Trial</div>
-                        <p class="stop-desc">The core skills every KHGN volunteer needs: protecting privacy, respecting copyright, and handling record release dates.</p>
-                        <p class="stop-req"><strong>Requirements:</strong> Complete the Tipple Trial.</p>
-                        <div class="stop-action"><a href="tipple-trial.html" class="game-btn">Begin &rarr;</a></div>
-                    </div>
-                </li>
-                <li class="stop">
-                    <div class="marker" aria-hidden="true">2</div>
-                    <div class="stop-card">
-                        <div class="stop-head"><span class="stop-title">Contributing Steward</span><span class="status open">Available</span></div>
-                        <div class="stop-module">Module 1: The Perfect Post</div>
-                        <p class="stop-desc">Build posts that get real answers and grow participation: well sourced, safe for living people, free of politics and paywalls, and clear of the spam filter.</p>
-                        <p class="stop-req"><strong>Requirements:</strong> Community Steward, then complete The Perfect Post.</p>
-                        <div class="stop-action"><a href="khgn_perfect_post.html" class="game-btn">Begin &rarr;</a></div>
-                    </div>
-                </li>
-                <li class="stop">
-                    <div class="marker" aria-hidden="true">3</div>
-                    <div class="stop-card">
-                        <div class="stop-head"><span class="stop-title">Moderator</span><span class="status open">Available</span></div>
-                        <div class="stop-module">Level 2: Moderator Training</div>
-                        <p class="stop-desc">Screen membership requests, moderate posts and comments, and safely review the Potential Spam folder.</p>
-                        <p class="stop-req"><strong>Requirements:</strong> Contributing Steward, Moderator Training, then hands-on moderation with a County Administrator mentor and their sign-off.</p>
-                        <div class="stop-action"><a href="khgn_moderator_training.html" class="game-btn">Begin &rarr;</a></div>
-                    </div>
-                </li>
-                <li class="stop soon">
-                    <div class="marker" aria-hidden="true">4</div>
-                    <div class="stop-card">
-                        <div class="stop-head"><span class="stop-title">County Administrator</span><span class="status soon">Coming Soon</span></div>
-                        <p class="stop-desc">Lead a county group: handle appeals and permanent bans, remove unavailable accounts, manage Admin Assist, and audit moderators.</p>
-                        <p class="stop-req"><strong>Requirements:</strong> Experience as a Moderator in good standing, training, and District Administrator sign-off.</p>
-                        <div class="stop-action"><span class="muted">Coming Soon</span></div>
-                    </div>
-                </li>
-                <li class="stop soon">
-                    <div class="marker" aria-hidden="true">5</div>
-                    <div class="stop-card">
-                        <div class="stop-head"><span class="stop-title">District Administrator</span><span class="status soon">Coming Soon</span></div>
-                        <p class="stop-desc">Coordinate several counties and their leadership teams, run activity log audits, and plan coverage so no one is overloaded.</p>
-                        <p class="stop-req"><strong>Requirements:</strong> Experience as a County Administrator, training, and Regional Administrator sign-off.</p>
-                        <div class="stop-action"><span class="muted">Coming Soon</span></div>
-                    </div>
-                </li>
-                <li class="stop soon">
-                    <div class="marker" aria-hidden="true">6</div>
-                    <div class="stop-card">
-                        <div class="stop-head"><span class="stop-title">Regional Administrator</span><span class="status soon">Coming Soon</span></div>
-                        <p class="stop-desc">Lead one of KHGN's ten regions and serve on the Social Media Subcommittee, helping shape strategy and policy across the network.</p>
-                        <p class="stop-req"><strong>Requirements:</strong> Experience as a District Administrator, training, and approval by the Directors overseeing the Social Media Subcommittee.</p>
-                        <div class="stop-action"><span class="muted">Coming Soon</span></div>
-                    </div>
-                </li>
-            </ol>
+            <div class="foundation">
+                <div>
+                    <div class="foundation-label">Start here · Required for every track</div>
+                    <div class="foundation-title">Community Steward: The Tipple Trial</div>
+                </div>
+                <a href="tipple-trial.html" class="game-btn">Begin &rarr;</a>
+            </div>
 
-            <div class="banners-note">
+            <div class="tracks">
+                <div class="track-list" role="tablist" aria-label="Subcommittee training tracks" aria-orientation="vertical">
+                    <button type="button" class="track-tab" role="tab" id="tab-social-media" aria-selected="true" aria-controls="panel-social-media" tabindex="0" data-track="social-media">
+                        <span class="track-name">Social Media</span>
+                        <span class="track-parent">Communication Committee</span>
+                        <span class="track-roles"><strong>Roles:</strong> Steward · Contributor · Moderator · Administrator</span>
+                    </button>
+                    <button type="button" class="track-tab is-soon" role="tab" id="tab-website" aria-selected="false" aria-controls="panel-website" tabindex="-1" data-track="website">
+                        <span class="track-name">Website</span>
+                        <span class="track-parent">Communication Committee</span>
+                        <span class="track-roles">Curriculum coming soon</span>
+                    </button>
+                    <button type="button" class="track-tab is-soon" role="tab" id="tab-county-website" aria-selected="false" aria-controls="panel-county-website" tabindex="-1" data-track="county-website">
+                        <span class="track-name">County Website</span>
+                        <span class="track-parent">Communication Committee</span>
+                        <span class="track-roles">Curriculum coming soon</span>
+                    </button>
+                    <button type="button" class="track-tab is-soon" role="tab" id="tab-community-advisory" aria-selected="false" aria-controls="panel-community-advisory" tabindex="-1" data-track="community-advisory">
+                        <span class="track-name">Community Advisory</span>
+                        <span class="track-parent">Communication Committee</span>
+                        <span class="track-roles">Curriculum coming soon</span>
+                    </button>
+                    <button type="button" class="track-tab is-soon" role="tab" id="tab-workforce" aria-selected="false" aria-controls="panel-workforce" tabindex="-1" data-track="workforce">
+                        <span class="track-name">Workforce Development &amp; Retention</span>
+                        <span class="track-parent">Grant &amp; Fundraising Committee</span>
+                        <span class="track-roles">Curriculum coming soon</span>
+                    </button>
+                </div>
+                <div class="track-panels">
+                    <div class="track-panel" role="tabpanel" id="panel-social-media" aria-labelledby="tab-social-media">
+                        <div class="panel-head">
+                            <h3 class="panel-title">Social Media</h3>
+                            <p class="panel-parent">Communication Committee</p>
+                            <p class="panel-desc">Leads KHGN's Facebook groups across Kentucky's ten regions, from welcoming members and moderating posts to regional leadership.</p>
+                        </div>
+                        <div class="levels">
+                            <details class="lvl lvl-open">
+                                <summary><span class="lvl-num" aria-hidden="true">1</span><span class="lvl-title">Community Steward</span><span class="status open">Available</span></summary>
+                                <div class="lvl-body">
+                                    <div class="stop-module">The Tipple Trial</div>
+                                    <p class="stop-desc">The core skills every KHGN volunteer needs: protecting privacy, respecting copyright, and handling record release dates. Shared by every track.</p>
+                                    <p class="stop-req"><strong>Requirements:</strong> Complete the Tipple Trial.</p>
+                                    <a href="tipple-trial.html" class="game-btn">Begin &rarr;</a>
+                                </div>
+                            </details>
+                            <details class="lvl lvl-enroll">
+                                <summary><span class="lvl-num" aria-hidden="true">2</span><span class="lvl-title">Contributing Steward</span><span class="status enroll">Enrolled Volunteers</span></summary>
+                                <div class="lvl-body">
+                                    <div class="stop-module">The Perfect Post</div>
+                                    <p class="stop-desc">Build posts that get real answers and grow participation: well sourced, safe for living people, free of politics and paywalls, and clear of the spam filter.</p>
+                                    <p class="stop-req"><strong>Requirements:</strong> Community Steward and enrollment, then complete The Perfect Post.</p>
+                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
+                                </div>
+                            </details>
+                            <details class="lvl lvl-enroll">
+                                <summary><span class="lvl-num" aria-hidden="true">3</span><span class="lvl-title">Moderator</span><span class="status enroll">Enrolled Volunteers</span></summary>
+                                <div class="lvl-body">
+                                    <div class="stop-module">Moderator Training</div>
+                                    <p class="stop-desc">Screen membership requests, moderate posts and comments, and safely review the Potential Spam folder.</p>
+                                    <p class="stop-req"><strong>Requirements:</strong> Contributing Steward, Moderator Training, then hands-on moderation with a County Administrator mentor and their sign-off.</p>
+                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
+                                </div>
+                            </details>
+                            <details class="lvl lvl-soon">
+                                <summary><span class="lvl-num" aria-hidden="true">4</span><span class="lvl-title">County Administrator</span><span class="status soon">Coming Soon</span></summary>
+                                <div class="lvl-body">
+                                    
+                                    <p class="stop-desc">Lead a county group: handle appeals and permanent bans, remove unavailable accounts, manage Admin Assist, and audit moderators.</p>
+                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a Moderator in good standing, training, and District Administrator sign-off.</p>
+                                    <span class="muted">Coming Soon</span>
+                                </div>
+                            </details>
+                            <details class="lvl lvl-soon">
+                                <summary><span class="lvl-num" aria-hidden="true">5</span><span class="lvl-title">District Administrator</span><span class="status soon">Coming Soon</span></summary>
+                                <div class="lvl-body">
+                                    
+                                    <p class="stop-desc">Coordinate several counties and their leadership teams, run activity log audits, and plan coverage so no one is overloaded.</p>
+                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a County Administrator, training, and Regional Administrator sign-off.</p>
+                                    <span class="muted">Coming Soon</span>
+                                </div>
+                            </details>
+                            <details class="lvl lvl-soon">
+                                <summary><span class="lvl-num" aria-hidden="true">6</span><span class="lvl-title">Regional Administrator</span><span class="status soon">Coming Soon</span></summary>
+                                <div class="lvl-body">
+                                    
+                                    <p class="stop-desc">Lead one of KHGN's ten regions and serve on the Social Media Subcommittee, helping shape strategy and policy across the network.</p>
+                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a District Administrator, training, and approval by the Directors overseeing the Social Media Subcommittee.</p>
+                                    <span class="muted">Coming Soon</span>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                    <div class="track-panel" role="tabpanel" id="panel-website" aria-labelledby="tab-website" hidden>
+                        <div class="panel-head">
+                            <h3 class="panel-title">Website</h3>
+                            <p class="panel-parent">Communication Committee</p>
+                            <p class="panel-desc">Builds and maintains KHGN's website, including the Trailhead and its training.</p>
+                        </div>
+                        <div class="levels">
+                            <div class="soon-panel">
+                                <p><strong>Curriculum coming soon.</strong> The training path for this subcommittee is being developed. Every track begins with Community Steward, so completing the Tipple Trial now gets you ready for whichever path you choose.</p>
+                                <a href="tipple-trial.html" class="game-btn">Begin the Tipple Trial &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="track-panel" role="tabpanel" id="panel-county-website" aria-labelledby="tab-county-website" hidden>
+                        <div class="panel-head">
+                            <h3 class="panel-title">County Website</h3>
+                            <p class="panel-parent">Communication Committee</p>
+                            <p class="panel-desc">Develops county content for the website, coordinated across the same ten regions as the Social Media groups.</p>
+                        </div>
+                        <div class="levels">
+                            <div class="soon-panel">
+                                <p><strong>Curriculum coming soon.</strong> The training path for this subcommittee is being developed. Every track begins with Community Steward, so completing the Tipple Trial now gets you ready for whichever path you choose.</p>
+                                <a href="tipple-trial.html" class="game-btn">Begin the Tipple Trial &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="track-panel" role="tabpanel" id="panel-community-advisory" aria-labelledby="tab-community-advisory" hidden>
+                        <div class="panel-head">
+                            <h3 class="panel-title">Community Advisory</h3>
+                            <p class="panel-parent">Communication Committee</p>
+                            <p class="panel-desc">Serves as KHGN's local liaison in each of the ten regions, connecting the network with the communities it serves.</p>
+                        </div>
+                        <div class="levels">
+                            <div class="soon-panel">
+                                <p><strong>Curriculum coming soon.</strong> The training path for this subcommittee is being developed. Every track begins with Community Steward, so completing the Tipple Trial now gets you ready for whichever path you choose.</p>
+                                <a href="tipple-trial.html" class="game-btn">Begin the Tipple Trial &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="track-panel" role="tabpanel" id="panel-workforce" aria-labelledby="tab-workforce" hidden>
+                        <div class="panel-head">
+                            <h3 class="panel-title">Workforce Development &amp; Retention</h3>
+                            <p class="panel-parent">Grant &amp; Fundraising Committee</p>
+                            <p class="panel-desc">Supports KHGN's volunteers through training, recruitment and onboarding, and retention, so no one carries too much alone.</p>
+                        </div>
+                        <div class="levels">
+                            <div class="soon-panel">
+                                <p><strong>Curriculum coming soon.</strong> The training path for this subcommittee is being developed. Every track begins with Community Steward, so completing the Tipple Trial now gets you ready for whichever path you choose.</p>
+                                <a href="tipple-trial.html" class="game-btn">Begin the Tipple Trial &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="banners-note" id="enroll">
+                <div><strong>How enrollment works</strong>Complete the Tipple Trial, then send a message to KHGN's Facebook Page. We'll schedule a short phone call to meet you and go over the role. Once approved, you'll receive access to the private training area by email.</div>
                 <div><strong>Training banners</strong>Download your banner as soon as you finish a training module. It shows you've learned the skills for that level.</div>
                 <div><strong>Role banners</strong>From Moderator up, your role banner comes after hands-on time in the role and a supervisor's sign-off. Time requirements can be adjusted when roles need filling.</div>
             </div>
@@ -516,6 +677,46 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        (function () {
+            var tabs = Array.prototype.slice.call(document.querySelectorAll(".track-tab"));
+            if (!tabs.length) { return; }
+            function select(tab, focus, updateHash) {
+                tabs.forEach(function (t) {
+                    var on = t === tab;
+                    t.setAttribute("aria-selected", on ? "true" : "false");
+                    t.setAttribute("tabindex", on ? "0" : "-1");
+                    document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+                });
+                if (focus) { tab.focus(); }
+                if (updateHash && history.replaceState) { history.replaceState(null, "", "#track-" + tab.dataset.track); }
+                if (window.matchMedia("(max-width: 760px)").matches) { tab.scrollIntoView({ block: "nearest", inline: "center" }); }
+            }
+            tabs.forEach(function (tab, i) {
+                tab.addEventListener("click", function () { select(tab, false, true); });
+                tab.addEventListener("keydown", function (e) {
+                    var next = null;
+                    if (e.key === "ArrowDown" || e.key === "ArrowRight") { next = tabs[(i + 1) % tabs.length]; }
+                    if (e.key === "ArrowUp" || e.key === "ArrowLeft") { next = tabs[(i - 1 + tabs.length) % tabs.length]; }
+                    if (e.key === "Home") { next = tabs[0]; }
+                    if (e.key === "End") { next = tabs[tabs.length - 1]; }
+                    if (next) { e.preventDefault(); select(next, true, true); }
+                });
+            });
+            function fromHash() {
+                var m = location.hash.match(/^#track-(.+)$/);
+                if (!m) { return; }
+                var tab = document.querySelector('.track-tab[data-track="' + m[1] + '"]');
+                if (tab) {
+                    select(tab, false, false);
+                    document.getElementById("leadership-path").scrollIntoView();
+                }
+            }
+            fromHash();
+            window.addEventListener("hashchange", fromHash);
+        })();
     </script>
 </body>
 </html>
