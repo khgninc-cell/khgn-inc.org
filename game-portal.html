@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Trailhead: Interactive Core Training - KHGN Inc.</title>
-    <meta name="description" content="Free interactive genealogy training from KHGN Inc. Start with core skills, follow the Volunteer Leadership Path from Community Steward to Regional Administrator, and explore research practice and Kentucky history.">
+    <meta name="description" content="Free interactive genealogy training from KHGN Inc. Start with core skills, set out on the journey toward volunteer leadership, and explore research practice and Kentucky history.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -306,6 +306,48 @@
             .lvl-body { padding: 0 14px 16px 14px; }
             .lvl-title { font-size: 16px; }
         }
+
+        /* The Climb */
+        .climb-map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 6px 16px rgba(0,0,0,0.25); margin-bottom: 22px; }
+        .climb-map svg { display: block; width: 100%; height: auto; }
+        .climb-stops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+        .climb-stop { position: relative; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 22px 20px 20px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); display: flex; flex-direction: column; }
+        .climb-stop h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 21px; margin: 4px 0 2px; color: var(--ink); }
+        .climb-stop p { font-size: 14.5px; line-height: 1.6; color: #4A3A28; margin: 6px 0 12px; }
+        .climb-stop .game-btn, .climb-stop .muted-pill { margin-top: auto; align-self: flex-start; }
+        .climb-for { font-size: 12.5px !important; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #7A3A1E !important; margin: 0 !important; }
+        .climb-badge { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Rye', serif; font-size: 18px; background: var(--brass-bright); color: var(--walnut-deep); }
+        .route-list { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 6px; }
+        .route-list li { font-size: 14.5px; font-weight: 700; color: var(--ink); background: #F6EDDB; border: 1px solid #CDBB98; border-radius: 6px; padding: 7px 10px; }
+        .route-list span { margin-right: 6px; }
+        .muted-pill { display: inline-block; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A; }
+        .banner-sample-wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 22px; align-items: center; margin-top: 26px; }
+        .banner-sample { aspect-ratio: 1200 / 630; background: #1C140F; border: 5px solid #B08D57; outline: 1px solid #B08D57; outline-offset: -14px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px; gap: 4px; }
+        .bs-top { font-size: clamp(10px, 1.4vw, 14px); font-weight: 800; letter-spacing: 0.08em; color: #D4AF6A; }
+        .bs-rule { width: 60px; height: 2px; background: #B08D57; margin: 4px 0 6px; }
+        .bs-title { font-family: 'Rye', serif; font-size: clamp(20px, 3.4vw, 38px); color: #EDE0C8; line-height: 1.1; }
+        .bs-tag { font-size: clamp(11px, 1.5vw, 16px); font-weight: 800; color: #D4AF6A; letter-spacing: 0.05em; }
+        .bs-line { font-size: clamp(11px, 1.4vw, 15px); color: #E0D0AC; margin-top: 6px; }
+        .bs-org { font-size: clamp(9px, 1.1vw, 12px); color: #BFAE8A; margin-top: 10px; }
+        .banner-sample-text h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; margin: 0 0 8px; color: var(--parchment); }
+        .banner-sample-text p { font-size: 15.5px; line-height: 1.65; color: var(--parchment-dim); margin: 0; }
+        @media (max-width: 800px) {
+            .climb-stops, .banner-sample-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* The Journey */
+        .journey { list-style: none; margin: 0 0 22px; padding: 0; position: relative; display: grid; gap: 12px; }
+        .journey::before { content: ""; position: absolute; left: 25px; top: 28px; bottom: 28px; border-left: 3px dashed var(--brass); }
+        .jstop { position: relative; display: flex; gap: 16px; align-items: flex-start; }
+        .jicon { position: relative; z-index: 1; flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; background: var(--walnut-deep); border: 2px solid var(--brass); }
+        .jbody { flex-grow: 1; min-width: 0; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 16px 20px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .jbody h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 20px; margin: 0; color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+        .jfor { font-family: 'Public Sans', Arial, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #7A3A1E; }
+        .jbody p { font-size: 14.5px; line-height: 1.6; color: #4A3A28; margin: 6px 0 10px; }
+        .jbody .route-list { max-width: 420px; }
+        .disclaimer { background: #F3D9D3; color: #6E1F17; border-left: 0; border: 1.5px solid #C9897D; border-radius: 10px; padding: 14px 18px; font-size: 14.5px; line-height: 1.6; margin-bottom: 8px; }
+        .disclaimer strong { color: #6E1F17; }
+        @media (max-width: 600px) { .journey::before { left: 21px; } .jicon { width: 44px; height: 44px; font-size: 20px; } .jstop { gap: 12px; } }
         .overview { border-top: 1px solid var(--line); padding-top: 40px; }
         .overview h2 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; color: var(--parchment); margin-bottom: 15px; }
         .trademark { font-size: 13px !important; color: var(--parchment-dim); opacity: 0.85; margin-top: 18px; }
@@ -341,15 +383,15 @@
     <div class="hero">
         <div class="eyebrow">Interactive Core Training</div>
         <h1>The Trailhead</h1>
-        <p>Free interactive training and stories from Kentucky's past. Start with the Tipple Trial, the core skills every genealogist needs, then follow the Volunteer Leadership Path or explore research practice, story trails, and serious history.</p>
+        <p>Free interactive training and stories from Kentucky's past. Start with the Tipple Trial, the core skills every genealogist needs, then set out on the journey toward volunteer leadership, or explore research practice, story trails, and serious history.</p>
         <ul class="hero-points">
             <li>Learn through real-life scenarios, not lectures</li>
             <li>Go at your own pace, on your phone or computer</li>
-            <li>Earn a banner at every level, from Community Steward to Regional Administrator</li>
+            <li>Earn a banner at every step of the journey</li>
         </ul>
         <div class="hero-actions">
             <a href="tipple-trial.html" class="hero-cta">Begin the Tipple Trial &rarr;</a>
-            <a href="#leadership-path" class="hero-cta ghost">See the Leadership Path</a>
+            <a href="#the-climb" class="hero-cta ghost">See the Journey</a>
         </div>
     </div>
 
@@ -372,254 +414,148 @@
                         <a href="tipple-trial.html" class="game-btn">Begin the Trail &rarr;</a>
                     </div>
                 </div>
+                <div class="game-card blue-accent">
+                    <div class="game-thumb">🚩</div>
+                    <div class="game-body">
+                        <div class="game-title">Flagging and Welcoming</div>
+                        <div class="game-desc">Learn to spot posts that break the rules, flag them the right way, and help new members feel at home. A Community Steward's first job in KHGN's groups.</div>
+                        <a href="community-steward-flagging.html" class="game-btn">Start Flagging Training &rarr;</a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <section class="category-section" id="leadership-path" aria-labelledby="path-title">
+        <section class="category-section climb" id="the-climb" aria-labelledby="climb-title">
             <div class="category-header">
                 <div class="category-dot brass"></div>
                 <div>
-                    <h2 class="category-title" id="path-title" style="margin:0">Volunteer Leadership Paths</h2>
-                    <p class="category-desc">Choose a subcommittee to see its full curriculum</p>
+                    <h2 class="category-title" id="climb-title" style="margin:0">The Journey</h2>
+                    <p class="category-desc">From the Trailhead to the Mountain Top: how do I get there from here?</p>
                 </div>
             </div>
-            <p class="path-intro">Each KHGN subcommittee has its own path, and each level comes with a banner to mark what you've accomplished. Volunteer roles only: leadership levels are unpaid and lead to greater responsibility within KHGN's volunteer network. Level 1 is open to everyone; Levels 2 and up are offered in KHGN's private training area to enrolled volunteers.</p>
+            <p class="path-intro">Like the families who set out from Virginia for Kentucky, every KHGN volunteer begins with a long journey. You'll join the caravan, choose your own route, learn the dangers as you go, and finally climb to stake your claim. Choose your journey wisely. Volunteer roles only: the journey leads to greater responsibility within KHGN's volunteer network, never paid work.</p>
 
-            <div class="foundation">
-                <div>
-                    <div class="foundation-label">Start here · Required for every track</div>
-                    <div class="foundation-title">Community Steward: The Tipple Trial</div>
-                </div>
-                <a href="tipple-trial.html" class="game-btn">Begin &rarr;</a>
+            <div class="climb-map">
+                <svg viewBox="0 0 1000 460" role="img" aria-labelledby="climb-svg-title climb-svg-desc" preserveAspectRatio="xMidYMid meet">
+                    <title id="climb-svg-title">The journey from the Trailhead to the Mountain Top</title>
+                    <desc id="climb-svg-desc">A trail leaves the Trailhead, joins the caravan, then splits into three separate routes that each reach the base of the mountain. From the base, one trail climbs to a cabin and cornfield at the summit.</desc>
+                    <defs>
+                        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A2C21"/><stop offset="1" stop-color="#2B211A"/></linearGradient>
+                        <linearGradient id="peak" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B5440"/><stop offset="1" stop-color="#3D2F23"/></linearGradient>
+                        <linearGradient id="ridge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4E3D2E"/><stop offset="1" stop-color="#2F241B"/></linearGradient>
+                    </defs>
+                    <rect width="1000" height="460" fill="url(#sky)"/>
+                    <circle cx="905" cy="60" r="22" fill="#D4AF6A" opacity="0.85"/>
+                    <polygon points="430,460 560,250 640,300 760,70 900,260 1000,330 1000,460" fill="url(#ridge)"/>
+                    <polygon points="560,460 760,70 960,460" fill="url(#peak)"/>
+                    <!-- trail to caravan -->
+                    <path d="M40,420 C110,420 160,415 210,405" fill="none" stroke="#D4AF6A" stroke-width="5" stroke-dasharray="12 10" stroke-linecap="round"/>
+                    <!-- three routes splitting -->
+                    <path d="M210,405 C300,395 380,330 470,340 C540,348 580,380 640,395" fill="none" stroke="#D4AF6A" stroke-width="4" stroke-dasharray="10 9" stroke-linecap="round" opacity="0.95"/>
+                    <path d="M210,405 C300,410 400,400 470,410 C540,418 590,405 640,395" fill="none" stroke="#B08D57" stroke-width="4" stroke-dasharray="10 9" stroke-linecap="round" opacity="0.95"/>
+                    <path d="M210,405 C290,440 390,450 480,438 C560,428 600,410 640,395" fill="none" stroke="#D4AF6A" stroke-width="4" stroke-dasharray="10 9" stroke-linecap="round" opacity="0.8"/>
+                    <!-- climb -->
+                    <path d="M640,395 C720,380 700,330 760,310 C820,290 700,250 740,215 C780,180 800,160 770,120 C760,105 762,96 762,90" fill="none" stroke="#D4AF6A" stroke-width="5" stroke-dasharray="12 10" stroke-linecap="round"/>
+                    <!-- cabin and corn at summit -->
+                    <g transform="translate(732,58)">
+                        <rect x="8" y="16" width="34" height="22" fill="#8A5A2B" stroke="#1C140F" stroke-width="2"/>
+                        <polygon points="2,18 25,0 48,18" fill="#A63D2F" stroke="#1C140F" stroke-width="2"/>
+                        <rect x="21" y="25" width="8" height="13" fill="#1C140F"/>
+                    </g>
+                    <g stroke="#82A671" stroke-width="3" stroke-linecap="round">
+                        <line x1="796" y1="96" x2="796" y2="78"/><line x1="806" y1="96" x2="806" y2="74"/><line x1="816" y1="96" x2="816" y2="80"/>
+                    </g>
+                    <!-- markers -->
+                    <circle cx="40" cy="420" r="12" fill="#D4AF6A" stroke="#1C140F" stroke-width="3"/>
+                    <circle cx="210" cy="405" r="12" fill="#B08D57" stroke="#1C140F" stroke-width="3"/>
+                    <circle cx="640" cy="395" r="12" fill="#B08D57" stroke="#1C140F" stroke-width="3"/>
+                    <g font-family="Rye, Georgia, serif" fill="#EDE0C8" font-size="22">
+                        <text x="22" y="385">Trailhead</text>
+                        <text x="160" y="370">The Caravan</text>
+                        <text x="330" y="318">Trail Routes</text>
+                        <text x="560" y="440">Base of the Mountain</text>
+                        <text x="640" y="40">Mountain Top</text>
+                    </g>
+                </svg>
             </div>
 
-            <div class="tracks">
-                <div class="track-list" role="tablist" aria-label="Subcommittee training tracks" aria-orientation="vertical">
-                    <button type="button" class="track-tab" role="tab" id="tab-facebook" aria-selected="true" aria-controls="panel-facebook" tabindex="0" data-track="facebook">
-                        <span class="track-name">Moderating on Facebook</span>
-                        <span class="track-parent">Social Media Subcommittee</span>
-                        <span class="track-roles"><strong>Roles:</strong> Steward · Contributor · Moderator · Administrator</span>
-                    </button>
-                    <button type="button" class="track-tab is-soon" role="tab" id="tab-website" aria-selected="false" aria-controls="panel-website" tabindex="-1" data-track="website">
-                        <span class="track-name">Website</span>
-                        <span class="track-parent">Communication Committee</span>
-                        <span class="track-roles">Curriculum coming soon</span>
-                    </button>
-                    <button type="button" class="track-tab is-soon" role="tab" id="tab-county-website" aria-selected="false" aria-controls="panel-county-website" tabindex="-1" data-track="county-website">
-                        <span class="track-name">County Website</span>
-                        <span class="track-parent">Communication Committee</span>
-                        <span class="track-roles">Curriculum coming soon</span>
-                    </button>
-                    <button type="button" class="track-tab" role="tab" id="tab-community-advisory" aria-selected="false" aria-controls="panel-community-advisory" tabindex="-1" data-track="community-advisory">
-                        <span class="track-name">Community Advisory</span>
-                        <span class="track-parent">Communication Committee</span>
-                        <span class="track-roles"><strong>Roles:</strong> Community Steward · Contributing Steward · Regional Advisor</span>
-                    </button>
-                    <button type="button" class="track-tab" role="tab" id="tab-workforce" aria-selected="false" aria-controls="panel-workforce" tabindex="-1" data-track="workforce">
-                        <span class="track-name">Workforce Development &amp; Retention</span>
-                        <span class="track-parent">Grant &amp; Fundraising Committee</span>
-                        <span class="track-roles"><strong>Roles:</strong> Greeter · Guide · Pathfinder · Trailblazer · Trailkeeper</span>
-                    </button>
+            <ol class="journey">
+                <li class="jstop">
+                    <div class="jicon" aria-hidden="true">🧭</div>
+                    <div class="jbody">
+                        <h3>The Trailhead <span class="jfor">Open to everyone, 20 and older</span></h3>
+                        <p>The beginning of the journey. Free interactive training and stories from Kentucky's past, open to the public.</p>
+                    </div>
+                </li>
+                <li class="jstop">
+                    <div class="jicon" aria-hidden="true">🐂</div>
+                    <div class="jbody">
+                        <h3>Joining the Caravan <span class="jfor">The Tipple Trial</span></h3>
+                        <p>Every journey west starts by joining the caravan. The Tipple Trial teaches the essentials every traveler needs before setting out: privacy, copyright, and the records you'll handle along the way.</p>
+                        <a href="tipple-trial.html" class="game-btn">Join the Caravan &rarr;</a>
+                    </div>
+                </li>
+                <li class="jstop">
+                    <div class="jicon" aria-hidden="true">🛤️</div>
+                    <div class="jbody">
+                        <h3>Trail Routes <span class="jfor">For enrolled volunteers</span></h3>
+                        <p>Here the wagons separate, each following its own route toward its claim. Choose your journey wisely, and learn the dangers as you go. Each route is KHGN's subcommittee-based volunteer training, climbed one level at a time, with a banner at every step:</p>
+                        <ul class="route-list">
+                            <li><span>🧭</span> Moderating on Facebook</li>
+                            <li><span>🥾</span> Workforce Development</li>
+                            <li><span>📣</span> Community Advisory</li>
+                            <li><span>🌄</span> More routes on the way</li>
+                        </ul>
+                        <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
+                    </div>
+                </li>
+                <li class="jstop">
+                    <div class="jicon" aria-hidden="true">⛰️</div>
+                    <div class="jbody">
+                        <h3>The Base of the Mountain <span class="jfor">Your route complete</span></h3>
+                        <p>Finish your Trail Route and you've reached the foot of the mountain, with the experience and trust earned along the way.</p>
+                    </div>
+                </li>
+                <li class="jstop">
+                    <div class="jicon" aria-hidden="true">🌽</div>
+                    <div class="jbody">
+                        <h3>The Mountain Top <span class="jfor">Committee and Director training</span></h3>
+                        <p>Now the climb to claim your grant. Kentucky's early settlers proved their claims by raising a crop of corn and building a cabin; here, you plant your "corn" and build your "cabin" by completing KHGN's top-level training for committee and Director service.</p>
+                        <span class="muted-pill">Coming Soon</span>
+                    </div>
+                </li>
+                <li class="jstop">
+                    <div class="jicon" aria-hidden="true">📜</div>
+                    <div class="jbody">
+                        <h3>Claiming the Grant <span class="jfor">Nomination and election</span></h3>
+                        <p>With the Mountain Top behind you, you may put forward your nomination for a Director seat. If the Board elects you, your grant is accepted: you've met all the terms to claim it.</p>
+                    </div>
+                </li>
+            </ol>
+
+            <div class="disclaimer" role="note">
+                <strong>Please note:</strong> Training for committee, Director, or Officer service does not guarantee any position. These are not appointed positions. They are filled by vote of KHGN's Board of Directors under its Bylaws, and completing training, or being nominated, does not imply placement, immediate or otherwise.
+            </div>
+
+            <div class="banner-sample-wrap">
+                <div class="banner-sample" role="img" aria-label="Sample training banner">
+                    <div class="bs-top">KHGN INC. · TRAILHEAD TRAINING</div>
+                    <div class="bs-rule"></div>
+                    <div class="bs-title">YOUR NEXT STEP</div>
+                    <div class="bs-tag">TRAINING COMPLETE</div>
+                    <div class="bs-line">Earned at every step of the journey</div>
+                    <div class="bs-org">Kentucky History &amp; Genealogy Network</div>
                 </div>
-                <div class="track-panels">
-                    <div class="track-panel" role="tabpanel" id="panel-facebook" aria-labelledby="tab-facebook">
-                        <div class="panel-head">
-                            <h3 class="panel-title">Moderating on Facebook</h3>
-                            <p class="panel-parent">Social Media Subcommittee · Communication Committee</p>
-                            <p class="panel-desc">Trains the volunteers who lead KHGN's Facebook groups across Kentucky's ten regions, from welcoming members and moderating posts to regional leadership.</p>
-                        </div>
-                        <div class="levels">
-                            <details class="lvl lvl-open">
-                                <summary><span class="lvl-num" aria-hidden="true">1</span><span class="lvl-title">Community Steward</span><span class="status open">Available</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">The Tipple Trial</div>
-                                    <p class="stop-desc">The core skills every KHGN volunteer needs: protecting privacy, respecting copyright, and handling record release dates. Shared by every track.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Complete the Tipple Trial.</p>
-                                    <a href="tipple-trial.html" class="game-btn">Begin &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">2</span><span class="lvl-title">Contributing Steward</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">The Perfect Post</div>
-                                    <p class="stop-desc">Build posts that get real answers and grow participation: well sourced, safe for living people, free of politics and paywalls, and clear of the spam filter.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Community Steward and enrollment, then complete The Perfect Post.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">3</span><span class="lvl-title">Moderator</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">Moderator Training</div>
-                                    <p class="stop-desc">Screen membership requests, moderate posts and comments, and analyze Potential Spam folder items for your County Administrator.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Contributing Steward, Moderator Training, then hands-on moderation with a County Administrator mentor and their sign-off.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">4</span><span class="lvl-title">County Administrator</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    
-                                    <div class="stop-module">County Administrator Training</div>
-                                    <p class="stop-desc">Lead one county's public group: make final decisions on Potential Spam folder items, handle appeals and permanent bans, remove unavailable accounts, manage Admin Assist, and audit moderators.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a Moderator in good standing, training, and District Administrator sign-off.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">5</span><span class="lvl-title">District Administrator</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    
-                                    <div class="stop-module">District Administrator Training</div>
-                                    <p class="stop-desc">Oversee three counties and their County Administrators: audit their work, coordinate coverage so no one is overloaded, and handle escalations. An oversight role, not a public group role.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a County Administrator, training, and Regional Administrator sign-off.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">6</span><span class="lvl-title">Regional Administrator</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    
-                                    <div class="stop-module">Regional Administrator Training</div>
-                                    <p class="stop-desc">Oversee one of KHGN's ten regions, twelve counties across four districts, and serve on the Social Media Subcommittee, helping shape strategy and policy across the network.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a District Administrator, training, and approval by the Directors overseeing the Social Media Subcommittee.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                        </div>
-                    </div>
-                    <div class="track-panel" role="tabpanel" id="panel-website" aria-labelledby="tab-website" hidden>
-                        <div class="panel-head">
-                            <h3 class="panel-title">Website</h3>
-                            <p class="panel-parent">Communication Committee</p>
-                            <p class="panel-desc">Builds and maintains KHGN's website, including the Trailhead and its training.</p>
-                        </div>
-                        <div class="levels">
-                            <div class="soon-panel">
-                                <p><strong>Curriculum coming soon.</strong> The training path for this subcommittee is being developed. Every track begins with Community Steward, so completing the Tipple Trial now gets you ready for whichever path you choose.</p>
-                                <a href="tipple-trial.html" class="game-btn">Begin the Tipple Trial &rarr;</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="track-panel" role="tabpanel" id="panel-county-website" aria-labelledby="tab-county-website" hidden>
-                        <div class="panel-head">
-                            <h3 class="panel-title">County Website</h3>
-                            <p class="panel-parent">Communication Committee</p>
-                            <p class="panel-desc">Develops county content for the website, coordinated across the same ten regions as the Social Media groups.</p>
-                        </div>
-                        <div class="levels">
-                            <div class="soon-panel">
-                                <p><strong>Curriculum coming soon.</strong> The training path for this subcommittee is being developed. Every track begins with Community Steward, so completing the Tipple Trial now gets you ready for whichever path you choose.</p>
-                                <a href="tipple-trial.html" class="game-btn">Begin the Tipple Trial &rarr;</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="track-panel" role="tabpanel" id="panel-community-advisory" aria-labelledby="tab-community-advisory" hidden>
-                        <div class="panel-head">
-                            <h3 class="panel-title">Community Advisory</h3>
-                            <p class="panel-parent">Communication Committee</p>
-                            <p class="panel-desc">Gives KHGN's audience a direct voice, while keeping KHGN a long-standing example of what public service is all about, well into the future. Stewards flag posts that appear to break the rules, welcome new members, and share how KHGN comes across to the public.</p>
-                        </div>
-                        <div class="levels">
-                            <details class="lvl lvl-open">
-                                <summary><span class="lvl-num" aria-hidden="true">1</span><span class="lvl-title">Community Steward</span><span class="status open">Available</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">The Tipple Trial, then Flagging and Welcoming</div>
-                                    <p class="stop-desc">Flag posts that appear to break the rules, quietly and through the proper tools, and help new members feel at home.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Complete the Tipple Trial and the flagging training.</p>
-                                    <a href="tipple-trial.html" class="game-btn">Tipple Trial &rarr;</a> <a href="community-steward-flagging.html" class="game-btn">Flagging Training &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">2</span><span class="lvl-title">Contributing Steward</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">The Perfect Post</div>
-                                    <p class="stop-desc">Model good posting, build participation, and help bring new members in.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Community Steward and enrollment, then complete The Perfect Post.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">3</span><span class="lvl-title">Regional Advisor</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">Regional Advisor Training</div>
-                                    <p class="stop-desc">Gather the Stewards' view of what's working, what needs changing, and how KHGN comes across to the public, and send recommendations up.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a Contributing Steward, training, and approval.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                        </div>
-                    </div>
-                    <div class="track-panel" role="tabpanel" id="panel-workforce" aria-labelledby="tab-workforce" hidden>
-                        <div class="panel-head">
-                            <h3 class="panel-title">Workforce Development &amp; Retention</h3>
-                            <p class="panel-parent">Grant &amp; Fundraising Committee</p>
-                            <p class="panel-desc">Supports KHGN's volunteers through training, recruitment and onboarding, and retention, so no one carries too much alone.</p>
-                        </div>
-                        <div class="levels">
-                            <details class="lvl lvl-open">
-                                <summary><span class="lvl-num" aria-hidden="true">1</span><span class="lvl-title">Community Steward</span><span class="status open">Available</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">The Tipple Trial</div>
-                                    <p class="stop-desc">The core skills every KHGN volunteer needs. Shared by every track.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Complete the Tipple Trial.</p>
-                                    <a href="tipple-trial.html" class="game-btn">Begin &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">2</span><span class="lvl-title">Trail Greeter</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">Trail Greeter Training</div>
-                                    <p class="stop-desc">Welcome people interested in volunteering, explain the paths honestly, and point them to enrollment, without handling anyone's personal information.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Community Steward and enrollment, then complete the training.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">3</span><span class="lvl-title">Trail Guide</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">Trail Guide Training</div>
-                                    <p class="stop-desc">Help newly approved volunteers get started in their placement during their first weeks.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a Trail Greeter, training, and sign-off.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">4</span><span class="lvl-title">Pathfinder</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">Pathfinder Training</div>
-                                    <p class="stop-desc">Work the shared statewide queue: place approved volunteers using every region's vacancy lists, and run check-ins.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a Trail Guide, training, and sign-off.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">5</span><span class="lvl-title">Trailblazer</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">Trailblazer Training</div>
-                                    <p class="stop-desc">Lead a team of Pathfinders and Guides: spot checks, sign-offs, and the team's monthly report.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a Pathfinder, training, and sign-off.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                            <details class="lvl lvl-enroll">
-                                <summary><span class="lvl-num" aria-hidden="true">6</span><span class="lvl-title">Trailkeeper</span><span class="status enroll">Enrolled Volunteers</span></summary>
-                                <div class="lvl-body">
-                                    <div class="stop-module">Trailkeeper Training</div>
-                                    <p class="stop-desc">Oversee the Trailblazers and the statewide staffing picture, and advise the Workforce Development & Retention Director.</p>
-                                    <p class="stop-req"><strong>Requirements:</strong> Experience as a Trailblazer, training, and approval.</p>
-                                    <a href="#enroll" class="game-btn">How to Enroll &rarr;</a>
-                                </div>
-                            </details>
-                        </div>
-                    </div>
+                <div class="banner-sample-text">
+                    <h3>Earn a banner at every step</h3>
+                    <p>Finish a training level and download your banner right away. From the leadership levels up, your role banner follows hands-on time and your supervisor's sign-off. Banners carry no personal information, so you can share them proudly.</p>
                 </div>
             </div>
 
             <div class="banners-note" id="enroll">
-                <div><strong>How enrollment works</strong>Complete the Tipple Trial, then send a message to <a href="https://www.facebook.com/KHGNINC/" target="_blank" rel="noopener noreferrer">KHGN's Facebook Page</a>. We'll schedule a short phone call to meet you and go over the role. Once approved, you'll receive access to the private training area by email.</div>
-                <div><strong>Training banners</strong>Download your banner as soon as you finish a training module. It shows you've learned the skills for that level.</div>
-                <div><strong>Role banners</strong>From Moderator up, your role banner comes after hands-on time in the role and a supervisor's sign-off. Time requirements can be adjusted when roles need filling.</div>
+                <div><strong>How enrollment works</strong>Complete the Tipple Trial, then send a message to <a href="https://www.facebook.com/KHGNINC/" target="_blank" rel="noopener noreferrer">KHGN's Facebook Page</a>. We'll schedule a short phone call to meet you and go over the role. Once approved, you'll receive access to Trail Routes by email.</div>
+                <div><strong>One step at a time</strong>Everyone starts at the first level of their route. Each step up comes with training, hands-on time, and a supervisor's sign-off, and time requirements can be adjusted when roles need filling.</div>
+                <div><strong>Climb at your own pace</strong>KHGN's teams share the load, so you can step back when life calls and pick up where you left off.</div>
             </div>
         </section>
 
@@ -731,7 +667,7 @@
             <p>
                 The KHGN Trailhead offers interactive ways to learn history and genealogy research skills, free and open to the public ages 20 and older.
                 This is KHGN's unaccredited curriculum &mdash; a separate, formally accredited program is planned as a future addition.
-                New content is sorted into the categories above based on what it teaches: core skills, volunteer leadership, research methods, historical stories, or serious history that stands on its own.
+                New content is sorted into the categories above based on what it teaches: core skills, research methods, historical stories, or serious history that stands on its own. Volunteer leadership training continues beyond the Trailhead, on the Trail Routes and the Mountain Top. Training for committee, Director, or Officer service does not guarantee any position; those seats are filled by vote of the Board.
                 New additions are made regularly, so check back often.
             </p>
             <p class="trademark">Facebook is a trademark of Meta Platforms, Inc. KHGN Inc. is not affiliated with or endorsed by Meta.</p>
