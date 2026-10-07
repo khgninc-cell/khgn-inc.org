@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view KHGN Trailhead Training.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Steward: Flagging and Welcoming - KHGN Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="KHGN Inc. Community Advisory: Community Steward flagging and welcoming training.">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --ink-soft:#4A3A28; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+    --pass:#2F5224; --pass-bg:#DDE8D6; --warn:#6A4E22; --warn-bg:#F1E2C4; --fail:#8E2A1F; --fail-bg:#F3D9D3; --card-line:#CDBB98;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--walnut); color: var(--parchment); font-family: 'Public Sans', Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  a { color: var(--brass-bright); }
+  :focus-visible { outline: 3px solid var(--brass-bright); outline-offset: 2px; }
+  /* Navigation */
+  .site-nav {
+      background: var(--walnut-deep);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+  }
+  .site-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+  .site-nav-brand {
+      color: var(--brass-bright);
+      text-decoration: none;
+      font-family: 'Rye', serif;
+      font-weight: 400;
+      font-size: 22px;
+      white-space: nowrap;
+  }
+  .site-nav-links {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+  }
+  .site-nav-links a {
+      color: var(--parchment);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .site-nav-links a:hover { color: var(--brass-bright); }
+  .site-nav-toggle {
+      display: none;
+      margin-left: auto;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+  }
+  .site-nav-toggle-bar {
+      display: block;
+      width: 24px;
+      height: 3px;
+      margin: 4px 0;
+      border-radius: 999px;
+      background: var(--brass-bright);
+  }
+  .page-games .site-nav-links a[href="https://khgn-inc.org/game-portal.html"] {
+      color: var(--brass-bright);
+      border-bottom-color: var(--brass);
+  }
+
+  @media (max-width: 700px) {
+      .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+      .site-nav-toggle { display: block; }
+      .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+      .site-nav.is-open .site-nav-links { display: flex; }
+      .site-nav-links a { width: 100%; padding: 10px 0; }
+      .game-grid { grid-template-columns: 1fr !important; }
+      .container { margin: 30px auto; }
+      .hero h1 { font-size: 32px; }
+  }
+
+
+  @media (max-width: 700px) {
+    .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+    .site-nav-toggle { display: block; }
+    .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+    .site-nav.is-open .site-nav-links { display: flex; }
+    .site-nav-links a { width: 100%; padding: 10px 0; }
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .back { display: inline-block; margin: 22px 0 0; font-weight: 700; text-decoration: none; }
+  .back:hover { color: var(--parchment); }
+  header.module { padding: 32px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 32px; background: radial-gradient(ellipse at 50% -40%, rgba(176,141,87,0.18), transparent 70%); }
+  .eyebrow { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); }
+  h1, h2 { font-family: 'Rye', Georgia, serif; font-weight: 400; line-height: 1.2; }
+  h1 { margin: 0 0 14px; font-size: clamp(30px, 5vw, 40px); color: var(--parchment); text-shadow: 0 2px 0 var(--walnut-deep); }
+  h2 { margin: 0 0 14px; font-size: 25px; color: var(--parchment); }
+  h3 { margin: 18px 0 6px; font-size: 18px; font-weight: 800; line-height: 1.3; color: var(--brass-bright); }
+  .lede { margin: 0; font-size: 18px; color: var(--parchment-dim); max-width: 700px; }
+  section.step { margin: 0 0 48px; }
+  section.step > p { color: var(--parchment-dim); }
+  .step-num { display: inline-block; margin-bottom: 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--brass-bright); text-transform: uppercase; }
+  .hint { margin: 0 0 10px; font-size: 15px; color: var(--parchment-dim); }
+  label.big { display: block; font-weight: 700; margin-bottom: 6px; }
+  /* parchment cards */
+  .card, .standard, .scenario, .quiz-q, .check, .award-card, .rung, .pledge, .stop-like {
+    background: var(--parchment); color: var(--ink); border-radius: 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+  .card h3, .award-card h3, .standard h3 { color: var(--ink); }
+  .card a, .standard a, .scenario a, .award-card a, .note a { color: #7A3A1E; }
+  .note { display: flex; gap: 14px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 20px; color: var(--parchment-dim); }
+  .note p { margin: 0; } .note strong { color: var(--brass-bright); } .note a { color: var(--brass-bright); }
+  .note svg { flex-shrink: 0; margin-top: 3px; }
+  .btn, button.primary, .row button {
+    min-height: 46px; padding: 11px 22px; font: inherit; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    color: #fff; background: var(--rust); border: 0; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;
+  }
+  .btn:hover, .row button:hover { background: var(--rust-bright); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+  .count { font-size: 15px; color: var(--parchment-dim); }
+  .feedback { margin-top: 10px; font-size: 15px; padding: 8px 12px; border-radius: 6px; display: none; }
+  .feedback.show { display: block; }
+  .feedback.right { background: var(--pass-bg); color: var(--pass); }
+  .feedback.wrong { background: var(--fail-bg); color: var(--fail); }
+  .progress { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .pill { padding: 6px 14px; border-radius: 999px; font-size: 14.5px; font-weight: 700; background: var(--walnut-deep); border: 1px solid var(--line); color: var(--parchment-dim); }
+  .pill.done { background: var(--pass-bg); border-color: var(--pass-bg); color: var(--pass); }
+  .locked { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  #award { display: none; } #award.show { display: block; }
+  .award-card { padding: 22px; }
+  .award-card .hint, .award-card p { color: var(--ink-soft); }
+  input[type="text"] { width: 100%; max-width: 420px; min-height: 44px; padding: 8px 12px; font: inherit; font-size: 17px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  canvas { display: block; width: 100%; height: auto; margin: 16px 0; border-radius: 8px; }
+  .privacy { font-size: 14px; color: var(--ink-soft); margin: 8px 0 0; }
+  footer { padding: 28px 0 48px; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--parchment-dim); }
+
+  .alert { padding: 14px 20px; border-radius: 10px; background: var(--fail-bg); color: var(--fail); font-weight: 700; margin: 14px 0; }
+  .card { padding: 18px 22px; margin-bottom: 14px; }
+  .card p { margin: 0 0 10px; } .card p:last-child { margin-bottom: 0; }
+  ul.rules { margin: 0; padding-left: 22px; } ul.rules li { margin-bottom: 10px; }
+  .why { display: block; font-size: 15px; color: var(--ink-soft); }
+  section.step > .why, section.step > p.why { color: var(--parchment-dim); }
+  .table-wrap { overflow-x: auto; border-radius: 10px; margin: 10px 0 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+  table { width: 100%; border-collapse: collapse; background: var(--parchment); color: var(--ink); font-size: 16px; }
+  th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--card-line); }
+  th { background: var(--walnut-deep); color: var(--brass-bright); font-weight: 700; }
+  tr:last-child td { border-bottom: 0; }
+  ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 8px; }
+  .ladder { display: grid; gap: 10px; }
+  .rung { display: flex; gap: 14px; align-items: flex-start; padding: 12px 18px; box-shadow: none; }
+  .rung b { flex-shrink: 0; min-width: 190px; color: var(--ink); }
+  .rung span { color: var(--ink-soft); }
+  .rung.here { outline: 3px solid var(--brass-bright); }
+  .scenario { padding: 18px 20px; margin-bottom: 14px; }
+  .scenario .case { margin: 0 0 12px; }
+  .scenario .num { font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; color: #7A3A1E; text-transform: uppercase; }
+  .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+  .choices button { min-height: 42px; padding: 8px 14px; font: inherit; font-size: 14.5px; font-weight: 700; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--brass); border-radius: 6px; cursor: pointer; }
+  .choices.stacked { flex-direction: column; align-items: stretch; }
+  .choices.stacked button { text-align: left; }
+  .choices button:hover { background: var(--parchment-dim); }
+  .choices button.picked-right { background: var(--pass-bg); border-color: var(--pass); color: var(--pass); }
+  .choices button.picked-wrong { background: var(--fail-bg); border-color: var(--fail); color: var(--fail); }
+  .pledge { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; cursor: pointer; }
+  .pledge input { margin-top: 6px; width: 20px; height: 20px; accent-color: var(--rust); }
+
+  .level-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 10px; scroll-margin-top: 90px; }
+  .level-step { display: flex; align-items: center; gap: 10px; text-align: left; padding: 12px 14px; font: inherit; color: var(--parchment); background: var(--walnut-deep); border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer; }
+  .level-step:hover { border-color: var(--brass); }
+  .level-step.is-current { background: var(--parchment); color: var(--ink); border-color: var(--brass-bright); }
+  .level-step.is-locked { opacity: 0.6; }
+  .ls-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Rye', Georgia, serif; font-size: 16px; background: var(--line); color: var(--parchment); }
+  .level-step.is-current .ls-num, .level-step.is-done .ls-num { background: var(--brass-bright); color: var(--walnut-deep); }
+  .level-step.is-done .ls-num::after { content: "✓"; font-family: 'Public Sans', Arial, sans-serif; font-weight: 800; }
+  .level-step.is-done .ls-num { font-size: 0; }
+  .level-step.is-done .ls-num::after { font-size: 16px; }
+  .ls-text { display: flex; flex-direction: column; min-width: 0; }
+  .ls-title { font-weight: 700; font-size: 14.5px; line-height: 1.25; }
+  .ls-state { font-size: 12.5px; color: var(--parchment-dim); }
+  .level-step.is-current .ls-state { color: #6A4E22; }
+  .progress-note { font-size: 14px; color: var(--parchment-dim); margin: 0 0 30px; }
+  .linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--brass-bright); text-decoration: underline; cursor: pointer; }
+  .level-panel { margin: 0 0 40px; }
+  .level-panel[hidden], .level-content[hidden], .locked-msg[hidden] { display: none; }
+  .level-intro { font-size: 17px; color: var(--parchment-dim); margin: -4px 0 20px; }
+  .locked-msg { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  .level-done { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 24px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--brass); border-radius: 10px; }
+  .level-status { font-weight: 700; color: var(--parchment); }
+  .next-btn:disabled { background: #6E5A48; color: #D8CBB2; cursor: not-allowed; }
+  @media (max-width: 760px) {
+    .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  .report-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 18px; }
+  .report-form label { display: flex; flex-direction: column; gap: 4px; font-size: 14.5px; font-weight: 700; color: var(--ink); }
+  .report-form input, .report-form textarea, .report-form select { font: inherit; font-size: 16px; font-weight: 400; padding: 8px 10px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  .report-form .wide { grid-column: 1 / -1; }
+  .report-form textarea { min-height: 80px; resize: vertical; }
+  .report-form fieldset { grid-column: 1 / -1; border: 1px solid var(--card-line); border-radius: 8px; padding: 12px 14px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px 14px; }
+  .report-form legend { font-weight: 800; color: #7A3A1E; padding: 0 6px; }
+  .report-out { width: 100%; min-height: 260px; margin-top: 14px; font-family: ui-monospace, Consolas, monospace; font-size: 14px; padding: 12px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .btn.ghost { background: transparent; color: #7A3A1E; border: 1.5px solid #7A3A1E; }
+  .btn.ghost:hover { background: var(--parchment-dim); }
+  @media (max-width: 900px) { .level-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  .county-grid { display: grid; grid-template-columns: minmax(150px, 1.4fr) repeat(3, minmax(90px, 1fr)) minmax(80px, 0.8fr); gap: 6px 10px; align-items: center; font-size: 14.5px; }
+  .county-grid .hdr { font-weight: 800; color: #7A3A1E; }
+  .county-grid input { width: 100%; font: inherit; font-size: 15px; padding: 6px 8px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; box-sizing: border-box; }
+  .county-grid .total { font-weight: 800; text-align: right; color: var(--ink); }
+  .grid-wrap { overflow-x: auto; }
+  .grid-wrap .county-grid { min-width: 620px; }
+</style>
+</head>
+<body class="page-games">
+
+    <nav class="site-nav" aria-label="Global">
+    <div class="site-nav-inner">
+        <a href="https://khgn-inc.org/index.html" class="site-nav-brand">KHGN Inc.</a>
+        <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+        </button>
+        <div class="site-nav-links">
+            <a href="https://khgn-inc.org/index.html">Home</a>
+            <a href="https://khgn-inc.org/socialmedia.html">Social Media</a>
+            <a href="https://khgn-inc.org/recruiting.html">Volunteer Recruitment</a>
+            <a href="https://khgn-inc.org/donation-portal.html">Donation Portal</a>
+            <a href="https://khgn-inc.org/training.html">Volunteer Training</a>
+            <a href="https://khgn-inc.org/game-portal.html">Trailhead Training</a>
+        </div>
+    </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="https://khgn-inc.org/game-portal.html#track-community-advisory">← Back to the Trailhead</a>
+
+  <header class="module">
+    <p class="eyebrow">Community Advisory · Community Steward</p>
+    <h1>Flagging and Welcoming</h1>
+    <p class="lede">Community Stewards are KHGN's eyes and ears in its groups. You flag posts that appear to break the rules, help new members feel at home, and share what you see so KHGN keeps improving. Three short levels, each unlocking the next.</p>
+  </header>
+
+  <section class="step" aria-labelledby="s0">
+    <span class="step-num">Before you begin</span>
+    <h2 id="s0">Where this fits</h2>
+    <div class="note">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+      <p><strong>Start with <a href="https://khgn-inc.org/tipple-trial.html">The Tipple Trial</a></strong> if you haven't already. It covers the privacy, copyright, and record basics every Community Steward needs. This training builds on it.</p>
+    </div>
+    <div class="ladder">
+      <div class="rung here"><b>Community Steward</b><span>Flags suspected violations and welcomes new members. This training.</span></div>
+      <div class="rung"><b>Contributing Steward</b><span>Trained in the Perfect Post; models good posting and builds participation.</span></div>
+      <div class="rung"><b>Regional Advisor</b><span>Gathers the Stewards' view of how KHGN is doing and sends recommendations up.</span></div>
+    </div>
+  </section>
+
+  <nav class="level-nav" aria-label="Community Steward training levels">
+    <button type="button" class="level-step" data-level="1" id="step-1"><span class="ls-num">1</span><span class="ls-text"><span class="ls-title">What to Flag</span><span class="ls-state" id="state-1">Locked</span></span></button>
+    <button type="button" class="level-step" data-level="2" id="step-2"><span class="ls-num">2</span><span class="ls-text"><span class="ls-title">How to Flag</span><span class="ls-state" id="state-2">Locked</span></span></button>
+    <button type="button" class="level-step" data-level="3" id="step-3"><span class="ls-num">3</span><span class="ls-text"><span class="ls-title">Welcoming &amp; Your Voice</span><span class="ls-state" id="state-3">Locked</span></span></button>
+  </nav>
+  <p class="progress-note">Your progress is saved on this device only, so you can stop and pick up where you left off. <button type="button" class="linkish" id="reset">Start over</button></p>
+
+  <!-- LEVEL 1 -->
+  <section class="level-panel" id="level-1" aria-labelledby="lt-1" hidden>
+    <span class="step-num">Level 1 of 3</span>
+    <h2 id="lt-1">What to Flag</h2>
+    <p class="level-intro">Flag anything that appears to break KHGN's group rules. You don't need to be certain; that's what moderators are for.</p>
+    <div class="locked-msg" id="locked-1" hidden>This level is the starting point.</div>
+    <div class="level-content" id="content-1">
+      <h3>The kinds of posts to flag</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Modern politics or religious debate,</strong> especially support for or opposition to a candidate.</li>
+          <li><strong>Selling, advertising, or paid services,</strong> including anything that asks for money within one click of a link.</li>
+          <li><strong>Private information about living people,</strong> such as addresses, phone numbers, or birth dates.</li>
+          <li><strong>Copied paid content,</strong> like a full article or obituary pasted from a subscription site.</li>
+          <li><strong>Spam and scams:</strong> link shorteners, lookalike web addresses, "share before it's deleted" pressure, or posts that seem designed to trick people.</li>
+          <li><strong>Harassment or insults</strong> that break the Code of Conduct.</li>
+          <li><strong>Engagement bait,</strong> like "type AMEN" or "share if you agree."</li>
+        </ul>
+      </div>
+      <h3>When in doubt, flag</h3>
+      <div class="card">
+        <p>You're flagging items that are <strong>assumed</strong> to be in violation. If something seems off, flag it, and let a trained moderator decide. A flag isn't an accusation; it's a request for a second look. Moderators would much rather review a post that turns out fine than miss one that isn't.</p>
+        <p>What not to flag: posts you simply disagree with, historical topics that mention elections or churches in a genealogical context, and honest research questions, even if the research seems shaky.</p>
+      </div>
+      <h3>Practice: what to flag</h3>
+      <div id="practice-1"></div>
+      <div class="level-done"><div class="level-status" id="status-1" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-1" disabled>Continue to Level 2 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 2 -->
+  <section class="level-panel" id="level-2" aria-labelledby="lt-2" hidden>
+    <span class="step-num">Level 2 of 3</span>
+    <h2 id="lt-2">How to Flag</h2>
+    <p class="level-intro">Flag quietly, through the proper tools, and leave the decision to the moderators.</p>
+    <div class="locked-msg" id="locked-2" hidden>Complete Level 1 to unlock this level.</div>
+    <div class="level-content" id="content-2">
+      <div class="alert">Community Stewards flag; they never enforce. Don't argue in the comments, call anyone out, or message the person who posted. Report it and let the moderators handle it.</div>
+      <h3>On Facebook</h3>
+      <div class="card">
+        <ol class="steps">
+          <li><strong>Open the post's menu</strong> (the <strong>⋯</strong> at the top right of the post).</li>
+          <li><strong>Choose the option to report it to the group's admins.</strong> Facebook's wording may change over time, but it's always in that menu.</li>
+          <li><strong>If asked for a reason,</strong> pick the one that fits best, such as spam or a rule violation.</li>
+        </ol>
+        <p>That sends it privately to the group's moderators and administrators for review. The person who posted isn't told who flagged it.</p>
+      </div>
+      <h3>Good flagging habits</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Don't click suspicious links</strong> to check them. Flag the post instead.</li>
+          <li><strong>Don't screenshot and share</strong> problem posts elsewhere, even to warn others.</li>
+          <li><strong>Don't flag in bulk</strong> or flag someone's posts because of a personal disagreement. Flagging is for rule violations, not settling scores.</li>
+          <li><strong>Serious threats or emergencies,</strong> like threats of harm, should also be reported to the appropriate authorities.</li>
+        </ul>
+      </div>
+      <h3>On KHGN's own platform</h3>
+      <div class="card">
+        <p>When KHGN launches its own social media platform, Community Stewards will be its flaggers. The flagging button will look different, but everything else in this training stays the same: flag what appears to break the rules, flag quietly, and let moderators decide.</p>
+      </div>
+      <h3>Practice: how to flag</h3>
+      <div id="practice-2"></div>
+      <div class="level-done"><div class="level-status" id="status-2" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-2" disabled>Continue to Level 3 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 3 -->
+  <section class="level-panel" id="level-3" aria-labelledby="lt-3" hidden>
+    <span class="step-num">Level 3 of 3</span>
+    <h2 id="lt-3">Welcoming and Your Voice</h2>
+    <p class="level-intro">Helping new members feel at home, and helping KHGN see itself as the public does.</p>
+    <div class="locked-msg" id="locked-3" hidden>Complete Level 2 to unlock this level.</div>
+    <div class="level-content" id="content-3">
+      <h3>Welcoming new members</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Greet them warmly</strong> when they introduce themselves.</li>
+          <li><strong>Point them to the group rules</strong> and free resources, like KYGenWeb.</li>
+          <li><strong>Answer what you can,</strong> and invite others to help with what you can't.</li>
+          <li><strong>Model good posts:</strong> specific, sourced, and kind.</li>
+        </ul>
+        <p>Never pressure anyone to volunteer, and never ask new members for personal information.</p>
+      </div>
+      <h3>Your voice matters</h3>
+      <div class="card">
+        <p>Community Advisory exists to give members a say in how KHGN does things. You see KHGN the way the public does, so tell us what's working, what needs changing, and anything confusing or off-putting about how KHGN presents itself. Share suggestions by messaging <a href="https://www.facebook.com/KHGNINC/" target="_blank" rel="noopener noreferrer">KHGN's Facebook Page</a>, and describe patterns rather than naming individuals.</p>
+        <p>Your input shapes recommendations; decisions are made by KHGN's Board. Watch for updates on what changed because of member feedback.</p>
+      </div>
+      <h3>Practice: welcoming and feedback</h3>
+      <div id="practice-3"></div>
+      <h3>Community Steward's pledge</h3>
+      <label class="pledge">
+        <input type="checkbox" id="pledge">
+        <span>I will flag posts that appear to break KHGN's rules, quietly and through the proper tools, never enforce or call anyone out myself, welcome new members warmly without asking for personal information, and share honest feedback that helps KHGN improve.</span>
+      </label>
+      <div class="level-done"><div class="level-status" id="status-3" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-3" disabled>Finish training</button></div>
+    </div>
+  </section>
+
+  <section class="step" aria-labelledby="s9" id="s9">
+    <span class="step-num">Completion</span>
+    <h2>Your training banner</h2>
+    <div class="locked" id="locked">Complete all three levels to unlock your training banner.</div>
+    <div id="award" aria-live="polite">
+      <div class="card">
+        <h3 style="margin-top:0">Community Steward flagging training complete</h3>
+        <p>This banner shows you've completed KHGN's flagging and welcoming training. Thank you for helping keep KHGN's groups safe and welcoming.</p>
+        <canvas id="banner" width="1200" height="630" role="img" aria-label="Community Steward flagging training complete banner"></canvas>
+        <button type="button" class="btn" id="download">Download banner</button>
+        <p class="privacy">Your banner is drawn in your browser. Nothing about you is sent to or stored by KHGN.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>KHGN Inc. · Kentucky History &amp; Genealogy Network · Trailhead Training is unaccredited volunteer education.<br>Facebook is a trademark of Meta Platforms, Inc. KHGN Inc. is not affiliated with or endorsed by Meta.</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ================= Settings ================= */
+  var LEVEL_NAME = "Community Steward";
+  var BANNER_TAG = "Flagging Training Complete";
+  var MODULE_NAME = "Community Advisory · Flagging and Welcoming";
+  var HANDS_ON_NOTE = "Thank you for helping keep KHGN's groups safe and welcoming";
+  var ORG_LINE = "Kentucky History & Genealogy Network";
+  var LEVELS = 3;
+  var KEY = "khgnCommunityStewardFlagging";
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  /* ================= Scenarios ================= */
+  var WHAT = [
+    { c: "A member posts a link to buy their self-published county history book for $24.",
+      o: ["Flag it", "Leave it; books are educational", "Comment that selling isn't allowed", "Message the member"],
+      a: 0, why: "It asks for money within one click, which breaks the no-selling rule. Flag it and let moderators decide." },
+    { c: "A post asks for help with an 1872 election record showing an ancestor elected county sheriff.",
+      o: ["Flag it as politics", "Leave it; it's a historical research question", "Flag it as spam", "Ask the member to delete it"],
+      a: 1, why: "Historical elections aren't modern politics. Honest research questions shouldn't be flagged." },
+    { c: "A post includes a living cousin's home address and phone number.",
+      o: ["Flag it", "Leave it; it's family information", "Reply asking them to remove it", "Screenshot it to warn others"],
+      a: 0, why: "Private information about living people breaks the rules. Flag it quietly." },
+    { c: "You're not sure whether a post with an unfamiliar link is spam.",
+      o: ["Click the link to check", "Flag it and let a moderator decide", "Ignore it, since you're not sure", "Ask in the comments whether it's safe"],
+      a: 1, why: "When in doubt, flag. A flag is a request for a second look, not an accusation." },
+    { c: "You strongly disagree with a member's theory about where a family came from, but the post follows the rules.",
+      o: ["Flag it as misinformation", "Don't flag it; disagreement isn't a violation", "Flag all their posts", "Argue in the comments"],
+      a: 1, why: "Flagging is for rule violations, not disagreements." }
+  ];
+
+  var HOW = [
+    { c: "You find a post that clearly breaks the rules. What do you do?",
+      o: ["Reply publicly explaining the rule", "Report it to the group's admins through the post's menu", "Message the poster directly", "Share it in another group as a warning"],
+      a: 1, why: "Flag quietly through the proper tool, and let moderators handle it." },
+    { c: "A post looks like a scam with a strange link. You want to be sure before flagging.",
+      o: ["Click the link to confirm", "Flag it without clicking the link", "Copy the link into your browser", "Ask a friend to click it"],
+      a: 1, why: "Never click suspicious links to check them. Flagging is enough." },
+    { c: "A member keeps disagreeing with you in comments. You're tempted to flag all their posts.",
+      o: ["Flag them all to make a point", "Flag only posts that actually break the rules", "Ask friends to flag them too", "Report them to Facebook"],
+      a: 1, why: "Flagging is for rule violations, never for settling personal disagreements." },
+    { c: "A comment contains a threat to harm someone.",
+      o: ["Only flag it to the admins", "Flag it to the admins, and also report it to the appropriate authorities", "Reply and confront the person", "Ignore it"],
+      a: 1, why: "Serious threats go to the admins and to the appropriate authorities." }
+  ];
+
+  var WELCOME = [
+    { c: "A new member introduces themselves and says they're researching their Clay County roots.",
+      o: ["Ignore it; someone else will reply", "Welcome them warmly and point them to the group rules and free resources", "Ask for their email to send resources", "Tell them to volunteer"],
+      a: 1, why: "A warm welcome and helpful pointers, without asking for personal information or pressuring them." },
+    { c: "You've noticed that new members often seem confused by the group rules. What do you do?",
+      o: ["Keep it to yourself", "Share the pattern as feedback by messaging KHGN's Facebook Page", "Rewrite the rules in a post", "Complain in the group"],
+      a: 1, why: "Your view of how KHGN comes across is exactly what Community Advisory needs. Share patterns as feedback." },
+    { c: "Your feedback is about one particular moderator's tone.",
+      o: ["Name them publicly", "Describe the pattern without naming individuals", "Post screenshots", "Keep it to yourself"],
+      a: 1, why: "Describe patterns rather than naming individuals. That keeps feedback constructive and fair." },
+    { c: "You suggested a change, and KHGN hasn't adopted it yet.",
+      o: ["Assume no one listened", "Remember that input shapes recommendations, and the Board decides; watch for updates on what changed", "Stop giving feedback", "Post about it in every group"],
+      a: 1, why: "Member input is advisory. KHGN shares updates on what changed because of member feedback." }
+  ];
+
+  var SETS = {
+    1: [{ host: "practice-1", items: WHAT, opts: null, label: "Case" }],
+    2: [{ host: "practice-2", items: HOW, opts: null, label: "Case" }],
+    3: [{ host: "practice-3", items: WELCOME, opts: null, label: "Case" }]
+  };
+  var correct = {};
+
+  /* ================= Saved progress (this device only) ================= */
+  var progress = { done: [] };
+  try { var saved = JSON.parse(localStorage.getItem(KEY)); if (saved && saved.done) { progress = saved; } } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(progress)); } catch (e) {} }
+  function isDone(n) { return progress.done.indexOf(n) !== -1; }
+  function isUnlocked(n) { return n === 1 || isDone(n - 1); }
+
+  /* ================= Build practice sets ================= */
+  function buildSet(n, set) {
+    var host = document.getElementById(set.host);
+    correct[set.host] = [];
+    set.items.forEach(function (item, i) {
+      var opts = item.o || set.opts;
+      var box = document.createElement("div");
+      box.className = "scenario";
+      var html = '<div class="num">' + set.label + ' ' + (i + 1) + '</div><p class="case">' + esc(item.c) + '</p><div class="choices' + (item.o ? ' stacked' : '') + '" role="group" aria-label="Choose an answer for ' + set.label.toLowerCase() + ' ' + (i + 1) + '">';
+      var order = opts.map(function (_, oi) { return oi; });
+      for (var k = order.length - 1; k > 0; k--) { var r = Math.floor(Math.random() * (k + 1)); var tmp = order[k]; order[k] = order[r]; order[r] = tmp; }
+      order.forEach(function (oi) { html += '<button type="button" data-i="' + oi + '">' + esc(opts[oi]) + '</button>'; });
+      html += '</div><div class="feedback" aria-live="polite"></div>';
+      box.innerHTML = html;
+      host.appendChild(box);
+      var fb = box.querySelector(".feedback");
+      if (isDone(n)) {
+        correct[set.host][i] = true;
+        box.querySelector('button[data-i="' + item.a + '"]').classList.add("picked-right");
+        fb.className = "feedback show right"; fb.textContent = "Correct. " + item.why;
+      }
+      box.querySelectorAll("button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          box.querySelectorAll("button").forEach(function (bb) { bb.classList.remove("picked-right", "picked-wrong"); });
+          var right = parseInt(btn.getAttribute("data-i"), 10) === item.a;
+          btn.classList.add(right ? "picked-right" : "picked-wrong");
+          fb.className = "feedback show " + (right ? "right" : "wrong");
+          fb.textContent = right ? "Correct. " + item.why : "Not quite. Review the material above and try another answer.";
+          correct[set.host][i] = right;
+          updateLevel(n);
+        });
+      });
+    });
+  }
+  for (var lv = 1; lv <= LEVELS; lv++) { SETS[lv].forEach(function (set) { buildSet(lv, set); }); }
+
+  var pledge = document.getElementById("pledge");
+  if (isDone(LEVELS)) { pledge.checked = true; }
+  pledge.addEventListener("change", function () { updateLevel(LEVELS); });
+
+  function tally(n) {
+    var got = 0, total = 0;
+    SETS[n].forEach(function (set) { total += set.items.length; got += correct[set.host].filter(Boolean).length; });
+    return { got: got, total: total };
+  }
+  function levelReady(n) {
+    var t = tally(n), all = t.got === t.total;
+    return n === LEVELS ? all && pledge.checked : all;
+  }
+  function updateLevel(n) {
+    var ready = levelReady(n), t = tally(n);
+    var btn = document.getElementById("next-" + n);
+    var status = document.getElementById("status-" + n);
+    btn.disabled = !ready;
+    if (isDone(n)) { status.textContent = "Level complete."; }
+    else if (ready) { status.textContent = "All answers correct. You're ready to move on."; }
+    else { status.textContent = t.got + " of " + t.total + " answers correct" + (n === LEVELS ? ", plus the pledge" : "") + "."; }
+  }
+
+
+  /* ================= Navigation ================= */
+  var award = document.getElementById("award");
+  var locked = document.getElementById("locked");
+  var current = 1;
+
+  function refreshSteps() {
+    for (var n = 1; n <= LEVELS; n++) {
+      var step = document.getElementById("step-" + n);
+      var state = document.getElementById("state-" + n);
+      step.classList.toggle("is-done", isDone(n));
+      step.classList.toggle("is-locked", !isUnlocked(n));
+      step.classList.toggle("is-current", n === current);
+      step.setAttribute("aria-current", n === current ? "step" : "false");
+      state.textContent = isDone(n) ? "Complete" : isUnlocked(n) ? "In progress" : "Locked";
+    }
+    var finished = isDone(LEVELS);
+    locked.style.display = finished ? "none" : "block";
+    if (finished && !award.classList.contains("show")) { award.classList.add("show"); drawBanner(); }
+    if (!finished) { award.classList.remove("show"); }
+  }
+
+  function show(n, scroll) {
+    current = n;
+    for (var i = 1; i <= LEVELS; i++) { document.getElementById("level-" + i).hidden = i !== n; }
+    var unlocked = isUnlocked(n);
+    document.getElementById("locked-" + n).hidden = unlocked;
+    document.getElementById("content-" + n).hidden = !unlocked;
+    refreshSteps();
+    updateLevel(n);
+    if (scroll) { document.querySelector(".level-nav").scrollIntoView({ behavior: "smooth", block: "start" }); }
+  }
+
+  for (var n0 = 1; n0 <= LEVELS; n0++) {
+    (function (n) {
+      document.getElementById("step-" + n).addEventListener("click", function () { show(n, false); });
+      document.getElementById("next-" + n).addEventListener("click", function () {
+        if (!levelReady(n)) { return; }
+        if (!isDone(n)) { progress.done.push(n); save(); }
+        if (n < LEVELS) { show(n + 1, true); }
+        else { refreshSteps(); updateLevel(LEVELS); document.getElementById("s9").scrollIntoView({ behavior: "smooth", block: "start" }); }
+      });
+    })(n0);
+  }
+
+  document.getElementById("reset").addEventListener("click", function () {
+    if (!window.confirm("Start the flagging training over? Your saved progress on this device will be cleared.")) { return; }
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    window.location.reload();
+  });
+
+
+  /* ================= Banner ================= */
+  var canvas = document.getElementById("banner");
+  var ctx = canvas.getContext("2d");
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { if (award.classList.contains("show")) { drawBanner(); } }); }
+
+  function fit(text, weight, size, min, family, maxW) {
+    ctx.font = weight + " " + size + "px " + family;
+    while (ctx.measureText(text).width > maxW && size > min) { size -= 2; ctx.font = weight + " " + size + "px " + family; }
+  }
+
+  function drawBanner() {
+    var W = canvas.width, H = canvas.height;
+    var serif = 'Rye, Georgia, "Times New Roman", serif';
+    var sans = '"Public Sans", Arial, sans-serif';
+    ctx.fillStyle = "#1C140F"; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "#B08D57"; ctx.lineWidth = 6; ctx.strokeRect(28, 28, W - 56, H - 56);
+    ctx.lineWidth = 1.5; ctx.strokeRect(44, 44, W - 88, H - 88);
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = "#D4AF6A"; ctx.font = "700 26px " + sans;
+    ctx.fillText("KHGN INC.  ·  TRAILHEAD TRAINING", W / 2, 112);
+    ctx.fillStyle = "#B08D57"; ctx.fillRect(W / 2 - 60, 132, 120, 3);
+
+    ctx.fillStyle = "#EDE0C8"; fit(LEVEL_NAME.toUpperCase(), "700", 80, 40, serif, W - 160);
+    ctx.fillText(LEVEL_NAME.toUpperCase(), W / 2, 250);
+    ctx.fillStyle = "#D4AF6A"; ctx.font = "700 30px " + sans;
+    ctx.fillText(BANNER_TAG.toUpperCase(), W / 2, 298);
+
+    ctx.fillStyle = "#E0D0AC"; ctx.font = "400 30px " + sans;
+    ctx.fillText("for completing " + MODULE_NAME, W / 2, 378);
+    ctx.fillStyle = "#D4AF6A"; ctx.font = "600 26px " + sans;
+    ctx.fillText(new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }), W / 2, 428);
+    ctx.fillStyle = "#BFAE8A"; fit(HANDS_ON_NOTE, "400", 20, 14, sans, W - 160);
+    ctx.fillText(HANDS_ON_NOTE, W / 2, H - 100);
+    ctx.font = "400 20px " + sans; ctx.fillText(ORG_LINE, W / 2, H - 70);
+  }
+
+  document.getElementById("download").addEventListener("click", function () {
+    drawBanner();
+    var fileName = "KHGN-" + LEVEL_NAME.replace(/\s+/g, "-") + "-Training-Complete.png";
+    canvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = fileName;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    }, "image/png");
+  });
+  /* Start on the first unfinished level (runs last, after the banner tools are ready) */
+  var firstOpen = 1;
+  while (firstOpen < LEVELS && isDone(firstOpen)) { firstOpen++; }
+  show(firstOpen, false);
+})();
+</script>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nav = document.querySelector(".site-nav");
+            const toggle = document.querySelector(".site-nav-toggle");
+            const links = document.querySelector(".site-nav-links");
+            if (!nav || !toggle || !links) {
+                return;
+            }
+            toggle.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+            links.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    toggle.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
