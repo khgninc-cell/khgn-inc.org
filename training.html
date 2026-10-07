@@ -1,90 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KHGN Inc. - Regional Field Training & Presentation Terminal</title>
-    <style>
-        body { margin: 0; font-family: Arial, sans-serif; background: #ffffff; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
-        .site-nav { background: #ffffff; border-bottom: 1px solid #d9e2ef; position: sticky; top: 0; z-index: 1000; }
-        .site-nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; min-height: 68px; display: flex; align-items: center; gap: 20px; }
-        .site-nav-brand { color: #111; text-decoration: none; font-size: 22px; font-weight: bold; white-space: nowrap; }
-        .site-nav-links { margin-left: auto; display: flex; align-items: center; gap: 18px; }
-        .site-nav-links a { color: #333; text-decoration: none; font-size: 15px; font-weight: bold; padding: 8px 0; border-bottom: 2px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
-        .site-nav-links a:hover { color: #0056b3; }
-        .site-nav-toggle { display: none; margin-left: auto; padding: 8px; border: none; background: transparent; cursor: pointer; }
-        .site-nav-toggle-bar { display: block; width: 24px; height: 3px; margin: 4px 0; border-radius: 999px; background: #0056b3; }
-        .page-index .site-nav-links a[href="index.html"],
-        .page-groups .site-nav-links a[href="groups.html"],
-        .page-recruiting .site-nav-links a[href="recruiting.html"],
-        .page-donation .site-nav-links a[href="donation-portal.html"],
-        .page-training .site-nav-links a[href="training.html"],
-        .page-games .site-nav-links a[href="game-portal.html"] { color: #0056b3; border-bottom-color: #0056b3; }
-        @media (max-width: 700px) {
-            .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
-            .site-nav-toggle { display: block; }
-            .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
-            .site-nav.is-open .site-nav-links { display: flex; }
-            .site-nav-links a { width: 100%; padding: 10px 0; }
-            .search-row, .lab-layout, .group-row { flex-direction: column; align-items: flex-start; }
-            .container { margin: 30px auto; }
-        }
-        .banner { background: #f4f4f4; border-bottom: 2px solid #ddd; padding: 25px; text-align: center; font-size: 26px; font-weight: bold; }
-        .container { max-width: 850px; margin: 40px auto; padding: 20px; box-sizing: border-box; width: 100%; }
-        .header-box { text-align: center; margin-bottom: 35px; }
-        h1 { font-size: 28px; color: #111; margin-bottom: 10px; }
-        .subcommittee-title { font-size: 17px; color: #0056b3; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
-        p { font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 25px; }
-        .field-card-box { background: #fafafa; border: 1px solid #eee; padding: 25px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.01); }
-        .disclaimer-box { background: #fffcf5; border: 1px solid #ffeeba; border-left: 4px solid #ffc107; padding: 18px; border-radius: 4px; margin-bottom: 30px; font-size: 14px; line-height: 1.5; color: #856404; }
-        .credit-callout { background: #f0f7ff; border-left: 4px solid #0056b3; padding: 20px; border-radius: 0 6px 6px 0; margin-bottom: 30px; }
-        .game-terminal-btn { display: block; width: 100%; padding: 14px; background: #222; color: #fff; text-decoration: none; border-radius: 4px; font-size: 16px; font-weight: bold; text-align: center; box-sizing: border-box; }
-        .game-terminal-btn:hover { background: #444; }
-        .back-home { display: inline-block; margin-top: 30px; color: #666; text-decoration: none; font-size: 14px; font-weight: bold; }
-    </style>
-</head>
-<body class="page-training">
-    <nav class="site-nav" aria-label="Global">
-        <div class="site-nav-inner">
-            <a href="index.html" class="site-nav-brand">KHGN Inc.</a>
-            <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="site-nav-toggle-bar"></span>
-                <span class="site-nav-toggle-bar"></span>
-                <span class="site-nav-toggle-bar"></span>
-            </button>
-            <div class="site-nav-links">
-                <a href="index.html">Home</a>
-                <a href="/socialmedia.html">Social Media</a>
-                <a href="recruiting.html">Volunteer Recruitment</a>
-                <a href="donation-portal.html">Donation Portal</a>
-                <a href="training.html">Training Lab</a>
-                <a href="game-portal.html">Trailhead Training</a>
-            </div>
-        </div>
-    </nav>
+<script src="/shared/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view KHGN Trailhead Training.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training Home - KHGN Inc. Volunteer Leadership Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="KHGN Inc. private volunteer leadership training for enrolled volunteers.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --ink-soft:#4A3A28; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+    --pass:#2F5224; --pass-bg:#DDE8D6; --warn:#6A4E22; --warn-bg:#F1E2C4; --fail:#8E2A1F; --fail-bg:#F3D9D3; --card-line:#CDBB98;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--walnut); color: var(--parchment); font-family: 'Public Sans', Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  a { color: var(--brass-bright); }
+  :focus-visible { outline: 3px solid var(--brass-bright); outline-offset: 2px; }
+  /* Navigation */
+  .site-nav {
+      background: var(--walnut-deep);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+  }
+  .site-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+  .site-nav-brand {
+      color: var(--brass-bright);
+      text-decoration: none;
+      font-family: 'Rye', serif;
+      font-weight: 400;
+      font-size: 22px;
+      white-space: nowrap;
+  }
+  .site-nav-links {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+  }
+  .site-nav-links a {
+      color: var(--parchment);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .site-nav-links a:hover { color: var(--brass-bright); }
+  .site-nav-toggle {
+      display: none;
+      margin-left: auto;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+  }
+  .site-nav-toggle-bar {
+      display: block;
+      width: 24px;
+      height: 3px;
+      margin: 4px 0;
+      border-radius: 999px;
+      background: var(--brass-bright);
+  }
+  .page-games .site-nav-links a[href="https://khgn-inc.org/game-portal.html"] {
+      color: var(--brass-bright);
+      border-bottom-color: var(--brass);
+  }
 
-    <div class="banner">🚗 Kentucky History and Genealogy Network Inc.</div>
-    <div class="container">
-        <div class="header-box">
-            <div id="subcommitteeLabel" class="subcommittee-title">🥾 Active Subcommittee: Boots On The Ground Field Training Unit</div>
-            <h1>Regional Field Presentations &amp; Archival Training</h1>
+  @media (max-width: 700px) {
+      .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+      .site-nav-toggle { display: block; }
+      .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+      .site-nav.is-open .site-nav-links { display: flex; }
+      .site-nav-links a { width: 100%; padding: 10px 0; }
+      .game-grid { grid-template-columns: 1fr !important; }
+      .container { margin: 30px auto; }
+      .hero h1 { font-size: 32px; }
+  }
+
+
+  @media (max-width: 700px) {
+    .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+    .site-nav-toggle { display: block; }
+    .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+    .site-nav.is-open .site-nav-links { display: flex; }
+    .site-nav-links a { width: 100%; padding: 10px 0; }
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .back { display: inline-block; margin: 22px 0 0; font-weight: 700; text-decoration: none; }
+  .back:hover { color: var(--parchment); }
+  header.module { padding: 32px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 32px; background: radial-gradient(ellipse at 50% -40%, rgba(176,141,87,0.18), transparent 70%); }
+  .eyebrow { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); }
+  h1, h2 { font-family: 'Rye', Georgia, serif; font-weight: 400; line-height: 1.2; }
+  h1 { margin: 0 0 14px; font-size: clamp(30px, 5vw, 40px); color: var(--parchment); text-shadow: 0 2px 0 var(--walnut-deep); }
+  h2 { margin: 0 0 14px; font-size: 25px; color: var(--parchment); }
+  h3 { margin: 18px 0 6px; font-size: 18px; font-weight: 800; line-height: 1.3; color: var(--brass-bright); }
+  .lede { margin: 0; font-size: 18px; color: var(--parchment-dim); max-width: 700px; }
+  section.step { margin: 0 0 48px; }
+  section.step > p { color: var(--parchment-dim); }
+  .step-num { display: inline-block; margin-bottom: 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--brass-bright); text-transform: uppercase; }
+  .hint { margin: 0 0 10px; font-size: 15px; color: var(--parchment-dim); }
+  label.big { display: block; font-weight: 700; margin-bottom: 6px; }
+  /* parchment cards */
+  .card, .standard, .scenario, .quiz-q, .check, .award-card, .rung, .pledge, .stop-like {
+    background: var(--parchment); color: var(--ink); border-radius: 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+  .card h3, .award-card h3, .standard h3 { color: var(--ink); }
+  .card a, .standard a, .scenario a, .award-card a, .note a { color: #7A3A1E; }
+  .note { display: flex; gap: 14px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 20px; color: var(--parchment-dim); }
+  .note p { margin: 0; } .note strong { color: var(--brass-bright); } .note a { color: var(--brass-bright); }
+  .note svg { flex-shrink: 0; margin-top: 3px; }
+  .btn, button.primary, .row button {
+    min-height: 46px; padding: 11px 22px; font: inherit; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    color: #fff; background: var(--rust); border: 0; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;
+  }
+  .btn:hover, .row button:hover { background: var(--rust-bright); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+  .count { font-size: 15px; color: var(--parchment-dim); }
+  .feedback { margin-top: 10px; font-size: 15px; padding: 8px 12px; border-radius: 6px; display: none; }
+  .feedback.show { display: block; }
+  .feedback.right { background: var(--pass-bg); color: var(--pass); }
+  .feedback.wrong { background: var(--fail-bg); color: var(--fail); }
+  .progress { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .pill { padding: 6px 14px; border-radius: 999px; font-size: 14.5px; font-weight: 700; background: var(--walnut-deep); border: 1px solid var(--line); color: var(--parchment-dim); }
+  .pill.done { background: var(--pass-bg); border-color: var(--pass-bg); color: var(--pass); }
+  .locked { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  #award { display: none; } #award.show { display: block; }
+  .award-card { padding: 22px; }
+  .award-card .hint, .award-card p { color: var(--ink-soft); }
+  input[type="text"] { width: 100%; max-width: 420px; min-height: 44px; padding: 8px 12px; font: inherit; font-size: 17px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  canvas { display: block; width: 100%; height: auto; margin: 16px 0; border-radius: 8px; }
+  .privacy { font-size: 14px; color: var(--ink-soft); margin: 8px 0 0; }
+  footer { padding: 28px 0 48px; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--parchment-dim); }
+
+  .alert { padding: 14px 20px; border-radius: 10px; background: var(--fail-bg); color: var(--fail); font-weight: 700; margin: 14px 0; }
+  .card { padding: 18px 22px; margin-bottom: 14px; }
+  .card p { margin: 0 0 10px; } .card p:last-child { margin-bottom: 0; }
+  ul.rules { margin: 0; padding-left: 22px; } ul.rules li { margin-bottom: 10px; }
+  .why { display: block; font-size: 15px; color: var(--ink-soft); }
+  section.step > .why, section.step > p.why { color: var(--parchment-dim); }
+  .table-wrap { overflow-x: auto; border-radius: 10px; margin: 10px 0 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+  table { width: 100%; border-collapse: collapse; background: var(--parchment); color: var(--ink); font-size: 16px; }
+  th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--card-line); }
+  th { background: var(--walnut-deep); color: var(--brass-bright); font-weight: 700; }
+  tr:last-child td { border-bottom: 0; }
+  ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 8px; }
+  .ladder { display: grid; gap: 10px; }
+  .rung { display: flex; gap: 14px; align-items: flex-start; padding: 12px 18px; box-shadow: none; }
+  .rung b { flex-shrink: 0; min-width: 190px; color: var(--ink); }
+  .rung span { color: var(--ink-soft); }
+  .rung.here { outline: 3px solid var(--brass-bright); }
+  .scenario { padding: 18px 20px; margin-bottom: 14px; }
+  .scenario .case { margin: 0 0 12px; }
+  .scenario .num { font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; color: #7A3A1E; text-transform: uppercase; }
+  .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+  .choices button { min-height: 42px; padding: 8px 14px; font: inherit; font-size: 14.5px; font-weight: 700; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--brass); border-radius: 6px; cursor: pointer; }
+  .choices.stacked { flex-direction: column; align-items: stretch; }
+  .choices.stacked button { text-align: left; }
+  .choices button:hover { background: var(--parchment-dim); }
+  .choices button.picked-right { background: var(--pass-bg); border-color: var(--pass); color: var(--pass); }
+  .choices button.picked-wrong { background: var(--fail-bg); border-color: var(--fail); color: var(--fail); }
+  .pledge { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; cursor: pointer; }
+  .pledge input { margin-top: 6px; width: 20px; height: 20px; accent-color: var(--rust); }
+
+  .level-nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 0 0 10px; scroll-margin-top: 90px; }
+  .level-step { display: flex; align-items: center; gap: 10px; text-align: left; padding: 12px 14px; font: inherit; color: var(--parchment); background: var(--walnut-deep); border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer; }
+  .level-step:hover { border-color: var(--brass); }
+  .level-step.is-current { background: var(--parchment); color: var(--ink); border-color: var(--brass-bright); }
+  .level-step.is-locked { opacity: 0.6; }
+  .ls-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Rye', Georgia, serif; font-size: 16px; background: var(--line); color: var(--parchment); }
+  .level-step.is-current .ls-num, .level-step.is-done .ls-num { background: var(--brass-bright); color: var(--walnut-deep); }
+  .level-step.is-done .ls-num::after { content: "✓"; font-family: 'Public Sans', Arial, sans-serif; font-weight: 800; }
+  .level-step.is-done .ls-num { font-size: 0; }
+  .level-step.is-done .ls-num::after { font-size: 16px; }
+  .ls-text { display: flex; flex-direction: column; min-width: 0; }
+  .ls-title { font-weight: 700; font-size: 14.5px; line-height: 1.25; }
+  .ls-state { font-size: 12.5px; color: var(--parchment-dim); }
+  .level-step.is-current .ls-state { color: #6A4E22; }
+  .progress-note { font-size: 14px; color: var(--parchment-dim); margin: 0 0 30px; }
+  .linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--brass-bright); text-decoration: underline; cursor: pointer; }
+  .level-panel { margin: 0 0 40px; }
+  .level-panel[hidden], .level-content[hidden], .locked-msg[hidden] { display: none; }
+  .level-intro { font-size: 17px; color: var(--parchment-dim); margin: -4px 0 20px; }
+  .locked-msg { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  .level-done { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 24px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--brass); border-radius: 10px; }
+  .level-status { font-weight: 700; color: var(--parchment); }
+  .next-btn:disabled { background: #6E5A48; color: #D8CBB2; cursor: not-allowed; }
+  @media (max-width: 760px) {
+    .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
+<style>
+  .home-hero { padding: 36px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 30px; background: radial-gradient(ellipse at 50% -40%, rgba(176,141,87,0.18), transparent 70%); }
+  .track-block { margin: 0 0 36px; }
+  .track-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 14px; }
+  .track-head h2 { margin: 0; }
+  .track-sub { font-size: 14px; font-weight: 700; color: var(--brass-bright); }
+  .lvl-row { display: flex; align-items: center; gap: 16px; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+  .lvl-row.soon { background: var(--parchment-dim); box-shadow: none; }
+  .lvl-n { flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Rye', Georgia, serif; font-size: 17px; background: var(--brass-bright); color: var(--walnut-deep); }
+  .lvl-row.soon .lvl-n { background: #D9C8A6; color: #6A4E22; }
+  .lvl-main { flex-grow: 1; min-width: 0; }
+  .lvl-name { font-family: 'Rye', Georgia, serif; font-size: 18px; }
+  .lvl-note { font-size: 14px; color: var(--ink-soft); margin: 2px 0 0; }
+  .lvl-go { flex-shrink: 0; display: inline-block; text-decoration: none; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 16px; border-radius: 6px; color: #fff; background: var(--rust); }
+  .lvl-go:hover { background: var(--rust-bright); color: #fff; }
+  .lvl-go.public { background: transparent; color: #7A3A1E; border: 1.5px solid #7A3A1E; }
+  .lvl-soon { flex-shrink: 0; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 9px 14px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A; }
+  .other-tracks { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .other { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .other b { display: block; font-family: 'Rye', Georgia, serif; font-weight: 400; font-size: 17px; color: var(--parchment); }
+  .other span { font-size: 13.5px; color: var(--parchment-dim); }
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 10px; }
+  .info { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; font-size: 14.5px; line-height: 1.6; color: var(--parchment-dim); }
+  .info strong { display: block; color: var(--brass-bright); margin-bottom: 4px; }
+  @media (max-width: 600px) { .lvl-row { flex-wrap: wrap; } .lvl-go, .lvl-soon { margin-left: 54px; } }
+</style>
+</head>
+<body class="page-games">
+
+    <nav class="site-nav" aria-label="Global">
+    <div class="site-nav-inner">
+        <a href="https://khgn-inc.org/index.html" class="site-nav-brand">KHGN Inc.</a>
+        <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+        </button>
+        <div class="site-nav-links">
+            <a href="https://khgn-inc.org/index.html">Home</a>
+            <a href="https://khgn-inc.org/socialmedia.html">Social Media</a>
+            <a href="https://khgn-inc.org/recruiting.html">Volunteer Recruitment</a>
+            <a href="https://khgn-inc.org/donation-portal.html">Donation Portal</a>
+            <a href="https://khgn-inc.org/training.html">Volunteer Training</a>
+            <a href="https://khgn-inc.org/game-portal.html">Trailhead Training</a>
         </div>
-        <div class="disclaimer-box">
-            <strong>⚠️ NOTICED DISCLOSURE (Arms-Length Operating Rule):</strong><br>
-            Kentucky History and Genealogy Network Inc. (KHGN Inc.) operates strictly as an independent, sovereign educational organization. KHGN Inc. maintains no formal joint ventures, legal partnerships, or affiliate relationships beyond what is explicitly disclosed here.
-        </div>
-        <div class="field-card-box">
-            <h3 style="margin-top:0; border-bottom: 2px solid #333; padding-bottom:5px; font-size:18px;">📋 Mobile Presentation &amp; Deployment Mission</h3>
-            <p>Our core operational focus is centered straight on independent, on-site historical data presentations and mobile preservation methodology workshops across the Commonwealth of Kentucky.</p>
-        </div>
-        <div class="credit-callout">
-            <strong style="color:#0056b3; font-size:17px;">🕹️ Integrated Field Training Suite</strong>
-            <p style="margin: 8px 0 15px 0; font-size:15px; color:#333; line-height:1.5;">Trainees attending our mobile field presentations can instantly launch their authorized GDevelop logic modules or browse our full <a href="game-portal.html">Trailhead</a> library of interactive learning tools.</p>
-            <a href="game-portal.html" class="game-terminal-btn">🚀 LAUNCH ACTIVE TRAILHEAD LAB</a>
-        </div>
-        <div style="text-align: center;"><a href="/index.html" class="back-home">⬅️ Return to Main Platform Landing Room</a></div>
     </div>
-    <script>
+</nav>
+
+<div class="wrap">
+  <header class="home-hero">
+    <p class="eyebrow">KHGN Volunteer Leadership Training</p>
+    <h1>Welcome to Training Home</h1>
+    <p class="lede">You're enrolled in KHGN's private training area. Choose your track below and work through each level in order. Each level unlocks after the one before it, and every level earns a banner.</p>
+  </header>
+
+  <section class="track-block" aria-labelledby="t-fb">
+    <div class="track-head">
+      <h2 id="t-fb">Moderating on Facebook</h2>
+      <span class="track-sub">Social Media Subcommittee</span>
+    </div>
+
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">1</div>
+      <div class="lvl-main"><div class="lvl-name">Community Steward</div><p class="lvl-note">The Tipple Trial · on KHGN's public website</p></div>
+      <a class="lvl-go public" href="https://khgn-inc.org/tipple-trial.html">Open &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">2</div>
+      <div class="lvl-main"><div class="lvl-name">Contributing Steward</div><p class="lvl-note">The Perfect Post</p></div>
+      <a class="lvl-go" href="/facebook/contributing-steward/">Begin &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">3</div>
+      <div class="lvl-main"><div class="lvl-name">Moderator</div><p class="lvl-note">Four levels: screening, post moderation, the Potential Spam folder, and accountability</p></div>
+      <a class="lvl-go" href="/facebook/moderator/">Begin &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">4</div>
+      <div class="lvl-main"><div class="lvl-name">County Administrator</div><p class="lvl-note">Five levels: final decisions, enforcement and appeals, group upkeep, leading moderators, and the monthly county report</p></div>
+      <a class="lvl-go" href="/facebook/county-admin/">Begin &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">5</div>
+      <div class="lvl-main"><div class="lvl-name">District Administrator</div><p class="lvl-note">Oversight of three counties: escalations, new issues and temporary fixes, spot checks, coverage, and the district report</p></div>
+      <a class="lvl-go" href="/facebook/district-admin/">Begin &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">6</div>
+      <div class="lvl-main"><div class="lvl-name">Regional Administrator</div><p class="lvl-note">Oversight of a twelve-county region and a seat on the Social Media Subcommittee: oversight, proposals, the Subcommittee, staffing, and two-way reports and policy communication</p></div>
+      <a class="lvl-go" href="/facebook/regional-admin/">Begin &rarr;</a>
+    </div>
+  </section>
+
+  <section class="track-block" aria-labelledby="t-wd">
+    <div class="track-head">
+      <h2 id="t-wd">Workforce Development</h2>
+      <span class="track-sub">Workforce Development &amp; Retention Subcommittee</span>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">1</div>
+      <div class="lvl-main"><div class="lvl-name">Community Steward</div><p class="lvl-note">The Tipple Trial · on KHGN's public website</p></div>
+      <a class="lvl-go public" href="https://khgn-inc.org/tipple-trial.html">Open &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">2</div>
+      <div class="lvl-main"><div class="lvl-name">Trail Greeter</div><p class="lvl-note">Welcomes interested people, explains the paths, and points them to enrollment</p></div>
+      <a class="lvl-go" href="/workforce-development/trail-greeter/">Begin &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">3</div>
+      <div class="lvl-main"><div class="lvl-name">Trail Guide</div><p class="lvl-note">Helps newly approved volunteers get started, stay connected, and want to stay</p></div>
+      <a class="lvl-go" href="/workforce-development/trail-guide/">Begin &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">4</div>
+      <div class="lvl-main"><div class="lvl-name">Pathfinder</div><p class="lvl-note">Works the shared statewide queue: places volunteers and runs check-ins</p></div>
+      <a class="lvl-go" href="/workforce-development/pathfinder/">Begin &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">5</div>
+      <div class="lvl-main"><div class="lvl-name">Trailblazer</div><p class="lvl-note">Leads a team of Pathfinders and Guides, with the team's monthly report</p></div>
+      <a class="lvl-go" href="/workforce-development/trailblazer/">Begin &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">6</div>
+      <div class="lvl-main"><div class="lvl-name">Trailkeeper</div><p class="lvl-note">Oversees the Trailblazers and the statewide staffing picture</p></div>
+      <a class="lvl-go" href="/workforce-development/trailkeeper/">Begin &rarr;</a>
+    </div>
+  </section>
+
+  <section class="track-block" aria-labelledby="t-ca">
+    <div class="track-head">
+      <h2 id="t-ca">Community Advisory</h2>
+      <span class="track-sub">Community Advisory Subcommittee</span>
+    </div>
+    <p class="lvl-note" style="color:var(--parchment-dim);margin:-6px 0 14px">Giving KHGN's audience a direct voice, while keeping KHGN a long-standing example of what public service is all about, well into the future.</p>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">1</div>
+      <div class="lvl-main"><div class="lvl-name">Community Steward</div><p class="lvl-note">The Tipple Trial plus Flagging and Welcoming · on KHGN's public website</p></div>
+      <a class="lvl-go public" href="https://khgn-inc.org/community-steward-flagging.html">Open &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">2</div>
+      <div class="lvl-main"><div class="lvl-name">Contributing Steward</div><p class="lvl-note">The Perfect Post: model good posting and build participation</p></div>
+      <a class="lvl-go" href="/facebook/contributing-steward/">Begin &rarr;</a>
+    </div>
+    <div class="lvl-row">
+      <div class="lvl-n" aria-hidden="true">3</div>
+      <div class="lvl-main"><div class="lvl-name">Regional Advisor</div><p class="lvl-note">Carries the public's voice to leadership: gathering feedback, recommending, and closing the loop</p></div>
+      <a class="lvl-go" href="/community-advisory/regional-advisor/">Begin &rarr;</a>
+    </div>
+  </section>
+
+  <section class="track-block" aria-labelledby="t-other">
+    <div class="track-head"><h2 id="t-other">More tracks on the way</h2></div>
+    <div class="other-tracks">
+      <div class="other"><b>Website</b><span>Communication Committee</span></div>
+      <div class="other"><b>County Website</b><span>Communication Committee</span></div>
+    </div>
+  </section>
+
+  <section class="track-block" aria-labelledby="t-info">
+    <div class="track-head"><h2 id="t-info">Good to know</h2></div>
+    <div class="info-grid">
+      <div class="info"><strong>Your progress</strong>Training progress is saved on the device you use, never sent to KHGN. If you switch devices, you may need to start a level again.</div>
+      <div class="info"><strong>Banners</strong>Training banners download when you finish a module. From Moderator up, your role banner follows hands-on time and your supervisor's sign-off.</div>
+      <div class="info"><strong>Need help?</strong>Ask your County Administrator, or send a message to <a href="https://www.facebook.com/KHGNINC/" target="_blank" rel="noopener noreferrer">KHGN's Facebook Page</a>.</div>
+    </div>
+  </section>
+
+  <footer>KHGN Inc. · Kentucky History &amp; Genealogy Network · Private training for enrolled volunteers. Please don't share these pages or your sign-in code.<br>Facebook is a trademark of Meta Platforms, Inc. KHGN Inc. is not affiliated with or endorsed by Meta.</footer>
+</div>
+
+<script>
         document.addEventListener("DOMContentLoaded", function () {
             const nav = document.querySelector(".site-nav");
             const toggle = document.querySelector(".site-nav-toggle");
@@ -103,10 +398,6 @@
                 });
             });
         });
-    </script>
-    <script>
-        const officialSubcommitteeName = "Boots On The Ground Field Training Unit";
-        document.getElementById("subcommitteeLabel").textContent = `🥾 Active Subcommittee: ${officialSubcommitteeName}`;
     </script>
 </body>
 </html>
