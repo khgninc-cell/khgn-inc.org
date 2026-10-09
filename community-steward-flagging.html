@@ -225,6 +225,8 @@
   .county-grid .total { font-weight: 800; text-align: right; color: var(--ink); }
   .grid-wrap { overflow-x: auto; }
   .grid-wrap .county-grid { min-width: 620px; }
+  .flag-diagram { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0 0 8px; overflow-x: auto; }
+  .flag-diagram svg { display: block; width: 100%; min-width: 560px; height: auto; }
 </style>
 </head>
 <body class="page-games">
@@ -325,6 +327,47 @@
         </ol>
         <p>That sends it privately to the group's moderators and administrators for review. The person who posted isn't told who flagged it.</p>
       </div>
+      <h3>Where a flag goes</h3>
+      <div class="flag-diagram">
+        <svg viewBox="0 0 760 330" role="img" aria-labelledby="fd-title fd-desc" preserveAspectRatio="xMidYMid meet">
+          <title id="fd-title">The two paths a flagged post can take</title>
+          <desc id="fd-desc">A Community Steward spots a post that seems to break the rules. Reporting it to the group's admins sends it to a moderator, who reviews it and decides, keeping the group well run. Reporting it to Facebook sends it to Facebook's reviewers, which can count against the whole group.</desc>
+          <defs>
+            <marker id="fd-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#B08D57"/></marker>
+            <marker id="fd-arrow-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C2503F"/></marker>
+          </defs>
+          <rect x="20" y="130" width="150" height="70" rx="10" fill="#1C140F" stroke="#B08D57" stroke-width="2"/>
+          <text x="95" y="160" text-anchor="middle" fill="#EDE0C8" font-family="Rye, Georgia, serif" font-size="16">You spot a</text>
+          <text x="95" y="182" text-anchor="middle" fill="#EDE0C8" font-family="Rye, Georgia, serif" font-size="16">problem post</text>
+          <path d="M170,150 C210,120 220,80 262,72" fill="none" stroke="#B08D57" stroke-width="3" marker-end="url(#fd-arrow)"/>
+          <path d="M170,182 C210,210 220,250 262,258" fill="none" stroke="#C2503F" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#fd-arrow-r)"/>
+          <rect x="266" y="40" width="160" height="64" rx="10" fill="#DDE8D6" stroke="#6B8A5C" stroke-width="2"/>
+          <text x="346" y="66" text-anchor="middle" fill="#2F5224" font-family="Public Sans, Arial, sans-serif" font-size="14" font-weight="800">Report to</text>
+          <text x="346" y="86" text-anchor="middle" fill="#2F5224" font-family="Public Sans, Arial, sans-serif" font-size="14" font-weight="800">the group's admins</text>
+          <path d="M426,72 L474,72" fill="none" stroke="#B08D57" stroke-width="3" marker-end="url(#fd-arrow)"/>
+          <rect x="478" y="40" width="120" height="64" rx="10" fill="#EDE0C8" stroke="#B08D57" stroke-width="2"/>
+          <text x="538" y="66" text-anchor="middle" fill="#221A12" font-family="Public Sans, Arial, sans-serif" font-size="14" font-weight="800">A moderator</text>
+          <text x="538" y="86" text-anchor="middle" fill="#221A12" font-family="Public Sans, Arial, sans-serif" font-size="14" font-weight="800">reviews it</text>
+          <path d="M598,72 L640,72" fill="none" stroke="#B08D57" stroke-width="3" marker-end="url(#fd-arrow)"/>
+          <rect x="644" y="22" width="100" height="100" rx="10" fill="#DDE8D6" stroke="#6B8A5C" stroke-width="2"/>
+          <text x="694" y="56" text-anchor="middle" fill="#2F5224" font-family="Public Sans, Arial, sans-serif" font-size="13" font-weight="800">A well-run</text>
+          <text x="694" y="74" text-anchor="middle" fill="#2F5224" font-family="Public Sans, Arial, sans-serif" font-size="13" font-weight="800">group, in</text>
+          <text x="694" y="92" text-anchor="middle" fill="#2F5224" font-family="Public Sans, Arial, sans-serif" font-size="13" font-weight="800">good standing</text>
+          <rect x="266" y="226" width="160" height="64" rx="10" fill="#F3D9D3" stroke="#C2503F" stroke-width="2"/>
+          <text x="346" y="252" text-anchor="middle" fill="#7A2E23" font-family="Public Sans, Arial, sans-serif" font-size="14" font-weight="800">Report to</text>
+          <text x="346" y="272" text-anchor="middle" fill="#7A2E23" font-family="Public Sans, Arial, sans-serif" font-size="14" font-weight="800">Facebook</text>
+          <path d="M426,258 L474,258" fill="none" stroke="#C2503F" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#fd-arrow-r)"/>
+          <rect x="478" y="226" width="120" height="64" rx="10" fill="#EDE0C8" stroke="#C2503F" stroke-width="2"/>
+          <text x="538" y="252" text-anchor="middle" fill="#221A12" font-family="Public Sans, Arial, sans-serif" font-size="14" font-weight="800">Facebook's</text>
+          <text x="538" y="272" text-anchor="middle" fill="#221A12" font-family="Public Sans, Arial, sans-serif" font-size="14" font-weight="800">reviewers step in</text>
+          <path d="M598,258 L640,258" fill="none" stroke="#C2503F" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#fd-arrow-r)"/>
+          <rect x="644" y="208" width="100" height="100" rx="10" fill="#F3D9D3" stroke="#C2503F" stroke-width="2"/>
+          <text x="694" y="242" text-anchor="middle" fill="#7A2E23" font-family="Public Sans, Arial, sans-serif" font-size="13" font-weight="800">Can count</text>
+          <text x="694" y="260" text-anchor="middle" fill="#7A2E23" font-family="Public Sans, Arial, sans-serif" font-size="13" font-weight="800">against the</text>
+          <text x="694" y="278" text-anchor="middle" fill="#7A2E23" font-family="Public Sans, Arial, sans-serif" font-size="13" font-weight="800">whole group</text>
+        </svg>
+      </div>
+      <p class="hint">Choose the green path: report to the group's admins. The red path hands the decision to Facebook.</p>
       <h3>Always the admins, never Facebook</h3>
       <div class="card">
         <p>Flagged posts should always go to the group's administrators, not to Facebook. When Facebook has to step in and moderate a group's content itself, it can penalize the whole group. When the group's own administrators handle problems quickly, Facebook sees a safe, well-run group with attentive leadership, which helps the group's standing and reach.</p>
