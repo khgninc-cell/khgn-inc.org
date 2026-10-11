@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view KHGN Trailhead Training.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Started in Genealogy - KHGN Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="Free genealogy training from KHGN Inc.: start with your family, follow leads to original records, and build your case like a detective.">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --ink-soft:#4A3A28; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+    --pass:#2F5224; --pass-bg:#DDE8D6; --warn:#6A4E22; --warn-bg:#F1E2C4; --fail:#8E2A1F; --fail-bg:#F3D9D3; --card-line:#CDBB98;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--walnut); color: var(--parchment); font-family: 'Public Sans', Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  a { color: var(--brass-bright); }
+  :focus-visible { outline: 3px solid var(--brass-bright); outline-offset: 2px; }
+  /* Navigation */
+  .site-nav {
+      background: var(--walnut-deep);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+  }
+  .site-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+  .site-nav-brand {
+      color: var(--brass-bright);
+      text-decoration: none;
+      font-family: 'Rye', serif;
+      font-weight: 400;
+      font-size: 22px;
+      white-space: nowrap;
+  }
+  .site-nav-links {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+  }
+  .site-nav-links a {
+      color: var(--parchment);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .site-nav-links a:hover { color: var(--brass-bright); }
+  .site-nav-toggle {
+      display: none;
+      margin-left: auto;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+  }
+  .site-nav-toggle-bar {
+      display: block;
+      width: 24px;
+      height: 3px;
+      margin: 4px 0;
+      border-radius: 999px;
+      background: var(--brass-bright);
+  }
+  .page-games .site-nav-links a[href="https://khgn-inc.org/game-portal.html"] {
+      color: var(--brass-bright);
+      border-bottom-color: var(--brass);
+  }
+
+  @media (max-width: 700px) {
+      .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+      .site-nav-toggle { display: block; }
+      .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+      .site-nav.is-open .site-nav-links { display: flex; }
+      .site-nav-links a { width: 100%; padding: 10px 0; }
+      .game-grid { grid-template-columns: 1fr !important; }
+      .container { margin: 30px auto; }
+      .hero h1 { font-size: 32px; }
+  }
+
+
+  @media (max-width: 700px) {
+    .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+    .site-nav-toggle { display: block; }
+    .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+    .site-nav.is-open .site-nav-links { display: flex; }
+    .site-nav-links a { width: 100%; padding: 10px 0; }
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .back { display: inline-block; margin: 22px 0 0; font-weight: 700; text-decoration: none; }
+  .back:hover { color: var(--parchment); }
+  header.module { padding: 32px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 32px; background: radial-gradient(ellipse at 50% -40%, rgba(176,141,87,0.18), transparent 70%); }
+  .eyebrow { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); }
+  h1, h2 { font-family: 'Rye', Georgia, serif; font-weight: 400; line-height: 1.2; }
+  h1 { margin: 0 0 14px; font-size: clamp(30px, 5vw, 40px); color: var(--parchment); text-shadow: 0 2px 0 var(--walnut-deep); }
+  h2 { margin: 0 0 14px; font-size: 25px; color: var(--parchment); }
+  h3 { margin: 18px 0 6px; font-size: 18px; font-weight: 800; line-height: 1.3; color: var(--brass-bright); }
+  .lede { margin: 0; font-size: 18px; color: var(--parchment-dim); max-width: 700px; }
+  section.step { margin: 0 0 48px; }
+  section.step > p { color: var(--parchment-dim); }
+  .step-num { display: inline-block; margin-bottom: 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--brass-bright); text-transform: uppercase; }
+  .hint { margin: 0 0 10px; font-size: 15px; color: var(--parchment-dim); }
+  label.big { display: block; font-weight: 700; margin-bottom: 6px; }
+  /* parchment cards */
+  .card, .standard, .scenario, .quiz-q, .check, .award-card, .rung, .pledge, .stop-like {
+    background: var(--parchment); color: var(--ink); border-radius: 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+  .card h3, .award-card h3, .standard h3 { color: var(--ink); }
+  .card a, .standard a, .scenario a, .award-card a, .note a { color: #7A3A1E; }
+  .note { display: flex; gap: 14px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 20px; color: var(--parchment-dim); }
+  .note p { margin: 0; } .note strong { color: var(--brass-bright); } .note a { color: var(--brass-bright); }
+  .note svg { flex-shrink: 0; margin-top: 3px; }
+  .btn, button.primary, .row button {
+    min-height: 46px; padding: 11px 22px; font: inherit; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    color: #fff; background: var(--rust); border: 0; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;
+  }
+  .btn:hover, .row button:hover { background: var(--rust-bright); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+  .count { font-size: 15px; color: var(--parchment-dim); }
+  .feedback { margin-top: 10px; font-size: 15px; padding: 8px 12px; border-radius: 6px; display: none; }
+  .feedback.show { display: block; }
+  .feedback.right { background: var(--pass-bg); color: var(--pass); }
+  .feedback.wrong { background: var(--fail-bg); color: var(--fail); }
+  .progress { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .pill { padding: 6px 14px; border-radius: 999px; font-size: 14.5px; font-weight: 700; background: var(--walnut-deep); border: 1px solid var(--line); color: var(--parchment-dim); }
+  .pill.done { background: var(--pass-bg); border-color: var(--pass-bg); color: var(--pass); }
+  .locked { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  #award { display: none; } #award.show { display: block; }
+  .award-card { padding: 22px; }
+  .award-card .hint, .award-card p { color: var(--ink-soft); }
+  input[type="text"] { width: 100%; max-width: 420px; min-height: 44px; padding: 8px 12px; font: inherit; font-size: 17px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  canvas { display: block; width: 100%; height: auto; margin: 16px 0; border-radius: 8px; }
+  .privacy { font-size: 14px; color: var(--ink-soft); margin: 8px 0 0; }
+  footer { padding: 28px 0 48px; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--parchment-dim); }
+
+  .alert { padding: 14px 20px; border-radius: 10px; background: var(--fail-bg); color: var(--fail); font-weight: 700; margin: 14px 0; }
+  .card { padding: 18px 22px; margin-bottom: 14px; }
+  .card p { margin: 0 0 10px; } .card p:last-child { margin-bottom: 0; }
+  ul.rules { margin: 0; padding-left: 22px; } ul.rules li { margin-bottom: 10px; }
+  .why { display: block; font-size: 15px; color: var(--ink-soft); }
+  section.step > .why, section.step > p.why { color: var(--parchment-dim); }
+  .table-wrap { overflow-x: auto; border-radius: 10px; margin: 10px 0 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+  table { width: 100%; border-collapse: collapse; background: var(--parchment); color: var(--ink); font-size: 16px; }
+  th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--card-line); }
+  th { background: var(--walnut-deep); color: var(--brass-bright); font-weight: 700; }
+  tr:last-child td { border-bottom: 0; }
+  ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 8px; }
+  .ladder { display: grid; gap: 10px; }
+  .rung { display: flex; gap: 14px; align-items: flex-start; padding: 12px 18px; box-shadow: none; }
+  .rung b { flex-shrink: 0; min-width: 190px; color: var(--ink); }
+  .rung span { color: var(--ink-soft); }
+  .rung.here { outline: 3px solid var(--brass-bright); }
+  .scenario { padding: 18px 20px; margin-bottom: 14px; }
+  .scenario .case { margin: 0 0 12px; }
+  .scenario .num { font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; color: #7A3A1E; text-transform: uppercase; }
+  .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+  .choices button { min-height: 42px; padding: 8px 14px; font: inherit; font-size: 14.5px; font-weight: 700; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--brass); border-radius: 6px; cursor: pointer; }
+  .choices.stacked { flex-direction: column; align-items: stretch; }
+  .choices.stacked button { text-align: left; }
+  .choices button:hover { background: var(--parchment-dim); }
+  .choices button.picked-right { background: var(--pass-bg); border-color: var(--pass); color: var(--pass); }
+  .choices button.picked-wrong { background: var(--fail-bg); border-color: var(--fail); color: var(--fail); }
+  .pledge { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; cursor: pointer; }
+  .pledge input { margin-top: 6px; width: 20px; height: 20px; accent-color: var(--rust); }
+
+  .level-nav { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin: 0 0 10px; scroll-margin-top: 90px; }
+  .level-step { display: flex; align-items: center; gap: 10px; text-align: left; padding: 12px 14px; font: inherit; color: var(--parchment); background: var(--walnut-deep); border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer; }
+  .level-step:hover { border-color: var(--brass); }
+  .level-step.is-current { background: var(--parchment); color: var(--ink); border-color: var(--brass-bright); }
+  .level-step.is-locked { opacity: 0.6; }
+  .ls-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Rye', Georgia, serif; font-size: 16px; background: var(--line); color: var(--parchment); }
+  .level-step.is-current .ls-num, .level-step.is-done .ls-num { background: var(--brass-bright); color: var(--walnut-deep); }
+  .level-step.is-done .ls-num::after { content: "✓"; font-family: 'Public Sans', Arial, sans-serif; font-weight: 800; }
+  .level-step.is-done .ls-num { font-size: 0; }
+  .level-step.is-done .ls-num::after { font-size: 16px; }
+  .ls-text { display: flex; flex-direction: column; min-width: 0; }
+  .ls-title { font-weight: 700; font-size: 14.5px; line-height: 1.25; }
+  .ls-state { font-size: 12.5px; color: var(--parchment-dim); }
+  .level-step.is-current .ls-state { color: #6A4E22; }
+  .progress-note { font-size: 14px; color: var(--parchment-dim); margin: 0 0 30px; }
+  .linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--brass-bright); text-decoration: underline; cursor: pointer; }
+  .level-panel { margin: 0 0 40px; }
+  .level-panel[hidden], .level-content[hidden], .locked-msg[hidden] { display: none; }
+  .level-intro { font-size: 17px; color: var(--parchment-dim); margin: -4px 0 20px; }
+  .locked-msg { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  .level-done { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 24px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--brass); border-radius: 10px; }
+  .level-status { font-weight: 700; color: var(--parchment); }
+  .next-btn:disabled { background: #6E5A48; color: #D8CBB2; cursor: not-allowed; }
+  @media (max-width: 760px) {
+    .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  .report-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 18px; }
+  .report-form label { display: flex; flex-direction: column; gap: 4px; font-size: 14.5px; font-weight: 700; color: var(--ink); }
+  .report-form input, .report-form textarea, .report-form select { font: inherit; font-size: 16px; font-weight: 400; padding: 8px 10px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  .report-form .wide { grid-column: 1 / -1; }
+  .report-form textarea { min-height: 80px; resize: vertical; }
+  .report-form fieldset { grid-column: 1 / -1; border: 1px solid var(--card-line); border-radius: 8px; padding: 12px 14px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px 14px; }
+  .report-form legend { font-weight: 800; color: #7A3A1E; padding: 0 6px; }
+  .report-out { width: 100%; min-height: 260px; margin-top: 14px; font-family: ui-monospace, Consolas, monospace; font-size: 14px; padding: 12px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .btn.ghost { background: transparent; color: #7A3A1E; border: 1.5px solid #7A3A1E; }
+  .btn.ghost:hover { background: var(--parchment-dim); }
+  @media (max-width: 900px) { .level-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  .county-grid { display: grid; grid-template-columns: minmax(150px, 1.4fr) repeat(3, minmax(90px, 1fr)) minmax(80px, 0.8fr); gap: 6px 10px; align-items: center; font-size: 14.5px; }
+  .county-grid .hdr { font-weight: 800; color: #7A3A1E; }
+  .county-grid input { width: 100%; font: inherit; font-size: 15px; padding: 6px 8px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; box-sizing: border-box; }
+  .county-grid .total { font-weight: 800; text-align: right; color: var(--ink); }
+  .grid-wrap { overflow-x: auto; }
+  .grid-wrap .county-grid { min-width: 620px; }
+  .flag-diagram { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0 0 8px; overflow-x: auto; }
+  .flag-diagram svg { display: block; width: 100%; min-width: 560px; height: auto; }
+
+  @media (max-width: 960px) { .level-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .star-chip { display: inline-block; font-size: 12.5px; font-weight: 800; letter-spacing: .04em; padding: 3px 10px; border-radius: 999px; background: var(--brass-bright); color: var(--walnut-deep); margin-bottom: 6px; }
+  .ladder-diagram { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0 0 12px; overflow-x: auto; }
+  .ladder-diagram svg { display: block; width: 100%; min-width: 620px; height: auto; }
+  .flag-diagram { display: none; }
+</style>
+</head>
+<body class="page-games">
+
+    <nav class="site-nav" aria-label="Global">
+    <div class="site-nav-inner">
+        <a href="https://khgn-inc.org/index.html" class="site-nav-brand">KHGN Inc.</a>
+        <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+        </button>
+        <div class="site-nav-links">
+            <a href="https://khgn-inc.org/index.html">Home</a>
+            <a href="https://khgn-inc.org/socialmedia.html">Social Media</a>
+            <a href="https://khgn-inc.org/recruiting.html">Volunteer Recruitment</a>
+            <a href="https://khgn-inc.org/donation-portal.html">Donation Portal</a>
+            <a href="https://khgn-inc.org/training.html">Volunteer Training</a>
+            <a href="https://khgn-inc.org/game-portal.html">Trailhead Training</a>
+        </div>
+    </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="https://khgn-inc.org/proving-your-claim.html">← Back to Proving Your Claim</a>
+
+  <header class="module">
+    <p class="eyebrow">First Steps · Free and open to the public</p>
+    <h1>Getting Started in Genealogy</h1>
+    <p class="lede">Every family history starts as a mystery. In six short levels, you'll learn to investigate it like a detective: start with your own family, follow your leads to original records, and build a case strong enough to take to court. Each level gives you exactly what the next one needs.</p>
+  </header>
+
+  <section class="step" aria-labelledby="s0">
+    <span class="step-num">Before you begin</span>
+    <h2 id="s0">How this training works</h2>
+    <div class="card">
+      <p>Genealogy research has two phases, just like solving a crime. First comes the <strong>investigation:</strong> gathering leads, checking tips, finding physical evidence, and building a case. That's what this training teaches. Then comes the <strong>courtroom:</strong> proving your case, which you'll learn next in <a href="https://khgn-inc.org/khgn_suggested_trial_framework.html">the KHGN Evidence Framework</a>.</p>
+      <p>Each level matches one of KHGN's star designations, from <strong>★1 Lead</strong> to <strong>★5 Case Built</strong>. All six levels are open, but they're built to be taken in order.</p>
+    </div>
+  </section>
+
+  <nav class="level-nav" aria-label="Getting Started in Genealogy levels">
+    <button type="button" class="level-step" data-level="1" id="step-1"><span class="ls-num">1</span><span class="ls-text"><span class="ls-title">Your Family</span><span class="ls-state" id="state-1"></span></span></button>
+    <button type="button" class="level-step" data-level="2" id="step-2"><span class="ls-num">2</span><span class="ls-text"><span class="ls-title">Checking Tips</span><span class="ls-state" id="state-2"></span></span></button>
+    <button type="button" class="level-step" data-level="3" id="step-3"><span class="ls-num">3</span><span class="ls-text"><span class="ls-title">Physical Evidence</span><span class="ls-state" id="state-3"></span></span></button>
+    <button type="button" class="level-step" data-level="4" id="step-4"><span class="ls-num">4</span><span class="ls-text"><span class="ls-title">Corroboration</span><span class="ls-state" id="state-4"></span></span></button>
+    <button type="button" class="level-step" data-level="5" id="step-5"><span class="ls-num">5</span><span class="ls-text"><span class="ls-title">Building the Case</span><span class="ls-state" id="state-5"></span></span></button>
+    <button type="button" class="level-step" data-level="6" id="step-6"><span class="ls-num">6</span><span class="ls-text"><span class="ls-title">The Big Picture</span><span class="ls-state" id="state-6"></span></span></button>
+  </nav>
+  <p class="progress-note">Your progress is saved on this device only, so you can stop and pick up where you left off. <button type="button" class="linkish" id="reset">Start over</button></p>
+
+  <!-- LEVEL 1 -->
+  <section class="level-panel" id="level-1" aria-labelledby="lt-1" hidden>
+    <span class="step-num">Level 1 of 6</span>
+    <h2 id="lt-1">Start With Your Family</h2>
+    <span class="star-chip">★1 Lead</span>
+    <p class="level-intro">Every investigation begins by talking to the people closest to the case. In genealogy, that's your family.</p>
+    <div class="locked-msg" id="locked-1" hidden></div>
+    <div class="level-content" id="content-1">
+      <h3>Talk with your relatives</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Start with the oldest generation</strong> you can reach. Their memories reach back furthest, and they won't always be here to ask.</li>
+          <li><strong>Ask open questions:</strong> Where did your grandparents live? What did they do for a living? What stories did they tell?</li>
+          <li><strong>Write down who said it and when.</strong> "Aunt Ruth, March 2026: Grandpa came from Virginia" is a lead you can follow. "Someone said he came from Virginia" isn't.</li>
+        </ul>
+      </div>
+      <h3>Search the house</h3>
+      <div class="card">
+        <p>Family Bibles, letters, funeral cards, old photographs with names on the back, discharge papers, and newspaper clippings are all worth gathering. Note where each one came from and who has it now.</p>
+      </div>
+      <h3>Every story is a lead</h3>
+      <div class="card">
+        <p>A family story is a <strong>lead:</strong> something worth following, not something proven. Stories often hold a kernel of truth, with details that shifted over generations. Treat each one as a question to investigate: "That's a good lead. Now let's find the record that proves it."</p>
+      </div>
+      <h3>Protect the living</h3>
+      <div class="card">
+        <p>Your living relatives' names, addresses, birth dates, and stories are theirs. Keep them private, and never post them publicly. Your research focuses on ancestors who have passed.</p>
+      </div>
+      <h3>Practice: your family</h3>
+      <div id="practice-1"></div>
+      <div class="level-done"><div class="level-status" id="status-1" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-1" disabled>Continue to Level 2 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 2 -->
+  <section class="level-panel" id="level-2" aria-labelledby="lt-2" hidden>
+    <span class="step-num">Level 2 of 6</span>
+    <h2 id="lt-2">Checking the Tips</h2>
+    <span class="star-chip">★2 Tip</span>
+    <p class="level-intro">With your leads in hand, you'll find plenty of tips online. A good detective checks every tip before trusting it.</p>
+    <div class="locked-msg" id="locked-2" hidden></div>
+    <div class="level-content" id="content-2">
+      <h3>What counts as a tip</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Online family trees</strong> built by other researchers</li>
+          <li><strong>Indexes and databases</strong> that list names and dates from records</li>
+          <li><strong>Transcriptions and abstracts,</strong> where someone typed up or summarized a record</li>
+          <li><strong>Published family histories</strong> and compiled genealogies</li>
+        </ul>
+        <p>Each is secondhand: someone else's reading of the evidence. Tips are valuable because they tell you <strong>where to look</strong>.</p>
+      </div>
+      <h3>How errors spread</h3>
+      <div class="card">
+        <p>One researcher guesses, another copies the guess, and soon dozens of trees "agree." But twenty copies of the same mistake are still one mistake. This is the most common trap in genealogy, and why KHGN never treats a copied tree as proof.</p>
+      </div>
+      <h3>Use tips to find the original</h3>
+      <div class="card">
+        <p>When a tip says "born 1823, Madison County," ask: what record says so? Follow it back to the original document. If no one can name the source, it's still only a tip.</p>
+      </div>
+      <h3>Practice: checking tips</h3>
+      <div id="practice-2"></div>
+      <div class="level-done"><div class="level-status" id="status-2" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-2" disabled>Continue to Level 3 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 3 -->
+  <section class="level-panel" id="level-3" aria-labelledby="lt-3" hidden>
+    <span class="step-num">Level 3 of 6</span>
+    <h2 id="lt-3">Finding Physical Evidence</h2>
+    <span class="star-chip">★3 Physical Evidence</span>
+    <p class="level-intro">Following your leads and tips back to the original record is where the case gets real.</p>
+    <div class="locked-msg" id="locked-3" hidden></div>
+    <div class="level-content" id="content-3">
+      <h3>What physical evidence looks like</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Census records:</strong> a household, as the census taker wrote it down</li>
+          <li><strong>Marriage bonds and licenses:</strong> in early Kentucky, a groom often posted a bond with a bondsman, frequently a relative, before marrying</li>
+          <li><strong>Deeds and wills:</strong> land and property, often naming family relationships</li>
+          <li><strong>Vital records:</strong> birth and death certificates, where they exist</li>
+          <li><strong>Court, tax, and church records</strong></li>
+        </ul>
+      </div>
+      <h3>Where Kentucky's records are</h3>
+      <div class="card">
+        <p>County clerk offices hold deeds, wills, and marriage records. The Kentucky Department for Libraries and Archives, free genealogy websites like FamilySearch, and the Library of Congress's digitized newspapers hold many more. KYGenWeb's county pages are a great place to start.</p>
+      </div>
+      <h3>Cite it so anyone can find it</h3>
+      <div class="card">
+        <p>Every piece of physical evidence needs a citation that answers: <strong>who</strong> created it, <strong>what</strong> it is, <strong>when</strong>, <strong>where</strong> it's kept, and <strong>where in it</strong> the information appears. For example: <em>1850 U.S. Census, Rockcastle County, Kentucky, page 12, household of William Smith.</em> A source no one else can find can't be verified.</p>
+      </div>
+      <h3>Practice: physical evidence</h3>
+      <div id="practice-3"></div>
+      <div class="level-done"><div class="level-status" id="status-3" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-3" disabled>Continue to Level 4 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 4 -->
+  <section class="level-panel" id="level-4" aria-labelledby="lt-4" hidden>
+    <span class="step-num">Level 4 of 6</span>
+    <h2 id="lt-4">Corroboration</h2>
+    <span class="star-chip">★4 Corroborated</span>
+    <p class="level-intro">One record can be wrong. When independent records agree, your case gets much stronger.</p>
+    <div class="locked-msg" id="locked-4" hidden></div>
+    <div class="level-content" id="content-4">
+      <h3>Weighing witness statements</h3>
+      <div class="card">
+        <p>Every record has a witness: the person who gave the information. A mother reporting her baby's birth was there. A son reporting his father's birth date on a death certificate decades later wasn't. Ask of every record: <strong>who gave this information, and how would they know?</strong></p>
+      </div>
+      <h3>Independent means different origins</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Independent records</strong> were created separately, by different people for different reasons, like a census, a deed, and a will.</li>
+          <li><strong>Copies aren't corroboration.</strong> Three websites showing the same census record are one record.</li>
+          <li><strong>Redundant records add nothing new.</strong> Five census years showing the same man in the same county don't prove who his parents were.</li>
+        </ul>
+      </div>
+      <h3>Practice: corroboration</h3>
+      <div id="practice-4"></div>
+      <div class="level-done"><div class="level-status" id="status-4" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-4" disabled>Continue to Level 5 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 5 -->
+  <section class="level-panel" id="level-5" aria-labelledby="lt-5" hidden>
+    <span class="step-num">Level 5 of 6</span>
+    <h2 id="lt-5">Building the Case</h2>
+    <span class="star-chip">★5 Case Built</span>
+    <p class="level-intro">Some answers are never written down in one place. Detectives solve those cases with circumstantial evidence.</p>
+    <div class="locked-msg" id="locked-5" hidden></div>
+    <div class="level-content" id="content-5">
+      <h3>Circumstantial evidence</h3>
+      <div class="card">
+        <p>No record may say "John was Elijah's father." But if John's land sits next to Elijah's, John witnesses Elijah's deed, Elijah names a son John, and both move to the same new county together, those facts point to a relationship. Genealogists call this <strong>indirect evidence</strong>. Assembled carefully, it can solve cases no single record can.</p>
+      </div>
+      <h3>Follow the friends, associates, and neighbors</h3>
+      <div class="card">
+        <p>People lived, worked, married, and migrated alongside their communities. The neighbors, witnesses, bondsmen, and fellow church members around your ancestor often lead to the family you're looking for.</p>
+      </div>
+      <h3>Check the alibis</h3>
+      <div class="card">
+        <p>When two men share a name, look for alibis: records placing each one somewhere else. If "your" John Smith is in Rockcastle County on the same day another John Smith signs a deed in Laurel County, they're two different men. Merging them is one of the most common errors in genealogy.</p>
+      </div>
+      <h3>Resolve conflicts, and keep a case file</h3>
+      <div class="card">
+        <p>When records disagree, don't pick your favorite. Weigh who gave each piece of information and how they'd know, and explain your reasoning. Keep everything in a case file: your leads, tips, physical evidence, citations, and notes on how it fits together.</p>
+      </div>
+      <h3>Practice: building the case</h3>
+      <div id="practice-5"></div>
+      <div class="level-done"><div class="level-status" id="status-5" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-5" disabled>Continue to Level 6 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 6 -->
+  <section class="level-panel" id="level-6" aria-labelledby="lt-6" hidden>
+    <span class="step-num">Level 6 of 6</span>
+    <h2 id="lt-6">The Big Picture</h2>
+    <p class="level-intro">Here's how everything you've learned fits together, and where the climb goes next.</p>
+    <div class="locked-msg" id="locked-6" hidden></div>
+    <div class="level-content" id="content-6">
+      <div class="ladder-diagram">
+        <svg viewBox="0 0 900 420" role="img" aria-labelledby="ld-title ld-desc" preserveAspectRatio="xMidYMid meet">
+          <title id="ld-title">KHGN's ten star designations, from Lead to Gold Star Verdict</title>
+          <desc id="ld-desc">A staircase of ten steps. Steps one through five are the investigation: Lead, Tip, Physical Evidence, Corroborated, and Case Built. Steps six through ten are the courtroom: Case Filed, Evidence Entered, Testimony Corroborated, Rebuttal Answered, and Gold Star Verdict.</desc>
+          <rect x="10" y="10" width="430" height="400" rx="10" fill="#241A13"/>
+          <rect x="460" y="10" width="430" height="400" rx="10" fill="#2E2118"/>
+          <text x="225" y="40" text-anchor="middle" fill="#D4AF6A" font-family="Rye, Georgia, serif" font-size="20">The Investigation</text>
+          <text x="225" y="62" text-anchor="middle" fill="#E0D0AC" font-family="Public Sans, Arial, sans-serif" font-size="13">Think like a detective</text>
+          <text x="675" y="40" text-anchor="middle" fill="#D4AF6A" font-family="Rye, Georgia, serif" font-size="20">The Courtroom</text>
+          <text x="675" y="62" text-anchor="middle" fill="#E0D0AC" font-family="Public Sans, Arial, sans-serif" font-size="13">Prove it like a lawyer</text>
+          <g font-family="Public Sans, Arial, sans-serif" font-size="13" font-weight="800">
+            <rect x="24" y="352" width="80" height="44" rx="6" fill="#EDE0C8"/><text x="64" y="370" text-anchor="middle" fill="#221A12">★1</text><text x="64" y="387" text-anchor="middle" fill="#221A12">Lead</text>
+            <rect x="108" y="316" width="80" height="80" rx="6" fill="#EDE0C8"/><text x="148" y="334" text-anchor="middle" fill="#221A12">★2</text><text x="148" y="351" text-anchor="middle" fill="#221A12">Tip</text>
+            <rect x="192" y="280" width="80" height="116" rx="6" fill="#EDE0C8"/><text x="232" y="298" text-anchor="middle" fill="#221A12">★3</text><text x="232" y="315" text-anchor="middle" fill="#221A12">Physical</text><text x="232" y="331" text-anchor="middle" fill="#221A12">Evidence</text>
+            <rect x="276" y="244" width="80" height="152" rx="6" fill="#EDE0C8"/><text x="316" y="262" text-anchor="middle" fill="#221A12">★4</text><text x="316" y="279" text-anchor="middle" fill="#221A12">Corrob-</text><text x="316" y="295" text-anchor="middle" fill="#221A12">orated</text>
+            <rect x="360" y="208" width="72" height="188" rx="6" fill="#EDE0C8"/><text x="396" y="226" text-anchor="middle" fill="#221A12">★5</text><text x="396" y="243" text-anchor="middle" fill="#221A12">Case</text><text x="396" y="259" text-anchor="middle" fill="#221A12">Built</text>
+            <rect x="468" y="172" width="80" height="224" rx="6" fill="#E0D0AC"/><text x="508" y="190" text-anchor="middle" fill="#221A12">★6</text><text x="508" y="207" text-anchor="middle" fill="#221A12">Case</text><text x="508" y="223" text-anchor="middle" fill="#221A12">Filed</text>
+            <rect x="552" y="136" width="80" height="260" rx="6" fill="#E0D0AC"/><text x="592" y="154" text-anchor="middle" fill="#221A12">★7</text><text x="592" y="171" text-anchor="middle" fill="#221A12">Evidence</text><text x="592" y="187" text-anchor="middle" fill="#221A12">Entered</text>
+            <rect x="636" y="100" width="80" height="296" rx="6" fill="#E0D0AC"/><text x="676" y="118" text-anchor="middle" fill="#221A12">★8</text><text x="676" y="135" text-anchor="middle" fill="#221A12">Testimony</text><text x="676" y="151" text-anchor="middle" fill="#221A12">Corrob.</text>
+            <rect x="720" y="88" width="76" height="308" rx="6" fill="#E0D0AC"/><text x="758" y="106" text-anchor="middle" fill="#221A12">★9</text><text x="758" y="123" text-anchor="middle" fill="#221A12">Rebuttal</text><text x="758" y="139" text-anchor="middle" fill="#221A12">Answered</text>
+            <rect x="800" y="76" width="80" height="320" rx="6" fill="#D4AF6A" stroke="#EDE0C8" stroke-width="2"/><text x="840" y="96" text-anchor="middle" fill="#1C140F">★10</text><text x="840" y="113" text-anchor="middle" fill="#1C140F">Gold Star</text><text x="840" y="129" text-anchor="middle" fill="#1C140F">Verdict</text>
+          </g>
+        </svg>
+      </div>
+      <div class="card">
+        <p><strong>You've just climbed the investigation:</strong> gathering leads from your family, checking tips, finding physical evidence, corroborating it, and building a case. That's the work behind KHGN's first five star designations.</p>
+        <p><strong>The courtroom is next.</strong> When your case is built, you prove it using <a href="https://khgn-inc.org/khgn_suggested_trial_framework.html">the KHGN Evidence Framework</a>: Opening Statements, Testimony and Rebuttal, Closing Arguments, and a Verdict that's never fully certain. Practice on <a href="https://khgn-inc.org/khgn_case_study_1_same_name.html">Same Name, Wrong Man</a>, then build your own with <a href="https://khgn-inc.org/khgn_build_your_case.html">Build Your Case</a>. A fully proven case, verified by two reviewers, earns the highest designation: the <strong>Gold Star Verdict</strong>.</p>
+        <p>Want to see where your own research stands? Try <a href="https://khgn-inc.org/rate-your-research.html">Rate Your Research</a>, a free self-evaluation using these designations. And before you lean on AI tools, take <a href="https://khgn-inc.org/working-with-ai.html">Working With AI Responsibly</a>.</p>
+        <p>Stars come from proving more, not from attaching more.</p>
+      </div>
+      <h3>Knowledge check: the big picture</h3>
+      <div id="practice-6"></div>
+      <h3>The researcher's pledge</h3>
+      <label class="pledge">
+        <input type="checkbox" id="pledge">
+        <span>I will treat stories and copied trees as leads and tips, follow them to the original records, cite every source so others can find it, weigh who gave each piece of information, check the alibis, protect living people's privacy, and build my case on proof rather than repetition.</span>
+      </label>
+      <div class="level-done"><div class="level-status" id="status-6" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-6" disabled>Finish training</button></div>
+    </div>
+  </section>
+
+  <section class="step" aria-labelledby="s9" id="s9">
+    <span class="step-num">Completion</span>
+    <h2>Your training banner</h2>
+    <div class="locked" id="locked">Complete all six levels to unlock your banner.</div>
+    <div id="award" aria-live="polite">
+      <div class="card">
+        <h3 style="margin-top:0">Getting Started in Genealogy complete</h3>
+        <p>You've completed the investigation. Next stop: the courtroom, with the KHGN Evidence Framework.</p>
+        <canvas id="banner" width="1200" height="630" role="img" aria-label="Family Detective training complete banner"></canvas>
+        <button type="button" class="btn" id="download">Download banner</button>
+        <p class="privacy">Your banner is drawn in your browser. Nothing about you is sent to or stored by KHGN.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>KHGN Inc. · Kentucky History &amp; Genealogy Network · Trailhead Training is unaccredited volunteer education.<br>Facebook is a trademark of Meta Platforms, Inc. KHGN Inc. is not affiliated with or endorsed by Meta.</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ================= Settings ================= */
+  var LEVEL_NAME = "Family Detective";
+  var BANNER_TAG = "Training Complete";
+  var MODULE_NAME = "Getting Started in Genealogy";
+  var HANDS_ON_NOTE = "Next stop: the courtroom, with the KHGN Evidence Framework";
+  var ORG_LINE = "Kentucky History & Genealogy Network";
+  var LEVELS = 6;
+  var KEY = "khgnGettingStartedProgress";
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  /* ================= Scenarios ================= */
+  var FAMILY = [
+    { c: "Your great-aunt says, \"Our people came from Virginia after the Revolution.\" What is this?",
+      o: ["Proof of the family's origin", "A lead worth following to the records", "Worthless, since it's only a story", "A tip from an online tree"],
+      a: 1, why: "Family stories are leads: worth following, not proven. Many hold a kernel of truth." },
+    { c: "What's the most useful way to write down a relative's story?",
+      o: ["\"Someone said Grandpa came from Virginia\"", "\"Aunt Ruth, March 2026: Grandpa came from Virginia\"", "Don't write it down; remember it", "\"Grandpa came from Virginia (proven)\""],
+      a: 1, why: "Recording who said it and when lets you weigh and follow the lead later." },
+    { c: "Who should you try to talk with first?",
+      o: ["Whoever is easiest to reach", "The oldest generation you can reach", "Only relatives who use the internet", "No one; start online"],
+      a: 1, why: "The oldest generation's memories reach back furthest, and they won't always be here to ask." },
+    { c: "Your cousin shares her address and her children's birth dates for your tree. What do you do with them?",
+      o: ["Post them in a genealogy group", "Keep them private; living people's details are theirs", "Add them to a public online tree", "Share them with anyone researching the family"],
+      a: 1, why: "Living relatives' information stays private. Research focuses on ancestors who have passed." }
+  ];
+
+  var TIPS = [
+    { c: "Twenty online trees all list the same birth year for your ancestor. What does that prove?",
+      o: ["The year is confirmed twenty times", "Nothing yet; they may all be copies of one guess", "The year is definitely wrong", "It earns four stars"],
+      a: 1, why: "Twenty copies of the same mistake are still one mistake. Find the original record." },
+    { c: "An index lists \"Wm. Smith, married 1842, Madison Co.\" What's your next step?",
+      o: ["Add it to your tree as proven", "Use it to find the original marriage record", "Ignore it, since indexes are useless", "Copy it into a family history"],
+      a: 1, why: "Tips tell you where to look. The original record is the evidence." },
+    { c: "A published family history says your ancestor was born in 1823, but names no source. What is it?",
+      o: ["Physical evidence", "A tip, until you find the record it came from", "Corroboration", "A Gold Star Verdict"],
+      a: 1, why: "Without a source you can find, it's still secondhand: a tip." },
+    { c: "Which of these is a tip rather than physical evidence?",
+      o: ["A transcription of a will typed up by a volunteer", "The original will in the county clerk's will book", "An image of the original will", "The will's recorded copy in the courthouse"],
+      a: 0, why: "A transcription is someone else's reading of the record. The record itself is the evidence." }
+  ];
+
+  var PHYSICAL = [
+    { c: "Which of these is physical evidence?",
+      o: ["An online family tree", "An image of the 1850 census page showing the household", "A family story", "An index entry"],
+      a: 1, why: "An original record, or an image of it, is physical evidence." },
+    { c: "In early Kentucky marriage records, who often appears on a marriage bond alongside the groom?",
+      o: ["The county sheriff", "A bondsman, frequently a relative", "The bride's employer", "No one else"],
+      a: 1, why: "Bondsmen were often relatives, which can make a marriage bond a valuable clue to family connections." },
+    { c: "Which citation lets someone else find the record?",
+      o: ["\"The census\"", "\"1850 U.S. Census, Rockcastle County, Kentucky, page 12, household of William Smith\"", "\"Ancestry\"", "\"I saw it somewhere\""],
+      a: 1, why: "A good citation answers who, what, when, where it's kept, and where in it the information appears." },
+    { c: "Where would you look for a Kentucky deed from the 1840s?",
+      o: ["Only in online trees", "The county clerk's deed books, or images of them online", "A modern phone directory", "Nowhere; deeds weren't kept"],
+      a: 1, why: "County clerk offices hold deed books, and many have been digitized on free sites." }
+  ];
+
+  var CORROB = [
+    { c: "A death certificate from 1920 gives the deceased's birth date. The informant was his son. How should you weigh it?",
+      o: ["As certain, since it's an official record", "With care: the son wasn't there at the birth, so look for other evidence", "Ignore it entirely", "As stronger than any other record"],
+      a: 1, why: "Ask who gave the information and how they'd know. Secondhand details on official records still need support." },
+    { c: "Three websites show the same 1860 census entry. How many sources is that?",
+      o: ["Three", "One", "Six", "None"],
+      a: 1, why: "Copies of the same record are one source. Corroboration needs independent records." },
+    { c: "Which pair best corroborates that Mary was John's daughter?",
+      o: ["Five census years showing Mary in John's household", "John's will naming Mary as his daughter, and a deed in which Mary's husband buys land from John 'for love and affection'", "Two online trees", "Mary's name in an index twice"],
+      a: 1, why: "Independent records of different types, created for different reasons, agree." },
+    { c: "You've found seven census entries showing your ancestor in the same county. You're trying to prove who his parents were. What do the census entries add?",
+      o: ["Strong proof of his parents", "Nothing toward his parents; they're redundant for that question", "Seven stars", "Corroboration of his parents"],
+      a: 1, why: "Redundant records add nothing new. Stars come from proving more, not from attaching more." }
+  ];
+
+  var CASE = [
+    { c: "No record names Elijah's father. But John lived next door, witnessed Elijah's deed, and Elijah named a son John. What is this?",
+      o: ["Useless, since nothing states it directly", "Circumstantial (indirect) evidence that may point to a relationship", "Proof beyond all doubt", "A tip"],
+      a: 1, why: "Indirect evidence, assembled carefully, can solve cases no single record can." },
+    { c: "Two John Smiths: one sells land in Laurel County on the same day the other is recorded in Rockcastle County. What does this tell you?",
+      o: ["They're the same man", "They're likely two different men: an alibi", "Nothing", "One record must be fake"],
+      a: 1, why: "Records placing two people in different places at the same time are alibis. Merging them is a common error." },
+    { c: "Your ancestor's neighbors and marriage bondsmen keep appearing in his records. Why follow them?",
+      o: ["They're unrelated, so ignore them", "Communities migrated and married together, so they often lead to the family", "Only to fill out your tree", "To find living relatives' addresses"],
+      a: 1, why: "Following friends, associates, and neighbors is one of the most powerful research methods." },
+    { c: "Two records give different birth years. What should you do?",
+      o: ["Pick the one you like", "Weigh who gave each piece of information and how they'd know, then explain your reasoning", "Average them", "Delete both"],
+      a: 1, why: "Resolving conflicts with reasoning is part of building a case." }
+  ];
+
+  var BIG = [
+    { c: "Which designation fits an online tree with no sources?",
+      o: ["★1 Lead", "★2 Tip", "★3 Physical Evidence", "★10 Gold Star Verdict"],
+      a: 1, why: "Secondhand information is a tip: useful for knowing where to look." },
+    { c: "What's the difference between the investigation and the courtroom?",
+      o: ["There isn't one", "The investigation gathers and builds the case; the courtroom proves it", "The courtroom comes first", "The investigation is only for professionals"],
+      a: 1, why: "Investigate like a detective, then prove it like a lawyer." },
+    { c: "What earns the Gold Star Verdict?",
+      o: ["Attaching the most documents", "A fully proven case, verified by two reviewers", "Posting the most often", "Having the oldest records"],
+      a: 1, why: "The highest designation requires a complete case, proven and independently verified." },
+    { c: "Where do you go next to learn the courtroom phase?",
+      o: ["Nowhere; you're done", "The KHGN Evidence Framework", "An online tree", "A paid course"],
+      a: 1, why: "The Evidence Framework teaches how to prove your case, followed by Same Name, Wrong Man and Build Your Case." }
+  ];
+
+  var SETS = {
+    1: [{ host: "practice-1", items: FAMILY, opts: null, label: "Case" }],
+    2: [{ host: "practice-2", items: TIPS, opts: null, label: "Case" }],
+    3: [{ host: "practice-3", items: PHYSICAL, opts: null, label: "Case" }],
+    4: [{ host: "practice-4", items: CORROB, opts: null, label: "Case" }],
+    5: [{ host: "practice-5", items: CASE, opts: null, label: "Case" }],
+    6: [{ host: "practice-6", items: BIG, opts: null, label: "Question" }]
+  };
+  var correct = {};
+
+  /* ================= Saved progress (this device only) ================= */
+  var progress = { done: [] };
+  try { var saved = JSON.parse(localStorage.getItem(KEY)); if (saved && saved.done) { progress = saved; } } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(progress)); } catch (e) {} }
+  function isDone(n) { return progress.done.indexOf(n) !== -1; }
+  function isUnlocked(n) { return true; }
+
+  /* ================= Build practice sets ================= */
+  function buildSet(n, set) {
+    var host = document.getElementById(set.host);
+    correct[set.host] = [];
+    set.items.forEach(function (item, i) {
+      var opts = item.o || set.opts;
+      var box = document.createElement("div");
+      box.className = "scenario";
+      var html = '<div class="num">' + set.label + ' ' + (i + 1) + '</div><p class="case">' + esc(item.c) + '</p><div class="choices' + (item.o ? ' stacked' : '') + '" role="group" aria-label="Choose an answer for ' + set.label.toLowerCase() + ' ' + (i + 1) + '">';
+      var order = opts.map(function (_, oi) { return oi; });
+      for (var k = order.length - 1; k > 0; k--) { var r = Math.floor(Math.random() * (k + 1)); var tmp = order[k]; order[k] = order[r]; order[r] = tmp; }
+      order.forEach(function (oi) { html += '<button type="button" data-i="' + oi + '">' + esc(opts[oi]) + '</button>'; });
+      html += '</div><div class="feedback" aria-live="polite"></div>';
+      box.innerHTML = html;
+      host.appendChild(box);
+      var fb = box.querySelector(".feedback");
+      if (isDone(n)) {
+        correct[set.host][i] = true;
+        box.querySelector('button[data-i="' + item.a + '"]').classList.add("picked-right");
+        fb.className = "feedback show right"; fb.textContent = "Correct. " + item.why;
+      }
+      box.querySelectorAll("button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          box.querySelectorAll("button").forEach(function (bb) { bb.classList.remove("picked-right", "picked-wrong"); });
+          var right = parseInt(btn.getAttribute("data-i"), 10) === item.a;
+          btn.classList.add(right ? "picked-right" : "picked-wrong");
+          fb.className = "feedback show " + (right ? "right" : "wrong");
+          fb.textContent = right ? "Correct. " + item.why : "Not quite. Review the material above and try another answer.";
+          correct[set.host][i] = right;
+          updateLevel(n);
+        });
+      });
+    });
+  }
+  for (var lv = 1; lv <= LEVELS; lv++) { SETS[lv].forEach(function (set) { buildSet(lv, set); }); }
+
+  var pledge = document.getElementById("pledge");
+  if (isDone(LEVELS)) { pledge.checked = true; }
+  pledge.addEventListener("change", function () { updateLevel(LEVELS); });
+
+  function tally(n) {
+    var got = 0, total = 0;
+    SETS[n].forEach(function (set) { total += set.items.length; got += correct[set.host].filter(Boolean).length; });
+    return { got: got, total: total };
+  }
+  function levelReady(n) {
+    var t = tally(n), all = t.got === t.total;
+    return n === LEVELS ? all && pledge.checked : all;
+  }
+  function updateLevel(n) {
+    var ready = levelReady(n), t = tally(n);
+    var btn = document.getElementById("next-" + n);
+    var status = document.getElementById("status-" + n);
+    btn.disabled = !ready;
+    if (isDone(n)) { status.textContent = "Level complete."; }
+    else if (ready) { status.textContent = "All answers correct. You're ready to move on."; }
+    else { status.textContent = t.got + " of " + t.total + " answers correct" + (n === LEVELS ? ", plus the pledge" : "") + "."; }
+  }
+
+
+  /* ================= Navigation ================= */
+  var award = document.getElementById("award");
+  var locked = document.getElementById("locked");
+  var current = 1;
+
+  function refreshSteps() {
+    for (var n = 1; n <= LEVELS; n++) {
+      var step = document.getElementById("step-" + n);
+      var state = document.getElementById("state-" + n);
+      step.classList.toggle("is-done", isDone(n));
+      step.classList.toggle("is-locked", !isUnlocked(n));
+      step.classList.toggle("is-current", n === current);
+      step.setAttribute("aria-current", n === current ? "step" : "false");
+      var nextUp = 1; while (nextUp < LEVELS && isDone(nextUp)) { nextUp++; }
+      state.textContent = isDone(n) ? "Complete" : (n === nextUp ? "Up next" : "Open");
+    }
+    var finished = isDone(LEVELS);
+    locked.style.display = finished ? "none" : "block";
+    if (finished && !award.classList.contains("show")) { award.classList.add("show"); drawBanner(); }
+    if (!finished) { award.classList.remove("show"); }
+  }
+
+  function show(n, scroll) {
+    current = n;
+    for (var i = 1; i <= LEVELS; i++) { document.getElementById("level-" + i).hidden = i !== n; }
+    var unlocked = isUnlocked(n);
+    document.getElementById("locked-" + n).hidden = unlocked;
+    document.getElementById("content-" + n).hidden = !unlocked;
+    refreshSteps();
+    updateLevel(n);
+    if (scroll) { document.querySelector(".level-nav").scrollIntoView({ behavior: "smooth", block: "start" }); }
+  }
+
+  for (var n0 = 1; n0 <= LEVELS; n0++) {
+    (function (n) {
+      document.getElementById("step-" + n).addEventListener("click", function () { show(n, false); });
+      document.getElementById("next-" + n).addEventListener("click", function () {
+        if (!levelReady(n)) { return; }
+        if (!isDone(n)) { progress.done.push(n); save(); }
+        if (n < LEVELS) { show(n + 1, true); }
+        else { refreshSteps(); updateLevel(LEVELS); document.getElementById("s9").scrollIntoView({ behavior: "smooth", block: "start" }); }
+      });
+    })(n0);
+  }
+
+  document.getElementById("reset").addEventListener("click", function () {
+    if (!window.confirm("Start Getting Started in Genealogy over? Your saved progress on this device will be cleared.")) { return; }
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    window.location.reload();
+  });
+
+
+  /* ================= Banner ================= */
+  var canvas = document.getElementById("banner");
+  var ctx = canvas.getContext("2d");
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { if (award.classList.contains("show")) { drawBanner(); } }); }
+
+  function fit(text, weight, size, min, family, maxW) {
+    ctx.font = weight + " " + size + "px " + family;
+    while (ctx.measureText(text).width > maxW && size > min) { size -= 2; ctx.font = weight + " " + size + "px " + family; }
+  }
+
+  function drawBanner() {
+    var W = canvas.width, H = canvas.height;
+    var serif = 'Rye, Georgia, "Times New Roman", serif';
+    var sans = '"Public Sans", Arial, sans-serif';
+    ctx.fillStyle = "#1C140F"; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "#B08D57"; ctx.lineWidth = 6; ctx.strokeRect(28, 28, W - 56, H - 56);
+    ctx.lineWidth = 1.5; ctx.strokeRect(44, 44, W - 88, H - 88);
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = "#D4AF6A"; ctx.font = "700 26px " + sans;
+    ctx.fillText("KHGN INC.  ·  TRAILHEAD TRAINING", W / 2, 112);
+    ctx.fillStyle = "#B08D57"; ctx.fillRect(W / 2 - 60, 132, 120, 3);
+
+    ctx.fillStyle = "#EDE0C8"; fit(LEVEL_NAME.toUpperCase(), "700", 80, 40, serif, W - 160);
+    ctx.fillText(LEVEL_NAME.toUpperCase(), W / 2, 250);
+    ctx.fillStyle = "#D4AF6A"; ctx.font = "700 30px " + sans;
+    ctx.fillText(BANNER_TAG.toUpperCase(), W / 2, 298);
+
+    ctx.fillStyle = "#E0D0AC"; ctx.font = "400 30px " + sans;
+    ctx.fillText("for completing " + MODULE_NAME, W / 2, 378);
+    ctx.fillStyle = "#D4AF6A"; ctx.font = "600 26px " + sans;
+    ctx.fillText(new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }), W / 2, 428);
+    ctx.fillStyle = "#BFAE8A"; fit(HANDS_ON_NOTE, "400", 20, 14, sans, W - 160);
+    ctx.fillText(HANDS_ON_NOTE, W / 2, H - 100);
+    ctx.font = "400 20px " + sans; ctx.fillText(ORG_LINE, W / 2, H - 70);
+  }
+
+  document.getElementById("download").addEventListener("click", function () {
+    drawBanner();
+    var fileName = "KHGN-" + LEVEL_NAME.replace(/\s+/g, "-") + "-Training-Complete.png";
+    canvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = fileName;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    }, "image/png");
+  });
+  /* Start on the first unfinished level (runs last, after the banner tools are ready) */
+  var firstOpen = 1;
+  while (firstOpen < LEVELS && isDone(firstOpen)) { firstOpen++; }
+  show(firstOpen, false);
+})();
+</script>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nav = document.querySelector(".site-nav");
+            const toggle = document.querySelector(".site-nav-toggle");
+            const links = document.querySelector(".site-nav-links");
+            if (!nav || !toggle || !links) {
+                return;
+            }
+            toggle.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+            links.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    toggle.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

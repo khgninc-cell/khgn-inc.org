@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <script src="/khgn-age-gate.js"></script>
+<script src="/khgn-ticker.js" defer></script>
 <noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -348,6 +349,16 @@
         .disclaimer { background: #F3D9D3; color: #6E1F17; border-left: 0; border: 1.5px solid #C9897D; border-radius: 10px; padding: 14px 18px; font-size: 14.5px; line-height: 1.6; margin-bottom: 8px; }
         .disclaimer strong { color: #6E1F17; }
         @media (max-width: 600px) { .journey::before { left: 21px; } .jicon { width: 44px; height: 44px; font-size: 20px; } .jstop { gap: 12px; } }
+
+        .claim-feature { display: flex; gap: 22px; align-items: flex-start; text-decoration: none; background: var(--parchment); color: var(--ink); border-top: 4px solid var(--sage); border-radius: 10px; padding: 22px 24px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); transition: box-shadow 0.2s ease, transform 0.2s ease; }
+        .claim-feature:hover { box-shadow: 0 10px 24px rgba(0,0,0,0.35); transform: translateY(-3px); }
+        .claim-feature-icon { flex-shrink: 0; font-size: 56px; line-height: 1; }
+        .claim-feature-body p { font-size: 15px; line-height: 1.6; color: #4A3A28; margin: 6px 0 10px; }
+        .claim-cats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 10px 24px; margin: 0 0 16px; }
+        .claim-cat { display: block; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #7A3A1E; margin-bottom: 4px; }
+        .claim-feature-body ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 14.5px; font-weight: 700; color: var(--ink); }
+        .claim-feature-body em { font-weight: 400; color: #6A4E22; }
+        @media (max-width: 600px) { .claim-feature { flex-direction: column; gap: 10px; } .claim-feature-icon { font-size: 44px; } .claim-cats { grid-template-columns: 1fr; } }
         .overview { border-top: 1px solid var(--line); padding-top: 40px; }
         .overview h2 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; color: var(--parchment); margin-bottom: 15px; }
         .trademark { font-size: 13px !important; color: var(--parchment-dim); opacity: 0.85; margin-top: 18px; }
@@ -496,6 +507,14 @@
                     </div>
                 </li>
                 <li class="jstop">
+                    <div class="jicon" aria-hidden="true">⚖️</div>
+                    <div class="jbody">
+                        <h3>Proving Your Claim <span class="jfor">Recommended for every traveler</span></h3>
+                        <p>Every settler had to prove their claim, and many had to defend it in court. Learn to weigh evidence the way a court weighs testimony before you choose your route.</p>
+                        <a href="proving-your-claim.html" class="game-btn">Learn to Prove a Claim &rarr;</a>
+                    </div>
+                </li>
+                <li class="jstop">
                     <div class="jicon" aria-hidden="true">🛤️</div>
                     <div class="jbody">
                         <h3>Trail Routes <span class="jfor">For enrolled volunteers</span></h3>
@@ -563,56 +582,31 @@
             <div class="category-header">
                 <div class="category-dot teal"></div>
                 <div>
-                    <div class="category-title">First Steps</div>
-                    <p class="category-desc">New to genealogy research? Your on-ramp starts here</p>
+                    <div class="category-title">Proving Your Claim</div>
+                    <p class="category-desc">Research skills: weigh evidence like a court and prove your own family's claim</p>
                 </div>
             </div>
-            <div class="game-grid">
-                <div class="game-card teal-accent" style="opacity:.6;">
-                    <div class="game-thumb">🌱</div>
-                    <div class="game-body">
-                        <div class="game-title">Getting Started in Genealogy</div>
-                        <div class="game-desc">The true beginner's on-ramp &mdash; how to read a census record, what a marriage bond is, and how to begin building your own family tree.</div>
-                        <span class="game-btn" style="cursor:default; opacity:.7;">Coming Soon</span>
+            <a class="claim-feature" href="proving-your-claim.html">
+                <div class="claim-feature-icon" aria-hidden="true">⚖️</div>
+                <div class="claim-feature-body">
+                    <div class="game-title">First Steps and Practice Your Skills</div>
+                    <p>Kentucky's early settlers often had to prove their land claims in court. Genealogists prove family claims the same way. Start with the basics, learn the KHGN Evidence Framework, practice on a real case, then build your own.</p>
+                    <div class="claim-cats">
+                        <div><span class="claim-cat">First Steps</span>
+                            <ul><li>🌱 Getting Started in Genealogy</li></ul>
+                        </div>
+                        <div><span class="claim-cat">Practice Your Skills</span>
+                            <ul>
+                                <li>⚖️ 1. The KHGN Evidence Framework</li>
+                                <li>🔍 2. Same Name, Wrong Man</li>
+                                <li>📝 3. Build Your Case</li>
+                                <li>🤖 4. Working With AI Responsibly</li>
+                            </ul>
+                        </div>
                     </div>
+                    <span class="game-btn">Explore Proving Your Claim &rarr;</span>
                 </div>
-            </div>
-        </div>
-
-        <div class="category-section">
-            <div class="category-header">
-                <div class="category-dot teal"></div>
-                <div>
-                    <div class="category-title">Practice Your Skills</div>
-                    <p class="category-desc">Real research methods &mdash; start with the framework, then the guided example, then your own case</p>
-                </div>
-            </div>
-            <div class="game-grid">
-                <div class="game-card teal-accent">
-                    <div class="game-thumb">⚖️</div>
-                    <div class="game-body">
-                        <div class="game-title">1. The KHGN Evidence Framework</div>
-                        <div class="game-desc">The full structure behind the exercises below &mdash; Opening Statements, Testimony &amp; Rebuttal, Closing Arguments, and a Verdict that's never fully certain.</div>
-                        <a href="khgn_suggested_trial_framework.html" class="game-btn">Read the Framework &rarr;</a>
-                    </div>
-                </div>
-                <div class="game-card teal-accent">
-                    <div class="game-thumb">🔍</div>
-                    <div class="game-body">
-                        <div class="game-title">2. Same Name, Wrong Man</div>
-                        <div class="game-desc">Practice the framework on a real case study &mdash; two men, same name, same county. Pick the right one and defend your reasoning.</div>
-                        <a href="khgn_case_study_1_same_name.html" class="game-btn">Try the Case &rarr;</a>
-                    </div>
-                </div>
-                <div class="game-card teal-accent">
-                    <div class="game-thumb">📝</div>
-                    <div class="game-body">
-                        <div class="game-title">3. Build Your Case</div>
-                        <div class="game-desc">Apply the framework to your own family history &mdash; write your case, get honest feedback, and download what you build.</div>
-                        <a href="khgn_build_your_case.html" class="game-btn">Start Building &rarr;</a>
-                    </div>
-                </div>
-            </div>
+            </a>
         </div>
 
         <div class="category-section">
@@ -667,7 +661,7 @@
             <p>
                 The KHGN Trailhead offers interactive ways to learn history and genealogy research skills, free and open to the public ages 20 and older.
                 This is KHGN's unaccredited curriculum &mdash; a separate, formally accredited program is planned as a future addition.
-                New content is sorted into the categories above based on what it teaches: core skills, research methods, historical stories, or serious history that stands on its own. Volunteer leadership training continues beyond the Trailhead, on the Trail Routes and the Mountain Top. Training for committee, Director, or Officer service does not guarantee any position; those seats are filled by vote of the Board.
+                New content is sorted into the categories above based on what it teaches: core skills, research methods for proving a claim, historical stories, or serious history that stands on its own. Volunteer leadership training continues beyond the Trailhead, on the Trail Routes and the Mountain Top. Training for committee, Director, or Officer service does not guarantee any position; those seats are filled by vote of the Board.
                 New additions are made regularly, so check back often.
             </p>
             <p class="trademark">Facebook is a trademark of Meta Platforms, Inc. KHGN Inc. is not affiliated with or endorsed by Meta.</p>

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view KHGN Trailhead Training.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Working With AI Responsibly - KHGN Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="Free training from KHGN Inc.: where AI helps genealogy research, where it misleads, how to handle AI-altered images, and why people verify.">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --ink-soft:#4A3A28; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+    --pass:#2F5224; --pass-bg:#DDE8D6; --warn:#6A4E22; --warn-bg:#F1E2C4; --fail:#8E2A1F; --fail-bg:#F3D9D3; --card-line:#CDBB98;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--walnut); color: var(--parchment); font-family: 'Public Sans', Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  a { color: var(--brass-bright); }
+  :focus-visible { outline: 3px solid var(--brass-bright); outline-offset: 2px; }
+  /* Navigation */
+  .site-nav {
+      background: var(--walnut-deep);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+  }
+  .site-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+  .site-nav-brand {
+      color: var(--brass-bright);
+      text-decoration: none;
+      font-family: 'Rye', serif;
+      font-weight: 400;
+      font-size: 22px;
+      white-space: nowrap;
+  }
+  .site-nav-links {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+  }
+  .site-nav-links a {
+      color: var(--parchment);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .site-nav-links a:hover { color: var(--brass-bright); }
+  .site-nav-toggle {
+      display: none;
+      margin-left: auto;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+  }
+  .site-nav-toggle-bar {
+      display: block;
+      width: 24px;
+      height: 3px;
+      margin: 4px 0;
+      border-radius: 999px;
+      background: var(--brass-bright);
+  }
+  .page-games .site-nav-links a[href="https://khgn-inc.org/game-portal.html"] {
+      color: var(--brass-bright);
+      border-bottom-color: var(--brass);
+  }
+
+  @media (max-width: 700px) {
+      .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+      .site-nav-toggle { display: block; }
+      .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+      .site-nav.is-open .site-nav-links { display: flex; }
+      .site-nav-links a { width: 100%; padding: 10px 0; }
+      .game-grid { grid-template-columns: 1fr !important; }
+      .container { margin: 30px auto; }
+      .hero h1 { font-size: 32px; }
+  }
+
+
+  @media (max-width: 700px) {
+    .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+    .site-nav-toggle { display: block; }
+    .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+    .site-nav.is-open .site-nav-links { display: flex; }
+    .site-nav-links a { width: 100%; padding: 10px 0; }
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .back { display: inline-block; margin: 22px 0 0; font-weight: 700; text-decoration: none; }
+  .back:hover { color: var(--parchment); }
+  header.module { padding: 32px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 32px; background: radial-gradient(ellipse at 50% -40%, rgba(176,141,87,0.18), transparent 70%); }
+  .eyebrow { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); }
+  h1, h2 { font-family: 'Rye', Georgia, serif; font-weight: 400; line-height: 1.2; }
+  h1 { margin: 0 0 14px; font-size: clamp(30px, 5vw, 40px); color: var(--parchment); text-shadow: 0 2px 0 var(--walnut-deep); }
+  h2 { margin: 0 0 14px; font-size: 25px; color: var(--parchment); }
+  h3 { margin: 18px 0 6px; font-size: 18px; font-weight: 800; line-height: 1.3; color: var(--brass-bright); }
+  .lede { margin: 0; font-size: 18px; color: var(--parchment-dim); max-width: 700px; }
+  section.step { margin: 0 0 48px; }
+  section.step > p { color: var(--parchment-dim); }
+  .step-num { display: inline-block; margin-bottom: 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--brass-bright); text-transform: uppercase; }
+  .hint { margin: 0 0 10px; font-size: 15px; color: var(--parchment-dim); }
+  label.big { display: block; font-weight: 700; margin-bottom: 6px; }
+  /* parchment cards */
+  .card, .standard, .scenario, .quiz-q, .check, .award-card, .rung, .pledge, .stop-like {
+    background: var(--parchment); color: var(--ink); border-radius: 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+  .card h3, .award-card h3, .standard h3 { color: var(--ink); }
+  .card a, .standard a, .scenario a, .award-card a, .note a { color: #7A3A1E; }
+  .note { display: flex; gap: 14px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 20px; color: var(--parchment-dim); }
+  .note p { margin: 0; } .note strong { color: var(--brass-bright); } .note a { color: var(--brass-bright); }
+  .note svg { flex-shrink: 0; margin-top: 3px; }
+  .btn, button.primary, .row button {
+    min-height: 46px; padding: 11px 22px; font: inherit; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    color: #fff; background: var(--rust); border: 0; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;
+  }
+  .btn:hover, .row button:hover { background: var(--rust-bright); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+  .count { font-size: 15px; color: var(--parchment-dim); }
+  .feedback { margin-top: 10px; font-size: 15px; padding: 8px 12px; border-radius: 6px; display: none; }
+  .feedback.show { display: block; }
+  .feedback.right { background: var(--pass-bg); color: var(--pass); }
+  .feedback.wrong { background: var(--fail-bg); color: var(--fail); }
+  .progress { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .pill { padding: 6px 14px; border-radius: 999px; font-size: 14.5px; font-weight: 700; background: var(--walnut-deep); border: 1px solid var(--line); color: var(--parchment-dim); }
+  .pill.done { background: var(--pass-bg); border-color: var(--pass-bg); color: var(--pass); }
+  .locked { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  #award { display: none; } #award.show { display: block; }
+  .award-card { padding: 22px; }
+  .award-card .hint, .award-card p { color: var(--ink-soft); }
+  input[type="text"] { width: 100%; max-width: 420px; min-height: 44px; padding: 8px 12px; font: inherit; font-size: 17px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  canvas { display: block; width: 100%; height: auto; margin: 16px 0; border-radius: 8px; }
+  .privacy { font-size: 14px; color: var(--ink-soft); margin: 8px 0 0; }
+  footer { padding: 28px 0 48px; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--parchment-dim); }
+
+  .alert { padding: 14px 20px; border-radius: 10px; background: var(--fail-bg); color: var(--fail); font-weight: 700; margin: 14px 0; }
+  .card { padding: 18px 22px; margin-bottom: 14px; }
+  .card p { margin: 0 0 10px; } .card p:last-child { margin-bottom: 0; }
+  ul.rules { margin: 0; padding-left: 22px; } ul.rules li { margin-bottom: 10px; }
+  .why { display: block; font-size: 15px; color: var(--ink-soft); }
+  section.step > .why, section.step > p.why { color: var(--parchment-dim); }
+  .table-wrap { overflow-x: auto; border-radius: 10px; margin: 10px 0 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+  table { width: 100%; border-collapse: collapse; background: var(--parchment); color: var(--ink); font-size: 16px; }
+  th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--card-line); }
+  th { background: var(--walnut-deep); color: var(--brass-bright); font-weight: 700; }
+  tr:last-child td { border-bottom: 0; }
+  ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 8px; }
+  .ladder { display: grid; gap: 10px; }
+  .rung { display: flex; gap: 14px; align-items: flex-start; padding: 12px 18px; box-shadow: none; }
+  .rung b { flex-shrink: 0; min-width: 190px; color: var(--ink); }
+  .rung span { color: var(--ink-soft); }
+  .rung.here { outline: 3px solid var(--brass-bright); }
+  .scenario { padding: 18px 20px; margin-bottom: 14px; }
+  .scenario .case { margin: 0 0 12px; }
+  .scenario .num { font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; color: #7A3A1E; text-transform: uppercase; }
+  .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+  .choices button { min-height: 42px; padding: 8px 14px; font: inherit; font-size: 14.5px; font-weight: 700; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--brass); border-radius: 6px; cursor: pointer; }
+  .choices.stacked { flex-direction: column; align-items: stretch; }
+  .choices.stacked button { text-align: left; }
+  .choices button:hover { background: var(--parchment-dim); }
+  .choices button.picked-right { background: var(--pass-bg); border-color: var(--pass); color: var(--pass); }
+  .choices button.picked-wrong { background: var(--fail-bg); border-color: var(--fail); color: var(--fail); }
+  .pledge { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; cursor: pointer; }
+  .pledge input { margin-top: 6px; width: 20px; height: 20px; accent-color: var(--rust); }
+
+  .level-nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 0 0 10px; scroll-margin-top: 90px; }
+  .level-step { display: flex; align-items: center; gap: 10px; text-align: left; padding: 12px 14px; font: inherit; color: var(--parchment); background: var(--walnut-deep); border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer; }
+  .level-step:hover { border-color: var(--brass); }
+  .level-step.is-current { background: var(--parchment); color: var(--ink); border-color: var(--brass-bright); }
+  .level-step.is-locked { opacity: 0.6; }
+  .ls-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Rye', Georgia, serif; font-size: 16px; background: var(--line); color: var(--parchment); }
+  .level-step.is-current .ls-num, .level-step.is-done .ls-num { background: var(--brass-bright); color: var(--walnut-deep); }
+  .level-step.is-done .ls-num::after { content: "✓"; font-family: 'Public Sans', Arial, sans-serif; font-weight: 800; }
+  .level-step.is-done .ls-num { font-size: 0; }
+  .level-step.is-done .ls-num::after { font-size: 16px; }
+  .ls-text { display: flex; flex-direction: column; min-width: 0; }
+  .ls-title { font-weight: 700; font-size: 14.5px; line-height: 1.25; }
+  .ls-state { font-size: 12.5px; color: var(--parchment-dim); }
+  .level-step.is-current .ls-state { color: #6A4E22; }
+  .progress-note { font-size: 14px; color: var(--parchment-dim); margin: 0 0 30px; }
+  .linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--brass-bright); text-decoration: underline; cursor: pointer; }
+  .level-panel { margin: 0 0 40px; }
+  .level-panel[hidden], .level-content[hidden], .locked-msg[hidden] { display: none; }
+  .level-intro { font-size: 17px; color: var(--parchment-dim); margin: -4px 0 20px; }
+  .locked-msg { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  .level-done { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 24px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--brass); border-radius: 10px; }
+  .level-status { font-weight: 700; color: var(--parchment); }
+  .next-btn:disabled { background: #6E5A48; color: #D8CBB2; cursor: not-allowed; }
+  @media (max-width: 760px) {
+    .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  .report-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 18px; }
+  .report-form label { display: flex; flex-direction: column; gap: 4px; font-size: 14.5px; font-weight: 700; color: var(--ink); }
+  .report-form input, .report-form textarea, .report-form select { font: inherit; font-size: 16px; font-weight: 400; padding: 8px 10px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  .report-form .wide { grid-column: 1 / -1; }
+  .report-form textarea { min-height: 80px; resize: vertical; }
+  .report-form fieldset { grid-column: 1 / -1; border: 1px solid var(--card-line); border-radius: 8px; padding: 12px 14px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px 14px; }
+  .report-form legend { font-weight: 800; color: #7A3A1E; padding: 0 6px; }
+  .report-out { width: 100%; min-height: 260px; margin-top: 14px; font-family: ui-monospace, Consolas, monospace; font-size: 14px; padding: 12px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .btn.ghost { background: transparent; color: #7A3A1E; border: 1.5px solid #7A3A1E; }
+  .btn.ghost:hover { background: var(--parchment-dim); }
+  @media (max-width: 900px) { .level-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  .county-grid { display: grid; grid-template-columns: minmax(150px, 1.4fr) repeat(3, minmax(90px, 1fr)) minmax(80px, 0.8fr); gap: 6px 10px; align-items: center; font-size: 14.5px; }
+  .county-grid .hdr { font-weight: 800; color: #7A3A1E; }
+  .county-grid input { width: 100%; font: inherit; font-size: 15px; padding: 6px 8px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; box-sizing: border-box; }
+  .county-grid .total { font-weight: 800; text-align: right; color: var(--ink); }
+  .grid-wrap { overflow-x: auto; }
+  .grid-wrap .county-grid { min-width: 620px; }
+  .flag-diagram { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0 0 8px; overflow-x: auto; }
+  .flag-diagram svg { display: block; width: 100%; min-width: 560px; height: auto; }
+
+  @media (max-width: 960px) { .level-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .star-chip { display: inline-block; font-size: 12.5px; font-weight: 800; letter-spacing: .04em; padding: 3px 10px; border-radius: 999px; background: var(--brass-bright); color: var(--walnut-deep); margin-bottom: 6px; }
+  .ladder-diagram { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0 0 12px; overflow-x: auto; }
+  .ladder-diagram svg { display: block; width: 100%; min-width: 620px; height: auto; }
+  .flag-diagram { display: none; }
+</style>
+</head>
+<body class="page-games">
+
+    <nav class="site-nav" aria-label="Global">
+    <div class="site-nav-inner">
+        <a href="https://khgn-inc.org/index.html" class="site-nav-brand">KHGN Inc.</a>
+        <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+        </button>
+        <div class="site-nav-links">
+            <a href="https://khgn-inc.org/index.html">Home</a>
+            <a href="https://khgn-inc.org/socialmedia.html">Social Media</a>
+            <a href="https://khgn-inc.org/recruiting.html">Volunteer Recruitment</a>
+            <a href="https://khgn-inc.org/donation-portal.html">Donation Portal</a>
+            <a href="https://khgn-inc.org/training.html">Volunteer Training</a>
+            <a href="https://khgn-inc.org/game-portal.html">Trailhead Training</a>
+        </div>
+    </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="https://khgn-inc.org/proving-your-claim.html">← Back to Proving Your Claim</a>
+
+  <header class="module">
+    <p class="eyebrow">Research Skills · Free and open to the public</p>
+    <h1>Working With AI Responsibly</h1>
+    <p class="lede">AI tools can be a genuine help in genealogy, and a fast way to spread errors. In four short levels, learn where AI helps, where it misleads, how to handle AI-altered images, and why the human touch decides. KHGN's principle is simple: <strong>AI assists. People verify.</strong></p>
+  </header>
+
+  <nav class="level-nav" aria-label="Working With AI Responsibly levels">
+    <button type="button" class="level-step" data-level="1" id="step-1"><span class="ls-num">1</span><span class="ls-text"><span class="ls-title">Where AI Helps</span><span class="ls-state" id="state-1"></span></span></button>
+    <button type="button" class="level-step" data-level="2" id="step-2"><span class="ls-num">2</span><span class="ls-text"><span class="ls-title">Where AI Misleads</span><span class="ls-state" id="state-2"></span></span></button>
+    <button type="button" class="level-step" data-level="3" id="step-3"><span class="ls-num">3</span><span class="ls-text"><span class="ls-title">Images and AI</span><span class="ls-state" id="state-3"></span></span></button>
+    <button type="button" class="level-step" data-level="4" id="step-4"><span class="ls-num">4</span><span class="ls-text"><span class="ls-title">The Human Touch</span><span class="ls-state" id="state-4"></span></span></button>
+  </nav>
+  <p class="progress-note">Your progress is saved on this device only, so you can stop and pick up where you left off. <button type="button" class="linkish" id="reset">Start over</button></p>
+
+  <!-- LEVEL 1 -->
+  <section class="level-panel" id="level-1" aria-labelledby="lt-1" hidden>
+    <span class="step-num">Level 1 of 4</span>
+    <h2 id="lt-1">Where AI Helps</h2>
+    <p class="level-intro">Used well, AI is like a tireless research assistant: quick, helpful, and always in need of checking.</p>
+    <div class="locked-msg" id="locked-1" hidden></div>
+    <div class="level-content" id="content-1">
+      <h3>Good jobs for AI</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Reading difficult handwriting:</strong> AI can offer a first reading of a hard-to-read will or letter. You then check every word against the image yourself, especially names, dates, and numbers.</li>
+          <li><strong>Translating:</strong> a German church record, a Latin baptism, or a French land grant. Treat the translation as a draft and confirm key details.</li>
+          <li><strong>Planning research:</strong> asking what kinds of records might exist for an 1840s Kentucky marriage, or which repositories hold a county's deeds.</li>
+          <li><strong>Organizing:</strong> sorting notes into a timeline, building a research checklist, or formatting a citation you've already gathered the details for.</li>
+        </ul>
+      </div>
+      <h3>The rule for every AI answer</h3>
+      <div class="card">
+        <p>Whatever AI tells you about an ancestor is a <strong>★1 Lead</strong>, just like a family story. It can point you toward a record, but it proves nothing until you find that record and read it yourself.</p>
+      </div>
+      <h3>Practice: where AI helps</h3>
+      <div id="practice-1"></div>
+      <div class="level-done"><div class="level-status" id="status-1" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-1" disabled>Continue to Level 2 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 2 -->
+  <section class="level-panel" id="level-2" aria-labelledby="lt-2" hidden>
+    <span class="step-num">Level 2 of 4</span>
+    <h2 id="lt-2">Where AI Misleads</h2>
+    <p class="level-intro">AI writes fluently and confidently, even when it's wrong. Knowing its common mistakes is your best protection.</p>
+    <div class="locked-msg" id="locked-2" hidden></div>
+    <div class="level-content" id="content-2">
+      <h3>Four common traps</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Invented sources:</strong> AI can produce citations that look completely real, with page numbers, archive names, and collection titles, for records that don't exist. Always follow a citation to the actual record.</li>
+          <li><strong>Merged identities:</strong> two men with the same name in the same county can be blended into one person, the classic "Same Name, Wrong Man" error, delivered with confidence.</li>
+          <li><strong>Filled gaps:</strong> when records are missing, AI may supply a plausible guess, such as a birth year, a parent, or a migration route, and present it as fact.</li>
+          <li><strong>Repeated errors:</strong> AI learns from what's already online, including copied, unsourced trees, so it can repeat a popular mistake as if it were settled.</li>
+        </ul>
+      </div>
+      <h3>A quick test for any AI claim</h3>
+      <div class="card">
+        <p>Ask: <strong>What record says so, and can I see it?</strong> If the answer is no, or the record can't be found, the claim stays a lead.</p>
+      </div>
+      <h3>Practice: where AI misleads</h3>
+      <div id="practice-2"></div>
+      <div class="level-done"><div class="level-status" id="status-2" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-2" disabled>Continue to Level 3 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 3 -->
+  <section class="level-panel" id="level-3" aria-labelledby="lt-3" hidden>
+    <span class="step-num">Level 3 of 4</span>
+    <h2 id="lt-3">Images and AI</h2>
+    <p class="level-intro">AI can sharpen, restore, colorize, and even invent images. Some of that is delightful, but none of it is evidence.</p>
+    <div class="locked-msg" id="locked-3" hidden></div>
+    <div class="level-content" id="content-3">
+      <h3>How AI changes images</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Enhancement and restoration</strong> can change faces, smooth away details, or alter the letters and numbers on a document.</li>
+          <li><strong>Colorization</strong> guesses at colors that were never recorded.</li>
+          <li><strong>Generated "ancestor portraits"</strong> show people who never looked that way, sometimes presented as real photographs.</li>
+        </ul>
+      </div>
+      <h3>The rules for images</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Only an unaltered image counts as evidence.</strong> A faithful scan or photograph of a record can be physical evidence; an enhanced version can't.</li>
+          <li><strong>Keep the original file</strong> whenever you restore or enhance a photo.</li>
+          <li><strong>Label altered images clearly,</strong> such as "AI-colorized" or "AI-generated illustration," so no one mistakes them for originals.</li>
+          <li><strong>Never present a generated portrait as a real ancestor.</strong></li>
+        </ul>
+      </div>
+      <h3>Practice: images and AI</h3>
+      <div id="practice-3"></div>
+      <div class="level-done"><div class="level-status" id="status-3" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-3" disabled>Continue to Level 4 →</button></div>
+    </div>
+  </section>
+
+  <!-- LEVEL 4 -->
+  <section class="level-panel" id="level-4" aria-labelledby="lt-4" hidden>
+    <span class="step-num">Level 4 of 4</span>
+    <h2 id="lt-4">The Human Touch</h2>
+    <p class="level-intro">AI can suggest. People decide. Here's what only you can do, and how to use AI honestly.</p>
+    <div class="locked-msg" id="locked-4" hidden></div>
+    <div class="level-content" id="content-4">
+      <h3>What only people can do</h3>
+      <div class="card">
+        <ul class="rules">
+          <li><strong>Confirm the record exists</strong> and actually says what's claimed.</li>
+          <li><strong>Weigh the witness:</strong> who gave the information, and how would they know?</li>
+          <li><strong>Check the alibis</strong> that separate people who share a name.</li>
+          <li><strong>Reach a verdict</strong> that honestly admits what remains uncertain.</li>
+        </ul>
+        <p>That's why, at KHGN, ratings are decided by people: jurors and judges examining the evidence, not an AI.</p>
+      </div>
+      <h3>Use AI honestly</h3>
+      <div class="card">
+        <p><strong>Disclose when AI helped,</strong> such as "handwriting transcribed with AI help and checked against the original." Using AI openly isn't a problem; hiding it is. Disclosure tells others which parts to double-check.</p>
+      </div>
+      <h3>Protect privacy</h3>
+      <div class="card">
+        <p>Many AI services keep what you type, and some may use it for other purposes. Don't paste living people's names, addresses, or birth dates, private family records, or anything from KHGN's private training into AI tools. The same standards you learned in the Tipple Trial apply.</p>
+      </div>
+      <h3>Knowledge check: the human touch</h3>
+      <div id="practice-4"></div>
+      <h3>The AI pledge</h3>
+      <label class="pledge">
+        <input type="checkbox" id="pledge">
+        <span>I will treat AI answers as leads, follow every citation to the real record, label altered images and never present them as evidence, disclose when AI helped my work, keep living people's information out of AI tools, and remember that AI assists, but people verify.</span>
+      </label>
+      <div class="level-done"><div class="level-status" id="status-4" aria-live="polite"></div><button type="button" class="btn next-btn" id="next-4" disabled>Finish training</button></div>
+    </div>
+  </section>
+
+  <section class="step" aria-labelledby="s9" id="s9">
+    <span class="step-num">Completion</span>
+    <h2>Your training banner</h2>
+    <div class="locked" id="locked">Complete all four levels to unlock your banner.</div>
+    <div id="award" aria-live="polite">
+      <div class="card">
+        <h3 style="margin-top:0">Working With AI Responsibly complete</h3>
+        <p>You know where AI helps, where it misleads, and why people verify.</p>
+        <canvas id="banner" width="1200" height="630" role="img" aria-label="AI-Wise Researcher training complete banner"></canvas>
+        <button type="button" class="btn" id="download">Download banner</button>
+        <p class="privacy">Your banner is drawn in your browser. Nothing about you is sent to or stored by KHGN.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>KHGN Inc. · Kentucky History &amp; Genealogy Network · Trailhead Training is unaccredited volunteer education.<br>Facebook is a trademark of Meta Platforms, Inc. KHGN Inc. is not affiliated with or endorsed by Meta.</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ================= Settings ================= */
+  var LEVEL_NAME = "AI-Wise Researcher";
+  var BANNER_TAG = "Training Complete";
+  var MODULE_NAME = "Working With AI Responsibly";
+  var HANDS_ON_NOTE = "AI assists. People verify.";
+  var ORG_LINE = "Kentucky History & Genealogy Network";
+  var LEVELS = 4;
+  var KEY = "khgnWorkingWithAIProgress";
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  /* ================= Scenarios ================= */
+  var HELPS = [
+    { c: "You can't make out several words in your ancestor's 1838 will. How can AI help?",
+      o: ["Have AI read it and accept its version as the transcription", "Have AI offer a first reading, then check every word against the image yourself", "Skip the will entirely", "Ask AI to summarize what the will probably said"],
+      a: 1, why: "AI's reading is a draft. Names, dates, and numbers especially must be checked against the image." },
+    { c: "Which is a good job for AI?",
+      o: ["Deciding who your ancestor's father was", "Suggesting which kinds of records might exist for an 1840s Kentucky marriage", "Inventing a missing birth year", "Proving a family relationship"],
+      a: 1, why: "Planning research is a great use. Conclusions about relationships need records and people." },
+    { c: "An AI translation of a German church record says your ancestor was born in 1802. What next?",
+      o: ["Add 1802 to your tree as proven", "Confirm the date against the original record, with help from a reference or someone who reads German if needed", "Ask the AI again until it agrees", "Ignore the translation"],
+      a: 1, why: "Translations are drafts. Key details like dates must be confirmed against the original." },
+    { c: "An AI tool tells you your ancestor was born in Virginia in 1790. What is this?",
+      o: ["Physical evidence", "A ★1 Lead to follow to the records", "Corroboration", "A Gold Star Verdict"],
+      a: 1, why: "Any AI answer about an ancestor is a lead, like a family story, until you find the record." }
+  ];
+
+  var MISLEADS = [
+    { c: "An AI gives you a citation: \"Madison County Will Book F, page 212.\" When you check, Will Book F has no page 212 entry for that name.",
+      o: ["Trust the AI; the clerk must be mistaken", "Treat the citation as invented, and keep searching the real records", "Cite it anyway", "Ask the AI to confirm it"],
+      a: 1, why: "AI can invent realistic citations. Only a record you can actually find counts." },
+    { c: "An AI biography of your ancestor includes land in two counties and a wife whose name doesn't match your records.",
+      o: ["Accept it; AI read more sources than you", "Suspect two same-name men were merged, and check the alibis", "Change your records to match", "Post it as a finished biography"],
+      a: 1, why: "Merged identities are a common AI error, and the classic Same Name, Wrong Man trap." },
+    { c: "No records survive for your ancestor's parents, but the AI confidently names them.",
+      o: ["Add the parents to your tree", "Treat it as a guess that fills a gap, and look for records or circumstantial evidence", "Ask a different AI and use the answer if it agrees", "Assume it's right since it sounds certain"],
+      a: 1, why: "AI fills gaps with plausible guesses. Confidence isn't evidence." },
+    { c: "An AI repeats a birth date that appears in dozens of online trees. Does that make it reliable?",
+      o: ["Yes, many sources agree", "Not necessarily; AI learns from copied trees and can repeat a popular mistake", "Yes, if two AI tools agree", "Yes, AI checks its sources"],
+      a: 1, why: "Repetition isn't proof. Ask what record says so." }
+  ];
+
+  var IMAGES = [
+    { c: "You restored a faded deed with an AI tool, and a date now looks clearer. Which version counts as evidence?",
+      o: ["The restored version, since it's easier to read", "The original, unaltered image", "Both equally", "Neither"],
+      a: 1, why: "Restoration can change letters and numbers. Only the unaltered image counts as evidence." },
+    { c: "A member shares an AI-colorized photo of a Civil War soldier. How should it be shared?",
+      o: ["As the original photograph", "Clearly labeled \"AI-colorized,\" with the original kept", "Without any label", "As proof of his uniform's colors"],
+      a: 1, why: "Colorization guesses at colors. Label altered images so no one mistakes them for originals." },
+    { c: "An AI generated a lifelike portrait of your 1790s ancestor, of whom no picture exists.",
+      o: ["Share it as his photograph", "If shared at all, label it as an AI-generated illustration, never as the real man", "Add it to his profile as his portrait", "Use it as evidence of his appearance"],
+      a: 1, why: "Never present a generated portrait as a real ancestor." },
+    { c: "Why keep the original file when you enhance a photo?",
+      o: ["There's no reason to", "So the unaltered version remains available as evidence and for comparison", "To save storage", "Because enhanced files can't be shared"],
+      a: 1, why: "The original is the evidence. The enhanced copy is an illustration." }
+  ];
+
+  var HUMAN = [
+    { c: "Who decides KHGN's research ratings?",
+      o: ["An AI tool", "People: jurors and judges examining the evidence", "Whoever posts first", "The most popular members"],
+      a: 1, why: "AI can suggest, but people decide. That's the human touch." },
+    { c: "You used AI to help transcribe a difficult letter, then checked it against the original. What should your post say?",
+      o: ["Nothing about AI", "That the transcription had AI help and was checked against the original", "That AI did all the work", "That no one should check it"],
+      a: 1, why: "Disclosing AI help is honest, and tells others which parts to double-check." },
+    { c: "Which should you never paste into an AI tool?",
+      o: ["A question about Kentucky record types", "Your living cousin's name, address, and birth date", "A general question about census records", "A request to format a citation"],
+      a: 1, why: "Many AI services keep what you type. Living people's information stays out, under the Tipple Trial standards." },
+    { c: "What's KHGN's principle for AI?",
+      o: ["AI decides; people approve", "AI assists. People verify.", "Avoid AI completely", "Whatever AI says is final"],
+      a: 1, why: "AI can help and critique, but people verify." }
+  ];
+
+  var SETS = {
+    1: [{ host: "practice-1", items: HELPS, opts: null, label: "Case" }],
+    2: [{ host: "practice-2", items: MISLEADS, opts: null, label: "Case" }],
+    3: [{ host: "practice-3", items: IMAGES, opts: null, label: "Case" }],
+    4: [{ host: "practice-4", items: HUMAN, opts: null, label: "Question" }]
+  };
+  var correct = {};
+
+  /* ================= Saved progress (this device only) ================= */
+  var progress = { done: [] };
+  try { var saved = JSON.parse(localStorage.getItem(KEY)); if (saved && saved.done) { progress = saved; } } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(progress)); } catch (e) {} }
+  function isDone(n) { return progress.done.indexOf(n) !== -1; }
+  function isUnlocked(n) { return true; }
+
+  /* ================= Build practice sets ================= */
+  function buildSet(n, set) {
+    var host = document.getElementById(set.host);
+    correct[set.host] = [];
+    set.items.forEach(function (item, i) {
+      var opts = item.o || set.opts;
+      var box = document.createElement("div");
+      box.className = "scenario";
+      var html = '<div class="num">' + set.label + ' ' + (i + 1) + '</div><p class="case">' + esc(item.c) + '</p><div class="choices' + (item.o ? ' stacked' : '') + '" role="group" aria-label="Choose an answer for ' + set.label.toLowerCase() + ' ' + (i + 1) + '">';
+      var order = opts.map(function (_, oi) { return oi; });
+      for (var k = order.length - 1; k > 0; k--) { var r = Math.floor(Math.random() * (k + 1)); var tmp = order[k]; order[k] = order[r]; order[r] = tmp; }
+      order.forEach(function (oi) { html += '<button type="button" data-i="' + oi + '">' + esc(opts[oi]) + '</button>'; });
+      html += '</div><div class="feedback" aria-live="polite"></div>';
+      box.innerHTML = html;
+      host.appendChild(box);
+      var fb = box.querySelector(".feedback");
+      if (isDone(n)) {
+        correct[set.host][i] = true;
+        box.querySelector('button[data-i="' + item.a + '"]').classList.add("picked-right");
+        fb.className = "feedback show right"; fb.textContent = "Correct. " + item.why;
+      }
+      box.querySelectorAll("button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          box.querySelectorAll("button").forEach(function (bb) { bb.classList.remove("picked-right", "picked-wrong"); });
+          var right = parseInt(btn.getAttribute("data-i"), 10) === item.a;
+          btn.classList.add(right ? "picked-right" : "picked-wrong");
+          fb.className = "feedback show " + (right ? "right" : "wrong");
+          fb.textContent = right ? "Correct. " + item.why : "Not quite. Review the material above and try another answer.";
+          correct[set.host][i] = right;
+          updateLevel(n);
+        });
+      });
+    });
+  }
+  for (var lv = 1; lv <= LEVELS; lv++) { SETS[lv].forEach(function (set) { buildSet(lv, set); }); }
+
+  var pledge = document.getElementById("pledge");
+  if (isDone(LEVELS)) { pledge.checked = true; }
+  pledge.addEventListener("change", function () { updateLevel(LEVELS); });
+
+  function tally(n) {
+    var got = 0, total = 0;
+    SETS[n].forEach(function (set) { total += set.items.length; got += correct[set.host].filter(Boolean).length; });
+    return { got: got, total: total };
+  }
+  function levelReady(n) {
+    var t = tally(n), all = t.got === t.total;
+    return n === LEVELS ? all && pledge.checked : all;
+  }
+  function updateLevel(n) {
+    var ready = levelReady(n), t = tally(n);
+    var btn = document.getElementById("next-" + n);
+    var status = document.getElementById("status-" + n);
+    btn.disabled = !ready;
+    if (isDone(n)) { status.textContent = "Level complete."; }
+    else if (ready) { status.textContent = "All answers correct. You're ready to move on."; }
+    else { status.textContent = t.got + " of " + t.total + " answers correct" + (n === LEVELS ? ", plus the pledge" : "") + "."; }
+  }
+
+
+  /* ================= Navigation ================= */
+  var award = document.getElementById("award");
+  var locked = document.getElementById("locked");
+  var current = 1;
+
+  function refreshSteps() {
+    for (var n = 1; n <= LEVELS; n++) {
+      var step = document.getElementById("step-" + n);
+      var state = document.getElementById("state-" + n);
+      step.classList.toggle("is-done", isDone(n));
+      step.classList.toggle("is-locked", !isUnlocked(n));
+      step.classList.toggle("is-current", n === current);
+      step.setAttribute("aria-current", n === current ? "step" : "false");
+      var nextUp = 1; while (nextUp < LEVELS && isDone(nextUp)) { nextUp++; }
+      state.textContent = isDone(n) ? "Complete" : (n === nextUp ? "Up next" : "Open");
+    }
+    var finished = isDone(LEVELS);
+    locked.style.display = finished ? "none" : "block";
+    if (finished && !award.classList.contains("show")) { award.classList.add("show"); drawBanner(); }
+    if (!finished) { award.classList.remove("show"); }
+  }
+
+  function show(n, scroll) {
+    current = n;
+    for (var i = 1; i <= LEVELS; i++) { document.getElementById("level-" + i).hidden = i !== n; }
+    var unlocked = isUnlocked(n);
+    document.getElementById("locked-" + n).hidden = unlocked;
+    document.getElementById("content-" + n).hidden = !unlocked;
+    refreshSteps();
+    updateLevel(n);
+    if (scroll) { document.querySelector(".level-nav").scrollIntoView({ behavior: "smooth", block: "start" }); }
+  }
+
+  for (var n0 = 1; n0 <= LEVELS; n0++) {
+    (function (n) {
+      document.getElementById("step-" + n).addEventListener("click", function () { show(n, false); });
+      document.getElementById("next-" + n).addEventListener("click", function () {
+        if (!levelReady(n)) { return; }
+        if (!isDone(n)) { progress.done.push(n); save(); }
+        if (n < LEVELS) { show(n + 1, true); }
+        else { refreshSteps(); updateLevel(LEVELS); document.getElementById("s9").scrollIntoView({ behavior: "smooth", block: "start" }); }
+      });
+    })(n0);
+  }
+
+  document.getElementById("reset").addEventListener("click", function () {
+    if (!window.confirm("Start Working With AI Responsibly over? Your saved progress on this device will be cleared.")) { return; }
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    window.location.reload();
+  });
+
+
+  /* ================= Banner ================= */
+  var canvas = document.getElementById("banner");
+  var ctx = canvas.getContext("2d");
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { if (award.classList.contains("show")) { drawBanner(); } }); }
+
+  function fit(text, weight, size, min, family, maxW) {
+    ctx.font = weight + " " + size + "px " + family;
+    while (ctx.measureText(text).width > maxW && size > min) { size -= 2; ctx.font = weight + " " + size + "px " + family; }
+  }
+
+  function drawBanner() {
+    var W = canvas.width, H = canvas.height;
+    var serif = 'Rye, Georgia, "Times New Roman", serif';
+    var sans = '"Public Sans", Arial, sans-serif';
+    ctx.fillStyle = "#1C140F"; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "#B08D57"; ctx.lineWidth = 6; ctx.strokeRect(28, 28, W - 56, H - 56);
+    ctx.lineWidth = 1.5; ctx.strokeRect(44, 44, W - 88, H - 88);
+    ctx.textAlign = "center";
+
+    ctx.fillStyle = "#D4AF6A"; ctx.font = "700 26px " + sans;
+    ctx.fillText("KHGN INC.  ·  TRAILHEAD TRAINING", W / 2, 112);
+    ctx.fillStyle = "#B08D57"; ctx.fillRect(W / 2 - 60, 132, 120, 3);
+
+    ctx.fillStyle = "#EDE0C8"; fit(LEVEL_NAME.toUpperCase(), "700", 80, 40, serif, W - 160);
+    ctx.fillText(LEVEL_NAME.toUpperCase(), W / 2, 250);
+    ctx.fillStyle = "#D4AF6A"; ctx.font = "700 30px " + sans;
+    ctx.fillText(BANNER_TAG.toUpperCase(), W / 2, 298);
+
+    ctx.fillStyle = "#E0D0AC"; ctx.font = "400 30px " + sans;
+    ctx.fillText("for completing " + MODULE_NAME, W / 2, 378);
+    ctx.fillStyle = "#D4AF6A"; ctx.font = "600 26px " + sans;
+    ctx.fillText(new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }), W / 2, 428);
+    ctx.fillStyle = "#BFAE8A"; fit(HANDS_ON_NOTE, "400", 20, 14, sans, W - 160);
+    ctx.fillText(HANDS_ON_NOTE, W / 2, H - 100);
+    ctx.font = "400 20px " + sans; ctx.fillText(ORG_LINE, W / 2, H - 70);
+  }
+
+  document.getElementById("download").addEventListener("click", function () {
+    drawBanner();
+    var fileName = "KHGN-" + LEVEL_NAME.replace(/\s+/g, "-") + "-Training-Complete.png";
+    canvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = fileName;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    }, "image/png");
+  });
+  /* Start on the first unfinished level (runs last, after the banner tools are ready) */
+  var firstOpen = 1;
+  while (firstOpen < LEVELS && isDone(firstOpen)) { firstOpen++; }
+  show(firstOpen, false);
+})();
+</script>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nav = document.querySelector(".site-nav");
+            const toggle = document.querySelector(".site-nav-toggle");
+            const links = document.querySelector(".site-nav-links");
+            if (!nav || !toggle || !links) {
+                return;
+            }
+            toggle.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+            links.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    toggle.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

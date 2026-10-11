@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view KHGN Trailhead Training.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rate Your Research - KHGN Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="Free self-evaluation from KHGN Inc.: describe your genealogy research and see which star designation it reaches, from Lead to Case Built.">
+<style>
+  :root{
+    --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+    --ink:#221A12; --ink-soft:#4A3A28; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+    --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+    --pass:#2F5224; --pass-bg:#DDE8D6; --warn:#6A4E22; --warn-bg:#F1E2C4; --fail:#8E2A1F; --fail-bg:#F3D9D3; --card-line:#CDBB98;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--walnut); color: var(--parchment); font-family: 'Public Sans', Arial, sans-serif; font-size: 17px; line-height: 1.6; }
+  a { color: var(--brass-bright); }
+  :focus-visible { outline: 3px solid var(--brass-bright); outline-offset: 2px; }
+  /* Navigation */
+  .site-nav {
+      background: var(--walnut-deep);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+  }
+  .site-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+  }
+  .site-nav-brand {
+      color: var(--brass-bright);
+      text-decoration: none;
+      font-family: 'Rye', serif;
+      font-weight: 400;
+      font-size: 22px;
+      white-space: nowrap;
+  }
+  .site-nav-links {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+  }
+  .site-nav-links a {
+      color: var(--parchment);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .site-nav-links a:hover { color: var(--brass-bright); }
+  .site-nav-toggle {
+      display: none;
+      margin-left: auto;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+  }
+  .site-nav-toggle-bar {
+      display: block;
+      width: 24px;
+      height: 3px;
+      margin: 4px 0;
+      border-radius: 999px;
+      background: var(--brass-bright);
+  }
+  .page-games .site-nav-links a[href="https://khgn-inc.org/game-portal.html"] {
+      color: var(--brass-bright);
+      border-bottom-color: var(--brass);
+  }
+
+  @media (max-width: 700px) {
+      .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+      .site-nav-toggle { display: block; }
+      .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+      .site-nav.is-open .site-nav-links { display: flex; }
+      .site-nav-links a { width: 100%; padding: 10px 0; }
+      .game-grid { grid-template-columns: 1fr !important; }
+      .container { margin: 30px auto; }
+      .hero h1 { font-size: 32px; }
+  }
+
+
+  @media (max-width: 700px) {
+    .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+    .site-nav-toggle { display: block; }
+    .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+    .site-nav.is-open .site-nav-links { display: flex; }
+    .site-nav-links a { width: 100%; padding: 10px 0; }
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .back { display: inline-block; margin: 22px 0 0; font-weight: 700; text-decoration: none; }
+  .back:hover { color: var(--parchment); }
+  header.module { padding: 32px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 32px; background: radial-gradient(ellipse at 50% -40%, rgba(176,141,87,0.18), transparent 70%); }
+  .eyebrow { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); }
+  h1, h2 { font-family: 'Rye', Georgia, serif; font-weight: 400; line-height: 1.2; }
+  h1 { margin: 0 0 14px; font-size: clamp(30px, 5vw, 40px); color: var(--parchment); text-shadow: 0 2px 0 var(--walnut-deep); }
+  h2 { margin: 0 0 14px; font-size: 25px; color: var(--parchment); }
+  h3 { margin: 18px 0 6px; font-size: 18px; font-weight: 800; line-height: 1.3; color: var(--brass-bright); }
+  .lede { margin: 0; font-size: 18px; color: var(--parchment-dim); max-width: 700px; }
+  section.step { margin: 0 0 48px; }
+  section.step > p { color: var(--parchment-dim); }
+  .step-num { display: inline-block; margin-bottom: 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--brass-bright); text-transform: uppercase; }
+  .hint { margin: 0 0 10px; font-size: 15px; color: var(--parchment-dim); }
+  label.big { display: block; font-weight: 700; margin-bottom: 6px; }
+  /* parchment cards */
+  .card, .standard, .scenario, .quiz-q, .check, .award-card, .rung, .pledge, .stop-like {
+    background: var(--parchment); color: var(--ink); border-radius: 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+  .card h3, .award-card h3, .standard h3 { color: var(--ink); }
+  .card a, .standard a, .scenario a, .award-card a, .note a { color: #7A3A1E; }
+  .note { display: flex; gap: 14px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 20px; color: var(--parchment-dim); }
+  .note p { margin: 0; } .note strong { color: var(--brass-bright); } .note a { color: var(--brass-bright); }
+  .note svg { flex-shrink: 0; margin-top: 3px; }
+  .btn, button.primary, .row button {
+    min-height: 46px; padding: 11px 22px; font: inherit; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    color: #fff; background: var(--rust); border: 0; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;
+  }
+  .btn:hover, .row button:hover { background: var(--rust-bright); }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+  .count { font-size: 15px; color: var(--parchment-dim); }
+  .feedback { margin-top: 10px; font-size: 15px; padding: 8px 12px; border-radius: 6px; display: none; }
+  .feedback.show { display: block; }
+  .feedback.right { background: var(--pass-bg); color: var(--pass); }
+  .feedback.wrong { background: var(--fail-bg); color: var(--fail); }
+  .progress { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .pill { padding: 6px 14px; border-radius: 999px; font-size: 14.5px; font-weight: 700; background: var(--walnut-deep); border: 1px solid var(--line); color: var(--parchment-dim); }
+  .pill.done { background: var(--pass-bg); border-color: var(--pass-bg); color: var(--pass); }
+  .locked { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  #award { display: none; } #award.show { display: block; }
+  .award-card { padding: 22px; }
+  .award-card .hint, .award-card p { color: var(--ink-soft); }
+  input[type="text"] { width: 100%; max-width: 420px; min-height: 44px; padding: 8px 12px; font: inherit; font-size: 17px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  canvas { display: block; width: 100%; height: auto; margin: 16px 0; border-radius: 8px; }
+  .privacy { font-size: 14px; color: var(--ink-soft); margin: 8px 0 0; }
+  footer { padding: 28px 0 48px; border-top: 1px solid var(--line); font-size: 14.5px; color: var(--parchment-dim); }
+
+  .alert { padding: 14px 20px; border-radius: 10px; background: var(--fail-bg); color: var(--fail); font-weight: 700; margin: 14px 0; }
+  .card { padding: 18px 22px; margin-bottom: 14px; }
+  .card p { margin: 0 0 10px; } .card p:last-child { margin-bottom: 0; }
+  ul.rules { margin: 0; padding-left: 22px; } ul.rules li { margin-bottom: 10px; }
+  .why { display: block; font-size: 15px; color: var(--ink-soft); }
+  section.step > .why, section.step > p.why { color: var(--parchment-dim); }
+  .table-wrap { overflow-x: auto; border-radius: 10px; margin: 10px 0 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+  table { width: 100%; border-collapse: collapse; background: var(--parchment); color: var(--ink); font-size: 16px; }
+  th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--card-line); }
+  th { background: var(--walnut-deep); color: var(--brass-bright); font-weight: 700; }
+  tr:last-child td { border-bottom: 0; }
+  ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 8px; }
+  .ladder { display: grid; gap: 10px; }
+  .rung { display: flex; gap: 14px; align-items: flex-start; padding: 12px 18px; box-shadow: none; }
+  .rung b { flex-shrink: 0; min-width: 190px; color: var(--ink); }
+  .rung span { color: var(--ink-soft); }
+  .rung.here { outline: 3px solid var(--brass-bright); }
+  .scenario { padding: 18px 20px; margin-bottom: 14px; }
+  .scenario .case { margin: 0 0 12px; }
+  .scenario .num { font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; color: #7A3A1E; text-transform: uppercase; }
+  .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+  .choices button { min-height: 42px; padding: 8px 14px; font: inherit; font-size: 14.5px; font-weight: 700; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--brass); border-radius: 6px; cursor: pointer; }
+  .choices.stacked { flex-direction: column; align-items: stretch; }
+  .choices.stacked button { text-align: left; }
+  .choices button:hover { background: var(--parchment-dim); }
+  .choices button.picked-right { background: var(--pass-bg); border-color: var(--pass); color: var(--pass); }
+  .choices button.picked-wrong { background: var(--fail-bg); border-color: var(--fail); color: var(--fail); }
+  .pledge { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; cursor: pointer; }
+  .pledge input { margin-top: 6px; width: 20px; height: 20px; accent-color: var(--rust); }
+
+  .level-nav { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin: 0 0 10px; scroll-margin-top: 90px; }
+  .level-step { display: flex; align-items: center; gap: 10px; text-align: left; padding: 12px 14px; font: inherit; color: var(--parchment); background: var(--walnut-deep); border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer; }
+  .level-step:hover { border-color: var(--brass); }
+  .level-step.is-current { background: var(--parchment); color: var(--ink); border-color: var(--brass-bright); }
+  .level-step.is-locked { opacity: 0.6; }
+  .ls-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Rye', Georgia, serif; font-size: 16px; background: var(--line); color: var(--parchment); }
+  .level-step.is-current .ls-num, .level-step.is-done .ls-num { background: var(--brass-bright); color: var(--walnut-deep); }
+  .level-step.is-done .ls-num::after { content: "✓"; font-family: 'Public Sans', Arial, sans-serif; font-weight: 800; }
+  .level-step.is-done .ls-num { font-size: 0; }
+  .level-step.is-done .ls-num::after { font-size: 16px; }
+  .ls-text { display: flex; flex-direction: column; min-width: 0; }
+  .ls-title { font-weight: 700; font-size: 14.5px; line-height: 1.25; }
+  .ls-state { font-size: 12.5px; color: var(--parchment-dim); }
+  .level-step.is-current .ls-state { color: #6A4E22; }
+  .progress-note { font-size: 14px; color: var(--parchment-dim); margin: 0 0 30px; }
+  .linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--brass-bright); text-decoration: underline; cursor: pointer; }
+  .level-panel { margin: 0 0 40px; }
+  .level-panel[hidden], .level-content[hidden], .locked-msg[hidden] { display: none; }
+  .level-intro { font-size: 17px; color: var(--parchment-dim); margin: -4px 0 20px; }
+  .locked-msg { padding: 20px; background: var(--walnut-deep); border: 1.5px dashed var(--line); border-radius: 10px; color: var(--parchment-dim); }
+  .level-done { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 24px; padding: 16px 20px; background: var(--walnut-deep); border: 1px solid var(--brass); border-radius: 10px; }
+  .level-status { font-weight: 700; color: var(--parchment); }
+  .next-btn:disabled { background: #6E5A48; color: #D8CBB2; cursor: not-allowed; }
+  @media (max-width: 760px) {
+    .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  .report-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 18px; }
+  .report-form label { display: flex; flex-direction: column; gap: 4px; font-size: 14.5px; font-weight: 700; color: var(--ink); }
+  .report-form input, .report-form textarea, .report-form select { font: inherit; font-size: 16px; font-weight: 400; padding: 8px 10px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  .report-form .wide { grid-column: 1 / -1; }
+  .report-form textarea { min-height: 80px; resize: vertical; }
+  .report-form fieldset { grid-column: 1 / -1; border: 1px solid var(--card-line); border-radius: 8px; padding: 12px 14px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px 14px; }
+  .report-form legend { font-weight: 800; color: #7A3A1E; padding: 0 6px; }
+  .report-out { width: 100%; min-height: 260px; margin-top: 14px; font-family: ui-monospace, Consolas, monospace; font-size: 14px; padding: 12px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .btn.ghost { background: transparent; color: #7A3A1E; border: 1.5px solid #7A3A1E; }
+  .btn.ghost:hover { background: var(--parchment-dim); }
+  @media (max-width: 900px) { .level-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  .county-grid { display: grid; grid-template-columns: minmax(150px, 1.4fr) repeat(3, minmax(90px, 1fr)) minmax(80px, 0.8fr); gap: 6px 10px; align-items: center; font-size: 14.5px; }
+  .county-grid .hdr { font-weight: 800; color: #7A3A1E; }
+  .county-grid input { width: 100%; font: inherit; font-size: 15px; padding: 6px 8px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; box-sizing: border-box; }
+  .county-grid .total { font-weight: 800; text-align: right; color: var(--ink); }
+  .grid-wrap { overflow-x: auto; }
+  .grid-wrap .county-grid { min-width: 620px; }
+  .flag-diagram { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0 0 8px; overflow-x: auto; }
+  .flag-diagram svg { display: block; width: 100%; min-width: 560px; height: auto; }
+
+  @media (max-width: 960px) { .level-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .level-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .star-chip { display: inline-block; font-size: 12.5px; font-weight: 800; letter-spacing: .04em; padding: 3px 10px; border-radius: 999px; background: var(--brass-bright); color: var(--walnut-deep); margin-bottom: 6px; }
+  .ladder-diagram { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0 0 12px; overflow-x: auto; }
+  .ladder-diagram svg { display: block; width: 100%; min-width: 620px; height: auto; }
+  .flag-diagram { display: none; }
+
+  .src-row { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1.6fr) auto auto; gap: 8px 10px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--card-line); }
+  .src-row select, .src-row input[type=text], .rr-field select, .rr-field textarea { font: inherit; font-size: 15px; padding: 7px 9px; color: var(--ink); background: #FFFDF8; border: 1.5px solid var(--card-line); border-radius: 6px; width: 100%; box-sizing: border-box; }
+  .src-row label.chk { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 700; white-space: nowrap; }
+  .src-del { background: transparent; border: 1px solid var(--card-line); border-radius: 6px; width: 32px; height: 32px; cursor: pointer; color: #7A3A1E; font-size: 16px; }
+  .rr-field { margin: 14px 0; }
+  .rr-field > span { display: block; font-weight: 700; margin-bottom: 6px; }
+  .rr-radio { display: grid; gap: 6px; }
+  .rr-radio label { display: flex; gap: 8px; align-items: flex-start; font-size: 15px; }
+  .result { display: none; margin-top: 18px; }
+  .result.show { display: block; }
+  .result-badge { display: flex; align-items: center; gap: 16px; background: var(--walnut-deep); color: var(--parchment); border: 2px solid var(--brass); border-radius: 12px; padding: 16px 20px; }
+  .result-stars { font-size: 30px; color: var(--brass-bright); letter-spacing: 2px; white-space: nowrap; }
+  .result-name { font-family: 'Rye', serif; font-size: 26px; line-height: 1.1; }
+  .result-sub { font-size: 14px; color: var(--parchment-dim); }
+  @media (max-width: 640px) { .src-row { grid-template-columns: 1fr 1fr; } .result-badge { flex-direction: column; align-items: flex-start; } }
+</style>
+</head>
+<body class="page-games">
+
+    <nav class="site-nav" aria-label="Global">
+    <div class="site-nav-inner">
+        <a href="https://khgn-inc.org/index.html" class="site-nav-brand">KHGN Inc.</a>
+        <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+            <span class="site-nav-toggle-bar"></span>
+        </button>
+        <div class="site-nav-links">
+            <a href="https://khgn-inc.org/index.html">Home</a>
+            <a href="https://khgn-inc.org/socialmedia.html">Social Media</a>
+            <a href="https://khgn-inc.org/recruiting.html">Volunteer Recruitment</a>
+            <a href="https://khgn-inc.org/donation-portal.html">Donation Portal</a>
+            <a href="https://khgn-inc.org/training.html">Volunteer Training</a>
+            <a href="https://khgn-inc.org/game-portal.html">Trailhead Training</a>
+        </div>
+    </div>
+</nav>
+
+<div class="wrap">
+  <a class="back" href="https://khgn-inc.org/proving-your-claim.html">← Back to Proving Your Claim</a>
+  <header class="module">
+    <p class="eyebrow">First Steps · Self-evaluation tool</p>
+    <h1>Rate Your Research</h1>
+    <p class="lede">Describe the evidence behind one claim in your family history, and see which of KHGN's star designations it reaches, from ★1 Lead to ★5 Case Built, plus exactly what the next star requires.</p>
+  </header>
+
+  <div class="note" style="margin-bottom:18px">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+    <p><strong>A practice self-evaluation, not an official rating.</strong> Nothing you enter is saved or sent anywhere. Describe sources about ancestors, and leave out living people's details. New to the designations? Start with <a href="https://khgn-inc.org/getting-started-genealogy.html">Getting Started in Genealogy</a>.</p>
+  </div>
+
+  <section class="step" aria-labelledby="q1">
+    <span class="step-num">Step 1</span>
+    <h2 id="q1">The claim</h2>
+    <div class="rr-field"><span>What are you trying to prove? <em style="font-weight:400">(optional, for your own reference)</em></span>
+      <textarea id="claim" rows="2" placeholder="e.g., William Smith, born about 1816, was the son of John Smith of Rockcastle County"></textarea></div>
+  </section>
+
+  <section class="step" aria-labelledby="q2">
+    <span class="step-num">Step 2</span>
+    <h2 id="q2">Your sources</h2>
+    <p class="hint">List each source that supports this claim. Leave out sources that only repeat something another listed source already shows.</p>
+    <div class="card">
+      <div id="sources"></div>
+      <button type="button" class="btn ghost" id="add-src" style="margin-top:12px">+ Add a source</button>
+    </div>
+  </section>
+
+  <section class="step" aria-labelledby="q3">
+    <span class="step-num">Step 3</span>
+    <h2 id="q3">Building the case</h2>
+    <div class="card">
+      <div class="rr-field"><span>Do any records disagree with each other, such as different birth years?</span>
+        <div class="rr-radio">
+          <label><input type="radio" name="conf" value="none"> No conflicts found after searching</label>
+          <label><input type="radio" name="conf" value="resolved"> Yes, and I've written out how I resolved them</label>
+          <label><input type="radio" name="conf" value="open"> Yes, and they're not resolved yet</label>
+          <label><input type="radio" name="conf" value="unchecked" checked> I haven't checked</label>
+        </div></div>
+      <div class="rr-field"><span>Did others with the same name live nearby?</span>
+        <div class="rr-radio">
+          <label><input type="radio" name="same" value="no"> No, I checked</label>
+          <label><input type="radio" name="same" value="alibi"> Yes, and I've checked the alibis to tell them apart</label>
+          <label><input type="radio" name="same" value="yes"> Yes, and I haven't separated them yet</label>
+          <label><input type="radio" name="same" value="unchecked" checked> I haven't checked</label>
+        </div></div>
+      <div class="rr-field"><span>Have you written out how your evidence fits together, including any circumstantial evidence like neighbors, witnesses, or naming patterns?</span>
+        <div class="rr-radio">
+          <label><input type="radio" name="written" value="yes"> Yes</label>
+          <label><input type="radio" name="written" value="no" checked> Not yet</label>
+        </div></div>
+    </div>
+    <button type="button" class="btn" id="evaluate">Rate my research</button>
+    <p id="err" class="privacy" style="color:#A63D2F" aria-live="polite"></p>
+
+    <div class="result" id="result" aria-live="polite">
+      <div class="result-badge">
+        <div class="result-stars" id="r-stars"></div>
+        <div><div class="result-name" id="r-name"></div><div class="result-sub" id="r-sub"></div></div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3 style="margin-top:0">Why this rating</h3>
+        <ul class="rules" id="r-why"></ul>
+        <h3>To reach the next level</h3>
+        <ul class="rules" id="r-next"></ul>
+      </div>
+    </div>
+  </section>
+  <footer>KHGN Inc. · Kentucky History &amp; Genealogy Network · Trailhead Training is unaccredited volunteer education.<br>Facebook is a trademark of Meta Platforms, Inc. KHGN Inc. is not affiliated with or endorsed by Meta.</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var TYPES = [
+    { v: "", t: "Choose the kind of source" },
+    { v: "story", t: "Family story or memory" },
+    { v: "tree", t: "Online tree or unsourced published history" },
+    { v: "index", t: "Index, database, transcription, or abstract" },
+    { v: "orig", t: "Original record, or an image of it" }
+  ];
+  var RECORDS = ["Census", "Deed", "Will or probate", "Marriage bond or license", "Birth or death record", "Court record", "Tax list", "Church record", "Military record", "Newspaper", "Family Bible written at the time", "Other original record"];
+  var list = document.getElementById("sources");
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function addRow() {
+    var row = document.createElement("div"); row.className = "src-row";
+    row.innerHTML = '<select class="s-type" aria-label="Kind of source">' + TYPES.map(function (o) { return '<option value="' + o.v + '">' + esc(o.t) + '</option>'; }).join("") + '</select>' +
+      '<select class="s-rec" aria-label="Type of original record" disabled><option value="">Record type (originals only)</option>' + RECORDS.map(function (r) { return '<option>' + esc(r) + '</option>'; }).join("") + '</select>' +
+      '<label class="chk"><input type="checkbox" class="s-cited"> Fully cited</label>' +
+      '<button type="button" class="src-del" aria-label="Remove this source">\u00D7</button>';
+    var type = row.querySelector(".s-type"), rec = row.querySelector(".s-rec");
+    type.addEventListener("change", function () { rec.disabled = type.value !== "orig"; if (rec.disabled) { rec.value = ""; } });
+    row.querySelector(".src-del").addEventListener("click", function () { row.remove(); if (!list.children.length) { addRow(); } });
+    list.appendChild(row);
+  }
+  addRow(); addRow();
+  document.getElementById("add-src").addEventListener("click", addRow);
+
+  function radio(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ""; }
+
+  var LEVELS = {
+    1: { name: "Lead", sub: "Worth following, not yet proven" },
+    2: { name: "Tip", sub: "Secondhand information pointing the way" },
+    3: { name: "Physical Evidence", sub: "An original record, fully cited" },
+    4: { name: "Corroborated", sub: "Independent original records agree" },
+    5: { name: "Case Built", sub: "Ready for the courtroom" }
+  };
+
+  document.getElementById("evaluate").addEventListener("click", function () {
+    var err = document.getElementById("err"); err.textContent = "";
+    var rows = Array.prototype.slice.call(list.querySelectorAll(".src-row"));
+    var srcs = rows.map(function (r) { return { type: r.querySelector(".s-type").value, rec: r.querySelector(".s-rec").value, cited: r.querySelector(".s-cited").checked }; }).filter(function (s) { return s.type; });
+    var missingRec = srcs.some(function (s) { return s.type === "orig" && !s.rec; });
+    if (missingRec) { err.textContent = "Choose a record type for each original record."; return; }
+
+    var why = [], next = [], level = 1;
+    var stories = srcs.filter(function (s) { return s.type === "story"; }).length;
+    var tips = srcs.filter(function (s) { return s.type === "tree" || s.type === "index"; }).length;
+    var origs = srcs.filter(function (s) { return s.type === "orig"; });
+    var cited = origs.filter(function (s) { return s.cited; });
+    var uncited = origs.length - cited.length;
+    var kinds = {}; cited.forEach(function (s) { kinds[s.rec] = true; });
+    var kindCount = Object.keys(kinds).length;
+    var conf = radio("conf"), same = radio("same"), written = radio("written");
+
+    if (!srcs.length) { why.push("No sources are listed yet, so the claim rests on a lead alone."); }
+    if (stories) { why.push(stories + " family stor" + (stories === 1 ? "y counts" : "ies count") + " as leads: valuable starting points, not proof."); }
+    if (tips) { why.push(tips + " secondhand source" + (tips === 1 ? " is a tip" : "s are tips") + ". Tips show where to look; copies of the same claim don't add up to proof."); level = Math.max(level, 2); }
+    if (uncited) { why.push(uncited + " original record" + (uncited === 1 ? " isn't" : "s aren't") + " fully cited yet, so " + (uncited === 1 ? "it doesn't" : "they don't") + " count until someone else could find " + (uncited === 1 ? "it" : "them") + "."); }
+    if (cited.length) { level = 3; why.push(cited.length + " fully cited original record" + (cited.length === 1 ? "" : "s") + ": physical evidence."); }
+    if (cited.length > kindCount) { why.push("Some original records are the same kind of record. Corroboration counts different, independent record types, so repeats of one kind add nothing new."); }
+    if (kindCount >= 2) { level = 4; why.push(kindCount + " independent record types agree: corroborated."); }
+
+    var caseReady = level === 4 && (conf === "none" || conf === "resolved") && (same === "no" || same === "alibi") && written === "yes";
+    if (caseReady) { level = 5; why.push("Conflicts are addressed, same-name alibis are checked, and your reasoning is written out: the case is built."); }
+
+    if (level === 1) { next.push("Follow your lead to a source. An online tree or index (a tip) can show you where the original record might be."); }
+    if (level <= 2) { next.push("Find the original record behind your tip, such as a census page, deed, will, or marriage bond, and cite it fully: who, what, when, where it's kept, and where in it."); }
+    if (level === 3) { next.push("Find a second original record of a different type, created independently, that supports the same claim, such as a deed or will alongside a census entry."); }
+    if (level === 4) {
+      if (!(conf === "none" || conf === "resolved")) { next.push(conf === "open" ? "Resolve the conflicting records: weigh who gave each piece of information and how they'd know, and write out your reasoning." : "Search for conflicting records, and resolve any you find."); }
+      if (!(same === "no" || same === "alibi")) { next.push(same === "yes" ? "Separate the people who share the name by checking alibis: records placing each one somewhere else." : "Check whether others with the same name lived nearby, and separate them if so."); }
+      if (written !== "yes") { next.push("Write out how your evidence fits together, including any circumstantial evidence."); }
+    }
+    if (level === 5) { next.push("You're ready for the courtroom. Learn the KHGN Evidence Framework, then file your case with Build Your Case. Courtroom designations, from ★6 Case Filed up to the ★10 Gold Star Verdict, are earned through a case submission and review."); }
+
+    var info = LEVELS[level];
+    document.getElementById("r-stars").textContent = "\u2605" + level;
+    document.getElementById("r-name").textContent = info.name;
+    document.getElementById("r-sub").textContent = info.sub;
+    document.getElementById("r-why").innerHTML = why.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("");
+    document.getElementById("r-next").innerHTML = next.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("");
+    var res = document.getElementById("result"); res.classList.add("show");
+    res.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+})();
+</script>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nav = document.querySelector(".site-nav");
+            const toggle = document.querySelector(".site-nav-toggle");
+            const links = document.querySelector(".site-nav-links");
+            if (!nav || !toggle || !links) {
+                return;
+            }
+            toggle.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+            links.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    toggle.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
