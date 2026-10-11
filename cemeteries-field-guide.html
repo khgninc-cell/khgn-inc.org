@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cemeteries Field Guide - KHGN Inc.</title>
+    <meta name="description" content="KHGN Inc. Record Field Guide: reading cemeteries and headstones, what burials reveal about a community, recording stones safely with raking light, and protecting privacy.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+            --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+            --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A; --blue:#3B7BB0; --blue-bright:#5B9BD0;
+        }
+        body {
+            margin: 0;
+            font-family: 'Public Sans', Arial, sans-serif;
+            background: var(--walnut);
+            color: var(--parchment);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        a { color: var(--brass-bright); }
+
+        /* Navigation */
+        .site-nav {
+            background: var(--walnut-deep);
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .site-nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .site-nav-brand {
+            color: var(--brass-bright);
+            text-decoration: none;
+            font-family: 'Rye', serif;
+            font-weight: 400;
+            font-size: 22px;
+            white-space: nowrap;
+        }
+        .site-nav-links {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .site-nav-links a {
+            color: var(--parchment);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .site-nav-links a:hover { color: var(--brass-bright); }
+        .site-nav-toggle {
+            display: none;
+            margin-left: auto;
+            padding: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        .site-nav-toggle-bar {
+            display: block;
+            width: 24px;
+            height: 3px;
+            margin: 4px 0;
+            border-radius: 999px;
+            background: var(--brass-bright);
+        }
+        .page-games .site-nav-links a[href="game-portal.html"] {
+            color: var(--brass-bright);
+            border-bottom-color: var(--brass);
+        }
+
+        @media (max-width: 700px) {
+            .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+            .site-nav-toggle { display: block; }
+            .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+            .site-nav.is-open .site-nav-links { display: flex; }
+            .site-nav-links a { width: 100%; padding: 10px 0; }
+            .game-grid { grid-template-columns: 1fr !important; }
+            .container { margin: 30px auto; }
+            .hero h1 { font-size: 32px; }
+        }
+
+        /* Hero */
+        .hero {
+            background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+            border-bottom: 1px solid var(--line);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero .eyebrow { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); margin-bottom: 10px; font-weight: 700; }
+        .hero h1 {
+            font-family: 'Rye', serif;
+            font-weight: 400;
+            font-size: 40px;
+            color: var(--parchment);
+            margin: 0 0 14px;
+            text-shadow: 0 2px 0 var(--walnut-deep);
+        }
+        .hero p { max-width: 700px; margin: 0 auto; font-size: 17px; line-height: 1.6; color: var(--parchment-dim); }
+        .hero-points { list-style: none; padding: 0; margin: 22px auto 0; max-width: 760px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; font-size: 14.5px; color: var(--parchment); }
+        .hero-points li::before { content: "✓ "; color: var(--sage-bright); font-weight: 700; }
+        .hero-actions { margin-top: 26px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .hero-cta {
+            display: inline-block; background: var(--rust); color: #fff; text-decoration: none;
+            font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 8px; transition: background 0.2s ease;
+        }
+        .hero-cta:hover { background: var(--rust-bright); }
+        .hero-cta.ghost { background: transparent; color: var(--parchment); border: 1.5px solid var(--brass); }
+        .hero-cta.ghost:hover { background: rgba(176,141,87,0.15); }
+
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; box-sizing: border-box; width: 100%; }
+
+        /* Category sections */
+        .category-section { margin-bottom: 48px; }
+        .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .category-dot { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; }
+        .category-dot.blue { background: var(--blue-bright); }
+        .category-dot.teal { background: var(--sage-bright); }
+        .category-dot.brass { background: var(--brass-bright); }
+        .category-title { font-family: 'Rye', serif; font-weight: 400; font-size: 24px; color: var(--parchment); }
+        .category-desc { font-size: 13.5px; color: var(--parchment-dim); margin: 2px 0 0; }
+
+        /* Cards */
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--brass);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--parchment);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .game-card.blue-accent { border-top-color: var(--blue); }
+        .game-card.teal-accent { border-top-color: var(--sage); }
+        .game-card:hover { box-shadow: 0 10px 24px rgba(0,0,0,0.35); transform: translateY(-3px); }
+        .game-thumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            height: 120px;
+            background: rgba(0,0,0,0.05);
+        }
+        .game-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; color: var(--ink); }
+        .game-title { font-family: 'Rye', serif; font-weight: 400; font-size: 19px; color: var(--ink); margin-bottom: 8px; }
+        .game-desc { font-size: 14px; line-height: 1.55; color: #4A3A28; flex-grow: 1; margin-bottom: 18px; }
+        .game-btn {
+            display: inline-block;
+            align-self: flex-start;
+            background: var(--rust);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .game-btn:hover { background: var(--rust-bright); }
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--brass-bright); outline-offset: 2px; }
+
+        /* Volunteer Leadership Path */
+        .path-intro { max-width: 760px; font-size: 15.5px; line-height: 1.65; color: var(--parchment-dim); margin: -6px 0 24px; }
+        .trail { list-style: none; margin: 0; padding: 0; position: relative; }
+        .trail::before {
+            content: ""; position: absolute; left: 25px; top: 26px; bottom: 26px;
+            border-left: 3px dashed var(--brass);
+        }
+        .stop { position: relative; display: flex; gap: 20px; align-items: flex-start; margin-bottom: 16px; }
+        .stop:last-child { margin-bottom: 0; }
+        .marker {
+            position: relative; z-index: 1; flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Rye', serif; font-size: 22px; color: var(--walnut-deep);
+            background: var(--brass-bright); border: 3px solid var(--walnut);
+            box-shadow: 0 0 0 2px var(--brass);
+        }
+        .stop.soon .marker { background: var(--walnut-deep); color: var(--parchment-dim); box-shadow: 0 0 0 2px var(--line); }
+        .stop-card {
+            flex-grow: 1; min-width: 0; background: var(--parchment); color: var(--ink);
+            border-radius: 10px; padding: 18px 22px; box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+            display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; align-items: center;
+        }
+        .stop.soon .stop-card { background: var(--parchment-dim); }
+        .stop-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+        .stop-title { font-family: 'Rye', serif; font-size: 20px; color: var(--ink); }
+        .status {
+            font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 3px 9px; border-radius: 999px;
+        }
+        .status.open { background: #DDE8D6; color: #2F5224; }
+        .status.soon { background: #E9DCC2; color: #6A4E22; }
+        .status.enroll { background: #E4D3B0; color: #5A3B14; }
+        .stop-module { font-size: 13.5px; font-weight: 700; color: #6A4E22; margin-top: 2px; }
+        .stop-desc { font-size: 14px; line-height: 1.55; color: #4A3A28; margin: 6px 0 0; }
+        .stop-req { font-size: 13px; line-height: 1.5; color: #5C4A33; margin: 6px 0 0; }
+        .stop-req strong { color: var(--ink); }
+        .stop-action { grid-column: 2; grid-row: 1 / span 4; }
+        .stop-action .muted {
+            display: inline-block; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A; white-space: nowrap;
+        }
+        .banners-note {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px;
+        }
+        .banners-note div {
+            background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px;
+            padding: 16px 20px; font-size: 14px; line-height: 1.6; color: var(--parchment-dim);
+        }
+        .banners-note a { color: var(--brass-bright); font-weight: 700; }
+        .banners-note a:hover { color: var(--parchment); }
+        .banners-note strong { display: block; color: var(--brass-bright); font-size: 15px; margin-bottom: 4px; }
+        @media (max-width: 700px) {
+            .stop-card { grid-template-columns: 1fr; }
+            .stop-action { grid-column: 1; grid-row: auto; margin-top: 10px; }
+            .banners-note { grid-template-columns: 1fr; }
+            .marker { width: 44px; height: 44px; font-size: 19px; }
+            .trail::before { left: 21px; }
+            .stop { gap: 14px; }
+        }
+
+
+        /* Leadership tracks */
+        .foundation {
+            display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+            background: var(--walnut-deep); border: 1px solid var(--brass); border-radius: 10px; padding: 16px 22px; margin-bottom: 22px;
+        }
+        .foundation-label { font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); }
+        .foundation-title { font-family: 'Rye', serif; font-size: 20px; color: var(--parchment); margin-top: 2px; }
+        .tracks { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 24px; align-items: start; }
+        .track-list { display: flex; flex-direction: column; gap: 10px; position: sticky; top: 88px; }
+        .track-tab {
+            display: flex; flex-direction: column; gap: 3px; text-align: left; width: 100%;
+            padding: 14px 16px; border-radius: 10px; cursor: pointer; font: inherit;
+            background: var(--walnut-deep); color: var(--parchment); border: 1.5px solid var(--line);
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .track-tab:hover { border-color: var(--brass); }
+        .track-tab[aria-selected="true"] { background: var(--parchment); color: var(--ink); border-color: var(--brass-bright); box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .track-name { font-family: 'Rye', serif; font-size: 18px; line-height: 1.25; }
+        .track-parent { font-size: 12.5px; font-weight: 600; color: var(--parchment-dim); }
+        .track-tab[aria-selected="true"] .track-parent { color: #6A4E22; }
+        .track-roles { font-size: 13px; line-height: 1.45; color: var(--parchment-dim); margin-top: 4px; }
+        .track-roles strong { color: var(--brass-bright); }
+        .track-tab[aria-selected="true"] .track-roles { color: #4A3A28; }
+        .track-tab[aria-selected="true"] .track-roles strong { color: #7A3A1E; }
+        .track-tab.is-soon .track-roles { font-style: italic; }
+        .track-panel { background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 24px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .track-panel[hidden] { display: none; }
+        .panel-head { border-bottom: 1px solid #CDBB98; padding-bottom: 14px; margin-bottom: 16px; }
+        .panel-title { font-family: 'Rye', serif; font-weight: 400; font-size: 26px; margin: 0; color: var(--ink); }
+        .panel-parent { margin: 2px 0 0; font-size: 13px; font-weight: 700; color: #6A4E22; }
+        .panel-desc { margin: 8px 0 0; font-size: 15px; line-height: 1.6; color: #4A3A28; }
+        .levels { display: flex; flex-direction: column; gap: 10px; }
+        .lvl { background: #F6EDDB; border: 1px solid #CDBB98; border-radius: 8px; }
+        .lvl summary {
+            display: flex; align-items: center; gap: 12px; padding: 12px 14px; cursor: pointer; list-style: none;
+        }
+        .lvl summary::-webkit-details-marker { display: none; }
+        .lvl summary::after { content: "+"; margin-left: auto; font-size: 22px; font-weight: 700; color: #6A4E22; line-height: 1; }
+        .lvl[open] summary::after { content: "–"; }
+        .lvl-num {
+            flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: 'Rye', serif; font-size: 16px; background: var(--brass-bright); color: var(--walnut-deep);
+        }
+        .lvl-soon .lvl-num { background: #D9C8A6; color: #6A4E22; }
+        .lvl-title { font-family: 'Rye', serif; font-size: 18px; color: var(--ink); }
+        .lvl-body { padding: 0 14px 16px 60px; }
+        .lvl-body .stop-module { margin-top: 0; }
+        .lvl-body .game-btn { margin-top: 12px; }
+        .lvl-body .muted {
+            display: inline-block; margin-top: 12px; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A;
+        }
+        .soon-panel p { margin: 0 0 14px; font-size: 15px; line-height: 1.6; color: #4A3A28; }
+        @media (max-width: 760px) {
+            .tracks { grid-template-columns: 1fr; gap: 16px; }
+            .track-list { position: static; flex-direction: row; overflow-x: auto; gap: 8px; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+            .track-tab { flex: 0 0 auto; width: auto; max-width: 230px; scroll-snap-align: start; padding: 10px 14px; }
+            .track-roles, .track-parent { display: none; }
+            .track-name { font-size: 16px; white-space: nowrap; }
+            .track-panel { padding: 18px; }
+            .lvl-body { padding: 0 14px 16px 14px; }
+            .lvl-title { font-size: 16px; }
+        }
+
+        /* The Climb */
+        .climb-map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 6px 16px rgba(0,0,0,0.25); margin-bottom: 22px; }
+        .climb-map svg { display: block; width: 100%; height: auto; }
+        .climb-stops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+        .climb-stop { position: relative; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 22px 20px 20px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); display: flex; flex-direction: column; }
+        .climb-stop h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 21px; margin: 4px 0 2px; color: var(--ink); }
+        .climb-stop p { font-size: 14.5px; line-height: 1.6; color: #4A3A28; margin: 6px 0 12px; }
+        .climb-stop .game-btn, .climb-stop .muted-pill { margin-top: auto; align-self: flex-start; }
+        .climb-for { font-size: 12.5px !important; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #7A3A1E !important; margin: 0 !important; }
+        .climb-badge { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Rye', serif; font-size: 18px; background: var(--brass-bright); color: var(--walnut-deep); }
+        .route-list { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 6px; }
+        .route-list li { font-size: 14.5px; font-weight: 700; color: var(--ink); background: #F6EDDB; border: 1px solid #CDBB98; border-radius: 6px; padding: 7px 10px; }
+        .route-list span { margin-right: 6px; }
+        .muted-pill { display: inline-block; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A; }
+        .banner-sample-wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 22px; align-items: center; margin-top: 26px; }
+        .banner-sample { aspect-ratio: 1200 / 630; background: #1C140F; border: 5px solid #B08D57; outline: 1px solid #B08D57; outline-offset: -14px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px; gap: 4px; }
+        .bs-top { font-size: clamp(10px, 1.4vw, 14px); font-weight: 800; letter-spacing: 0.08em; color: #D4AF6A; }
+        .bs-rule { width: 60px; height: 2px; background: #B08D57; margin: 4px 0 6px; }
+        .bs-title { font-family: 'Rye', serif; font-size: clamp(20px, 3.4vw, 38px); color: #EDE0C8; line-height: 1.1; }
+        .bs-tag { font-size: clamp(11px, 1.5vw, 16px); font-weight: 800; color: #D4AF6A; letter-spacing: 0.05em; }
+        .bs-line { font-size: clamp(11px, 1.4vw, 15px); color: #E0D0AC; margin-top: 6px; }
+        .bs-org { font-size: clamp(9px, 1.1vw, 12px); color: #BFAE8A; margin-top: 10px; }
+        .banner-sample-text h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; margin: 0 0 8px; color: var(--parchment); }
+        .banner-sample-text p { font-size: 15.5px; line-height: 1.65; color: var(--parchment-dim); margin: 0; }
+        @media (max-width: 800px) {
+            .climb-stops, .banner-sample-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* The Journey */
+        .journey { list-style: none; margin: 0 0 22px; padding: 0; position: relative; display: grid; gap: 12px; }
+        .journey::before { content: ""; position: absolute; left: 25px; top: 28px; bottom: 28px; border-left: 3px dashed var(--brass); }
+        .jstop { position: relative; display: flex; gap: 16px; align-items: flex-start; }
+        .jicon { position: relative; z-index: 1; flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; background: var(--walnut-deep); border: 2px solid var(--brass); }
+        .jbody { flex-grow: 1; min-width: 0; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 16px 20px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .jbody h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 20px; margin: 0; color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+        .jfor { font-family: 'Public Sans', Arial, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #7A3A1E; }
+        .jbody p { font-size: 14.5px; line-height: 1.6; color: #4A3A28; margin: 6px 0 10px; }
+        .jbody .route-list { max-width: 420px; }
+        .disclaimer { background: #F3D9D3; color: #6E1F17; border-left: 0; border: 1.5px solid #C9897D; border-radius: 10px; padding: 14px 18px; font-size: 14.5px; line-height: 1.6; margin-bottom: 8px; }
+        .disclaimer strong { color: #6E1F17; }
+        @media (max-width: 600px) { .journey::before { left: 21px; } .jicon { width: 44px; height: 44px; font-size: 20px; } .jstop { gap: 12px; } }
+        .overview { border-top: 1px solid var(--line); padding-top: 40px; }
+        .overview h2 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; color: var(--parchment); margin-bottom: 15px; }
+        .trademark { font-size: 13px !important; color: var(--parchment-dim); opacity: 0.85; margin-top: 18px; }
+        .overview p { font-size: 16px; line-height: 1.7; color: var(--parchment-dim); }
+
+        .mission-note {
+            background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 12px;
+            padding: 20px 24px; margin-top: 30px; font-size: 13.5px; line-height: 1.65; color: var(--parchment-dim);
+        }
+        .mission-note strong { color: var(--brass-bright); }
+
+        /* Proving Your Claim hub */
+        .claim-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; position: relative; }
+        .claim-steps::before { content: ""; position: absolute; left: 27px; top: 30px; bottom: 30px; border-left: 3px dashed var(--brass); }
+        .claim-steps:has(> li:only-child)::before { display: none; }
+        .claim-step { position: relative; display: flex; gap: 18px; align-items: flex-start; }
+        .claim-num { position: relative; z-index: 1; flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; background: var(--walnut-deep); border: 2px solid var(--brass); }
+        .claim-card { flex-grow: 1; min-width: 0; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 18px 22px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .claim-card.soon { background: var(--parchment-dim); }
+        .claim-card h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 21px; margin: 0; color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+        .claim-for { font-family: 'Public Sans', Arial, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #7A3A1E; }
+        .claim-card p { font-size: 15px; line-height: 1.6; color: #4A3A28; margin: 8px 0 12px; }
+        .muted-pill { display: inline-block; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A; }
+        .rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+        .rec { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; font-size: 14.5px; line-height: 1.6; color: var(--parchment-dim); }
+        .rec strong { display: block; color: var(--brass-bright); margin-bottom: 4px; font-size: 15px; }
+        .back-link { display: inline-block; margin-bottom: 24px; font-weight: 700; text-decoration: none; }
+        @media (max-width: 600px) { .claim-steps::before { left: 23px; } .claim-num { width: 48px; height: 48px; font-size: 22px; } .claim-step { gap: 12px; } }
+
+        /* Census Field Guide */
+        .guide-intro { background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 20px 24px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); margin-bottom: 22px; }
+        .guide-intro p { font-size: 15.5px; line-height: 1.7; color: #4A3A28; margin: 0 0 12px; }
+        .guide-intro p:last-child { margin-bottom: 0; }
+        .principle { border-left: 4px solid var(--brass); background: rgba(176,141,87,0.10); padding: 12px 16px; border-radius: 6px; font-style: italic; color: #3A2C1E; }
+        .tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 26px; }
+        .tip { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; font-size: 14.5px; line-height: 1.6; color: var(--parchment-dim); }
+        .tip strong { display: block; color: var(--brass-bright); margin-bottom: 4px; font-size: 15px; }
+        .decades { display: grid; gap: 10px; }
+        details.decade { background: var(--parchment); color: var(--ink); border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.22); }
+        details.decade > summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: 14px; padding: 14px 20px; }
+        details.decade > summary::-webkit-details-marker { display: none; }
+        details.decade > summary::after { content: "+"; margin-left: auto; font-size: 22px; font-weight: 700; color: #7A3A1E; }
+        details.decade[open] > summary::after { content: "\2212"; }
+        .yr { font-family: 'Rye', serif; font-size: 24px; color: var(--ink); min-width: 64px; }
+        .yr-sum { font-size: 14.5px; font-weight: 700; color: #4A3A28; }
+        .decade-body { padding: 0 20px 18px; font-size: 15px; line-height: 1.65; color: #3A2C1E; }
+        .decade-body h4 { font-size: 12.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #7A3A1E; margin: 14px 0 4px; }
+        .decade-body ul { margin: 0; padding-left: 20px; }
+        .decade-body li { margin-bottom: 4px; }
+        .ky { background: #E3EDDC; border-radius: 6px; padding: 10px 12px; margin-top: 12px; color: #2F4A26; }
+        .ky strong { color: #2F4A26; }
+        .star-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+        .star-box { background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 16px 18px; font-size: 14.5px; line-height: 1.6; }
+        .star-box strong { display: block; font-size: 15.5px; margin-bottom: 4px; }
+        details.qa { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; color: var(--parchment); }
+        details.qa summary { cursor: pointer; font-weight: 700; color: var(--parchment); }
+        details.qa p { margin: 10px 0 0; color: var(--parchment-dim); font-size: 14.5px; line-height: 1.6; }
+        .back-link { display: inline-block; margin-bottom: 24px; font-weight: 700; text-decoration: none; }
+
+        .field-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+        .field-table th, .field-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #D8C7A3; vertical-align: top; }
+        .field-table th { font-size: 12.5px; text-transform: uppercase; letter-spacing: .05em; color: #7A3A1E; }
+        .field-table tr:last-child td { border-bottom: 0; }
+        .tbl-wrap { overflow-x: auto; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 8px 10px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .pill-strong { display: inline-block; font-size: 11.5px; font-weight: 800; padding: 2px 8px; border-radius: 999px; background: #DDE8D6; color: #2F5224; white-space: nowrap; }
+        .pill-lead { display: inline-block; font-size: 11.5px; font-weight: 800; padding: 2px 8px; border-radius: 999px; background: #F5E6C8; color: #6A4E22; white-space: nowrap; }
+        .plain-card { background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 18px 22px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); font-size: 15px; line-height: 1.65; }
+        .plain-card p { margin: 0 0 10px; color: #3A2C1E; }
+        .plain-card ul { margin: 0 0 10px; padding-left: 20px; }
+        .plain-card li { margin-bottom: 5px; }
+        .warn-card { background: #F3D9D3; color: #6E1F17; border: 1.5px solid #C9897D; border-radius: 10px; padding: 16px 20px; font-size: 15px; line-height: 1.6; }
+        .warn-card ul { margin: 6px 0 0; padding-left: 20px; }
+        .sym-h { font-family: 'Rye', serif; font-weight: 400; font-size: 19px; color: var(--parchment); margin: 6px 0 8px; }
+    </style>
+</head>
+<body class="page-games">
+    <nav class="site-nav" aria-label="Global">
+        <div class="site-nav-inner">
+            <a href="index.html" class="site-nav-brand">KHGN Inc.</a>
+            <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="site-nav-toggle-bar"></span>
+                <span class="site-nav-toggle-bar"></span>
+                <span class="site-nav-toggle-bar"></span>
+            </button>
+            <div class="site-nav-links">
+                <a href="index.html">Home</a>
+                <a href="socialmedia.html">Social Media</a>
+                <a href="recruiting.html">Volunteer Recruitment</a>
+                <a href="donation-portal.html">Donation Portal</a>
+                <a href="training.html">Volunteer Training</a>
+                <a href="game-portal.html">Trailhead Training</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="eyebrow">Record Field Guide · Free and open to the public</div>
+        <h1>Cemeteries</h1>
+        <p>A cemetery is a community's record carved in stone. Learn to read the stones and symbols, see what a cemetery reveals about the lives around it, record what you find without harming it, and protect the living along the way.</p>
+    </div>
+
+    <div class="container">
+        <a class="back-link" href="proving-your-claim.html">&larr; Back to Proving Your Claim</a>
+
+        <div class="guide-intro">
+            <p class="principle">To research and understand history, you must place yourself in that time period and work with what was available at that point in history.</p>
+            <p>Stand in an old cemetery and notice a dozen stones dated the same autumn, or a row of small stones in one family's plot, or a line of graves bearing the same date as a mine explosion. Burials record the forces that shaped people's lives. Read them in their time, and a cemetery tells a story no single record can.</p>
+        </div>
+
+        <section class="category-section" aria-labelledby="reveal-title">
+            <div class="category-header">
+                <div class="category-dot brass"></div>
+                <div>
+                    <h2 class="category-title" id="reveal-title" style="margin:0">What a Cemetery Reveals</h2>
+                    <p class="category-desc">The issues that affected a community, written in stone</p>
+                </div>
+            </div>
+            <div class="tips">
+                <div class="tip"><strong>Epidemics</strong>Clusters of deaths within the same weeks can mark outbreaks, from the cholera epidemics of the 1800s to the 1918 influenza.</div>
+                <div class="tip"><strong>Wars</strong>Government-issued military markers and veterans' emblems record service, from the Revolution through the Civil War and beyond.</div>
+                <div class="tip"><strong>Disasters</strong>Several stones bearing the same date can mark a mine explosion, a flood, or a fire that struck a whole community.</div>
+                <div class="tip"><strong>Childhood loss</strong>Small stones, often carved with lambs, record the children families lost young, many of whom appear in no other record.</div>
+                <div class="tip"><strong>Belonging</strong>Fraternal emblems, church sections, segregated burial grounds, and family plots on old farmland show where people belonged.</div>
+                <div class="tip"><strong>Hardship</strong>Unmarked fieldstones often mean a family couldn't afford a carved marker, not that a burial was unimportant.</div>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="symbols-title">
+            <div class="category-header">
+                <div class="category-dot teal"></div>
+                <div>
+                    <h2 class="category-title" id="symbols-title" style="margin:0">Reading the Stones</h2>
+                    <p class="category-desc">Insignia, emblems, and symbols, and what they often suggest</p>
+                </div>
+            </div>
+            <h3 class="sym-h">Fraternal and civic organizations</h3>
+            <div class="tbl-wrap" style="margin-bottom:14px">
+            <table class="field-table">
+                <thead><tr><th>Symbol</th><th>What it often suggests</th></tr></thead>
+                <tbody><tr><td>Square and compass, often with a G</td><td>A Mason</td></tr><tr><td>Scimitar, crescent, and star</td><td>A Shriner, a branch of the Masons</td></tr><tr><td>Five-pointed star, point down, often with small symbols in each point</td><td>A member of the Order of the Eastern Star, open to Masons' female relatives</td></tr><tr><td>Three linked rings, often with F, L, and T</td><td>An Odd Fellow; the letters stand for Friendship, Love, and Truth, sometimes with IOOF</td></tr><tr><td>Beehive, moon and seven stars, dove, or lily, often with three linked rings</td><td>A Rebekah, the women's branch of the Odd Fellows</td></tr><tr><td>A shield or knight's helmet, often with F, C, and B</td><td>A Knight of Pythias; the letters stand for Friendship, Charity, and Benevolence</td></tr><tr><td>A carved tree stump or log, sometimes reading <em>Dum Tacet Clamat</em></td><td>A member of the Woodmen of the World; the Latin means "Though silent, he speaks"</td></tr><tr><td>An elk's head, often with BPOE</td><td>A member of the Elks</td></tr><tr><td>The letters IORM</td><td>A member of the Improved Order of Red Men</td></tr></tbody>
+            </table>
+            </div>
+            <h3 class="sym-h">Military service</h3>
+            <div class="tbl-wrap" style="margin-bottom:14px">
+            <table class="field-table">
+                <thead><tr><th>Symbol</th><th>What it often suggests</th></tr></thead>
+                <tbody><tr><td>A plain, upright stone with a sunken shield and a curved top</td><td>A government-issued marker for a Union veteran of the Civil War</td></tr><tr><td>A plain, upright government stone with a pointed top</td><td>A government-issued marker for a Confederate veteran</td></tr><tr><td>An iron cross reading "Southern Cross of Honor"</td><td>A Confederate veteran, often placed by the United Daughters of the Confederacy</td></tr><tr><td>A five-pointed star marker with GAR</td><td>A Union veteran and member of the Grand Army of the Republic</td></tr><tr><td>A flat or upright government marker naming a unit and war</td><td>A veteran of a later war; the unit points to service records</td></tr><tr><td>American Legion or VFW emblems</td><td>A veteran of the World Wars or later conflicts</td></tr></tbody>
+            </table>
+            </div>
+            <h3 class="sym-h">Faith and mourning</h3>
+            <div class="tbl-wrap" style="margin-bottom:14px">
+            <table class="field-table">
+                <thead><tr><th>Symbol</th><th>What it often suggests</th></tr></thead>
+                <tbody><tr><td>A cross, or a cross and crown</td><td>Christian faith; the crown suggests victory over death</td></tr><tr><td>IHS</td><td>A monogram for the name of Jesus</td></tr><tr><td>The Star of David</td><td>Jewish faith</td></tr><tr><td>An open book</td><td>The Bible, or the "book of life"</td></tr><tr><td>A hand pointing upward</td><td>Hope of heaven</td></tr><tr><td>Clasped hands</td><td>Farewell, or a bond between spouses</td></tr><tr><td>An anchor</td><td>Hope, and sometimes a seafaring life</td></tr><tr><td>A dove</td><td>Peace, or the Holy Spirit</td></tr><tr><td>A willow and urn, or a draped urn</td><td>Mourning, especially on early 1800s stones</td></tr><tr><td>A broken column</td><td>A life cut short, often the head of a family</td></tr><tr><td>An upside-down torch</td><td>A life extinguished</td></tr><tr><td>An hourglass</td><td>The passing of time</td></tr><tr><td>A sheaf of wheat</td><td>A long, fruitful life</td></tr><tr><td>Gates standing open</td><td>Passage into heaven</td></tr><tr><td>Ivy</td><td>Faithfulness and remembrance</td></tr><tr><td>Oak leaves</td><td>Strength and endurance</td></tr></tbody>
+            </table>
+            </div>
+            <h3 class="sym-h">Children and young lives</h3>
+            <div class="tbl-wrap" style="margin-bottom:14px">
+            <table class="field-table">
+                <thead><tr><th>Symbol</th><th>What it often suggests</th></tr></thead>
+                <tbody><tr><td>A lamb</td><td>Usually a child; innocence</td></tr><tr><td>A cherub or small angel</td><td>Often a child</td></tr><tr><td>A broken rosebud or flower</td><td>A young life cut short</td></tr></tbody>
+            </table>
+            </div>
+            <p class="hint">Meanings can vary by era, region, and carver, and some symbols were chosen simply because they were popular or available from the stonecutter's catalog. Treat each one as a clue to investigate, not a fact.</p>
+            <p class="hint" style="margin-top:10px">A symbol is a lead, not proof. A fraternal emblem points to lodge records, and a military marker points to service records, where the evidence lives. See the <a href="death-records-field-guide.html">Death Records Field Guide</a> for lodge burial records.</p>
+        </section>
+
+        <section class="category-section" aria-labelledby="raised-title">
+            <div class="category-header">
+                <div class="category-dot brass"></div>
+                <div>
+                    <h2 class="category-title" id="raised-title" style="margin:0">Raised Graves, Tent Graves, and Grave Houses</h2>
+                    <p class="category-desc">A myth explained by placing yourself in the time</p>
+                </div>
+            </div>
+            <div class="plain-card">
+                <p>Older Kentucky cemeteries sometimes hold graves covered entirely above ground: <strong>raised graves</strong> with a capstone spanning the whole grave, <strong>tent graves</strong> with stone slabs leaning together like a roof, and small <strong>grave houses,</strong> wooden or stone shelters built over a grave. They're often described as "Indian graves," but in most cases there's a far more practical explanation.</p>
+                <p><strong>Place yourself in that time.</strong> The wills and estate inventories of many early settlers list very little: a few tools, and little iron or steel of any quality. Picture a family burying a loved one with simple hand tools in rocky hillside ground, while cattle and hogs roamed freely among the graves. Two reasons stand out:</p>
+                <ul>
+                    <li><strong>Graves couldn't always be dug deep.</strong> With limited tools and hard, rocky ground, a shallow grave needed protection above it.</li>
+                    <li><strong>Livestock grazed among the graves.</strong> A heavy cover of stone, slabs, or a small shelter kept graves from being trampled by cattle, or rooted up by hogs and wild animals.</li>
+                </ul>
+                <p>So before calling an unusual grave "Indian," look at the family's estate records, the ground, and the farm around the cemetery. More often than not, the explanation is a family doing the best they could with what they had.</p>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="find-title">
+            <div class="category-header">
+                <div class="category-dot brass"></div>
+                <div>
+                    <h2 class="category-title" id="find-title" style="margin:0">Finding Burials</h2>
+                    <p class="category-desc">Where Kentucky's dead may rest</p>
+                </div>
+            </div>
+            <div class="plain-card">
+                <ul>
+                    <li><strong>Church cemeteries,</strong> often with burial registers kept by the church</li>
+                    <li><strong>Family cemeteries on farmland,</strong> sometimes now on someone else's property, marked by a few stones, a fence line, or a cluster of cedars</li>
+                    <li><strong>Community and town cemeteries,</strong> and company cemeteries near former coal and timber camps</li>
+                    <li><strong>Unmarked graves,</strong> shown by sunken ground or plain fieldstones, which may be recorded only in church, funeral home, or family records</li>
+                </ul>
+                <p>Online memorial and grave-listing sites can help you find a burial, but treat their transcriptions as <strong>tips</strong>. A clear photograph of the stone itself is better evidence.</p>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="record-title">
+            <div class="category-header">
+                <div class="category-dot teal"></div>
+                <div>
+                    <h2 class="category-title" id="record-title" style="margin:0">Recording a Stone: Light and Lens Only</h2>
+                    <p class="category-desc">KHGN's method for reading worn inscriptions without harming them</p>
+                </div>
+            </div>
+            <div class="plain-card">
+                <p>Worn lettering becomes readable when light strikes the stone <strong>at a low angle</strong>, filling the carved letters with shadow. This is called raking light, and it never touches the stone.</p>
+                <ul>
+                    <li><strong>A mirror and the sun:</strong> reflect sunlight across the face of the stone from the side, at a low angle, and adjust the mirror until the lettering stands out. It works best when the stone itself is in shade.</li>
+                    <li><strong>A high-powered battery floodlight:</strong> hold it low and to the side, at a sharp angle. It works at any time of day, and especially well at dusk or on cloudy days. Try each side; some letters show better from one direction.</li>
+                    <li><strong>Photograph it:</strong> take a straight-on shot of the inscription while the light makes it readable, then a wider shot showing the whole stone and its surroundings, and note the cemetery and the stone's location in it.</li>
+                </ul>
+            </div>
+            <div class="warn-card" style="margin-top:14px">
+                <strong>KHGN never uses:</strong>
+                <ul>
+                    <li><strong>Chalk, flour, or shaving cream,</strong> which leave residue that damages stone over time</li>
+                    <li><strong>Rubbings,</strong> which stress fragile, weathered stones</li>
+                    <li><strong>Wire brushes or scraping,</strong> which permanently remove the stone's surface</li>
+                    <li><strong>Household cleaners or bleach,</strong> which cause lasting harm</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="respect-title">
+            <div class="category-header">
+                <div class="category-dot brass"></div>
+                <div>
+                    <h2 class="category-title" id="respect-title" style="margin:0">Respect and Access</h2>
+                    <p class="category-desc">Visiting with care</p>
+                </div>
+            </div>
+            <div class="plain-card">
+                <ul>
+                    <li><strong>Ask permission</strong> before visiting a cemetery on private land. Kentucky law provides ways for descendants to visit family cemeteries on private property, but starting with a friendly conversation with the landowner is always best.</li>
+                    <li><strong>Leave everything as you found it:</strong> flowers, mementos, fallen stones, and fences.</li>
+                    <li><strong>Be mindful of families</strong> visiting recent graves, and of services in progress.</li>
+                </ul>
+                <p><strong>KHGN documents, photographs, and records cemeteries. KHGN does not perform cemetery maintenance, upkeep, or restoration;</strong> the care of cemeteries rests with the counties, local organizations, and individuals who choose to take it on.</p>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="privacy-title">
+            <div class="category-header">
+                <div class="category-dot brass"></div>
+                <div>
+                    <h2 class="category-title" id="privacy-title" style="margin:0">Protect the Living</h2>
+                    <p class="category-desc">The privacy standards from the Tipple Trial apply here too</p>
+                </div>
+            </div>
+            <div class="warn-card">
+                <strong>Take care with:</strong>
+                <ul>
+                    <li><strong>Companion stones</strong> with a living spouse's name and birth year carved beside an open death date, which reveal a likely living person's name, age, and town. Crop or blur that side before sharing, until a death date is confirmed.</li>
+                    <li><strong>Recent burials,</strong> whose stones and nearby flowers or cards may name living children and grandchildren.</li>
+                    <li><strong>Online memorial pages</strong> that copy recent obituaries in full, including living survivors' details.</li>
+                </ul>
+                <p style="margin:10px 0 0">See the <a href="tipple-trial.html" style="color:#6E1F17">Tipple Trial</a> for the full privacy standards.</p>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="star-title">
+            <div class="category-header">
+                <div class="category-dot teal"></div>
+                <div>
+                    <h2 class="category-title" id="star-title" style="margin:0">Headstones and the Star Designations</h2>
+                    <p class="category-desc">What a stone proves, and what it only suggests</p>
+                </div>
+            </div>
+            <div class="star-row">
+                <div class="star-box"><strong>★3 Physical Evidence of a memorial</strong>A clear photograph of a stone is physical evidence that a person was memorialized there.</div>
+                <div class="star-box"><strong>Often only a lead for the dates</strong>Many stones were carved years after a death, from family memory, and replacement stones can repeat old errors. Corroborate dates with records made at the time.</div>
+                <div class="star-box"><strong>Symbols point to evidence</strong>An emblem or military marker is a lead to lodge, service, or pension records, where the stronger evidence lives.</div>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="practice-title">
+            <div class="category-header">
+                <div class="category-dot brass"></div>
+                <div>
+                    <h2 class="category-title" id="practice-title" style="margin:0">Quick Practice</h2>
+                    <p class="category-desc">Think it through, then reveal the answer</p>
+                </div>
+            </div>
+            <details class="qa"><summary>Six stones in one church cemetery are dated within three weeks of each other in the fall of 1918. What might explain it?</summary><p>Very possibly the 1918 influenza epidemic. Check death records, church registers, and newspapers from those weeks.</p></details>
+            <details class="qa"><summary>An inscription is too worn to read. Should you rub chalk into the letters?</summary><p>No. Chalk leaves residue that damages stone. Use raking light from a mirror or a battery floodlight held low and to the side, then photograph it.</p></details>
+            <details class="qa"><summary>A companion stone shows "Mary Miller, 1941–" with no death year. Can you post the photo as is?</summary><p>Crop or blur Mary's side first. The open death date suggests a living person, and the stone reveals her name, age, and town.</p></details>
+            <details class="qa"><summary>An old family cemetery has a grave covered by a stone capstone across its whole length. Is it an Indian burial?</summary><p>Probably not. Raised graves, tent graves, and grave houses were often built by settler families to protect shallow graves dug with limited tools from livestock and animals. Check the family's estate records and the land before drawing conclusions.</p></details>
+            <details class="qa"><summary>A headstone gives a birth date of 1802, but a Bible record says 1804. Which carries more weight?</summary><p>Often the Bible entry, if it was written near the time of the birth. Many stones were carved years later from memory. Weigh when and by whom each was made.</p></details>
+        </section>
+
+        <div class="mission-note">
+            <strong>More Record Field Guides are on the way,</strong> so you can read each record the way the people who made it did.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nav = document.querySelector(".site-nav");
+            const toggle = document.querySelector(".site-nav-toggle");
+            const links = document.querySelector(".site-nav-links");
+            if (!nav || !toggle || !links) {
+                return;
+            }
+            toggle.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+            links.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    toggle.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
