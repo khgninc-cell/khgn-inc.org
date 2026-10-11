@@ -22,6 +22,7 @@
     { cat: "First Steps", title: "Getting Started in Genealogy", desc: "Start with your family and investigate like a detective.", href: "/getting-started-genealogy.html" },
     { cat: "First Steps", title: "Rate Your Research", desc: "See which star designation your evidence reaches.", href: "/rate-your-research.html" },
     { cat: "Record Field Guides", title: "The Census, 1790 to 1950", desc: "What every census asked, decade by decade, with Kentucky notes.", href: "/census-field-guide.html" },
+    { cat: "Record Field Guides", title: "Death Records", desc: "What a certificate proves, from coal camps to fraternal lodges.", href: "/death-records-field-guide.html" },
     { cat: "Practice Your Skills", title: "The KHGN Evidence Framework", desc: "Weigh evidence like a court, from opening statement to verdict.", href: "/khgn_suggested_trial_framework.html" },
     { cat: "Practice Your Skills", title: "Same Name, Wrong Man", desc: "Two men, same name, same county. Can you pick the right one?", href: "/khgn_case_study_1_same_name.html" },
     { cat: "Practice Your Skills", title: "Build Your Case", desc: "Apply the framework to your own family history.", href: "/khgn_build_your_case.html" },
