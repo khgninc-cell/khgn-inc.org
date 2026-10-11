@@ -21,6 +21,7 @@
     { cat: "Core Training", title: "Flagging and Welcoming", desc: "Learn to flag rule-breaking posts and welcome new members.", href: "/community-steward-flagging.html" },
     { cat: "First Steps", title: "Getting Started in Genealogy", desc: "Start with your family and investigate like a detective.", href: "/getting-started-genealogy.html" },
     { cat: "First Steps", title: "Rate Your Research", desc: "See which star designation your evidence reaches.", href: "/rate-your-research.html" },
+    { cat: "Record Field Guides", title: "The Census, 1790 to 1950", desc: "What every census asked, decade by decade, with Kentucky notes.", href: "/census-field-guide.html" },
     { cat: "Practice Your Skills", title: "The KHGN Evidence Framework", desc: "Weigh evidence like a court, from opening statement to verdict.", href: "/khgn_suggested_trial_framework.html" },
     { cat: "Practice Your Skills", title: "Same Name, Wrong Man", desc: "Two men, same name, same county. Can you pick the right one?", href: "/khgn_case_study_1_same_name.html" },
     { cat: "Practice Your Skills", title: "Build Your Case", desc: "Apply the framework to your own family history.", href: "/khgn_build_your_case.html" },
@@ -33,6 +34,7 @@
   var CATEGORY_COLORS = {
     "Core Training":        { bg: "#3B7BB0", fg: "#FFFFFF" },
     "First Steps":          { bg: "#82A671", fg: "#1C140F" },
+    "Record Field Guides":  { bg: "#D4AF6A", fg: "#1C140F" },
     "Practice Your Skills": { bg: "#6B8A5C", fg: "#FFFFFF" },
     "Story Trails":         { bg: "#B08D57", fg: "#1C140F" },
     "Dignified History":    { bg: "#7A6A58", fg: "#FFFFFF" },
