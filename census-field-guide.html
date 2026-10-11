@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="/khgn-age-gate.js"></script>
+<noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Census Field Guide, 1790 to 1950 - KHGN Inc.</title>
+    <meta name="description" content="KHGN Inc. Record Field Guide: every U.S. census from 1790 to 1950, what each asked, why it matters, Kentucky notes, and how to read it as the census taker saw it.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+            --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+            --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A; --blue:#3B7BB0; --blue-bright:#5B9BD0;
+        }
+        body {
+            margin: 0;
+            font-family: 'Public Sans', Arial, sans-serif;
+            background: var(--walnut);
+            color: var(--parchment);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        a { color: var(--brass-bright); }
+
+        /* Navigation */
+        .site-nav {
+            background: var(--walnut-deep);
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .site-nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            min-height: 68px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .site-nav-brand {
+            color: var(--brass-bright);
+            text-decoration: none;
+            font-family: 'Rye', serif;
+            font-weight: 400;
+            font-size: 22px;
+            white-space: nowrap;
+        }
+        .site-nav-links {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .site-nav-links a {
+            color: var(--parchment);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .site-nav-links a:hover { color: var(--brass-bright); }
+        .site-nav-toggle {
+            display: none;
+            margin-left: auto;
+            padding: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        .site-nav-toggle-bar {
+            display: block;
+            width: 24px;
+            height: 3px;
+            margin: 4px 0;
+            border-radius: 999px;
+            background: var(--brass-bright);
+        }
+        .page-games .site-nav-links a[href="game-portal.html"] {
+            color: var(--brass-bright);
+            border-bottom-color: var(--brass);
+        }
+
+        @media (max-width: 700px) {
+            .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
+            .site-nav-toggle { display: block; }
+            .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
+            .site-nav.is-open .site-nav-links { display: flex; }
+            .site-nav-links a { width: 100%; padding: 10px 0; }
+            .game-grid { grid-template-columns: 1fr !important; }
+            .container { margin: 30px auto; }
+            .hero h1 { font-size: 32px; }
+        }
+
+        /* Hero */
+        .hero {
+            background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+            border-bottom: 1px solid var(--line);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero .eyebrow { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); margin-bottom: 10px; font-weight: 700; }
+        .hero h1 {
+            font-family: 'Rye', serif;
+            font-weight: 400;
+            font-size: 40px;
+            color: var(--parchment);
+            margin: 0 0 14px;
+            text-shadow: 0 2px 0 var(--walnut-deep);
+        }
+        .hero p { max-width: 700px; margin: 0 auto; font-size: 17px; line-height: 1.6; color: var(--parchment-dim); }
+        .hero-points { list-style: none; padding: 0; margin: 22px auto 0; max-width: 760px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; font-size: 14.5px; color: var(--parchment); }
+        .hero-points li::before { content: "✓ "; color: var(--sage-bright); font-weight: 700; }
+        .hero-actions { margin-top: 26px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .hero-cta {
+            display: inline-block; background: var(--rust); color: #fff; text-decoration: none;
+            font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 8px; transition: background 0.2s ease;
+        }
+        .hero-cta:hover { background: var(--rust-bright); }
+        .hero-cta.ghost { background: transparent; color: var(--parchment); border: 1.5px solid var(--brass); }
+        .hero-cta.ghost:hover { background: rgba(176,141,87,0.15); }
+
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; box-sizing: border-box; width: 100%; }
+
+        /* Category sections */
+        .category-section { margin-bottom: 48px; }
+        .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .category-dot { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; }
+        .category-dot.blue { background: var(--blue-bright); }
+        .category-dot.teal { background: var(--sage-bright); }
+        .category-dot.brass { background: var(--brass-bright); }
+        .category-title { font-family: 'Rye', serif; font-weight: 400; font-size: 24px; color: var(--parchment); }
+        .category-desc { font-size: 13.5px; color: var(--parchment-dim); margin: 2px 0 0; }
+
+        /* Cards */
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--brass);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--parchment);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .game-card.blue-accent { border-top-color: var(--blue); }
+        .game-card.teal-accent { border-top-color: var(--sage); }
+        .game-card:hover { box-shadow: 0 10px 24px rgba(0,0,0,0.35); transform: translateY(-3px); }
+        .game-thumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            height: 120px;
+            background: rgba(0,0,0,0.05);
+        }
+        .game-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; color: var(--ink); }
+        .game-title { font-family: 'Rye', serif; font-weight: 400; font-size: 19px; color: var(--ink); margin-bottom: 8px; }
+        .game-desc { font-size: 14px; line-height: 1.55; color: #4A3A28; flex-grow: 1; margin-bottom: 18px; }
+        .game-btn {
+            display: inline-block;
+            align-self: flex-start;
+            background: var(--rust);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .game-btn:hover { background: var(--rust-bright); }
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--brass-bright); outline-offset: 2px; }
+
+        /* Volunteer Leadership Path */
+        .path-intro { max-width: 760px; font-size: 15.5px; line-height: 1.65; color: var(--parchment-dim); margin: -6px 0 24px; }
+        .trail { list-style: none; margin: 0; padding: 0; position: relative; }
+        .trail::before {
+            content: ""; position: absolute; left: 25px; top: 26px; bottom: 26px;
+            border-left: 3px dashed var(--brass);
+        }
+        .stop { position: relative; display: flex; gap: 20px; align-items: flex-start; margin-bottom: 16px; }
+        .stop:last-child { margin-bottom: 0; }
+        .marker {
+            position: relative; z-index: 1; flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Rye', serif; font-size: 22px; color: var(--walnut-deep);
+            background: var(--brass-bright); border: 3px solid var(--walnut);
+            box-shadow: 0 0 0 2px var(--brass);
+        }
+        .stop.soon .marker { background: var(--walnut-deep); color: var(--parchment-dim); box-shadow: 0 0 0 2px var(--line); }
+        .stop-card {
+            flex-grow: 1; min-width: 0; background: var(--parchment); color: var(--ink);
+            border-radius: 10px; padding: 18px 22px; box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+            display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; align-items: center;
+        }
+        .stop.soon .stop-card { background: var(--parchment-dim); }
+        .stop-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+        .stop-title { font-family: 'Rye', serif; font-size: 20px; color: var(--ink); }
+        .status {
+            font-size: 11.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 3px 9px; border-radius: 999px;
+        }
+        .status.open { background: #DDE8D6; color: #2F5224; }
+        .status.soon { background: #E9DCC2; color: #6A4E22; }
+        .status.enroll { background: #E4D3B0; color: #5A3B14; }
+        .stop-module { font-size: 13.5px; font-weight: 700; color: #6A4E22; margin-top: 2px; }
+        .stop-desc { font-size: 14px; line-height: 1.55; color: #4A3A28; margin: 6px 0 0; }
+        .stop-req { font-size: 13px; line-height: 1.5; color: #5C4A33; margin: 6px 0 0; }
+        .stop-req strong { color: var(--ink); }
+        .stop-action { grid-column: 2; grid-row: 1 / span 4; }
+        .stop-action .muted {
+            display: inline-block; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A; white-space: nowrap;
+        }
+        .banners-note {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px;
+        }
+        .banners-note div {
+            background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px;
+            padding: 16px 20px; font-size: 14px; line-height: 1.6; color: var(--parchment-dim);
+        }
+        .banners-note a { color: var(--brass-bright); font-weight: 700; }
+        .banners-note a:hover { color: var(--parchment); }
+        .banners-note strong { display: block; color: var(--brass-bright); font-size: 15px; margin-bottom: 4px; }
+        @media (max-width: 700px) {
+            .stop-card { grid-template-columns: 1fr; }
+            .stop-action { grid-column: 1; grid-row: auto; margin-top: 10px; }
+            .banners-note { grid-template-columns: 1fr; }
+            .marker { width: 44px; height: 44px; font-size: 19px; }
+            .trail::before { left: 21px; }
+            .stop { gap: 14px; }
+        }
+
+
+        /* Leadership tracks */
+        .foundation {
+            display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+            background: var(--walnut-deep); border: 1px solid var(--brass); border-radius: 10px; padding: 16px 22px; margin-bottom: 22px;
+        }
+        .foundation-label { font-size: 12.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass-bright); }
+        .foundation-title { font-family: 'Rye', serif; font-size: 20px; color: var(--parchment); margin-top: 2px; }
+        .tracks { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 24px; align-items: start; }
+        .track-list { display: flex; flex-direction: column; gap: 10px; position: sticky; top: 88px; }
+        .track-tab {
+            display: flex; flex-direction: column; gap: 3px; text-align: left; width: 100%;
+            padding: 14px 16px; border-radius: 10px; cursor: pointer; font: inherit;
+            background: var(--walnut-deep); color: var(--parchment); border: 1.5px solid var(--line);
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .track-tab:hover { border-color: var(--brass); }
+        .track-tab[aria-selected="true"] { background: var(--parchment); color: var(--ink); border-color: var(--brass-bright); box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .track-name { font-family: 'Rye', serif; font-size: 18px; line-height: 1.25; }
+        .track-parent { font-size: 12.5px; font-weight: 600; color: var(--parchment-dim); }
+        .track-tab[aria-selected="true"] .track-parent { color: #6A4E22; }
+        .track-roles { font-size: 13px; line-height: 1.45; color: var(--parchment-dim); margin-top: 4px; }
+        .track-roles strong { color: var(--brass-bright); }
+        .track-tab[aria-selected="true"] .track-roles { color: #4A3A28; }
+        .track-tab[aria-selected="true"] .track-roles strong { color: #7A3A1E; }
+        .track-tab.is-soon .track-roles { font-style: italic; }
+        .track-panel { background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 24px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .track-panel[hidden] { display: none; }
+        .panel-head { border-bottom: 1px solid #CDBB98; padding-bottom: 14px; margin-bottom: 16px; }
+        .panel-title { font-family: 'Rye', serif; font-weight: 400; font-size: 26px; margin: 0; color: var(--ink); }
+        .panel-parent { margin: 2px 0 0; font-size: 13px; font-weight: 700; color: #6A4E22; }
+        .panel-desc { margin: 8px 0 0; font-size: 15px; line-height: 1.6; color: #4A3A28; }
+        .levels { display: flex; flex-direction: column; gap: 10px; }
+        .lvl { background: #F6EDDB; border: 1px solid #CDBB98; border-radius: 8px; }
+        .lvl summary {
+            display: flex; align-items: center; gap: 12px; padding: 12px 14px; cursor: pointer; list-style: none;
+        }
+        .lvl summary::-webkit-details-marker { display: none; }
+        .lvl summary::after { content: "+"; margin-left: auto; font-size: 22px; font-weight: 700; color: #6A4E22; line-height: 1; }
+        .lvl[open] summary::after { content: "–"; }
+        .lvl-num {
+            flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: 'Rye', serif; font-size: 16px; background: var(--brass-bright); color: var(--walnut-deep);
+        }
+        .lvl-soon .lvl-num { background: #D9C8A6; color: #6A4E22; }
+        .lvl-title { font-family: 'Rye', serif; font-size: 18px; color: var(--ink); }
+        .lvl-body { padding: 0 14px 16px 60px; }
+        .lvl-body .stop-module { margin-top: 0; }
+        .lvl-body .game-btn { margin-top: 12px; }
+        .lvl-body .muted {
+            display: inline-block; margin-top: 12px; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A;
+        }
+        .soon-panel p { margin: 0 0 14px; font-size: 15px; line-height: 1.6; color: #4A3A28; }
+        @media (max-width: 760px) {
+            .tracks { grid-template-columns: 1fr; gap: 16px; }
+            .track-list { position: static; flex-direction: row; overflow-x: auto; gap: 8px; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+            .track-tab { flex: 0 0 auto; width: auto; max-width: 230px; scroll-snap-align: start; padding: 10px 14px; }
+            .track-roles, .track-parent { display: none; }
+            .track-name { font-size: 16px; white-space: nowrap; }
+            .track-panel { padding: 18px; }
+            .lvl-body { padding: 0 14px 16px 14px; }
+            .lvl-title { font-size: 16px; }
+        }
+
+        /* The Climb */
+        .climb-map { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 6px 16px rgba(0,0,0,0.25); margin-bottom: 22px; }
+        .climb-map svg { display: block; width: 100%; height: auto; }
+        .climb-stops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+        .climb-stop { position: relative; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 22px 20px 20px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); display: flex; flex-direction: column; }
+        .climb-stop h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 21px; margin: 4px 0 2px; color: var(--ink); }
+        .climb-stop p { font-size: 14.5px; line-height: 1.6; color: #4A3A28; margin: 6px 0 12px; }
+        .climb-stop .game-btn, .climb-stop .muted-pill { margin-top: auto; align-self: flex-start; }
+        .climb-for { font-size: 12.5px !important; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #7A3A1E !important; margin: 0 !important; }
+        .climb-badge { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Rye', serif; font-size: 18px; background: var(--brass-bright); color: var(--walnut-deep); }
+        .route-list { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 6px; }
+        .route-list li { font-size: 14.5px; font-weight: 700; color: var(--ink); background: #F6EDDB; border: 1px solid #CDBB98; border-radius: 6px; padding: 7px 10px; }
+        .route-list span { margin-right: 6px; }
+        .muted-pill { display: inline-block; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A; }
+        .banner-sample-wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 22px; align-items: center; margin-top: 26px; }
+        .banner-sample { aspect-ratio: 1200 / 630; background: #1C140F; border: 5px solid #B08D57; outline: 1px solid #B08D57; outline-offset: -14px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px; gap: 4px; }
+        .bs-top { font-size: clamp(10px, 1.4vw, 14px); font-weight: 800; letter-spacing: 0.08em; color: #D4AF6A; }
+        .bs-rule { width: 60px; height: 2px; background: #B08D57; margin: 4px 0 6px; }
+        .bs-title { font-family: 'Rye', serif; font-size: clamp(20px, 3.4vw, 38px); color: #EDE0C8; line-height: 1.1; }
+        .bs-tag { font-size: clamp(11px, 1.5vw, 16px); font-weight: 800; color: #D4AF6A; letter-spacing: 0.05em; }
+        .bs-line { font-size: clamp(11px, 1.4vw, 15px); color: #E0D0AC; margin-top: 6px; }
+        .bs-org { font-size: clamp(9px, 1.1vw, 12px); color: #BFAE8A; margin-top: 10px; }
+        .banner-sample-text h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; margin: 0 0 8px; color: var(--parchment); }
+        .banner-sample-text p { font-size: 15.5px; line-height: 1.65; color: var(--parchment-dim); margin: 0; }
+        @media (max-width: 800px) {
+            .climb-stops, .banner-sample-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* The Journey */
+        .journey { list-style: none; margin: 0 0 22px; padding: 0; position: relative; display: grid; gap: 12px; }
+        .journey::before { content: ""; position: absolute; left: 25px; top: 28px; bottom: 28px; border-left: 3px dashed var(--brass); }
+        .jstop { position: relative; display: flex; gap: 16px; align-items: flex-start; }
+        .jicon { position: relative; z-index: 1; flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; background: var(--walnut-deep); border: 2px solid var(--brass); }
+        .jbody { flex-grow: 1; min-width: 0; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 16px 20px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .jbody h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 20px; margin: 0; color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+        .jfor { font-family: 'Public Sans', Arial, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #7A3A1E; }
+        .jbody p { font-size: 14.5px; line-height: 1.6; color: #4A3A28; margin: 6px 0 10px; }
+        .jbody .route-list { max-width: 420px; }
+        .disclaimer { background: #F3D9D3; color: #6E1F17; border-left: 0; border: 1.5px solid #C9897D; border-radius: 10px; padding: 14px 18px; font-size: 14.5px; line-height: 1.6; margin-bottom: 8px; }
+        .disclaimer strong { color: #6E1F17; }
+        @media (max-width: 600px) { .journey::before { left: 21px; } .jicon { width: 44px; height: 44px; font-size: 20px; } .jstop { gap: 12px; } }
+        .overview { border-top: 1px solid var(--line); padding-top: 40px; }
+        .overview h2 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; color: var(--parchment); margin-bottom: 15px; }
+        .trademark { font-size: 13px !important; color: var(--parchment-dim); opacity: 0.85; margin-top: 18px; }
+        .overview p { font-size: 16px; line-height: 1.7; color: var(--parchment-dim); }
+
+        .mission-note {
+            background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 12px;
+            padding: 20px 24px; margin-top: 30px; font-size: 13.5px; line-height: 1.65; color: var(--parchment-dim);
+        }
+        .mission-note strong { color: var(--brass-bright); }
+
+        /* Proving Your Claim hub */
+        .claim-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; position: relative; }
+        .claim-steps::before { content: ""; position: absolute; left: 27px; top: 30px; bottom: 30px; border-left: 3px dashed var(--brass); }
+        .claim-steps:has(> li:only-child)::before { display: none; }
+        .claim-step { position: relative; display: flex; gap: 18px; align-items: flex-start; }
+        .claim-num { position: relative; z-index: 1; flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; background: var(--walnut-deep); border: 2px solid var(--brass); }
+        .claim-card { flex-grow: 1; min-width: 0; background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 18px 22px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+        .claim-card.soon { background: var(--parchment-dim); }
+        .claim-card h3 { font-family: 'Rye', serif; font-weight: 400; font-size: 21px; margin: 0; color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+        .claim-for { font-family: 'Public Sans', Arial, sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #7A3A1E; }
+        .claim-card p { font-size: 15px; line-height: 1.6; color: #4A3A28; margin: 8px 0 12px; }
+        .muted-pill { display: inline-block; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 18px; border-radius: 6px; color: #6A4E22; border: 1.5px dashed #B9A27A; }
+        .rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+        .rec { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; font-size: 14.5px; line-height: 1.6; color: var(--parchment-dim); }
+        .rec strong { display: block; color: var(--brass-bright); margin-bottom: 4px; font-size: 15px; }
+        .back-link { display: inline-block; margin-bottom: 24px; font-weight: 700; text-decoration: none; }
+        @media (max-width: 600px) { .claim-steps::before { left: 23px; } .claim-num { width: 48px; height: 48px; font-size: 22px; } .claim-step { gap: 12px; } }
+
+        /* Census Field Guide */
+        .guide-intro { background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 20px 24px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); margin-bottom: 22px; }
+        .guide-intro p { font-size: 15.5px; line-height: 1.7; color: #4A3A28; margin: 0 0 12px; }
+        .guide-intro p:last-child { margin-bottom: 0; }
+        .principle { border-left: 4px solid var(--brass); background: rgba(176,141,87,0.10); padding: 12px 16px; border-radius: 6px; font-style: italic; color: #3A2C1E; }
+        .tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 26px; }
+        .tip { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; font-size: 14.5px; line-height: 1.6; color: var(--parchment-dim); }
+        .tip strong { display: block; color: var(--brass-bright); margin-bottom: 4px; font-size: 15px; }
+        .decades { display: grid; gap: 10px; }
+        details.decade { background: var(--parchment); color: var(--ink); border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.22); }
+        details.decade > summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: 14px; padding: 14px 20px; }
+        details.decade > summary::-webkit-details-marker { display: none; }
+        details.decade > summary::after { content: "+"; margin-left: auto; font-size: 22px; font-weight: 700; color: #7A3A1E; }
+        details.decade[open] > summary::after { content: "\2212"; }
+        .yr { font-family: 'Rye', serif; font-size: 24px; color: var(--ink); min-width: 64px; }
+        .yr-sum { font-size: 14.5px; font-weight: 700; color: #4A3A28; }
+        .decade-body { padding: 0 20px 18px; font-size: 15px; line-height: 1.65; color: #3A2C1E; }
+        .decade-body h4 { font-size: 12.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #7A3A1E; margin: 14px 0 4px; }
+        .decade-body ul { margin: 0; padding-left: 20px; }
+        .decade-body li { margin-bottom: 4px; }
+        .ky { background: #E3EDDC; border-radius: 6px; padding: 10px 12px; margin-top: 12px; color: #2F4A26; }
+        .ky strong { color: #2F4A26; }
+        .star-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+        .star-box { background: var(--parchment); color: var(--ink); border-radius: 10px; padding: 16px 18px; font-size: 14.5px; line-height: 1.6; }
+        .star-box strong { display: block; font-size: 15.5px; margin-bottom: 4px; }
+        details.qa { background: var(--walnut-deep); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; color: var(--parchment); }
+        details.qa summary { cursor: pointer; font-weight: 700; color: var(--parchment); }
+        details.qa p { margin: 10px 0 0; color: var(--parchment-dim); font-size: 14.5px; line-height: 1.6; }
+        .back-link { display: inline-block; margin-bottom: 24px; font-weight: 700; text-decoration: none; }
+    </style>
+</head>
+<body class="page-games">
+    <nav class="site-nav" aria-label="Global">
+        <div class="site-nav-inner">
+            <a href="index.html" class="site-nav-brand">KHGN Inc.</a>
+            <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="site-nav-toggle-bar"></span>
+                <span class="site-nav-toggle-bar"></span>
+                <span class="site-nav-toggle-bar"></span>
+            </button>
+            <div class="site-nav-links">
+                <a href="index.html">Home</a>
+                <a href="socialmedia.html">Social Media</a>
+                <a href="recruiting.html">Volunteer Recruitment</a>
+                <a href="donation-portal.html">Donation Portal</a>
+                <a href="training.html">Volunteer Training</a>
+                <a href="game-portal.html">Trailhead Training</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="eyebrow">Record Field Guide · Free and open to the public</div>
+        <h1>The Census, 1790 to 1950</h1>
+        <p>Every federal census from the first count to the newest released: what each one asked, why it matters to your research, what Kentucky researchers should know, and how to read it as the census taker saw it.</p>
+    </div>
+
+    <div class="container">
+        <a class="back-link" href="proving-your-claim.html">&larr; Back to Proving Your Claim</a>
+
+        <div class="guide-intro">
+            <p class="principle">To research and understand history, you must place yourself in that time period and work with what was available at that point in history. Many of the myths get explained away in this manner.</p>
+            <p>The census is one of the best places to practice that principle. Before reading any census page, picture how it was made: a census taker traveling from house to house, often on horseback along roads and creeks, asking questions of whoever answered the door and writing down what he heard. Keep that picture in mind, and much of what puzzles researchers starts to make sense.</p>
+        </div>
+
+        <section class="category-section" aria-labelledby="read-title">
+            <div class="category-header">
+                <div class="category-dot brass"></div>
+                <div>
+                    <h2 class="category-title" id="read-title" style="margin:0">Reading Any Census</h2>
+                    <p class="category-desc">Four things to picture before you trust what's written</p>
+                </div>
+            </div>
+            <div class="tips">
+                <div class="tip"><strong>The neighbors are on the page</strong>Because the census taker went from one house to the next, the order of households often shows who lived near whom. Those neighbors are frequently in-laws, siblings, and future spouses. From 1850 on, households were numbered in the order visited.</div>
+                <div class="tip"><strong>Spelling followed sound</strong>The census taker wrote what he heard, often from someone who couldn't read or spell their own name. Mullins one decade and Mullens the next is usually the same family.</div>
+                <div class="tip"><strong>Ages were estimates</strong>Many people didn't know their exact birth year, and whoever answered the door gave a best guess. An ancestor who ages eight years in a decade isn't a mystery once you picture the conversation.</div>
+                <div class="tip"><strong>Families can seem to vanish</strong>A remote hollow skipped, a family away working, or a newly formed county can explain a "missing" household. Check neighboring pages and parent counties before concluding they moved.</div>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="dec-title">
+            <div class="category-header">
+                <div class="category-dot teal"></div>
+                <div>
+                    <h2 class="category-title" id="dec-title" style="margin:0">Decade by Decade</h2>
+                    <p class="category-desc">Open any year to see what it asked and why it matters</p>
+                </div>
+            </div>
+            <div class="decades">
+            <details class="decade">
+                <summary><span class="yr">1790</span><span class="yr-sum">Heads of household only</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: August 2, 1790.</li><li>Names only the <strong>head of household</strong>.</li><li>Counts free white males 16 and older and under 16, free white females, all other free persons, and enslaved people, without names or ages for anyone else.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>Places a head of household in a county at the nation's first count, a starting point for families on the move into Kentucky.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> Kentucky was still part of Virginia in 1790, becoming a state in 1792. <strong>Kentucky's 1790 schedules are lost</strong>, along with Virginia's. Researchers turn to county tax lists from the late 1780s and 1790s as substitutes.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">With only tally marks, age groups are your main clues. Match the counts against what you know of the family's size.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1800</span><span class="yr-sum">Age brackets appear</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: August 4, 1800.</li><li>Still names only the head of household.</li><li>Divides free white males and females into five age brackets.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>The age brackets let you estimate the ages of a household's members and test whether a family fits.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> <strong>Kentucky's 1800 schedules are also lost.</strong> Compilations built from the 1800 county tax lists are widely used as a substitute.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Picture the census taker asking the head of house to sort his household into age groups. Estimates were common.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1810</span><span class="yr-sum">Kentucky's first surviving census</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: August 6, 1810.</li><li>Names only the head of household, with the same age brackets as 1800.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>For Kentucky researchers, this is usually the earliest surviving federal census.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> 1810 is generally the first federal census to survive for Kentucky, though coverage varies by county. Check which counties' schedules exist before concluding a family is missing.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Counties were being divided rapidly. A family that never moved may appear in a new county carved from the old one.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1820</span><span class="yr-sum">Occupations and foreigners</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: August 7, 1820.</li><li>Adds counts of people engaged in agriculture, commerce, or manufacturing.</li><li>Counts foreigners not naturalized, and adds a bracket for free white males 16 to 18.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>The occupation counts hint at whether a household farmed or worked a trade.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> Kentucky's 1820 census survives and is a key bridge between the early tax lists and later, more detailed censuses.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Overlapping age brackets in 1820 can double-count young men. Read the column headings carefully.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1830</span><span class="yr-sum">Finer age brackets</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: June 1, 1830.</li><li>Still names only the head of household.</li><li>Uses narrower age brackets, in five- and ten-year steps, and counts the deaf, mute, and blind.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>Narrower brackets give tighter age estimates than earlier censuses.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> Use the 1830 and 1840 censuses together to track a household's children as they move up through the age brackets.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">A household that suddenly shrinks often marks children marrying and setting up homes nearby. Check the neighbors.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1840</span><span class="yr-sum">Revolutionary War pensioners named</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: June 1, 1840.</li><li>Still names only the head of household, with age brackets.</li><li>Names <strong>pensioners for Revolutionary or military service</strong>, with their ages, living in each household.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>The pensioner column can identify an aged veteran living with a son or son-in-law, a powerful lead to his pension file.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> Many Revolutionary veterans settled in Kentucky on military land. An 1840 pensioner listing can point straight to a pension file rich with family detail.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">The pensioner named isn't always the head of household. He may be an elderly father living with one of his children.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1850</span><span class="yr-sum">Every free person named</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: June 1, 1850.</li><li>Names <strong>every free person</strong> in the household for the first time.</li><li>Records age, sex, color, occupation, value of real estate, birthplace by state or country, and whether each person attended school or could read and write.</li><li>Households and dwellings are numbered in the order visited.</li><li>Enslaved people are listed on separate slave schedules, by owner, without names.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>The first census to show whole families by name, often your first look at a complete household.</li><li>Separate <strong>mortality schedules</strong> list people who died in the year before the census.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> Kentucky's 1850 slave schedules list enslaved people by age, sex, and color under their enslavers' names, a difficult but essential record for African American research.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Relationships aren't stated in 1850. The people listed after a husband and wife may be children, but they may also be relatives, boarders, or laborers.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1860</span><span class="yr-sum">Personal estate added</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: June 1, 1860.</li><li>Names every free person, as in 1850.</li><li>Adds the value of personal estate alongside real estate, and the post office.</li><li>Slave schedules are taken again.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>The last census before the Civil War, a snapshot of families just before many were scattered or divided by the war.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> Compare 1860 with 1870 to trace Kentucky families across the war years, a border state where loyalties often divided families.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">A family's wealth can change sharply between 1860 and 1870. The war's effects show up plainly in the estate columns.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1870</span><span class="yr-sum">Formerly enslaved people named</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: June 1, 1870.</li><li>Names <strong>every person</strong>, including formerly enslaved people for the first time.</li><li>Notes whether each person's father and mother were foreign born, and the month of birth or marriage if within the census year.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>For African American families, 1870 is often the first record naming their ancestors, a cornerstone census.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> For Black Kentuckians, the 1870 census is a crucial bridge back toward the 1860 slave schedules, where formerly enslaved people may appear only as unnamed entries under an enslaver's name.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Surnames chosen after emancipation may differ from an enslaver's name. Look at neighbors and nearby families for connections.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1880</span><span class="yr-sum">Relationships stated</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: June 1, 1880.</li><li>Gives each person's <strong>relationship to the head of household</strong> and marital status.</li><li>Records the birthplace of each person's father and mother.</li><li>Includes street addresses in cities, and notes some illnesses and disabilities.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>The first census to state relationships outright, often the key to confirming parents and children.</li><li>Parents' birthplaces can point to a previous generation's origins.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> An index called Soundex was created later for 1880 households that included children aged 10 or younger, a useful finding aid for families of that era.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">"Son" means son of the head of household. A stepson or grandson may still be recorded simply as "son."</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1890</span><span class="yr-sum">Mostly destroyed by fire</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: June 2, 1890.</li><li>Most of the population schedules were destroyed after a 1921 fire in Washington, leaving only fragments.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>Its loss creates a twenty-year gap between 1880 and 1900, so researchers lean on other records for those years.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> A special 1890 schedule of <strong>Union veterans and their widows</strong> survives for about half of Kentucky and later states alphabetically. Even Confederate veterans sometimes appear on it, crossed out. Kentucky tax lists and city directories also help fill the gap.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Don't conclude a family left Kentucky because they're missing in 1890. Almost everyone is missing in 1890.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1900</span><span class="yr-sum">Month and year of birth</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: June 1, 1900.</li><li>Records <strong>month and year of birth</strong>, plus age.</li><li>Asks years married, how many children each mother had borne, and how many were living.</li><li>Records year of immigration and naturalization status, and whether the home was owned or rented.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>The children-born and children-living columns can reveal children who died young and appear in no other record.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> Use the 1900 children-born and children-living columns with Kentucky's death records, which began statewide in 1911, and with cemetery records to account for every child.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Birth months and years were still remembered, not documented. They may conflict with other records.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1910</span><span class="yr-sum">Civil War veterans noted</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: April 15, 1910.</li><li>Asks whether each man was a survivor of the <strong>Union or Confederate</strong> army or navy.</li><li>Repeats years married, children born, and children living, and asks the language spoken.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>The veteran column points to a Civil War service or pension record.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> For Kentucky, a border state, the Union-or-Confederate question can settle which side a family member served on, a frequent point of family confusion.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Check the census date. It moved to April 15, so ages may shift compared with earlier June censuses.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1920</span><span class="yr-sum">Naturalization year</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: January 1, 1920.</li><li>Records year of immigration and year of naturalization, and each person's mother tongue.</li><li>Drops the children-born and children-living questions.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>Naturalization years point to citizenship records for immigrant ancestors.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> With the January census day, Kentucky families who moved seasonally for work may appear somewhere different than in April or June censuses.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">A January 1 census day changes how ages compare with earlier censuses. Expect a year's drift either way.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1930</span><span class="yr-sum">Age at first marriage</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: April 1, 1930.</li><li>Asks <strong>age at first marriage</strong>, veteran status and which war, and whether the household had a radio set.</li><li>Records the value of the home or monthly rent.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>Age at first marriage can help you estimate a marriage year and search for the record.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> The 1930 census captures Kentucky families early in the Great Depression, including many who had moved to mill and mining towns.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Age at first marriage refers to the first marriage, even for someone later widowed and remarried.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1940</span><span class="yr-sum">The informant is marked</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: April 1, 1940.</li><li>Marks <strong>which person gave the information</strong>, with an X in a circle, the first census to do so.</li><li>Asks where each person lived on April 1, 1935, highest grade of school completed, and wage income.</li><li>Asks extra questions of two people per page, including parents' birthplaces.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>Knowing the informant lets you weigh the information, exactly as you weigh a witness.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> The 1935 residence question can trace Kentucky families who left for factory work in Ohio, Indiana, and Michigan during the Depression.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">If the informant was a neighbor or a child, treat ages and birthplaces with extra caution.</p>
+                </div>
+            </details>
+            <details class="decade">
+                <summary><span class="yr">1950</span><span class="yr-sum">The newest released</span></summary>
+                <div class="decade-body">
+                    <h4>What it asked</h4>
+                    <ul><li>Census day: April 1, 1950.</li><li>Asks where each person lived one year earlier.</li><li>Asks extra questions of a sample of people on each page.</li><li>Released to the public in 2022.</li></ul>
+                    <h4>Why it matters</h4>
+                    <ul><li>The most recent census available, connecting living memory to the historical record.</li></ul>
+                    <div class="ky"><strong>Kentucky notes:</strong> Many people in the 1950 census are still living. Use it carefully, and follow KHGN's privacy standards for anyone who may be alive.</div>
+                    <h4>Picture the day</h4>
+                    <p style="margin:0">Census records are released 72 years after they're taken, so the 1960 census will open in 2032.</p>
+                </div>
+            </details>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="star-title">
+            <div class="category-header">
+                <div class="category-dot brass"></div>
+                <div>
+                    <h2 class="category-title" id="star-title" style="margin:0">The Census and the Star Designations</h2>
+                    <p class="category-desc">What a census entry proves, and what it only suggests</p>
+                </div>
+            </div>
+            <div class="star-row">
+                <div class="star-box"><strong>★3 Physical Evidence</strong>An image of the original census page is physical evidence that a household was recorded in a place on the census day.</div>
+                <div class="star-box"><strong>A lead for the details</strong>Ages, birthplaces, and relationships came from whoever answered the door, so they often need corroboration. Until 1940, you don't know who that was.</div>
+                <div class="star-box"><strong>Redundant, not corroborating</strong>Five censuses showing the same household in the same county don't prove who the parents were. Corroboration needs a different kind of record, like a deed or a will.</div>
+            </div>
+        </section>
+
+        <section class="category-section" aria-labelledby="practice-title">
+            <div class="category-header">
+                <div class="category-dot teal"></div>
+                <div>
+                    <h2 class="category-title" id="practice-title" style="margin:0">Quick Practice</h2>
+                    <p class="category-desc">Think it through, then reveal the answer</p>
+                </div>
+            </div>
+            <details class="qa"><summary>Your ancestor is 30 in 1850 and 38 in 1860. Is he the same man?</summary><p>Very likely. Ages were estimates given by whoever answered the door, so drift of a few years is common. Check the household members, birthplaces, and neighbors to confirm.</p></details>
+            <details class="qa"><summary>You can't find a Kentucky family in 1890. Did they leave the state?</summary><p>Probably not. Most of the 1890 census was destroyed after a 1921 fire. Use tax lists, city directories, and the surviving 1890 veterans schedule instead.</p></details>
+            <details class="qa"><summary>Which census first names formerly enslaved people?</summary><p>1870. It's often the first record naming African American ancestors, and the bridge back toward the unnamed entries on the 1850 and 1860 slave schedules.</p></details>
+            <details class="qa"><summary>In 1850, the people listed after a husband and wife: are they their children?</summary><p>Not necessarily. 1850 doesn't state relationships, so they may be children, other relatives, boarders, or laborers. 1880 is the first census to state relationships.</p></details>
+        </section>
+
+        <div class="mission-note">
+            <strong>More Record Field Guides are on the way,</strong> starting with death certificates, so you can read each record the way the people who made it did.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const nav = document.querySelector(".site-nav");
+            const toggle = document.querySelector(".site-nav-toggle");
+            const links = document.querySelector(".site-nav-links");
+            if (!nav || !toggle || !links) {
+                return;
+            }
+            toggle.addEventListener("click", function () {
+                const isOpen = nav.classList.toggle("is-open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+            links.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    nav.classList.remove("is-open");
+                    toggle.setAttribute("aria-expanded", "false");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
