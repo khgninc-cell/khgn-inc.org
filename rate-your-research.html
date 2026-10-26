@@ -8,7 +8,7 @@
 <title>Rate Your Research - KHGN Inc.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<meta name="description" content="Free self-evaluation from KHGN Inc.: describe your genealogy research and see which star designation it reaches, from Lead to Case Built.">
+<meta name="description" content="Free self-evaluation from KHGN Inc.: describe your genealogy research and see which star rating it reaches, from Footprint to Mapped Route.">
 <style>
   :root{
     --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
@@ -278,7 +278,7 @@
   <header class="module">
     <p class="eyebrow">First Steps · Self-evaluation tool</p>
     <h1>Rate Your Research</h1>
-    <p class="lede">Describe the evidence behind one claim in your family history, and see which of KHGN's star designations it reaches, from ★1 Lead to ★5 Case Built, plus exactly what the next star requires.</p>
+    <p class="lede">Describe the evidence behind one claim in your family history, and see which of KHGN's star ratings it reaches, from ★1 Footprint to ★5 Mapped Route, plus exactly what the next star requires.</p>
   </header>
 
   <div class="note" style="margin-bottom:18px">
@@ -317,7 +317,7 @@
       <div class="rr-field"><span>Did others with the same name live nearby?</span>
         <div class="rr-radio">
           <label><input type="radio" name="same" value="no"> No, I checked</label>
-          <label><input type="radio" name="same" value="alibi"> Yes, and I've checked the alibis to tell them apart</label>
+          <label><input type="radio" name="same" value="alibi"> Yes, and I've ruled out the wrong trails to tell them apart</label>
           <label><input type="radio" name="same" value="yes"> Yes, and I haven't separated them yet</label>
           <label><input type="radio" name="same" value="unchecked" checked> I haven't checked</label>
         </div></div>
@@ -376,11 +376,11 @@
   function radio(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ""; }
 
   var LEVELS = {
-    1: { name: "Lead", sub: "Worth following, not yet proven" },
-    2: { name: "Tip", sub: "Secondhand information pointing the way" },
-    3: { name: "Physical Evidence", sub: "An original record, fully cited" },
-    4: { name: "Corroborated", sub: "Independent original records agree" },
-    5: { name: "Case Built", sub: "Ready for the courtroom" }
+    1: { name: "Footprint", sub: "A lead worth following, not yet proven" },
+    2: { name: "Signpost", sub: "Secondhand information pointing the way" },
+    3: { name: "Landmark", sub: "An original record, fully cited" },
+    4: { name: "Crossroads", sub: "Independent original records meet and agree" },
+    5: { name: "Mapped Route", sub: "Ready for the climb" }
   };
 
   document.getElementById("evaluate").addEventListener("click", function () {
@@ -402,24 +402,24 @@
 
     if (!srcs.length) { why.push("No sources are listed yet, so the claim rests on a lead alone."); }
     if (stories) { why.push(stories + " family stor" + (stories === 1 ? "y counts" : "ies count") + " as leads: valuable starting points, not proof."); }
-    if (tips) { why.push(tips + " secondhand source" + (tips === 1 ? " is a tip" : "s are tips") + ". Tips show where to look; copies of the same claim don't add up to proof."); level = Math.max(level, 2); }
+    if (tips) { why.push(tips + " secondhand source" + (tips === 1 ? " is a signpost" : "s are signposts") + ". Signposts show where to look; copies of the same claim don't add up to proof."); level = Math.max(level, 2); }
     if (uncited) { why.push(uncited + " original record" + (uncited === 1 ? " isn't" : "s aren't") + " fully cited yet, so " + (uncited === 1 ? "it doesn't" : "they don't") + " count until someone else could find " + (uncited === 1 ? "it" : "them") + "."); }
-    if (cited.length) { level = 3; why.push(cited.length + " fully cited original record" + (cited.length === 1 ? "" : "s") + ": physical evidence."); }
+    if (cited.length) { level = 3; why.push(cited.length + " fully cited original record" + (cited.length === 1 ? ": a landmark on the map." : "s: landmarks on the map.")); }
     if (cited.length > kindCount) { why.push("Some original records are the same kind of record. Corroboration counts different, independent record types, so repeats of one kind add nothing new."); }
-    if (kindCount >= 2) { level = 4; why.push(kindCount + " independent record types agree: corroborated."); }
+    if (kindCount >= 2) { level = 4; why.push(kindCount + " independent record types meet and agree: a crossroads."); }
 
     var caseReady = level === 4 && (conf === "none" || conf === "resolved") && (same === "no" || same === "alibi") && written === "yes";
-    if (caseReady) { level = 5; why.push("Conflicts are addressed, same-name alibis are checked, and your reasoning is written out: the case is built."); }
+    if (caseReady) { level = 5; why.push("Conflicts are addressed, wrong trails are ruled out, and your reasoning is written out: the route is mapped."); }
 
     if (level === 1) { next.push("Follow your lead to a source. An online tree or index (a tip) can show you where the original record might be."); }
     if (level <= 2) { next.push("Find the original record behind your tip, such as a census page, deed, will, or marriage bond, and cite it fully: who, what, when, where it's kept, and where in it."); }
     if (level === 3) { next.push("Find a second original record of a different type, created independently, that supports the same claim, such as a deed or will alongside a census entry."); }
     if (level === 4) {
       if (!(conf === "none" || conf === "resolved")) { next.push(conf === "open" ? "Resolve the conflicting records: weigh who gave each piece of information and how they'd know, and write out your reasoning." : "Search for conflicting records, and resolve any you find."); }
-      if (!(same === "no" || same === "alibi")) { next.push(same === "yes" ? "Separate the people who share the name by checking alibis: records placing each one somewhere else." : "Check whether others with the same name lived nearby, and separate them if so."); }
+      if (!(same === "no" || same === "alibi")) { next.push(same === "yes" ? "Separate the people who share the name by ruling out wrong trails: records placing each one somewhere else." : "Check whether others with the same name lived nearby, and separate them if so."); }
       if (written !== "yes") { next.push("Write out how your evidence fits together, including any circumstantial evidence."); }
     }
-    if (level === 5) { next.push("You're ready for the courtroom. Learn the KHGN Evidence Framework, then file your case with Build Your Case. Courtroom designations, from ★6 Case Filed up to the ★10 Gold Star Verdict, are earned through a case submission and review."); }
+    if (level === 5) { next.push("You're ready for the climb. Learn the KHGN Evidence Framework, then submit your claim with Build Your Case. The climbing ratings, from ★6 Base Camp up to ★10 Claim Granted, are earned through review by trained reviewers."); }
 
     var info = LEVELS[level];
     document.getElementById("r-stars").textContent = "\u2605" + level;
