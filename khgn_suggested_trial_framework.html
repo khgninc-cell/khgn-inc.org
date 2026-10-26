@@ -5,7 +5,8 @@
 <noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui,sans-serif}</style></noscript>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The KHGN Suggested Trial Framework</title>
+<title>The KHGN Evidence Framework - KHGN Inc.</title>
+<meta name="description" content="The KHGN Evidence Framework: a trail-marked method for proving a genealogical claim, from scouting both paths to a summit that stays open to new evidence.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -26,10 +27,15 @@
   .masthead .eyebrow{ font-size:12.5px; letter-spacing:.04em; color:var(--brass-bright); text-transform:uppercase; margin-bottom:6px; }
   .masthead h1{ font-family:'Rye', serif; font-weight:400; font-size:clamp(24px,5vw,36px); margin:0; text-shadow:0 2px 0 var(--walnut-deep); }
   .masthead .sub{ font-size:14px; color:var(--parchment-dim); margin-top:8px; font-style:italic; }
+  .stops{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:8px; margin:0 0 22px; }
+  .stop{ background:var(--walnut-deep); border:1px solid var(--line); border-radius:10px; padding:10px 8px; text-align:center; font-size:12.5px; line-height:1.35; color:var(--parchment-dim); }
+  .stop b{ display:block; font-family:'Rye', serif; font-weight:400; font-size:15px; color:var(--brass-bright); margin-bottom:2px; }
+  @media (max-width:560px){ .stops{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
   article{
     background:var(--parchment); color:var(--ink); border-radius:16px; padding:40px 36px;
     box-shadow:0 10px 30px rgba(0,0,0,0.35); font-size:15.5px; line-height:1.7;
   }
+  @media (max-width:560px){ article{ padding:28px 20px; } }
   article h2{ font-family:'Rye', serif; font-weight:400; font-size:23px; margin:32px 0 12px; color:var(--ink); }
   article h2:first-child{ margin-top:0; }
   article p{ margin:0 0 14px; }
@@ -54,96 +60,138 @@
   }
   .part-box p{ margin:0 0 8px; }
   .part-box ul{ margin:0; }
+  .ratings{ width:100%; border-collapse:collapse; font-size:14.5px; margin:8px 0 14px; }
+  .ratings th, .ratings td{ text-align:left; padding:8px 10px; border-bottom:1px solid #D8C7A3; vertical-align:top; }
+  .ratings th{ font-size:12.5px; text-transform:uppercase; letter-spacing:.04em; color:#6B5A42; }
+  .ratings td:first-child{ white-space:nowrap; font-weight:700; }
   .footnote{ text-align:center; font-style:italic; font-size:13px; color:#6B5A42; margin-top:28px; border-top:1px solid #D8CBAE; padding-top:16px; }
+  a:focus-visible{ outline:3px solid var(--brass-bright); outline-offset:2px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <a class="back-link" href="game-portal.html">&larr; Back to Green Pasture</a>
+  <a class="back-link" href="proving-your-claim.html">&larr; Back to Proving Your Claim</a>
   <div class="masthead">
     <div class="eyebrow">Kentucky History &amp; Genealogy Network, Inc.</div>
-    <h1>The KHGN Suggested Trial Framework</h1>
-    <div class="sub">A Framework for Genealogical Proof, Built on the Structure of a Trial</div>
+    <h1>The KHGN Evidence Framework</h1>
+    <div class="sub">A trail-marked method for proving a genealogical claim</div>
   </div>
+
+  <div class="stops" aria-label="The four stops on the trail">
+    <div class="stop"><b>1. The Fork</b>Scout both paths before you choose</div>
+    <div class="stop"><b>2. The Trail</b>Test each record as you find it</div>
+    <div class="stop"><b>3. The Overlook</b>Look back over both paths</div>
+    <div class="stop"><b>4. The Summit</b>Confident, but never closed</div>
+  </div>
+
   <article>
 
-    <h2>What This Is — and What It Isn't</h2>
-    <p>This framework borrows the shape of a courtroom trial to organize how a genealogical proof argument gets built. It is not a description of how real trials work, and it is not the Genealogical Proof Standard published by the Board for Certification of Genealogists (BCG). It's something KHGN built on its own terms, drawing what's useful from both, and departing from both wherever the departure serves the actual work of genealogical research better.</p>
+    <h2>What This Is, and What It Isn't</h2>
+    <p>This framework marks out the trail a careful researcher follows to prove a genealogical claim, from the first fork in the road to the summit. It is not the Genealogical Proof Standard published by the Board for Certification of Genealogists (BCG). It's something KHGN built on its own terms, drawing what's useful from professional practice and departing from it wherever the departure serves the actual work of genealogical research better.</p>
 
     <p>Two departures are worth naming plainly, up front, rather than leaving you to discover them later:</p>
     <div class="departure-box">
       <ul>
-        <li><strong>We borrow the phrase "beyond a reasonable doubt" for its feel, not its legal weight.</strong> That phrase is the actual standard of proof in criminal law. Genealogists are not legally bound by it, and the real Genealogical Proof Standard doesn't use that language. We use it here because it captures the right level of confidence a strong conclusion should carry — not because a family history claim is being held to a courtroom's legal standard.</li>
-        <li><strong>A real courtroom verdict is final. Ours deliberately isn't.</strong> Real trials have finality built in — double jeopardy, appeals with real limits. Genealogical proof doesn't work that way, and shouldn't pretend to. A record can surface next year that changes everything you thought you knew. This framework builds that openness into the verdict itself, rather than treating "Proven" as a locked door.</li>
+        <li><strong>We aim for strong, honestly earned confidence, not legal proof.</strong> A family history conclusion isn't held to any legal standard, and the Genealogical Proof Standard doesn't use legal language. What we're after is a conclusion sure-footed enough that another careful researcher, walking the same trail with the same records, would reach the same place.</li>
+        <li><strong>Reaching the summit doesn't end the journey.</strong> A record can surface next year that changes everything you thought you knew. This framework builds that openness into the summit itself, rather than treating a proven claim as a locked door.</li>
       </ul>
     </div>
 
     <div class="not-coursework-box">
-      <strong>This is a self-directed practice framework, not coursework.</strong> Using it does not constitute formal education, training credit, a teaching credential, or any accredited instruction. It isn't affiliated with, endorsed by, or equivalent to BCG's certification process. It's simply a way of organizing your own thinking when you sit down to research — nothing more formal than that.
+      <strong>This is a self-directed practice framework, not coursework.</strong> Using it does not constitute formal education, training credit, a teaching credential, or any accredited instruction. It isn't affiliated with, endorsed by, or equivalent to BCG's certification process. It's simply a way of organizing your own thinking when you sit down to research, nothing more formal than that.
     </div>
 
-    <p>This is meant to build the <em>habit</em> of honest, rigorous proof argument — not to teach source citation formatting, paleography, or jurisdiction-specific record law, and not to stand in for BCG's actual published standard. For the full professional discipline this framework is inspired by, see the <a href="https://bcgcertification.org/" target="_blank" rel="noopener">Board for Certification of Genealogists</a>.</p>
+    <p>This is meant to build the <em>habit</em> of honest, rigorous proof, not to teach source citation formatting, paleography, or jurisdiction-specific record law, and not to stand in for BCG's actual published standard. For the full professional discipline this framework is inspired by, see the <a href="https://bcgcertification.org/" target="_blank" rel="noopener">Board for Certification of Genealogists</a>.</p>
     <hr>
 
-    <h2>Part One: Opening Statements — Both Sides, Before You Choose</h2>
-    <p>A real opening statement only argues one side. This framework asks for both, before you commit to either.</p>
-    <p>Before you decide what you believe, lay out the case <strong>for</strong> your leading candidate and the case <strong>against</strong> them — including the strongest version of the argument for whoever else could be the right person. This is deliberate, and it's the most important departure this framework makes from how most people naturally research: most people pick a candidate first, based on a name match or a family story, and only encounter the opposing case later, if at all — usually after they're already attached to being right.</p>
-    <p>By forcing both charges onto the table <em>before</em> any commitment is made, this framework tries to catch confirmation bias at the earliest possible point, rather than treating it as something to correct for later. If you can't yet state a real, honest case for the alternative candidate, you're not ready to have an opening statement — you're ready to go find one.</p>
+    <h2>Stop One: The Fork, Scout Both Paths Before You Choose</h2>
+    <p>Most researchers take the first path that looks right, following a name match or a family story, and only discover the other path later, if at all, usually after they're already attached to being right. This framework asks you to stop at the fork and scout both paths before you commit to either.</p>
+    <p>Before you decide what you believe, lay out the case <strong>for</strong> your leading candidate and the case <strong>against</strong> them, including the strongest version of the case for whoever else could be the right person. This is deliberate, and it's the most important habit the framework builds.</p>
+    <p>By putting both paths on the map <em>before</em> any commitment is made, this framework tries to catch confirmation bias at the earliest possible point, rather than treating it as something to correct later. If you can't yet describe a real, honest case for the alternative candidate, you're not ready to choose a path. You're ready to go scout one.</p>
     <div class="part-box">
-      <p><strong>What belongs in this stage:</strong></p>
+      <p><strong>What belongs at this stop:</strong></p>
       <ul>
         <li>The specific research question you're investigating</li>
         <li>The leading candidate, and the honest case for them</li>
         <li>The strongest alternative candidate (or explanation), and the honest case for <em>them</em></li>
-        <li>No conclusion yet — just two theses, stated fairly</li>
+        <li>No conclusion yet, just two paths, described fairly</li>
       </ul>
     </div>
     <hr>
 
-    <h2>Part Two: Trial Testimony, Rebuttal, and Evidence — One Continuous Body</h2>
-    <p>Real trials often separate direct examination, cross-examination, and rebuttal into distinct phases. This framework merges them into one continuous body, because that's a truer reflection of how genealogical research actually unfolds. You rarely gather all your supporting evidence first and only then encounter the complications. In real research, a supporting record, a complicating record, and another supporting record tend to arrive in whatever order the archive happens to hand them to you.</p>
-    <p>This stage is where you present evidence as you find it, and you're expected to let it talk back to you as you go:</p>
+    <h2>Stop Two: The Trail, Test Each Record as You Find It</h2>
+    <p>You rarely gather all your supporting records first and only then meet the complications. In real research, a supporting record, a complicating record, and another supporting record arrive in whatever order the archive happens to hand them to you. So this framework treats evidence as one continuous trail, tested step by step.</p>
+    <p>At this stop, you record each record as you find it, and you let it talk back to you as you go:</p>
     <div class="part-box">
       <ul>
-        <li><strong>Testimony:</strong> each piece of evidence, presented plainly — what it says, where it came from</li>
-        <li><strong>Rebuttal:</strong> for each piece, immediately ask what could be wrong with it. A second person of the same name? A transcription error? A record that only proves something adjacent to what you need it to prove?</li>
-        <li><strong>Evidence weight:</strong> not all evidence is equal. A pension file naming specific children carries more weight than a bare tax list with only a name and acreage. Say so, honestly, as you go — don't save that judgment for later.</li>
+        <li><strong>Landmarks:</strong> each record, described plainly: what it says, and where it came from</li>
+        <li><strong>Challenges:</strong> for each record, immediately ask what could be wrong with it. A second person of the same name, a wrong trail? A transcription error? A record that only proves something next to what you need it to prove?</li>
+        <li><strong>Weight:</strong> not all evidence is equal. A pension file naming specific children carries more weight than a bare tax list with only a name and acreage. Say so, honestly, as you go. Don't save that judgment for later.</li>
       </ul>
     </div>
-    <p>The goal of this stage isn't to build the strongest-sounding case. It's to build the most honestly-tested one, one exchange at a time.</p>
+    <p>The goal of this stop isn't the strongest-sounding claim. It's the most honestly tested one, one step at a time.</p>
     <hr>
 
-    <h2>Part Three: Closing Arguments — Both Sides, One Final Time</h2>
-    <p>A real closing argument only restates your own side. This framework asks you to restate <strong>both</strong> sides' strongest points, in your own words, one more time before rendering any verdict.</p>
-    <p>This is a genuinely harder exercise than it sounds. If you can only summarize your own conclusion and can't fairly restate the best version of the opposing case, that's a sign you never really engaged with it in the first place — you just noted its existence and moved on. A closing argument that can't do justice to both sides isn't a closing argument. It's a highlight reel.</p>
+    <h2>Stop Three: The Overlook, Look Back Over Both Paths</h2>
+    <p>Before the final climb, stop at the overlook and look back over both paths one more time. Restate <strong>both</strong> sides' strongest points, in your own words, before reaching any conclusion.</p>
+    <p>This is a genuinely harder exercise than it sounds. If you can only summarize your own conclusion and can't fairly restate the best version of the other path, that's a sign you never really engaged with it in the first place. You just noted that it existed and kept walking. A look back that can't do justice to both paths isn't an overlook. It's a highlight reel.</p>
     <div class="part-box">
-      <p><strong>What belongs in this stage:</strong></p>
+      <p><strong>What belongs at this stop:</strong></p>
       <ul>
         <li>A fair, complete restatement of the case <em>for</em> your conclusion</li>
-        <li>An equally fair, complete restatement of the strongest case <em>against</em> it — not a straw man, the real thing</li>
-        <li>Only after both are stated: your own assessment of which case actually held up better, and why</li>
+        <li>An equally fair, complete restatement of the strongest case <em>against</em> it: not a straw man, the real thing</li>
+        <li>Only after both are stated: your own assessment of which path actually held up better, and why</li>
       </ul>
     </div>
     <hr>
 
-    <h2>Part Four: The Verdict — Confident, But Never Closed</h2>
-    <p>Render your verdict here: the belief that your conclusion is true beyond a reasonable doubt, in the sense described at the top of this document — a strong, honestly earned confidence, not a legal finding — and that it would withstand real scrutiny from another careful researcher.</p>
-    <p>But the verdict is entered here in a <strong>standing state of appeal</strong>. It is not sealed. If new evidence comes to light — a record surfaces, a DNA match complicates the picture, a document you trusted turns out to be flawed — the case reopens. This isn't a weakness in the verdict. It's the honest acknowledgment that historical research is never actually finished, and treating a conclusion as permanently closed is exactly the kind of overconfidence this whole framework exists to prevent.</p>
+    <h2>Stop Four: The Summit, Confident but Never Closed</h2>
+    <p>State your conclusion here: a strong, honestly earned confidence that your claim is true, sure-footed enough to withstand real scrutiny from another careful researcher.</p>
+    <p>But the summit stays <strong>open to new evidence</strong>. If a record surfaces, a DNA match complicates the picture, or a document you trusted turns out to be flawed, the trail reopens. This isn't a weakness in your conclusion. It's the honest acknowledgment that historical research is never actually finished, and treating a conclusion as permanently closed is exactly the kind of overconfidence this whole framework exists to prevent.</p>
     <div class="part-box">
-      <p><strong>What belongs in this stage:</strong></p>
+      <p><strong>What belongs at this stop:</strong></p>
       <ul>
-        <li>Your final determination, stated plainly</li>
-        <li>What specific evidence would be strong enough to reopen the case if it appeared</li>
-        <li>An explicit acknowledgment that the verdict stands only until better evidence says otherwise</li>
+        <li>Your conclusion, stated plainly</li>
+        <li>What specific evidence would be strong enough to reopen the trail if it appeared</li>
+        <li>An explicit acknowledgment that the conclusion stands only until better evidence says otherwise</li>
       </ul>
     </div>
+    <hr>
+
+    <h2>How This Fits KHGN's Star Ratings</h2>
+    <p>The framework is how a claim makes <strong>the climb</strong>. Research gathered on the trail, from ★1 Footprint to ★5 Mapped Route, is ready for the framework. When you submit a claim through <a href="khgn_build_your_case.html">Build Your Case</a>, you become a <strong>Settler</strong> bringing a claim, and reviewers follow it up the mountain:</p>
+    <table class="ratings">
+      <thead><tr><th>Rating</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>★6 Base Camp</td><td>The claim is submitted for review</td></tr>
+        <tr><td>★7 Switchback</td><td>Every stop is complete, and each record is tied to the fact it proves</td></tr>
+        <tr><td>★8 Ridge Line</td><td>Scouts confirm that independent records agree</td></tr>
+        <tr><td>★9 Final Ascent</td><td>Every challenge has been answered</td></tr>
+        <tr><td>★10 Claim Granted</td><td>Proven, and verified by two Surveyors</td></tr>
+      </tbody>
+    </table>
+    <h2>Who Travels with a Claim</h2>
+    <p>Every claim submitted for review makes the journey with a company of people, each with a role drawn from Kentucky's settlement:</p>
+    <table class="ratings">
+      <thead><tr><th>Title</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>Settler</td><td><strong>The claimant</strong>, who submits the claim for review</td></tr>
+        <tr><td>Caravan Leader</td><td><strong>The claim's guide and advocate</strong>, who helps the Settler present the claim at its strongest and most honest, and answer challenges. A Caravan Leader never reviews the same claim.</td></tr>
+        <tr><td>Scouts</td><td><strong>Trail Reviewers</strong>, a panel of twelve who examine the evidence and weigh in, each opinion weighted by the evidence behind it</td></tr>
+        <tr><td>Sentinels</td><td><strong>Challengers</strong>, who keep watch and raise a challenge when new evidence calls a claim into question</td></tr>
+        <tr><td>Surveyors</td><td><strong>Proof Reviewers</strong>, two experienced researchers who verify the claim against the standards. Both must agree to grant it.</td></tr>
+        <tr><td>Land Commissioners</td><td><strong>Second-review panelists</strong>, three reviewers who hear a request for a second review if a Settler believes the standards were misapplied</td></tr>
+      </tbody>
+    </table>
+    <p>On the frontier, scouts read the land, sentinels kept watch, and no claim was granted until surveyors had verified and marked it. KHGN's review works the same way: everyone travels toward the truth, and no one person decides alone.</p>
+    <p>New to the ratings? Start with <a href="getting-started-genealogy.html">Getting Started in Genealogy</a>, or see where your own research stands with <a href="rate-your-research.html">Rate Your Research</a>.</p>
     <hr>
 
     <h2>Why Build It This Way</h2>
-    <p>Every departure this framework makes from the real courtroom, and from BCG's official standard, was made on purpose, in service of the same underlying goal: catching a researcher's own wishful thinking as early and as thoroughly as possible, and refusing to let a conclusion calcify into unquestionable fact just because it was reached with confidence once.</p>
-    <p>This is KHGN's own framework — built collaboratively, on our own terms, borrowing what serves the work and leaving behind what doesn't.</p>
+    <p>Every choice in this framework serves the same goal: catching a researcher's own wishful thinking as early and as thoroughly as possible, and refusing to let a conclusion harden into unquestionable fact just because it was reached with confidence once.</p>
+    <p>This is KHGN's own framework, built collaboratively, on our own terms, borrowing what serves the work and leaving behind what doesn't.</p>
 
-    <p class="footnote">This framework was developed by Kentucky History &amp; Genealogy Network, Inc. It is inspired by, but distinct from, both courtroom trial procedure and the Genealogical Proof Standard published by the Board for Certification of Genealogists. It is intended to build sound research habits, not to serve as a substitute for professional certification standards or formal legal procedure.</p>
+    <p class="footnote">This framework was developed by Kentucky History &amp; Genealogy Network, Inc. It is inspired by, but distinct from, the Genealogical Proof Standard published by the Board for Certification of Genealogists. It is intended to build sound research habits, not to serve as a substitute for professional certification standards.</p>
   </article>
 </div>
 </body>
