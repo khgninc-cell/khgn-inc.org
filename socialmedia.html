@@ -1,544 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media Group Directory - KHGN</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root{
-            --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
-            --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
-            --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
-        }
-        body {
-            font-family: 'Public Sans', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--parchment);
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px 40px;
-            background-color: var(--walnut);
-        }
-        h1, h2, h3 {
-            font-family: 'Rye', serif;
-            font-weight: 400;
-            color: var(--brass-bright);
-        }
-        h1 { margin-top: 30px; text-shadow: 0 2px 0 var(--walnut-deep); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>County Hub: All 120 Kentucky Counties | KHGN, Inc.</title>
+<meta name="description" content="KHGN, Inc. County Hub: a page for every one of Kentucky's 120 counties, plus KHGN's statewide history and genealogy groups.">
+<link rel="canonical" href="https://khgn-inc.org/socialmedia.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="/khgn-county-ticker.js" defer></script>
+<style>
+:root{--walnut:#2B211A;--walnut-deep:#1C140F;--parchment:#EDE0C8;--parchment-dim:#E0D0AC;--ink:#221A12;--brass:#B08D57;--brass-bright:#D4AF6A;--rust:#A63D2F;--rust-bright:#C2503F;--line:#4A392A;}
+*{box-sizing:border-box}
+body{font-family:'Public Sans',Arial,sans-serif;font-size:18px;line-height:1.65;color:var(--parchment);max-width:1000px;margin:0 auto;padding:0 20px 40px;background-color:var(--walnut);}
+h1,h2,h3{font-family:'Rye',Georgia,serif;font-weight:400;color:var(--brass-bright);}
+h1{font-size:clamp(30px,6vw,40px);margin:30px 0 8px;text-shadow:0 2px 0 var(--walnut-deep);line-height:1.2;}
+.site-nav{background:var(--walnut-deep);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:1000;margin:0 -20px 30px;}
+.site-nav-inner{max-width:1100px;margin:0 auto;padding:0 20px;min-height:68px;display:flex;align-items:center;gap:20px;}
+.site-nav-brand{color:var(--brass-bright);text-decoration:none;font-family:'Rye',Georgia,serif;font-size:22px;white-space:nowrap;}
+.site-nav-links{margin-left:auto;display:flex;align-items:center;gap:18px;}
+.site-nav-links a{color:var(--parchment);text-decoration:none;font-size:15px;font-weight:600;padding:8px 0;border-bottom:2px solid transparent;}
+.site-nav-links a:hover{color:var(--brass-bright);}
+.site-nav-links a.current{color:var(--brass-bright);border-bottom-color:var(--brass);}
+.site-nav-toggle{display:none;margin-left:auto;padding:8px;border:none;background:transparent;cursor:pointer;}
+.site-nav-toggle-bar{display:block;width:24px;height:3px;margin:4px 0;border-radius:999px;background:var(--brass-bright);}
+@media (max-width:700px){.site-nav-inner{flex-wrap:wrap;padding:12px 20px;min-height:0;}.site-nav-toggle{display:block;}.site-nav-links{display:none;width:100%;margin-left:0;flex-direction:column;align-items:flex-start;gap:0;padding:8px 0 4px;}.site-nav.is-open .site-nav-links{display:flex;}.site-nav-links a{width:100%;padding:10px 0;}}
+section{background:var(--parchment);color:var(--ink);padding:24px;border-radius:10px;border-top:4px solid var(--brass);box-shadow:0 10px 30px rgba(0,0,0,.35);margin-bottom:26px;}
+section h2{color:var(--ink);margin-top:0;font-size:26px;}
+section p{color:#4A3A28;}
+section a{color:var(--rust);font-weight:600;}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--brass-bright);outline-offset:2px;}
+.legal{font-size:15.5px;color:var(--parchment-dim);margin:0 0 20px;}
+.small-note{font-size:15px;color:var(--parchment-dim);}
 
-        /* Navigation */
-        .site-nav {
-            background: var(--walnut-deep);
-            border-bottom: 1px solid var(--line);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            margin: 0 -20px 30px;
-        }
-        .site-nav-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-            min-height: 68px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .site-nav-brand {
-            color: var(--brass-bright);
-            text-decoration: none;
-            font-family: 'Rye', serif;
-            font-weight: 400;
-            font-size: 22px;
-            white-space: nowrap;
-        }
-        .site-nav-links {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        .site-nav-links a {
-            color: var(--parchment);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-            padding: 8px 0;
-            border-bottom: 2px solid transparent;
-            transition: color 0.2s ease, border-color 0.2s ease;
-        }
-        .site-nav-links a:hover { color: var(--brass-bright); }
-        .site-nav-toggle {
-            display: none;
-            margin-left: auto;
-            padding: 8px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-        }
-        .site-nav-toggle-bar {
-            display: block;
-            width: 24px;
-            height: 3px;
-            margin: 4px 0;
-            border-radius: 999px;
-            background: var(--brass-bright);
-        }
-        .page-groups .site-nav-links a[href="socialmedia.html"] {
-            color: var(--brass-bright);
-            border-bottom-color: var(--brass);
-        }
-        @media (max-width: 700px) {
-            .site-nav-inner { flex-wrap: wrap; padding: 12px 20px; min-height: 0; }
-            .site-nav-toggle { display: block; }
-            .site-nav-links { display: none; width: 100%; margin-left: 0; flex-direction: column; align-items: flex-start; gap: 0; padding: 8px 0 4px; }
-            .site-nav.is-open .site-nav-links { display: flex; }
-            .site-nav-links a { width: 100%; padding: 10px 0; }
-        }
+.jump-bar{background:var(--parchment);padding:12px;border-radius:8px;margin:0 0 16px;text-align:center;}
+.jump-bar a,.jump-bar span{display:inline-block;margin:3px 4px;min-width:34px;padding:7px 9px;border-radius:4px;font-weight:700;font-size:14px;}
+.jump-bar a{background:rgba(0,0,0,.06);color:var(--ink);text-decoration:none;}
+.jump-bar a:hover{background:var(--rust);color:#fff;}
+.jump-bar span{color:#9A8B74;}
+.letter{border-bottom:2px solid var(--brass);padding-bottom:4px;margin:22px 0 8px;color:var(--ink);scroll-margin-top:120px;font-size:20px;}
+.top-link{float:right;font-size:12px;font-family:'Public Sans',sans-serif;font-weight:600;color:var(--rust);text-decoration:none;}
+.county-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;}
+.county-list a{display:block;padding:10px 12px;border:1px solid #D8C7A3;border-radius:8px;background:rgba(0,0,0,.03);text-decoration:none;}
+.county-list a:hover{border-color:var(--brass);}
+.county-list span{display:block;font-size:15px;color:#5E5242;font-weight:400;}
+.find{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 6px;}
+.find input{flex:1 1 240px;min-height:50px;padding:8px 12px;font:18px 'Public Sans',sans-serif;border:2px solid #D8C7A3;border-radius:8px;background:#fff;color:var(--ink);}
+.status{font-size:15px;color:#5E5242;min-height:1em;}
+.fb-list{list-style:none;margin:0;padding:0;display:grid;gap:8px;}
+.fb-list a{display:block;padding:12px 14px;border-radius:8px;background:var(--rust);color:#fff !important;text-decoration:none;font-weight:700;}
+.fb-list a:hover{background:var(--rust-bright);}
 
-        .jump-bar {
-            background: var(--parchment);
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .jump-bar a {
-            display: inline-block;
-            margin: 4px 6px;
-            padding: 6px 10px;
-            background: rgba(0,0,0,0.06);
-            color: var(--ink);
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 14px;
-        }
-        .jump-bar a:hover {
-            background: var(--rust);
-            color: #fff;
-        }
-        section {
-            background: var(--parchment);
-            color: var(--ink);
-            padding: 25px;
-            border-radius: 10px;
-            border-top: 4px solid var(--brass);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-            margin-bottom: 30px;
-        }
-        section > p { color: #4A3A28; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            margin-bottom: 25px;
-        }
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #D8C7A3;
-            text-align: left;
-            color: var(--ink);
-        }
-        th {
-            background-color: rgba(0,0,0,0.04);
-            color: var(--rust);
-            font-family: 'Rye', serif;
-            font-weight: 400;
-        }
-        td a { color: var(--rust); font-weight: 600; text-decoration: none; }
-        td a:hover { text-decoration: underline; }
-        .letter-header {
-            border-bottom: 2px solid var(--brass);
-            padding-bottom: 5px;
-            margin-top: 30px;
-            color: var(--ink);
-        }
-        .top-link {
-            float: right;
-            font-size: 12px;
-            font-weight: 600;
-            font-family: 'Public Sans', sans-serif;
-            text-decoration: none;
-            color: var(--rust);
-        }
-        ul li a { color: var(--rust); font-weight: 600; }
-    </style>
+</style>
 </head>
-<body class="page-groups">
-    <nav class="site-nav" aria-label="Global">
-        <div class="site-nav-inner">
-            <a href="index.html" class="site-nav-brand">KHGN Inc.</a>
-            <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="site-nav-toggle-bar"></span>
-                <span class="site-nav-toggle-bar"></span>
-                <span class="site-nav-toggle-bar"></span>
-            </button>
-            <div class="site-nav-links">
-                <a href="index.html">Home</a>
-                <a href="socialmedia.html">Social Media</a>
-                <a href="recruiting.html">Volunteer Recruitment</a>
-                <a href="donation-portal.html">Donation Portal</a>
-                <a href="training.html">Volunteer Training</a>
-                <a href="game-portal.html">Trailhead Training</a>
-            </div>
-        </div>
-    </nav>
+<body id="top">
+<nav class="site-nav" aria-label="Global">
+  <div class="site-nav-inner">
+    <a href="index.html" class="site-nav-brand">KHGN Inc.</a>
+    <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation"><span class="site-nav-toggle-bar"></span><span class="site-nav-toggle-bar"></span><span class="site-nav-toggle-bar"></span></button>
+    <div class="site-nav-links">
+      <a href="index.html">Home</a>
+      <a href="socialmedia.html" class="current" aria-current="page">County Hub</a>
+      <a href="recruiting.html">Volunteer Recruitment</a>
+      <a href="donation-portal.html">Donation Portal</a>
+      <a href="training.html">Volunteer Training</a>
+      <a href="game-portal.html">Trailhead Training</a>
+    </div>
+  </div>
+</nav>
+<h1>County Hub</h1>
+<p class="legal">KHGN, Inc. is the filed assumed name of Kentucky History and Genealogy Network, Inc., a 501(c)(3) nonprofit. They are one and the same organization.</p>
 
-    <h1>Social Media Group Directory</h1>
-    <p>Welcome to the community hub. Browse our local county groups or explore our statewide groups below.</p>
-    <!-- SECTION 1: LOCAL & DISTRICT GROUPS -->
-    <section>
-        <h2>Local &amp; District Groups (Geographic)</h2>
-        <p>Quickly jump to a county using the index below:</p>
+<section id="statewide">
+<h2>Statewide Facebook Groups</h2>
+<p>KHGN&rsquo;s statewide communities, open to researchers across Kentucky and beyond:</p>
+<ul class="fb-list">
+<li><a href="https://www.facebook.com/groups/kentuckhistoryandgenealogynetwork" target="_blank" rel="noopener">Kentucky History and Genealogy Network (Private Group)</a></li>
+<li><a href="https://www.facebook.com/groups/kentuckygenealogyrecords" target="_blank" rel="noopener">Genealogy Records Kentucky</a></li>
+<li><a href="https://www.facebook.com/groups/586924011435193" target="_blank" rel="noopener">Genealogical DNA</a></li>
+<li><a href="https://www.facebook.com/groups/cemeteriesofkentucky" target="_blank" rel="noopener">Cemeteries Kentucky</a></li>
+<li><a href="https://www.facebook.com/groups/kentuckytalltales" target="_blank" rel="noopener">Kentucky Tall Tales and Folklore</a></li>
+</ul>
+</section>
 
-        <!-- A-Z Jump Bar -->
-        <div class="jump-bar">
-            <a href="#county-a">A</a> <a href="#county-b">B</a> <a href="#county-c">C</a>
-            <a href="#county-d">D</a> <a href="#county-e">E</a> <a href="#county-f">F</a>
-            <a href="#county-g">G</a> <a href="#county-h">H</a> <a href="#county-i">I</a>
-            <a href="#county-j">J</a> <a href="#county-k">K</a> <a href="#county-l">L</a>
-            <a href="#county-m">M</a> <a href="#county-n">N</a> <a href="#county-o">O</a>
-            <a href="#county-p">P</a> <a href="#county-q">Q</a> <a href="#county-r">R</a>
-            <a href="#county-s">S</a> <a href="#county-t">T</a> <a href="#county-u">U</a>
-            <a href="#county-v">V</a> <a href="#county-w">W</a> <a href="#county-x">X</a>
-            <a href="#county-y">Y</a> <a href="#county-z">Z</a>
-        </div>
-
-        <!-- County Letter A -->
-        <h3 id="county-a" class="letter-header">A <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Adair County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/adaircumberlandmetcalfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Adair County</a></td></tr>
-                <tr><td><strong>Allen County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/allencountysimpsoncountywarrencounty" target="_blank" rel="noopener">Allen County</a></td></tr>
-                <tr><td><strong>Anderson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/andersoncountykentuckyhistoryandgenealogynetworkin" target="_blank" rel="noopener">Anderson County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter B -->
-        <h3 id="county-b" class="letter-header">B <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Barren County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/barrencountykyhistoryandgenealogy" target="_blank" rel="noopener">Barren County</a></td></tr>
-                <tr><td><strong>Bath County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/bathmenifeerowancountykyhistoryandgenealogy" target="_blank" rel="noopener">Bath County</a></td></tr>
-                <tr><td><strong>Bell County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/bellcountykyhistorandgenealogy" target="_blank" rel="noopener">Bell County</a></td></tr>
-                <tr><td><strong>Boone County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boonecampbellgallatinkentoncountykygenealogy" target="_blank" rel="noopener">Boone County</a></td></tr>
-                <tr><td><strong>Bourbon County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/bourbonmontgomerynicholascountyhistoryandgenealogy" target="_blank" rel="noopener">Bourbon County</a></td></tr>
-                <tr><td><strong>Boyd County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boydcountycartercountylawrencecounty" target="_blank" rel="noopener">Boyd County</a></td></tr>
-                <tr><td><strong>Boyle County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boylecountygarrarcountymercercounty" target="_blank" rel="noopener">Boyle County</a></td></tr>
-                <tr><td><strong>Bracken County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/brackencountymasoncountyrobertsoncounty" target="_blank" rel="noopener">Bracken County</a></td></tr>
-                <tr><td><strong>Breathitt County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/breathittcountykyhistoryandgenealogy" target="_blank" rel="noopener">Breathitt County</a></td></tr>
-                <tr><td><strong>Breckinridge County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/breckinridgcountkenuckyhistoryandgenealogynetwork" target="_blank" rel="noopener">Breckinridge County</a></td></tr>
-                <tr><td><strong>Bullitt County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/bullittcountykentucky" target="_blank" rel="noopener">Bullitt County</a></td></tr>
-                <tr><td><strong>Butler County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/butlercountydaviesscountyohiocountykygenealogy" target="_blank" rel="noopener">Butler County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter C -->
-        <h3 id="county-c" class="letter-header">C <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Caldwell County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/caldwellcountycrittendencountylivingstoncounty" target="_blank" rel="noopener">Caldwell County</a></td></tr>
-                <tr><td><strong>Calloway County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/callowaycountylyoncountytriggcounty" target="_blank" rel="noopener">Calloway County</a></td></tr>
-                <tr><td><strong>Campbell County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boonecampbellgallatinkentoncountykygenealogy" target="_blank" rel="noopener">Campbell County</a></td></tr>
-                <tr><td><strong>Carroll County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Carroll County</a></td></tr>
-                <tr><td><strong>Carter County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boydcountycartercountylawrencecounty" target="_blank" rel="noopener">Carter County</a></td></tr>
-                <tr><td><strong>Casey County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/caseycountykentuckyhistoryandgenealogy" target="_blank" rel="noopener">Casey County</a></td></tr>
-                <tr><td><strong>Christian County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/christiancountylogancountoddcountyky" target="_blank" rel="noopener">Christian County</a></td></tr>
-                <tr><td><strong>Clark County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/clarkcountyestillcountypowellcountykygenealogy" target="_blank" rel="noopener">Clark County</a></td></tr>
-                <tr><td><strong>Clay County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/claycountykentuckygenealogy" target="_blank" rel="noopener">Clay County</a></td></tr>
-                <tr><td><strong>Clinton County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/clintoncountykentucky" target="_blank" rel="noopener">Clinton County</a></td></tr>
-                <tr><td><strong>Crittenden County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/caldwellcountycrittendencountylivingstoncounty" target="_blank" rel="noopener">Crittenden County</a></td></tr>
-                <tr><td><strong>Cumberland County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/cumberlandcountykentucky" target="_blank" rel="noopener">Cumberland County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter D -->
-        <h3 id="county-d" class="letter-header">D <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Daviess County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/butlercountydaviesscountyohiocountykygenealogy" target="_blank" rel="noopener">Daviess County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter E -->
-        <h3 id="county-e" class="letter-header">E <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Edmonson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/edmonsoncountykentuckyhistoryandgenealogunetworkin" target="_blank" rel="noopener">Edmonson County</a></td></tr>
-                <tr><td><strong>Elliott County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/elliottcountymorgancountykyhistoryandgenealogy" target="_blank" rel="noopener">Elliott County</a></td></tr>
-                <tr><td><strong>Estill County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/estillcountykentucky" target="_blank" rel="noopener">Estill County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter F -->
-        <h3 id="county-f" class="letter-header">F <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Fayette County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/fayettecountykentucky" target="_blank" rel="noopener">Fayette County</a></td></tr>
-                <tr><td><strong>Fleming County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/flemingcountygreenupcountylewiscounty" target="_blank" rel="noopener">Fleming County</a></td></tr>
-                <tr><td><strong>Floyd County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/floydcountykentuckyhistoryandgenealogynetwork" target="_blank" rel="noopener">Floyd County</a></td></tr>
-                <tr><td><strong>Franklin County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/franklincountykyhistoryandgenealogy" target="_blank" rel="noopener">Franklin County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter G -->
-        <h3 id="county-g" class="letter-header">G <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Gallatin County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boonecampbellgallatinkentoncountykygenealogy" target="_blank" rel="noopener">Gallatin County</a></td></tr>
-                <tr><td><strong>Garrard County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boylecountygarrarcountymercercounty" target="_blank" rel="noopener">Garrard County</a></td></tr>
-                <tr><td><strong>Grant County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/grantcountykentuckyhistoryandgenealogynetworkinc" target="_blank" rel="noopener">Grant County</a></td></tr>
-                <tr><td><strong>Grayson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/graysoncountykentuckyhistoryangenealogynetworkinc" target="_blank" rel="noopener">Grayson County</a></td></tr>
-                <tr><td><strong>Green County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/greencountyhartcountytaylorcounty" target="_blank" rel="noopener">Green County</a></td></tr>
-                <tr><td><strong>Greenup County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/flemingcountygreenupcountylewiscounty" target="_blank" rel="noopener">Greenup County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter H -->
-        <h3 id="county-h" class="letter-header">H <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Hancock County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/hancockcountykentuckyhostoryandgenealogynetwork" target="_blank" rel="noopener">Hancock County</a></td></tr>
-                <tr><td><strong>Hardin County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/hardincountykyhistoryandgenealogy" target="_blank" rel="noopener">Hardin County</a></td></tr>
-                <tr><td><strong>Harlan County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/harlancountykentucky" target="_blank" rel="noopener">Harlan County</a></td></tr>
-                <tr><td><strong>Harrison County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/harrisoncountykentuckyhistoryandgenealogynetworkin" target="_blank" rel="noopener">Harrison County</a></td></tr>
-                <tr><td><strong>Hart County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/greencountyhartcountytaylorcounty" target="_blank" rel="noopener">Hart County</a></td></tr>
-                <tr><td><strong>Henderson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/hendersoncountywebstercountyunioncountygenealogy" target="_blank" rel="noopener">Henderson County</a></td></tr>
-                <tr><td><strong>Henry County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Henry County</a></td></tr>
-                <tr><td><strong>Hopkins County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/hopkinscountymuhlenbergcountymcleancounty" target="_blank" rel="noopener">Hopkins County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter I -->
-        <h3 id="county-i" class="letter-header">I <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <p><em>No county groups listed under this letter.</em></p>
-
-        <!-- County Letter J -->
-        <h3 id="county-j" class="letter-header">J <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Jackson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/jacksoncountykentucky" target="_blank" rel="noopener">Jackson County</a></td></tr>
-                <tr><td><strong>Jefferson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/jeffersoncountykyhistoryandgenealogy" target="_blank" rel="noopener">Jefferson County</a></td></tr>
-                <tr><td><strong>Jessamine County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/jessaminecountykyhistoryandgenealogy" target="_blank" rel="noopener">Jessamine County</a></td></tr>
-                <tr><td><strong>Johnson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/johnsoncountykentuckyhistoryandgenealogynetworkinc" target="_blank" rel="noopener">Johnson County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter K -->
-        <h3 id="county-k" class="letter-header">K <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Kenton County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boonecampbellgallatinkentoncountykygenealogy" target="_blank" rel="noopener">Kenton County</a></td></tr>
-                <tr><td><strong>Knott County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/knottcountykyhistoryandgenalogy" target="_blank" rel="noopener">Knott County</a></td></tr>
-                <tr><td><strong>Knox County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/knoxcountykentuckygenealogy" target="_blank" rel="noopener">Knox County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter L -->
-        <h3 id="county-l" class="letter-header">L <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>LaRue County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/laruecountykentuckyhistoryandgenealogy" target="_blank" rel="noopener">LaRue County</a></td></tr>
-                <tr><td><strong>Laurel County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/laurelcountykentucky" target="_blank" rel="noopener">Laurel County</a></td></tr>
-                <tr><td><strong>Lawrence County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boydcountycartercountylawrencecounty" target="_blank" rel="noopener">Lawrence County</a></td></tr>
-                <tr><td><strong>Lee County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/leecountywolfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Lee County</a></td></tr>
-                <tr><td><strong>Leslie County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/lesliecountykentucky" target="_blank" rel="noopener">Leslie County</a></td></tr>
-                <tr><td><strong>Letcher County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/letchercountykentucky" target="_blank" rel="noopener">Letcher County</a></td></tr>
-                <tr><td><strong>Lewis County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/fleminggreenuplewiscountykyhistoryandgenealogy" target="_blank" rel="noopener">Lewis County</a></td></tr>
-                <tr><td><strong>Lincoln County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/lincolncountykyhistoryandgenealogy" target="_blank" rel="noopener">Lincoln County</a></td></tr>
-                <tr><td><strong>Livingston County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/caldwellcountycrittendencountylivingstoncounty" target="_blank" rel="noopener">Livingston County</a></td></tr>
-                <tr><td><strong>Logan County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/christiancountylogancountoddcountyky" target="_blank" rel="noopener">Logan County</a></td></tr>
-                <tr><td><strong>Lyon County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/callowaycountylyoncountytriggcounty" target="_blank" rel="noopener">Lyon County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter M -->
-        <h3 id="county-m" class="letter-header">M <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                
-                <tr><td><strong>McCreary County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/mccrearycountykentucky" target="_blank" rel="noopener">McCreary County</a></td></tr>
-                <tr><td><strong>McLean County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/hopkinscountymuhlenbergcountymcleancounty" target="_blank" rel="noopener">McLean County</a></td></tr>
-                <tr><td><strong>Madison County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/madisoncountykentucky" target="_blank" rel="noopener">Madison County</a></td></tr>
-                <tr><td><strong>Magoffin County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/magoffincountykentuckyhistoryandgenealogynetworkin" target="_blank" rel="noopener">Magoffin County</a></td></tr>
-                <tr><td><strong>Marion County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/marioncountykentuckyhistoryandgenealogynetworkinc" target="_blank" rel="noopener">Marion County</a></td></tr>
-                <tr><td><strong>Martin County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/pikecountymartincountykentucky" target="_blank" rel="noopener">Martin County</a></td></tr>
-                <tr><td><strong>Mason County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/brackencountymasoncountyrobertsoncounty" target="_blank" rel="noopener">Mason County</a></td></tr>
-                <tr><td><strong>Meade County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/meadecountykentuckyhistoryandgenealogy" target="_blank" rel="noopener">Meade County</a></td></tr>
-                <tr><td><strong>Menifee County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/bathmenifeerowancountykyhistoryandgenealogy" target="_blank" rel="noopener">Menifee County</a></td></tr>
-                <tr><td><strong>Mercer County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/boylecountygarrarcountymercercounty" target="_blank" rel="noopener">Mercer County</a></td></tr>
-                <tr><td><strong>Metcalfe County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/metcalfecountykentucky" target="_blank" rel="noopener">Metcalfe County</a></td></tr>
-                <tr><td><strong>Monroe County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/barrenedmonsonandmonroecountyhistoryandgenealogy" target="_blank" rel="noopener">Monroe County</a></td></tr>
-                <tr><td><strong>Montgomery County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/bourbonmontgomerynicholascountyhistoryandgenealogy" target="_blank" rel="noopener">Montgomery County</a></td></tr>
-                <tr><td><strong>Morgan County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/elliottcountymorgancountykyhistoryandgenealogy" target="_blank" rel="noopener">Morgan County</a></td></tr>
-                <tr><td><strong>Muhlenberg County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/hopkinscountymuhlenbergcountymcleancounty" target="_blank" rel="noopener">Muhlenberg County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter N -->
-        <h3 id="county-n" class="letter-header">N <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Nelson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/nelsoncountykhistoryandgenealogy" target="_blank" rel="noopener">Nelson County</a></td></tr>
-                <tr><td><strong>Nicholas County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/bourbonmontgomerynicholascountyhistoryandgenealogy" target="_blank" rel="noopener">Nicholas County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter O -->
-        <h3 id="county-o" class="letter-header">O <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Ohio County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/butlercountydaviesscountyohiocountykygenealogy" target="_blank" rel="noopener">Ohio County</a></td></tr>
-                <tr><td><strong>Oldham County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/oldhamcountykyhistoryandgenealogy" target="_blank" rel="noopener">Oldham County</a></td></tr>
-                <tr><td><strong>Owen County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Owen County</a></td></tr>
-                <tr><td><strong>Owsley County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/owsleycountykentucky" target="_blank" rel="noopener">Owsley County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter P -->
-        <h3 id="county-p" class="letter-header">P <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Pendleton County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/pendletoncountykhgn" target="_blank" rel="noopener">Pendleton County</a></td></tr>
-                <tr><td><strong>Perry County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/perrycountykentucky" target="_blank" rel="noopener">Perry County</a></td></tr>
-                <tr><td><strong>Pike County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/pikecountymartincountykentucky" target="_blank" rel="noopener">Pike County</a></td></tr>
-                <tr><td><strong>Powell County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/clarkcountyestillcountypowellcountykygenealogy" target="_blank" rel="noopener">Powell County</a></td></tr>
-                <tr><td><strong>Pulaski County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/pulaskicountykentucky" target="_blank" rel="noopener">Pulaski County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter Q -->
-        <h3 id="county-q" class="letter-header">Q <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <p><em>No county groups listed under this letter.</em></p>
-
-        <!-- County Letter R -->
-        <h3 id="county-r" class="letter-header">R <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Robertson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/brackencountymasoncountyrobertsoncounty" target="_blank" rel="noopener">Robertson County</a></td></tr>
-                <tr><td><strong>Rockcastle County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/rockcastlecountykentucky" target="_blank" rel="noopener">Rockcastle County</a></td></tr>
-                <tr><td><strong>Rowan County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/bathmenifeerowancountykyhistoryandgenealogy" target="_blank" rel="noopener">Rowan County</a></td></tr>
-                <tr><td><strong>Russell County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/russellcountykentuckyhistoryandgenealogy" target="_blank" rel="noopener">Russell County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter S -->
-        <h3 id="county-s" class="letter-header">S <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Scott County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/scottcountykentuckyhistoryandgenealogynetworkinc" target="_blank" rel="noopener">Scott County</a></td></tr>
-                <tr><td><strong>Shelby County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/shelbycountykyhistoryandgenealogy" target="_blank" rel="noopener">Shelby County</a></td></tr>
-                <tr><td><strong>Simpson County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/allencountysimpsoncountywarrencounty" target="_blank" rel="noopener">Simpson County</a></td></tr>
-                <tr><td><strong>Spencer County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/spencercountykentucky" target="_blank" rel="noopener">Spencer County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter T -->
-        <h3 id="county-t" class="letter-header">T <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Taylor County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/greencountyhartcountytaylorcounty" target="_blank" rel="noopener">Taylor County</a></td></tr>
-                <tr><td><strong>Todd County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/christiancountylogancountoddcountyky" target="_blank" rel="noopener">Todd County</a></td></tr>
-                <tr><td><strong>Trigg County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/callowaycountylyoncountytriggcounty" target="_blank" rel="noopener">Trigg County</a></td></tr>
-                <tr><td><strong>Trimble County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/carrollcountytrimblecountyhenrycountyowencounty" target="_blank" rel="noopener">Trimble County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter U -->
-        <h3 id="county-u" class="letter-header">U <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Union County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/hendersoncountywebstercountyunioncountygenealogy" target="_blank" rel="noopener">Union County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter V -->
-        <h3 id="county-v" class="letter-header">V <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <p><em>No county groups listed under this letter.</em></p>
-
-        <!-- County Letter W -->
-        <h3 id="county-w" class="letter-header">W <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <table>
-            <thead><tr><th>County</th><th>Group</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Warren County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/allencountysimpsoncountywarrencounty" target="_blank" rel="noopener">Warren County</a></td></tr>
-                <tr><td><strong>Washington County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/andersoncountymarioncountywashingtoncounty" target="_blank" rel="noopener">Washington County</a></td></tr>
-                <tr><td><strong>Wayne County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/waynecountykentucky" target="_blank" rel="noopener">Wayne County</a></td></tr>
-                <tr><td><strong>Webster County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/hendersoncountywebstercountyunioncountygenealogy" target="_blank" rel="noopener">Webster County</a></td></tr>
-                <tr><td><strong>Whitley County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/whitleycountykentucky" target="_blank" rel="noopener">Whitley County</a></td></tr>
-                <tr><td><strong>Wolfe County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/leecountywolfecountykyhistoryandgenealogy" target="_blank" rel="noopener">Wolfe County</a></td></tr>
-                <tr><td><strong>Woodford County Kentucky History and Genealogy</strong></td><td><a href="https://www.facebook.com/groups/woodfordcountykyhistoryandgenealogy" target="_blank" rel="noopener">Woodford County</a></td></tr>
-            </tbody>
-        </table>
-
-        <!-- County Letter X -->
-        <h3 id="county-x" class="letter-header">X <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <p><em>No county groups listed under this letter.</em></p>
-
-        <!-- County Letter Y -->
-        <h3 id="county-y" class="letter-header">Y <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <p><em>No county groups listed under this letter.</em></p>
-
-        <!-- County Letter Z -->
-        <h3 id="county-z" class="letter-header">Z <a href="#" class="top-link">Back to Top ↑</a></h3>
-        <p><em>No county groups listed under this letter.</em></p>
-    </section>
-
-     <!-- SECTION 2: STATEWIDE GROUPS -->
-    <section>
-        <h2>Statewide Groups</h2>
-        <p>Join our statewide communities, open to researchers and members across Kentucky and beyond:</p>
-        <ul>
-            <li><a href="https://www.facebook.com/groups/kentuckhistoryandgenealogynetwork" target="_blank" rel="noopener">Kentucky History and Genealogy Network (Private Group)</a></li>
-            <li><a href="https://www.facebook.com/groups/kentuckygenealogyrecords" target="_blank" rel="noopener">Genealogy Records Kentucky</a></li>
-            <li><a href="https://www.facebook.com/groups/586924011435193" target="_blank" rel="noopener">Genealogical DNA</a></li>
-            <li><a href="https://www.facebook.com/groups/cemeteriesofkentucky" target="_blank" rel="noopener">Cemeteries Kentucky</a></li>
-            <li><a href="https://www.facebook.com/groups/kentuckytalltales" target="_blank" rel="noopener">Kentucky Tall Tales and Folklore</a></li>
-        </ul>
-    </section>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const nav = document.querySelector(".site-nav");
-            const toggle = document.querySelector(".site-nav-toggle");
-            const links = document.querySelector(".site-nav-links");
-            if (!nav || !toggle || !links) {
-                return;
-            }
-            toggle.addEventListener("click", function () {
-                const isOpen = nav.classList.toggle("is-open");
-                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-            });
-            links.querySelectorAll("a").forEach(function (link) {
-                link.addEventListener("click", function () {
-                    nav.classList.remove("is-open");
-                    toggle.setAttribute("aria-expanded", "false");
-                });
-            });
-        });
-    </script>
+<section>
+<h2>Kentucky&rsquo;s 120 Counties</h2>
+<div class="find"><label for="county-find" style="font-weight:700">Find a county:</label><input type="search" id="county-find" placeholder="Type a county name" autocomplete="off"></div>
+<p class="status" id="find-status" role="status" aria-live="polite"></p>
+<div class="jump-bar" id="jump-bar"><a href="#county-a">A</a> <a href="#county-b">B</a> <a href="#county-c">C</a> <a href="#county-d">D</a> <a href="#county-e">E</a> <a href="#county-f">F</a> <a href="#county-g">G</a> <a href="#county-h">H</a> <span aria-hidden="true">I</span> <a href="#county-j">J</a> <a href="#county-k">K</a> <a href="#county-l">L</a> <a href="#county-m">M</a> <a href="#county-n">N</a> <a href="#county-o">O</a> <a href="#county-p">P</a> <span aria-hidden="true">Q</span> <a href="#county-r">R</a> <a href="#county-s">S</a> <a href="#county-t">T</a> <a href="#county-u">U</a> <span aria-hidden="true">V</span> <a href="#county-w">W</a> <span aria-hidden="true">X</span> <span aria-hidden="true">Y</span> <span aria-hidden="true">Z</span></div>
+<h3 class="letter" id="county-a">A <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="adair"><a href="counties/adair/">Adair County, KHGN, Inc.<span>County seat: Columbia</span></a></li>
+<li data-county="allen"><a href="counties/allen/">Allen County, KHGN, Inc.<span>County seat: Scottsville</span></a></li>
+<li data-county="anderson"><a href="counties/anderson/">Anderson County, KHGN, Inc.<span>County seat: Lawrenceburg</span></a></li>
+</ul>
+<h3 class="letter" id="county-b">B <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="ballard"><a href="counties/ballard/">Ballard County, KHGN, Inc.<span>County seat: Wickliffe</span></a></li>
+<li data-county="barren"><a href="counties/barren/">Barren County, KHGN, Inc.<span>County seat: Glasgow</span></a></li>
+<li data-county="bath"><a href="counties/bath/">Bath County, KHGN, Inc.<span>County seat: Owingsville</span></a></li>
+<li data-county="bell"><a href="counties/bell/">Bell County, KHGN, Inc.<span>County seat: Pineville</span></a></li>
+<li data-county="boone"><a href="counties/boone/">Boone County, KHGN, Inc.<span>County seat: Burlington</span></a></li>
+<li data-county="bourbon"><a href="counties/bourbon/">Bourbon County, KHGN, Inc.<span>County seat: Paris</span></a></li>
+<li data-county="boyd"><a href="counties/boyd/">Boyd County, KHGN, Inc.<span>County seat: Catlettsburg</span></a></li>
+<li data-county="boyle"><a href="counties/boyle/">Boyle County, KHGN, Inc.<span>County seat: Danville</span></a></li>
+<li data-county="bracken"><a href="counties/bracken/">Bracken County, KHGN, Inc.<span>County seat: Brooksville</span></a></li>
+<li data-county="breathitt"><a href="counties/breathitt/">Breathitt County, KHGN, Inc.<span>County seat: Jackson</span></a></li>
+<li data-county="breckinridge"><a href="counties/breckinridge/">Breckinridge County, KHGN, Inc.<span>County seat: Hardinsburg</span></a></li>
+<li data-county="bullitt"><a href="counties/bullitt/">Bullitt County, KHGN, Inc.<span>County seat: Shepherdsville</span></a></li>
+<li data-county="butler"><a href="counties/butler/">Butler County, KHGN, Inc.<span>County seat: Morgantown</span></a></li>
+</ul>
+<h3 class="letter" id="county-c">C <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="caldwell"><a href="counties/caldwell/">Caldwell County, KHGN, Inc.<span>County seat: Princeton</span></a></li>
+<li data-county="calloway"><a href="counties/calloway/">Calloway County, KHGN, Inc.<span>County seat: Murray</span></a></li>
+<li data-county="campbell"><a href="counties/campbell/">Campbell County, KHGN, Inc.<span>County seat: Alexandria and Newport</span></a></li>
+<li data-county="carlisle"><a href="counties/carlisle/">Carlisle County, KHGN, Inc.<span>County seat: Bardwell</span></a></li>
+<li data-county="carroll"><a href="counties/carroll/">Carroll County, KHGN, Inc.<span>County seat: Carrollton</span></a></li>
+<li data-county="carter"><a href="counties/carter/">Carter County, KHGN, Inc.<span>County seat: Grayson</span></a></li>
+<li data-county="casey"><a href="counties/casey/">Casey County, KHGN, Inc.<span>County seat: Liberty</span></a></li>
+<li data-county="christian"><a href="counties/christian/">Christian County, KHGN, Inc.<span>County seat: Hopkinsville</span></a></li>
+<li data-county="clark"><a href="counties/clark/">Clark County, KHGN, Inc.<span>County seat: Winchester</span></a></li>
+<li data-county="clay"><a href="counties/clay/">Clay County, KHGN, Inc.<span>County seat: Manchester</span></a></li>
+<li data-county="clinton"><a href="counties/clinton/">Clinton County, KHGN, Inc.<span>County seat: Albany</span></a></li>
+<li data-county="crittenden"><a href="counties/crittenden/">Crittenden County, KHGN, Inc.<span>County seat: Marion</span></a></li>
+<li data-county="cumberland"><a href="counties/cumberland/">Cumberland County, KHGN, Inc.<span>County seat: Burkesville</span></a></li>
+</ul>
+<h3 class="letter" id="county-d">D <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="daviess"><a href="counties/daviess/">Daviess County, KHGN, Inc.<span>County seat: Owensboro</span></a></li>
+</ul>
+<h3 class="letter" id="county-e">E <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="edmonson"><a href="counties/edmonson/">Edmonson County, KHGN, Inc.<span>County seat: Brownsville</span></a></li>
+<li data-county="elliott"><a href="counties/elliott/">Elliott County, KHGN, Inc.<span>County seat: Sandy Hook</span></a></li>
+<li data-county="estill"><a href="counties/estill/">Estill County, KHGN, Inc.<span>County seat: Irvine</span></a></li>
+</ul>
+<h3 class="letter" id="county-f">F <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="fayette"><a href="counties/fayette/">Fayette County, KHGN, Inc.<span>County seat: Lexington</span></a></li>
+<li data-county="fleming"><a href="counties/fleming/">Fleming County, KHGN, Inc.<span>County seat: Flemingsburg</span></a></li>
+<li data-county="floyd"><a href="counties/floyd/">Floyd County, KHGN, Inc.<span>County seat: Prestonsburg</span></a></li>
+<li data-county="franklin"><a href="counties/franklin/">Franklin County, KHGN, Inc.<span>County seat: Frankfort</span></a></li>
+<li data-county="fulton"><a href="counties/fulton/">Fulton County, KHGN, Inc.<span>County seat: Hickman</span></a></li>
+</ul>
+<h3 class="letter" id="county-g">G <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="gallatin"><a href="counties/gallatin/">Gallatin County, KHGN, Inc.<span>County seat: Warsaw</span></a></li>
+<li data-county="garrard"><a href="counties/garrard/">Garrard County, KHGN, Inc.<span>County seat: Lancaster</span></a></li>
+<li data-county="grant"><a href="counties/grant/">Grant County, KHGN, Inc.<span>County seat: Williamstown</span></a></li>
+<li data-county="graves"><a href="counties/graves/">Graves County, KHGN, Inc.<span>County seat: Mayfield</span></a></li>
+<li data-county="grayson"><a href="counties/grayson/">Grayson County, KHGN, Inc.<span>County seat: Leitchfield</span></a></li>
+<li data-county="green"><a href="counties/green/">Green County, KHGN, Inc.<span>County seat: Greensburg</span></a></li>
+<li data-county="greenup"><a href="counties/greenup/">Greenup County, KHGN, Inc.<span>County seat: Greenup</span></a></li>
+</ul>
+<h3 class="letter" id="county-h">H <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="hancock"><a href="counties/hancock/">Hancock County, KHGN, Inc.<span>County seat: Hawesville</span></a></li>
+<li data-county="hardin"><a href="counties/hardin/">Hardin County, KHGN, Inc.<span>County seat: Elizabethtown</span></a></li>
+<li data-county="harlan"><a href="counties/harlan/">Harlan County, KHGN, Inc.<span>County seat: Harlan</span></a></li>
+<li data-county="harrison"><a href="counties/harrison/">Harrison County, KHGN, Inc.<span>County seat: Cynthiana</span></a></li>
+<li data-county="hart"><a href="counties/hart/">Hart County, KHGN, Inc.<span>County seat: Munfordville</span></a></li>
+<li data-county="henderson"><a href="counties/henderson/">Henderson County, KHGN, Inc.<span>County seat: Henderson</span></a></li>
+<li data-county="henry"><a href="counties/henry/">Henry County, KHGN, Inc.<span>County seat: New Castle</span></a></li>
+<li data-county="hickman"><a href="counties/hickman/">Hickman County, KHGN, Inc.<span>County seat: Clinton</span></a></li>
+<li data-county="hopkins"><a href="counties/hopkins/">Hopkins County, KHGN, Inc.<span>County seat: Madisonville</span></a></li>
+</ul>
+<h3 class="letter" id="county-j">J <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="jackson"><a href="counties/jackson/">Jackson County, KHGN, Inc.<span>County seat: McKee</span></a></li>
+<li data-county="jefferson"><a href="counties/jefferson/">Jefferson County, KHGN, Inc.<span>County seat: Louisville</span></a></li>
+<li data-county="jessamine"><a href="counties/jessamine/">Jessamine County, KHGN, Inc.<span>County seat: Nicholasville</span></a></li>
+<li data-county="johnson"><a href="counties/johnson/">Johnson County, KHGN, Inc.<span>County seat: Paintsville</span></a></li>
+</ul>
+<h3 class="letter" id="county-k">K <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="kenton"><a href="counties/kenton/">Kenton County, KHGN, Inc.<span>County seat: Covington and Independence</span></a></li>
+<li data-county="knott"><a href="counties/knott/">Knott County, KHGN, Inc.<span>County seat: Hindman</span></a></li>
+<li data-county="knox"><a href="counties/knox/">Knox County, KHGN, Inc.<span>County seat: Barbourville</span></a></li>
+</ul>
+<h3 class="letter" id="county-l">L <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="larue"><a href="counties/larue/">LaRue County, KHGN, Inc.<span>County seat: Hodgenville</span></a></li>
+<li data-county="laurel"><a href="counties/laurel/">Laurel County, KHGN, Inc.<span>County seat: London</span></a></li>
+<li data-county="lawrence"><a href="counties/lawrence/">Lawrence County, KHGN, Inc.<span>County seat: Louisa</span></a></li>
+<li data-county="lee"><a href="counties/lee/">Lee County, KHGN, Inc.<span>County seat: Beattyville</span></a></li>
+<li data-county="leslie"><a href="counties/leslie/">Leslie County, KHGN, Inc.<span>County seat: Hyden</span></a></li>
+<li data-county="letcher"><a href="counties/letcher/">Letcher County, KHGN, Inc.<span>County seat: Whitesburg</span></a></li>
+<li data-county="lewis"><a href="counties/lewis/">Lewis County, KHGN, Inc.<span>County seat: Vanceburg</span></a></li>
+<li data-county="lincoln"><a href="counties/lincoln/">Lincoln County, KHGN, Inc.<span>County seat: Stanford</span></a></li>
+<li data-county="livingston"><a href="counties/livingston/">Livingston County, KHGN, Inc.<span>County seat: Smithland</span></a></li>
+<li data-county="logan"><a href="counties/logan/">Logan County, KHGN, Inc.<span>County seat: Russellville</span></a></li>
+<li data-county="lyon"><a href="counties/lyon/">Lyon County, KHGN, Inc.<span>County seat: Eddyville</span></a></li>
+</ul>
+<h3 class="letter" id="county-m">M <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="madison"><a href="counties/madison/">Madison County, KHGN, Inc.<span>County seat: Richmond</span></a></li>
+<li data-county="magoffin"><a href="counties/magoffin/">Magoffin County, KHGN, Inc.<span>County seat: Salyersville</span></a></li>
+<li data-county="marion"><a href="counties/marion/">Marion County, KHGN, Inc.<span>County seat: Lebanon</span></a></li>
+<li data-county="marshall"><a href="counties/marshall/">Marshall County, KHGN, Inc.<span>County seat: Benton</span></a></li>
+<li data-county="martin"><a href="counties/martin/">Martin County, KHGN, Inc.<span>County seat: Inez</span></a></li>
+<li data-county="mason"><a href="counties/mason/">Mason County, KHGN, Inc.<span>County seat: Maysville</span></a></li>
+<li data-county="mccracken"><a href="counties/mccracken/">McCracken County, KHGN, Inc.<span>County seat: Paducah</span></a></li>
+<li data-county="mccreary"><a href="counties/mccreary/">McCreary County, KHGN, Inc.<span>County seat: Whitley City</span></a></li>
+<li data-county="mclean"><a href="counties/mclean/">McLean County, KHGN, Inc.<span>County seat: Calhoun</span></a></li>
+<li data-county="meade"><a href="counties/meade/">Meade County, KHGN, Inc.<span>County seat: Brandenburg</span></a></li>
+<li data-county="menifee"><a href="counties/menifee/">Menifee County, KHGN, Inc.<span>County seat: Frenchburg</span></a></li>
+<li data-county="mercer"><a href="counties/mercer/">Mercer County, KHGN, Inc.<span>County seat: Harrodsburg</span></a></li>
+<li data-county="metcalfe"><a href="counties/metcalfe/">Metcalfe County, KHGN, Inc.<span>County seat: Edmonton</span></a></li>
+<li data-county="monroe"><a href="counties/monroe/">Monroe County, KHGN, Inc.<span>County seat: Tompkinsville</span></a></li>
+<li data-county="montgomery"><a href="counties/montgomery/">Montgomery County, KHGN, Inc.<span>County seat: Mount Sterling</span></a></li>
+<li data-county="morgan"><a href="counties/morgan/">Morgan County, KHGN, Inc.<span>County seat: West Liberty</span></a></li>
+<li data-county="muhlenberg"><a href="counties/muhlenberg/">Muhlenberg County, KHGN, Inc.<span>County seat: Greenville</span></a></li>
+</ul>
+<h3 class="letter" id="county-n">N <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="nelson"><a href="counties/nelson/">Nelson County, KHGN, Inc.<span>County seat: Bardstown</span></a></li>
+<li data-county="nicholas"><a href="counties/nicholas/">Nicholas County, KHGN, Inc.<span>County seat: Carlisle</span></a></li>
+</ul>
+<h3 class="letter" id="county-o">O <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="ohio"><a href="counties/ohio/">Ohio County, KHGN, Inc.<span>County seat: Hartford</span></a></li>
+<li data-county="oldham"><a href="counties/oldham/">Oldham County, KHGN, Inc.<span>County seat: La Grange</span></a></li>
+<li data-county="owen"><a href="counties/owen/">Owen County, KHGN, Inc.<span>County seat: Owenton</span></a></li>
+<li data-county="owsley"><a href="counties/owsley/">Owsley County, KHGN, Inc.<span>County seat: Booneville</span></a></li>
+</ul>
+<h3 class="letter" id="county-p">P <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="pendleton"><a href="counties/pendleton/">Pendleton County, KHGN, Inc.<span>County seat: Falmouth</span></a></li>
+<li data-county="perry"><a href="counties/perry/">Perry County, KHGN, Inc.<span>County seat: Hazard</span></a></li>
+<li data-county="pike"><a href="counties/pike/">Pike County, KHGN, Inc.<span>County seat: Pikeville</span></a></li>
+<li data-county="powell"><a href="counties/powell/">Powell County, KHGN, Inc.<span>County seat: Stanton</span></a></li>
+<li data-county="pulaski"><a href="counties/pulaski/">Pulaski County, KHGN, Inc.<span>County seat: Somerset</span></a></li>
+</ul>
+<h3 class="letter" id="county-r">R <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="robertson"><a href="counties/robertson/">Robertson County, KHGN, Inc.<span>County seat: Mount Olivet</span></a></li>
+<li data-county="rockcastle"><a href="counties/rockcastle/">Rockcastle County, KHGN, Inc.<span>County seat: Mount Vernon</span></a></li>
+<li data-county="rowan"><a href="counties/rowan/">Rowan County, KHGN, Inc.<span>County seat: Morehead</span></a></li>
+<li data-county="russell"><a href="counties/russell/">Russell County, KHGN, Inc.<span>County seat: Jamestown</span></a></li>
+</ul>
+<h3 class="letter" id="county-s">S <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="scott"><a href="counties/scott/">Scott County, KHGN, Inc.<span>County seat: Georgetown</span></a></li>
+<li data-county="shelby"><a href="counties/shelby/">Shelby County, KHGN, Inc.<span>County seat: Shelbyville</span></a></li>
+<li data-county="simpson"><a href="counties/simpson/">Simpson County, KHGN, Inc.<span>County seat: Franklin</span></a></li>
+<li data-county="spencer"><a href="counties/spencer/">Spencer County, KHGN, Inc.<span>County seat: Taylorsville</span></a></li>
+</ul>
+<h3 class="letter" id="county-t">T <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="taylor"><a href="counties/taylor/">Taylor County, KHGN, Inc.<span>County seat: Campbellsville</span></a></li>
+<li data-county="todd"><a href="counties/todd/">Todd County, KHGN, Inc.<span>County seat: Elkton</span></a></li>
+<li data-county="trigg"><a href="counties/trigg/">Trigg County, KHGN, Inc.<span>County seat: Cadiz</span></a></li>
+<li data-county="trimble"><a href="counties/trimble/">Trimble County, KHGN, Inc.<span>County seat: Bedford</span></a></li>
+</ul>
+<h3 class="letter" id="county-u">U <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="union"><a href="counties/union/">Union County, KHGN, Inc.<span>County seat: Morganfield</span></a></li>
+</ul>
+<h3 class="letter" id="county-w">W <a class="top-link" href="#top">Back to top ↑</a></h3>
+<ul class="county-list">
+<li data-county="warren"><a href="counties/warren/">Warren County, KHGN, Inc.<span>County seat: Bowling Green</span></a></li>
+<li data-county="washington"><a href="counties/washington/">Washington County, KHGN, Inc.<span>County seat: Springfield</span></a></li>
+<li data-county="wayne"><a href="counties/wayne/">Wayne County, KHGN, Inc.<span>County seat: Monticello</span></a></li>
+<li data-county="webster"><a href="counties/webster/">Webster County, KHGN, Inc.<span>County seat: Dixon</span></a></li>
+<li data-county="whitley"><a href="counties/whitley/">Whitley County, KHGN, Inc.<span>County seat: Williamsburg</span></a></li>
+<li data-county="wolfe"><a href="counties/wolfe/">Wolfe County, KHGN, Inc.<span>County seat: Campton</span></a></li>
+<li data-county="woodford"><a href="counties/woodford/">Woodford County, KHGN, Inc.<span>County seat: Versailles</span></a></li>
+</ul>
+</section>
+<p class="small-note">KHGN, Inc. is independent of, and not affiliated with, any county historical or genealogical society. We encourage you to support your local society.</p>
+<script>document.addEventListener("DOMContentLoaded",function(){var n=document.querySelector(".site-nav"),t=document.querySelector(".site-nav-toggle"),l=document.querySelector(".site-nav-links");if(!n||!t||!l)return;t.addEventListener("click",function(){var o=n.classList.toggle("is-open");t.setAttribute("aria-expanded",o?"true":"false");});l.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){n.classList.remove("is-open");t.setAttribute("aria-expanded","false");});});});</script>
+<script>
+(function(){var i=document.getElementById('county-find'),s=document.getElementById('find-status');if(!i)return;
+i.addEventListener('input',function(){var q=i.value.trim().toLowerCase().replace(/\s*county.*$/,''),n=0;
+document.querySelectorAll('li[data-county]').forEach(function(li){var h=!q||li.getAttribute('data-county').indexOf(q)===0;li.style.display=h?'':'none';if(h)n++;});
+document.querySelectorAll('.letter').forEach(function(h){var u=h.nextElementSibling,a=u.querySelectorAll('li[data-county]:not([style*="none"])').length;h.style.display=a?'':'none';u.style.display=a?'':'none';});
+document.getElementById('jump-bar').style.display=q?'none':'';s.textContent=q?(n?n+' matching '+(n===1?'county':'counties'):'No county matches that name.'):'';});})();
+</script>
 </body>
 </html>

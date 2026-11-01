@@ -1,0 +1,17 @@
+# KHGN statewide ticker. Shown on any county page whose own ticker.txt is empty.
+# Format, one item per line:  Label | Text | Link   (the link is optional)
+# Lines starting with # are notes and are ignored.
+Core Training | The Tipple Trial: Join the caravan: the core skills every KHGN volunteer needs. | /tipple-trial.html
+Core Training | Flagging and Welcoming: Learn to flag rule-breaking posts and welcome new members. | /community-steward-flagging.html
+First Steps | Getting Started in Genealogy: Start with your family and follow the trail to original records. | /getting-started-genealogy.html
+First Steps | Rate Your Research: See which star rating your evidence reaches. | /rate-your-research.html
+Record Field Guides | The Census, 1790 to 1950: What every census asked, decade by decade, with Kentucky notes. | /census-field-guide.html
+Record Field Guides | Death Records: What a certificate proves, from coal camps to fraternal lodges. | /death-records-field-guide.html
+Record Field Guides | Cemeteries: Read the stones, and record worn inscriptions with raking light. | /cemeteries-field-guide.html
+Practice Your Skills | The KHGN Evidence Framework: The full structure for proving a claim, step by step. | /khgn_suggested_trial_framework.html
+Practice Your Skills | Same Name, Wrong Man: Two men, same name, same county. Can you pick the right one? | /khgn_case_study_1_same_name.html
+Practice Your Skills | Build Your Case: Apply the framework to your own family history. | /khgn_build_your_case.html
+Practice Your Skills | Working With AI Responsibly: Where AI helps, where it misleads, and why people verify. | /working-with-ai.html
+Story Trails | The Road to Kentucky: From an agent's promise in Ireland to a Kentucky homestead. | /khgn_road_to_kentucky.html
+Dignified History | Roads Between the Stations: How Kentucky's early turnpikes were built, and who built them. | /khgn_roads_between_stations.html
+Trail Routes | Volunteer with KHGN: Choose your route up the mountain. Here's how to enroll. | /game-portal.html#enroll
