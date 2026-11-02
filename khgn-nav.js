@@ -17,7 +17,7 @@
   var MENU = [
     { label: "Home",                  href: "/index.html",           match: ["", "index.html"] },
     { label: "County Hubs",           href: "/socialmedia.html",     match: ["socialmedia.html", "counties"] },
-    { label: "Volunteer Recruitment", href: "/recruiting.html",      match: ["recruiting.html"] },
+    { label: "Volunteer Recruitment", href: "/get-involved.html",    match: ["get-involved.html", "recruiting.html"] },
     { label: "Donation Portal",       href: "/donation-portal.html", match: ["donation-portal.html"] },
     { label: "Volunteer Training",    href: "/training.html",        match: ["training.html"] },
     { label: "Trailhead Training",    href: "/game-portal.html",     match: ["game-portal.html"] }
