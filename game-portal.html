@@ -6,8 +6,9 @@
 <noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui, sans-serif;color:#EDE0C8;background:#2B211A;text-align:center;}</style></noscript>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Trailhead: Interactive Core Training - KHGN Inc.</title>
-    <meta name="description" content="Free interactive genealogy training from KHGN Inc. Start with core skills, set out on the journey toward volunteer leadership, and explore research practice and Kentucky history.">
+    <title>The Trailhead: Interactive Core Training - KHGN, Inc.</title>
+    <link rel="canonical" href="https://khgn-inc.org/game-portal.html">
+    <meta name="description" content="Free interactive genealogy training from KHGN, Inc. Start with core skills, set out on the journey toward volunteer leadership, and explore research practice and Kentucky history.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -372,24 +373,8 @@
     </style>
 </head>
 <body class="page-games">
-    <nav class="site-nav" aria-label="Global">
-        <div class="site-nav-inner">
-            <a href="index.html" class="site-nav-brand">KHGN Inc.</a>
-            <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="site-nav-toggle-bar"></span>
-                <span class="site-nav-toggle-bar"></span>
-                <span class="site-nav-toggle-bar"></span>
-            </button>
-            <div class="site-nav-links">
-                <a href="index.html">Home</a>
-                <a href="socialmedia.html">Social Media</a>
-                <a href="recruiting.html">Volunteer Recruitment</a>
-                <a href="donation-portal.html">Donation Portal</a>
-                <a href="training.html">Volunteer Training</a>
-                <a href="game-portal.html">Trailhead Training</a>
-            </div>
-        </div>
-    </nav>
+    <div id="khgn-nav"></div>
+<script src="/khgn-nav.js"></script>
 
     <div class="hero">
         <div class="eyebrow">Interactive Core Training</div>
@@ -507,10 +492,10 @@
                     </div>
                 </li>
                 <li class="jstop">
-                    <div class="jicon" aria-hidden="true">⚖️</div>
+                    <div class="jicon" aria-hidden="true">🗺️</div>
                     <div class="jbody">
                         <h3>Proving Your Claim <span class="jfor">Recommended for every traveler</span></h3>
-                        <p>Every settler had to prove their claim, and many had to defend it in court. Learn to weigh evidence the way a court weighs testimony before you choose your route.</p>
+                        <p>Every settler had to prove their claim before it could be granted. Learn to weigh evidence carefully, testing each record the way the land office checked every claim, before you choose your route.</p>
                         <a href="proving-your-claim.html" class="game-btn">Learn to Prove a Claim &rarr;</a>
                     </div>
                 </li>
@@ -583,21 +568,21 @@
                 <div class="category-dot teal"></div>
                 <div>
                     <div class="category-title">Proving Your Claim</div>
-                    <p class="category-desc">Research skills: weigh evidence like a court and prove your own family's claim</p>
+                    <p class="category-desc">Research skills: weigh evidence carefully and prove your own family's claim</p>
                 </div>
             </div>
             <a class="claim-feature" href="proving-your-claim.html">
-                <div class="claim-feature-icon" aria-hidden="true">⚖️</div>
+                <div class="claim-feature-icon" aria-hidden="true">🗺️</div>
                 <div class="claim-feature-body">
                     <div class="game-title">First Steps and Practice Your Skills</div>
-                    <p>Kentucky's early settlers often had to prove their land claims in court. Genealogists prove family claims the same way. Start with the basics, learn the KHGN Evidence Framework, practice on a real case, then build your own.</p>
+                    <p>Kentucky's early settlers had to prove their land claims before they could be granted. Genealogists prove family claims the same way. Start with the basics, learn the KHGN Evidence Framework, practice on a real case, then build your own.</p>
                     <div class="claim-cats">
                         <div><span class="claim-cat">First Steps</span>
                             <ul><li>🌱 Getting Started in Genealogy</li></ul>
                         </div>
                         <div><span class="claim-cat">Practice Your Skills</span>
                             <ul>
-                                <li>⚖️ 1. The KHGN Evidence Framework</li>
+                                <li>🧭 1. The KHGN Evidence Framework</li>
                                 <li>🔍 2. Same Name, Wrong Man</li>
                                 <li>📝 3. Build Your Case</li>
                                 <li>🤖 4. Working With AI Responsibly</li>
@@ -664,30 +649,11 @@
                 New content is sorted into the categories above based on what it teaches: core skills, research methods for proving a claim, historical stories, or serious history that stands on its own. Volunteer leadership training continues beyond the Trailhead, on the Trail Routes and the Mountain Top. Training for committee, Director, or Officer service does not guarantee any position; those seats are filled by vote of the Board.
                 New additions are made regularly, so check back often.
             </p>
-            <p class="trademark">Facebook is a trademark of Meta Platforms, Inc. KHGN Inc. is not affiliated with or endorsed by Meta.</p>
+            <p class="trademark">Facebook is a trademark of Meta Platforms, Inc. KHGN, Inc. is not affiliated with or endorsed by Meta.</p>
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const nav = document.querySelector(".site-nav");
-            const toggle = document.querySelector(".site-nav-toggle");
-            const links = document.querySelector(".site-nav-links");
-            if (!nav || !toggle || !links) {
-                return;
-            }
-            toggle.addEventListener("click", function () {
-                const isOpen = nav.classList.toggle("is-open");
-                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-            });
-            links.querySelectorAll("a").forEach(function (link) {
-                link.addEventListener("click", function () {
-                    nav.classList.remove("is-open");
-                    toggle.setAttribute("aria-expanded", "false");
-                });
-            });
-        });
-    </script>
+    
 
     <script>
         (function () {

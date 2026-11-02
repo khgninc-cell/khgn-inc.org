@@ -5,7 +5,7 @@
 <noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui,sans-serif}</style></noscript>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case Study: Same Name, Wrong Man</title>
+<title>Practice Trail: Same Name, Wrong Man - KHGN Inc.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -18,10 +18,11 @@
   body{
     margin:0; background:radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
     color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
-    display:flex; justify-content:center; padding:28px 16px 60px;
+    display:block; padding:0 0 60px;
   }
-  .wrap{ width:100%; max-width:760px; }
+  .wrap{ width:100%; max-width:760px; margin:28px auto 0; padding:0 16px; box-sizing:border-box; }
   .back-link{ display:inline-block; color:var(--brass-bright); text-decoration:none; font-size:13px; font-weight:600; margin-bottom:16px; }
+  .back-link:hover{ text-decoration:underline; }
   .masthead{ text-align:center; margin-bottom:18px; }
   .masthead .eyebrow{ font-size:12.5px; letter-spacing:.04em; color:var(--brass-bright); text-transform:uppercase; margin-bottom:6px; }
   .masthead h1{ font-family:'Rye', serif; font-weight:400; font-size:clamp(24px,4.5vw,34px); margin:0; text-shadow:0 2px 0 var(--walnut-deep); }
@@ -40,6 +41,8 @@
     box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .35s ease;
   }
   @keyframes rise{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){ .card{ animation:none; } }
+  @media (max-width:560px){ .card{ padding:24px 18px; } }
   .card h2{ font-family:'Rye', serif; font-weight:400; font-size:22px; margin:0 0 12px; }
   .card p{ font-size:15px; line-height:1.65; margin:0 0 14px; }
   .card p.legend{ font-style:italic; background:rgba(0,0,0,0.05); padding:12px 14px; border-left:4px solid var(--brass); border-radius:6px; }
@@ -50,6 +53,7 @@
   }
 
   .candidate-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
+  @media (max-width:560px){ .candidate-row{ grid-template-columns:1fr; } }
   .candidate{
     border:2px solid #D8C7A3; border-radius:10px; padding:14px; cursor:pointer; transition:all .15s ease;
   }
@@ -108,41 +112,44 @@
     background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
     padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
   }
+  button:focus-visible, a:focus-visible, .candidate:focus-visible, .evidence-card:focus-visible{ outline:3px solid var(--brass-bright); outline-offset:2px; }
 
-  .verdict-badge{
+  .result-badge{
     text-align:center; font-family:'Rye', serif; font-size:30px; padding:18px; border-radius:12px; margin-bottom:16px;
   }
-  .verdict-badge.proven{ background:#DCE9D6; color:#3C5533; }
-  .verdict-badge.probable{ background:#E9E3C9; color:#6B5A20; }
-  .verdict-badge.possible{ background:#FBF0D9; color:#7A5A10; }
-  .verdict-badge.disproven{ background:#F2D9D4; color:#7A2E23; }
+  .result-badge.proven{ background:#DCE9D6; color:#3C5533; }
+  .result-badge.probable{ background:#E9E3C9; color:#6B5A20; }
+  .result-badge.possible{ background:#FBF0D9; color:#7A5A10; }
+  .result-badge.disproven{ background:#F2D9D4; color:#7A2E23; }
 
   .next-step-box{
     background:rgba(0,0,0,0.04); border-radius:8px; padding:14px 16px; margin-top:16px; font-size:13.5px; line-height:1.6;
   }
   .next-step-box a{ color:var(--rust); font-weight:700; }
 
-  .footer-note{ text-align:center; font-size:11.5px; color:var(--parchment-dim); opacity:.6; margin-top:22px; line-height:1.5; }
+  .footer-note{ text-align:center; font-size:11.5px; color:var(--parchment-dim); opacity:.75; margin-top:22px; line-height:1.5; }
 </style>
 </head>
 <body>
+<div id="khgn-nav"></div>
+<script src="/khgn-nav.js"></script>
 <div class="wrap">
-  <a class="back-link" href="game-portal.html">&larr; Back to Green Pasture</a>
+  <a class="back-link" href="proving-your-claim.html">&larr; Back to Proving Your Claim</a>
   <div class="masthead">
-    <div class="eyebrow">Practice Your Skills · Case 1 of 4</div>
+    <div class="eyebrow">Practice Your Skills · Practice Trail 1</div>
     <h1>Same Name, Wrong Man</h1>
-    <div class="sub">A genealogical proof-argument workbench</div>
+    <div class="sub">Practice the KHGN Evidence Framework on a real-world puzzle</div>
   </div>
   <div class="stepper" id="stepper"></div>
   <div id="stage"></div>
   <div class="footer-note">
-    Kentucky History &amp; Genealogy Network, Inc. — this exercise builds the habit of honest proof argument.
+    Kentucky History &amp; Genealogy Network, Inc. · This exercise builds the habit of honest proof.
     It does not teach citation formatting, paleography, or jurisdiction-specific record law.
   </div>
 </div>
 
 <script>
-const STEPS = ["Hypothesis", "Evidence", "Cross-Examination", "Verdict"];
+const STEPS = ["The Fork", "The Trail", "Challenges", "The Summit"];
 let currentStep = 0;
 
 const CANDIDATES = {
@@ -179,19 +186,19 @@ const EVIDENCE = [
 const CHALLENGES = [
   {
     id: "identity",
-    text: "A second William Hartley — born around the same time, in neighboring Garrard County — also has a documented marriage and family. How do you know your evidence is actually about your man, and not him?",
+    text: "A second William Hartley, born around the same time in neighboring Garrard County, also has a documented marriage and family. How do you know your records are about your man, and not him? This is the classic wrong trail.",
     correctMove: "resolve",
     correctEvidenceIds: ["pension", "will"]
   },
   {
     id: "weaktax",
-    text: "The 1830 Tax List you may have cited lists only a name and acreage — no family details, no unique identifiers. Does this actually prove which William Hartley it refers to?",
+    text: "The 1830 Tax List you may have chosen lists only a name and acreage, with no family details and no unique identifiers. Does it actually show which William Hartley it refers to?",
     correctMove: "concede",
     relatedEvidenceId: "taxlist"
   },
   {
     id: "findagraveweak",
-    text: "If you leaned on a Find A Grave memorial anywhere in your reasoning: that page is user-submitted, not a primary source. Does it deserve independent weight in your case?",
+    text: "If you leaned on a Find A Grave memorial anywhere in your reasoning: that page is user-submitted, not an original record. Does it deserve independent weight in your claim?",
     correctMove: "concede",
     relatedEvidenceId: "findagrave"
   }
@@ -216,27 +223,27 @@ function renderHypothesis(){
   return `
   <div class="card">
     <div class="disclaimer-box">
-      <strong>Before you start:</strong> this exercise builds the habit of honest proof argument — testing your
+      <strong>Before you start:</strong> this exercise builds the habit of honest proof: testing your
       own conclusion instead of just defending it. It does not teach source citation formatting, paleography,
       or jurisdiction-specific record law. Think of it as practice for the mindset, not a substitute for the
       full discipline.
     </div>
-    <h2>The Family Legend</h2>
-    <p class="legend">"Family tradition says your ancestor was William Hartley of Madison County, Kentucky — that
+    <h2>The Fork: The Family Legend</h2>
+    <p class="legend">"Family tradition says your ancestor was William Hartley of Madison County, Kentucky, that
     he fought in the War of 1812 and later kept a farm near the Kentucky River. Beyond that, nobody remembers
     much more: not his wife's name, not his birth year, nothing definite."</p>
     <p>Your research has turned up <strong>two men named William Hartley</strong>, both living in the same
-    general area around the same time. Before looking at any records in detail, which one is your working
-    hypothesis?</p>
+    general area around the same time. You've reached a fork in the trail. Before looking at any records in
+    detail, which path will you follow as your working hypothesis?</p>
     <div class="candidate-row" id="candidate-row"></div>
-    <button class="primary-btn" id="hyp-continue" disabled onclick="confirmHypothesis()">Continue with This Hypothesis</button>
+    <button class="primary-btn" id="hyp-continue" disabled onclick="confirmHypothesis()">Follow This Path</button>
   </div>`;
 }
 
 function wireHypothesisCard(){
   const row = document.getElementById('candidate-row');
   row.innerHTML = Object.entries(CANDIDATES).map(([key, c]) => `
-    <div class="candidate" id="cand-${key}" onclick="pickHypothesis('${key}')">
+    <div class="candidate" id="cand-${key}" role="button" tabindex="0" onclick="pickHypothesis('${key}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();pickHypothesis('${key}')}">
       <h3>${c.name}</h3>
       <ul>${c.facts.map(f => `<li>${f}</li>`).join('')}</ul>
     </div>`).join('');
@@ -257,19 +264,19 @@ function confirmHypothesis(){
 function renderEvidence(){
   return `
   <div class="card">
-    <h2>Build Your Case</h2>
-    <p>You're working from the hypothesis that your ancestor is <strong>${CANDIDATES[hypothesis].name}</strong>.
-    Review the records below and select every piece you believe genuinely supports your case. Choose carefully —
-    you'll need to defend these choices in a moment.</p>
+    <h2>The Trail: Gather Your Evidence</h2>
+    <p>You're following the path that your ancestor is <strong>${CANDIDATES[hypothesis].name}</strong>.
+    Review the records below and select every one you believe genuinely supports your claim. Choose carefully:
+    each record will face a challenge in a moment.</p>
     <div class="evidence-grid" id="evidence-grid"></div>
-    <button class="primary-btn" id="ev-continue" disabled onclick="confirmEvidence()">Present My Case</button>
+    <button class="primary-btn" id="ev-continue" disabled onclick="confirmEvidence()">Face the Challenges</button>
   </div>`;
 }
 
 function wireEvidenceCard(){
   const grid = document.getElementById('evidence-grid');
   grid.innerHTML = EVIDENCE.map(e => `
-    <div class="evidence-card" id="ev-${e.id}" onclick="toggleEvidence('${e.id}')">
+    <div class="evidence-card" id="ev-${e.id}" role="checkbox" aria-checked="${pickedEvidence.has(e.id)}" tabindex="0" onclick="toggleEvidence('${e.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleEvidence('${e.id}')}">
       <div class="check">${pickedEvidence.has(e.id) ? '✓' : ''}</div>
       <div>
         <div class="ev-title">${e.title}</div>
@@ -282,7 +289,9 @@ function wireEvidenceCard(){
 function toggleEvidence(id){
   if(pickedEvidence.has(id)) pickedEvidence.delete(id);
   else pickedEvidence.add(id);
-  document.getElementById('ev-'+id).classList.toggle('picked');
+  const card = document.getElementById('ev-'+id);
+  card.classList.toggle('picked');
+  card.setAttribute('aria-checked', pickedEvidence.has(id));
   const check = document.querySelector('#ev-'+id+' .check');
   check.textContent = pickedEvidence.has(id) ? '✓' : '';
   updateEvidenceContinueBtn();
@@ -298,26 +307,26 @@ function confirmEvidence(){
   render();
 }
 
-function renderCrossExam(){
+function renderChallenges(){
   const ch = CHALLENGES[currentChallengeIdx];
   const outcome = challengeOutcomes[ch.id];
   return `
   <div class="card">
-    <h2>Cross-Examination (${currentChallengeIdx+1} of ${CHALLENGES.length})</h2>
-    <p>Your case so far: <strong>${[...pickedEvidence].map(id => EVIDENCE.find(e=>e.id===id).title).join(', ') || '(no evidence selected)'}</strong></p>
+    <h2>Challenges on the Trail (${currentChallengeIdx+1} of ${CHALLENGES.length})</h2>
+    <p>Your evidence so far: <strong>${[...pickedEvidence].map(id => EVIDENCE.find(e=>e.id===id).title).join(', ') || '(no records selected)'}</strong></p>
     <div class="challenge-box">
       <div class="ch-label">Challenge</div>
       <p>${ch.text}</p>
       ${!outcome ? `
       <div class="response-row">
-        <button class="resp-btn" onclick="openResolvePicker('${ch.id}')">Resolve it — I have evidence that answers this directly</button>
-        <button class="resp-btn" onclick="respondChallenge('${ch.id}','concede')">Concede — this is a fair point I can't currently answer</button>
-        <button class="resp-btn" onclick="respondChallenge('${ch.id}','flag')">Flag for more research — I'm not sure yet</button>
+        <button class="resp-btn" onclick="openResolvePicker('${ch.id}')">Answer it: I have a record that answers this directly</button>
+        <button class="resp-btn" onclick="respondChallenge('${ch.id}','concede')">Concede: this is a fair point I can't currently answer</button>
+        <button class="resp-btn" onclick="respondChallenge('${ch.id}','flag')">Flag for more research: I'm not sure yet</button>
       </div>
       <div id="resolve-picker-${ch.id}"></div>
       ` : renderChallengeOutcome(ch, outcome)}
     </div>
-    ${outcome ? `<button class="primary-btn" onclick="nextChallenge()">${currentChallengeIdx+1 === CHALLENGES.length ? 'See Case Summary' : 'Next Challenge'}</button>` : ''}
+    ${outcome ? `<button class="primary-btn" onclick="nextChallenge()">${currentChallengeIdx+1 === CHALLENGES.length ? 'Climb to the Summit' : 'Next Challenge'}</button>` : ''}
   </div>`;
 }
 
@@ -326,11 +335,11 @@ function openResolvePicker(challengeId){
   const picker = document.getElementById('resolve-picker-'+challengeId);
   const options = [...pickedEvidence].map(id => EVIDENCE.find(e=>e.id===id));
   if(options.length === 0){
-    picker.innerHTML = `<div class="resolve-picker"><p style="margin:0; font-size:13px;">You didn't select any evidence to point to. Try Concede or Flag instead.</p></div>`;
+    picker.innerHTML = `<div class="resolve-picker"><p style="margin:0; font-size:13px;">You didn't select any records to point to. Try Concede or Flag instead.</p></div>`;
     return;
   }
   picker.innerHTML = `<div class="resolve-picker">
-    <p style="margin-bottom:8px; font-weight:700; font-size:13px;">Which piece of your evidence resolves this?</p>
+    <p style="margin-bottom:8px; font-weight:700; font-size:13px;">Which of your records answers this?</p>
     ${options.map(e => `<button onclick="resolveWith('${challengeId}','${e.id}')">${e.title}</button>`).join('')}
   </div>`;
 }
@@ -349,17 +358,17 @@ function respondChallenge(challengeId, move){
 
 function renderChallengeOutcome(ch, outcome){
   if(outcome === 'resolved-correct'){
-    return `<div class="outcome-banner good">✓ Well argued — that evidence directly answers the challenge.</div>`;
+    return `<div class="outcome-banner good">✓ Well reasoned: that record directly answers the challenge.</div>`;
   }
   if(outcome === 'resolved-wrong'){
-    return `<div class="outcome-banner bad">✗ That evidence doesn't actually resolve this challenge — it's not specific enough to rule out the alternative. A careful reviewer would catch this.</div>`;
+    return `<div class="outcome-banner bad">✗ That record doesn't actually answer this challenge. It's not specific enough to rule out the other path. A careful reviewer would catch this.</div>`;
   }
   if(outcome === 'conceded'){
     const good = ch.correctMove === 'concede';
-    return `<div class="outcome-banner ${good ? 'good' : 'ok'}">${good ? '✓ Good instinct — honestly conceding a weak point is exactly the right move here.' : '⚠ You conceded a point that actually had a strong answer available. Worth reconsidering next time.'}</div>`;
+    return `<div class="outcome-banner ${good ? 'good' : 'ok'}">${good ? '✓ Good instinct: honestly conceding a weak point is exactly the right move here.' : '⚠ You conceded a point that actually had a strong answer available. Worth reconsidering next time.'}</div>`;
   }
   if(outcome === 'flagged'){
-    return `<div class="outcome-banner ok">⚑ Flagged for more research — an honest "not yet," but it keeps your case from claiming full proof until it's resolved.</div>`;
+    return `<div class="outcome-banner ok">⚑ Flagged for more research: an honest "not yet," but it keeps your claim from reaching full proof until it's resolved.</div>`;
   }
   return '';
 }
@@ -372,9 +381,9 @@ function nextChallenge(){
   render();
 }
 
-function computeVerdict(){
+function computeResult(){
   if(hypothesis !== CORRECT_CANDIDATE){
-    return { level: 'disproven', title: 'Disproven Upon Review' };
+    return { level: 'disproven', title: 'Wrong Trail' };
   }
   const identityOutcome = challengeOutcomes['identity'];
   const taxOutcome = challengeOutcomes['weaktax'];
@@ -398,43 +407,45 @@ function computeVerdict(){
   return { level: 'probable', title: 'Probable' };
 }
 
-function renderVerdict(){
-  const v = computeVerdict();
+function renderResult(){
+  const v = computeResult();
   let explanation = '';
   if(v.level === 'disproven'){
-    explanation = `You built a case for William Hartley of Garrard County — but the family legend's specific
-    detail ("fought in the War of 1812... farm near the Kentucky River") only matches William Hartley of
-    <strong>Madison County</strong>. This is exactly the confirmation-bias trap the source guide warns about:
-    picking a candidate early and building support for them, rather than testing which candidate the strongest
+    explanation = `You followed the path for William Hartley of Garrard County, but the family legend's specific
+    details ("fought in the War of 1812... farm near the Kentucky River") only match William Hartley of
+    <strong>Madison County</strong>. This is exactly the trap the Evidence Framework warns about at the fork:
+    choosing a path early and gathering support for it, rather than testing which path the strongest
     evidence actually points to.`;
   } else if(v.level === 'proven'){
-    explanation = `You correctly identified William Hartley of Madison County, backed it with evidence specific
-    enough to rule out the other candidate (the pension file, the matching will), and you didn't overclaim the
+    explanation = `You identified William Hartley of Madison County, backed it with records specific
+    enough to rule out the other man (the pension file, the matching will), and you didn't overclaim the
     weak, non-identifying evidence (the bare tax list, the unsourced Find A Grave page). This is what a
-    genuinely defensible proof argument looks like.`;
+    genuinely sound proof looks like. On KHGN's star ratings, it's a <strong>★5 Mapped Route</strong>,
+    ready for the climb toward ★10 Claim Granted.`;
   } else if(v.level === 'probable'){
-    explanation = `You correctly identified the right man and answered the core identity challenge well — but
-    somewhere along the way you leaned too hard on evidence that doesn't actually carry that kind of weight (a
+    explanation = `You identified the right man and answered the core wrong-trail challenge well, but
+    somewhere along the way you leaned too hard on evidence that doesn't carry that kind of weight (a
     bare tax list entry, or an unsourced online memorial). A careful reviewer would ask you to soften those
     claims.`;
   } else {
-    explanation = `You picked the correct candidate, but when directly challenged on how you know the records
-    are actually about him and not the other William Hartley, you weren't able to answer with evidence specific
-    enough to rule out the alternative. The case is plausible, but not yet proven.`;
+    explanation = `You chose the correct path, but when challenged on how you know the records
+    are about him and not the other William Hartley, you couldn't answer with a record specific
+    enough to rule out the other man. Your claim is plausible, but not yet proven.`;
   }
 
   return `
   <div class="card">
-    <h2>Your Verdict</h2>
-    <div class="verdict-badge ${v.level}">${v.title}</div>
+    <h2>The Summit: Where Your Claim Stands</h2>
+    <div class="result-badge ${v.level}">${v.title}</div>
     <p>${explanation}</p>
     <div class="next-step-box">
-      This exercise practices the <em>habit</em> of honest proof argument — it doesn't teach source citation
-      formatting, paleography, or state-specific record law. For the full professional standard this is based
-      on, see the <a href="https://bcgcertification.org/" target="_blank" rel="noopener">Board for Certification
-      of Genealogists</a>.
+      This exercise practices the <em>habit</em> of honest proof. It doesn't teach source citation
+      formatting, paleography, or state-specific record law. To see the full method, read
+      <a href="khgn_suggested_trial_framework.html">the KHGN Evidence Framework</a>; for the professional
+      standard it draws on, see the <a href="https://bcgcertification.org/" target="_blank" rel="noopener">Board
+      for Certification of Genealogists</a>.
     </div>
-    <button class="secondary-btn" onclick="resetCase()">Try This Case Again</button>
+    <button class="secondary-btn" onclick="resetCase()">Walk This Trail Again</button>
   </div>`;
 }
 
@@ -457,10 +468,11 @@ function render(){
     stage.innerHTML = renderEvidence();
     wireEvidenceCard();
   } else if(currentStep === 2){
-    stage.innerHTML = renderCrossExam();
+    stage.innerHTML = renderChallenges();
   } else {
-    stage.innerHTML = renderVerdict();
+    stage.innerHTML = renderResult();
   }
+  window.scrollTo(0, 0);
 }
 
 render();

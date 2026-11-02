@@ -18,9 +18,9 @@
   body{
     margin:0; background:radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
     color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
-    display:flex; justify-content:center; padding:32px 16px 60px;
+    display:block; padding:0 0 60px;
   }
-  .wrap{ width:100%; max-width:720px; }
+  .wrap{ width:100%; max-width:720px; margin:32px auto 0; padding:0 16px; box-sizing:border-box; }
   .back-link{ display:inline-block; color:var(--brass-bright); text-decoration:none; font-size:13px; font-weight:600; margin-bottom:18px; }
   .back-link:hover{ text-decoration:underline; }
   .masthead{ text-align:center; margin-bottom:24px; }
@@ -69,6 +69,8 @@
 </style>
 </head>
 <body>
+<div id="khgn-nav"></div>
+<script src="/khgn-nav.js"></script>
 <div class="wrap">
   <a class="back-link" href="proving-your-claim.html">&larr; Back to Proving Your Claim</a>
   <div class="masthead">
@@ -167,7 +169,7 @@
         <tr><td>★7 Switchback</td><td>Every stop is complete, and each record is tied to the fact it proves</td></tr>
         <tr><td>★8 Ridge Line</td><td>Scouts confirm that independent records agree</td></tr>
         <tr><td>★9 Final Ascent</td><td>Every challenge has been answered</td></tr>
-        <tr><td>★10 Claim Granted</td><td>Proven, and verified by two Surveyors</td></tr>
+        <tr><td>★10 Claim Granted</td><td>Proven, and granted by two Registers</td></tr>
       </tbody>
     </table>
     <h2>Who Travels with a Claim</h2>
@@ -179,11 +181,11 @@
         <tr><td>Caravan Leader</td><td><strong>The claim's guide and advocate</strong>, who helps the Settler present the claim at its strongest and most honest, and answer challenges. A Caravan Leader never reviews the same claim.</td></tr>
         <tr><td>Scouts</td><td><strong>Trail Reviewers</strong>, a panel of twelve who examine the evidence and weigh in, each opinion weighted by the evidence behind it</td></tr>
         <tr><td>Sentinels</td><td><strong>Challengers</strong>, who keep watch and raise a challenge when new evidence calls a claim into question</td></tr>
-        <tr><td>Surveyors</td><td><strong>Proof Reviewers</strong>, two experienced researchers who verify the claim against the standards. Both must agree to grant it.</td></tr>
+        <tr><td>Registers</td><td><strong>Proof Reviewers</strong>, two experienced researchers who review the claim against the standards and grant it. Both must agree.</td></tr>
         <tr><td>Land Commissioners</td><td><strong>Second-review panelists</strong>, three reviewers who hear a request for a second review if a Settler believes the standards were misapplied</td></tr>
       </tbody>
     </table>
-    <p>On the frontier, scouts read the land, sentinels kept watch, and no claim was granted until surveyors had verified and marked it. KHGN's review works the same way: everyone travels toward the truth, and no one person decides alone.</p>
+    <p>On the frontier, scouts read the land, sentinels kept watch, and no claim was granted until the Register of the Land Office had reviewed the proof and issued the grant. KHGN's review works the same way: everyone travels toward the truth, and no one person decides alone.</p>
     <p>New to the ratings? Start with <a href="getting-started-genealogy.html">Getting Started in Genealogy</a>, or see where your own research stands with <a href="rate-your-research.html">Rate Your Research</a>.</p>
     <hr>
 

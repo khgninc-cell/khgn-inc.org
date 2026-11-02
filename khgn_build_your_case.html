@@ -18,9 +18,9 @@
   body{
     margin:0; background:radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
     color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
-    display:flex; justify-content:center; padding:28px 16px 60px;
+    display:block; padding:0 0 60px;
   }
-  .wrap{ width:100%; max-width:800px; }
+  .wrap{ width:100%; max-width:800px; margin:28px auto 0; padding:0 16px; box-sizing:border-box; }
   .back-link{ display:inline-block; color:var(--brass-bright); text-decoration:none; font-size:13px; font-weight:600; margin-bottom:16px; }
   .back-link:hover{ text-decoration:underline; }
   .masthead{ text-align:center; margin-bottom:18px; }
@@ -142,6 +142,8 @@
 </style>
 </head>
 <body>
+<div id="khgn-nav"></div>
+<script src="/khgn-nav.js"></script>
 <div class="wrap">
   <a class="back-link" href="proving-your-claim.html">&larr; Back to Proving Your Claim</a>
   <div class="masthead">
@@ -393,7 +395,7 @@ function renderFinal(){
     <div id="check-area" aria-live="polite"></div>
     <div class="next-step-box">
       This exercise practices the habit of honest proof. When KHGN's review process opens, claims submitted for review
-      begin the climb at <strong>★6 Base Camp</strong>, and those proven and verified by two Surveyors (Proof Reviewers) reach
+      begin the climb at <strong>★6 Base Camp</strong>, and those proven and verified by two Registers (Proof Reviewers) reach
       <strong>★10 Claim Granted</strong>. Read the full method in <a href="khgn_suggested_trial_framework.html">the KHGN
       Evidence Framework</a>, and for the professional standard it draws on, see the
       <a href="https://bcgcertification.org/" target="_blank" rel="noopener">Board for Certification of Genealogists</a>.
@@ -474,7 +476,7 @@ function runSelfCheck(){
       <ul class="check-list">
         ${items.map(x => `<li><span class="mark ${x.ok ? 'ok' : 'warn'}" aria-hidden="true">${x.ok ? '✓' : '!'}</span><span><span class="sr-only" style="position:absolute;left:-9999px">${x.ok ? 'Looking strong: ' : 'Worth another look: '}</span>${escapeHtml(x.text)}</span></li>`).join('')}
       </ul>
-      <p class="check-note">This checklist reviews the shape of your claim, not whether it's true. Weighing the records themselves is the work of careful people: you, and in time, KHGN's Scouts and Surveyors.</p>
+      <p class="check-note">This checklist reviews the shape of your claim, not whether it's true. Weighing the records themselves is the work of careful people: you, and in time, KHGN's Scouts and Registers.</p>
     </div>`;
 }
 
