@@ -254,24 +254,8 @@
 </head>
 <body class="page-games">
 
-    <nav class="site-nav" aria-label="Global">
-    <div class="site-nav-inner">
-        <a href="https://khgn-inc.org/index.html" class="site-nav-brand">KHGN Inc.</a>
-        <button class="site-nav-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="site-nav-toggle-bar"></span>
-            <span class="site-nav-toggle-bar"></span>
-            <span class="site-nav-toggle-bar"></span>
-        </button>
-        <div class="site-nav-links">
-            <a href="https://khgn-inc.org/index.html">Home</a>
-            <a href="https://khgn-inc.org/socialmedia.html">Social Media</a>
-            <a href="https://khgn-inc.org/recruiting.html">Volunteer Recruitment</a>
-            <a href="https://khgn-inc.org/donation-portal.html">Donation Portal</a>
-            <a href="https://khgn-inc.org/training.html">Volunteer Training</a>
-            <a href="https://khgn-inc.org/game-portal.html">Trailhead Training</a>
-        </div>
-    </div>
-</nav>
+    <div id="khgn-nav"></div>
+<script src="/khgn-nav.js"></script>
 
 <div class="wrap">
   <a class="back" href="https://khgn-inc.org/proving-your-claim.html">← Back to Proving Your Claim</a>
@@ -419,7 +403,7 @@
       if (!(same === "no" || same === "alibi")) { next.push(same === "yes" ? "Separate the people who share the name by ruling out wrong trails: records placing each one somewhere else." : "Check whether others with the same name lived nearby, and separate them if so."); }
       if (written !== "yes") { next.push("Write out how your evidence fits together, including any circumstantial evidence."); }
     }
-    if (level === 5) { next.push("You're ready for the climb. Learn the KHGN Evidence Framework, then submit your claim with Build Your Case. The climbing ratings, from ★6 Base Camp up to ★10 Claim Granted, are earned through review by trained reviewers."); }
+    if (level === 5) { next.push("You're ready for the climb. Learn the KHGN Evidence Framework, then submit your claim with Build Your Case. The climbing ratings, from ★6 Base Camp up to ★10 Claim Granted, are earned through review by Scouts (Trail Reviewers) and Surveyors (Proof Reviewers)."); }
 
     var info = LEVELS[level];
     document.getElementById("r-stars").textContent = "\u2605" + level;
