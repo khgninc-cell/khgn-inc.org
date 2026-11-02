@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kentucky History and Genealogy Network, Inc. (KHGN, Inc.)</title>
+    <meta name="description" content="Official website for Kentucky History and Genealogy Network, Inc. Access community history, County Hubs for all 120 Kentucky counties, volunteer opportunities, and educational tools.">
+    <link rel="canonical" href="https://khgn-inc.org/">
+
+    <!-- OpenGraph tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Kentucky History and Genealogy Network, Inc. (KHGN, Inc.)">
+    <meta property="og:title" content="Kentucky History and Genealogy Network, Inc. (KHGN, Inc.)">
+    <meta property="og:description" content="Official website for Kentucky History and Genealogy Network, Inc. Access community history, County Hubs for all 120 Kentucky counties, volunteer opportunities, and educational tools.">
+    <meta property="og:url" content="https://khgn-inc.org/">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Kentucky History and Genealogy Network, Inc. (KHGN, Inc.)">
+    <meta name="twitter:description" content="Official website for Kentucky History and Genealogy Network, Inc. Access community history, County Hubs for all 120 Kentucky counties, volunteer opportunities, and educational tools.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --walnut:#2B211A; --walnut-deep:#1C140F; --parchment:#EDE0C8; --parchment-dim:#E0D0AC;
+            --ink:#221A12; --brass:#B08D57; --brass-bright:#D4AF6A; --rust:#A63D2F; --rust-bright:#C2503F;
+            --sage:#6B8A5C; --sage-bright:#82A671; --line:#4A392A;
+        }
+        body {
+            margin: 0;
+            font-family: 'Public Sans', Arial, sans-serif;
+            background: var(--walnut);
+            color: var(--parchment);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        a { color: var(--brass-bright); }
+
+        @media (max-width: 700px) {
+            .feature-grid { grid-template-columns: 1fr !important; }
+            .container { margin: 30px auto; }
+        }
+
+        /* Hero */
+        .hero {
+            background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
+            border-bottom: 1px solid var(--line);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero-image {
+            display: block; margin: 0 auto 30px; max-width: 600px; width: 100%; height: auto;
+            border-radius: 10px; border: 2px solid var(--line); box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+        .hero h1 {
+            font-family: 'Rye', serif;
+            font-weight: 400;
+            font-size: 38px;
+            color: var(--parchment);
+            margin: 0 0 14px;
+            text-shadow: 0 2px 0 var(--walnut-deep);
+        }
+        .hero p { max-width: 700px; margin: 0 auto; font-size: 17px; line-height: 1.6; color: var(--parchment-dim); }
+
+        .container { max-width: 1000px; margin: 50px auto; padding: 0 20px; box-sizing: border-box; width: 100%; }
+
+        /* Feature cards */
+        .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 50px; }
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--brass);
+            border-radius: 10px;
+            padding: 25px 20px;
+            text-decoration: none;
+            background: var(--parchment);
+            color: var(--ink);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .feature-card:hover { box-shadow: 0 10px 24px rgba(0,0,0,0.35); transform: translateY(-3px); }
+        .feature-card:focus-visible { outline: 3px solid var(--brass-bright); outline-offset: 3px; }
+        .feature-icon { font-size: 32px; margin-bottom: 12px; }
+        .feature-title { font-family: 'Rye', serif; font-weight: 400; font-size: 18px; color: var(--ink); margin-bottom: 8px; }
+        .feature-desc { font-size: 14px; line-height: 1.55; color: #4A3A28; flex-grow: 1; }
+        .feature-link { margin-top: 14px; font-size: 12.5px; font-weight: 700; color: var(--rust); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Overview */
+        .overview { border-top: 1px solid var(--line); padding-top: 40px; }
+        .overview h2 { font-family: 'Rye', serif; font-weight: 400; font-size: 22px; color: var(--parchment); margin-bottom: 15px; }
+        .overview p { font-size: 16px; line-height: 1.7; color: var(--parchment-dim); }
+        .overview a { color: var(--brass-bright); font-weight: 600; }
+    </style>
+</head>
+<body class="page-index">
+<div id="khgn-nav"></div>
+<script src="/khgn-nav.js"></script>
+
+    <div class="hero">
+        <img src="ed lester ai.png" alt="Kentucky History and Genealogy Network" class="hero-image">
+        <h1>Kentucky History and Genealogy Network, Inc.</h1>
+        <p>Welcome to KHGN, Inc., an independent, volunteer-driven non-profit dedicated to preserving Kentucky's community history and genealogy. Explore the County Hubs for all 120 Kentucky counties, get involved as a volunteer, support our mission, or dive into our educational training tools.</p>
+    </div>
+
+    <div class="container">
+        <div class="feature-grid">
+            <a href="socialmedia.html" class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <div class="feature-title">County Hubs</div>
+                <div class="feature-desc">A home page for every Kentucky county, with links to each county's Facebook group and to KHGN's statewide groups.</div>
+                <div class="feature-link">Explore County Hubs &rarr;</div>
+            </a>
+            <a href="get-involved.html" class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <div class="feature-title">Volunteer &amp; Board Recruitment</div>
+                <div class="feature-desc">Join our team as a volunteer or board member and help grow Kentucky's history and genealogy community.</div>
+                <div class="feature-link">Get Involved &rarr;</div>
+            </a>
+            <a href="donation-portal.html" class="feature-card">
+                <div class="feature-icon">💛</div>
+                <div class="feature-title">Non-Profit Donation Portal</div>
+                <div class="feature-desc">Support our preservation work with a secure contribution to KHGN, Inc.'s community initiatives.</div>
+                <div class="feature-link">Donate Now &rarr;</div>
+            </a>
+            <a href="training.html" class="feature-card">
+                <div class="feature-icon">📚</div>
+                <div class="feature-title">Training Arcade</div>
+                <div class="feature-desc">Explore interactive learning games, field presentation resources, and archival skill modules.</div>
+                <div class="feature-link">Enter Training Arcade &rarr;</div>
+            </a>
+            <a href="game-portal.html" class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <div class="feature-title">Trailhead</div>
+                <div class="feature-desc">Browse our full library of interactive history and genealogy learning games in one place.</div>
+                <div class="feature-link">Enter Trailhead &rarr;</div>
+            </a>
+        </div>
+
+        <div class="overview">
+            <h2>About Kentucky History and Genealogy Network, Inc.</h2>
+            <p>
+                Kentucky History and Genealogy Network, Inc. (KHGN, Inc.) is an independent educational non-profit organization serving family history researchers and genealogists across the Commonwealth of Kentucky. Our
+                <a href="socialmedia.html">County Hubs</a> give every Kentucky county its own page, connecting members with that county's Facebook group and with KHGN's statewide communities covering topics such as coal mining heritage, cemetery documentation, and local folklore.
+                We rely on dedicated community members, so if you're interested in contributing your time, please visit our <a href="get-involved.html">volunteer and board recruitment page</a> to learn more about open roles.
+                As a non-profit organization, KHGN, Inc. depends on public support to sustain its mission — you can make a meaningful impact through our <a href="donation-portal.html">secure donation portal</a>.
+                Finally, researchers and volunteers looking to build new skills can visit our <a href="training.html">educational training arcade</a> for regional field presentation and archival skill development, or explore our full <a href="game-portal.html">Trailhead</a> for more interactive learning tools.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
+/* ==================================================================
+   KHGN, Inc. — Shared site menu
+   ------------------------------------------------------------------
+   Every page loads its menu from this one file. To rename a tab or add
+   a page, edit the MENU list below; every page updates at once.
+
+   HOW TO ADD THE MENU TO A PAGE
+   Put these two lines right after the page's <body> tag:
+       <div id="khgn-nav"></div>
+       <script src="/khgn-nav.js"></script>
+   ================================================================== */
+(function () {
+  "use strict";
+
+  /* ---------- Menu: edit this list to change the menu ---------- */
+  var BRAND = { text: "KHGN Inc.", href: "/index.html" };
+  var MENU = [
+    { label: "Home",                  href: "/index.html",           match: ["", "index.html"] },
+    { label: "County Hubs",           href: "/socialmedia.html",     match: ["socialmedia.html", "counties"] },
+    { label: "Volunteer Recruitment", href: "/get-involved.html",    match: ["get-involved.html", "recruiting.html"] },
+    { label: "Donation Portal",       href: "/donation-portal.html", match: ["donation-portal.html"] },
+    { label: "Volunteer Training",    href: "/training.html",        match: ["training.html"] },
+    { label: "Trailhead Training",    href: "/game-portal.html",     match: ["game-portal.html"] }
+  ];
+
+  /* ---------- Styles ---------- */
+  var css = [
+    ".site-nav{background:#1C140F;border-bottom:1px solid #4A392A;position:sticky;top:0;z-index:1000}",
+    ".kn-inner{max-width:1100px;margin:0 auto;padding:0 20px;min-height:68px;display:flex;align-items:center;gap:20px;box-sizing:border-box;font-family:'Public Sans',Arial,sans-serif}",
+    ".kn-brand{color:#D4AF6A;text-decoration:none;font-family:'Rye',Georgia,serif;font-weight:400;font-size:22px;white-space:nowrap}",
+    ".kn-links{margin-left:auto;display:flex;align-items:center;gap:18px}",
+    ".kn-links a{color:#EDE0C8;text-decoration:none;font-size:16px;font-weight:600;padding:8px 0;border-bottom:2px solid transparent}",
+    ".kn-links a:hover{color:#D4AF6A}",
+    ".kn-links a.kn-current{color:#D4AF6A;border-bottom-color:#B08D57}",
+    ".kn-brand:focus-visible,.kn-links a:focus-visible,.kn-toggle:focus-visible{outline:3px solid #D4AF6A;outline-offset:2px}",
+    ".kn-toggle{display:none;margin-left:auto;padding:10px;border:none;background:transparent;cursor:pointer}",
+    ".kn-bar{display:block;width:26px;height:3px;margin:5px 0;border-radius:999px;background:#D4AF6A}",
+    "@media (max-width:760px){.kn-inner{flex-wrap:wrap;padding:12px 20px;min-height:0}.kn-toggle{display:block}.kn-links{display:none;width:100%;margin-left:0;flex-direction:column;align-items:flex-start;gap:0;padding:8px 0 4px}.site-nav.kn-open .kn-links{display:flex}.kn-links a{width:100%;padding:12px 0;font-size:17px}}"
+  ].join("");
+
+  function currentKey() {
+    var parts = location.pathname.split("/").filter(Boolean);
+    if (parts[0] && parts[0].toLowerCase() === "counties") { return "counties"; }
+    return (parts.pop() || "").toLowerCase();
+  }
+
+  function build() {
+    var holder = document.getElementById("khgn-nav");
+    if (!holder || document.querySelector(".site-nav[data-khgn]")) { return; }
+    var style = document.createElement("style"); style.textContent = css; document.head.appendChild(style);
+
+    var key = currentKey();
+    var nav = document.createElement("nav");
+    nav.className = "site-nav"; nav.setAttribute("aria-label", "Global"); nav.setAttribute("data-khgn", "");
+    var inner = document.createElement("div"); inner.className = "kn-inner";
+
+    var brand = document.createElement("a"); brand.className = "kn-brand"; brand.href = BRAND.href; brand.textContent = BRAND.text;
+    var toggle = document.createElement("button");
+    toggle.type = "button"; toggle.className = "kn-toggle";
+    toggle.setAttribute("aria-expanded", "false"); toggle.setAttribute("aria-label", "Open menu");
+    for (var b = 0; b < 3; b++) { var bar = document.createElement("span"); bar.className = "kn-bar"; toggle.appendChild(bar); }
+
+    var links = document.createElement("div"); links.className = "kn-links";
+    MENU.forEach(function (item) {
+      var a = document.createElement("a"); a.href = item.href; a.textContent = item.label;
+      if (item.match.indexOf(key) > -1) { a.className = "kn-current"; a.setAttribute("aria-current", "page"); }
+      a.addEventListener("click", function () { nav.classList.remove("kn-open"); toggle.setAttribute("aria-expanded", "false"); });
+      links.appendChild(a);
+    });
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("kn-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+
+    inner.appendChild(brand); inner.appendChild(toggle); inner.appendChild(links);
+    nav.appendChild(inner);
+    holder.parentNode.replaceChild(nav, holder);
+  }
+  build();
+})();
+
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Get Involved | KHGN, Inc.</title>
+<link rel="canonical" href="https://khgn-inc.org/get-involved.html">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="refresh" content="0; url=get-involved.html">
+<script>location.replace("get-involved.html");</script></head>
+<body style="font-family:Arial,sans-serif;background:#2B211A;color:#EDE0C8;padding:40px"><p>This page has moved to <a style="color:#D4AF6A" href="get-involved.html">Get Involved</a>.</p></body></html>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://khgn-inc.org/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/socialmedia.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/game-portal.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/proving-your-claim.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/getting-started-genealogy.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/rate-your-research.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/working-with-ai.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/census-field-guide.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/death-records-field-guide.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/cemeteries-field-guide.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/khgn_suggested_trial_framework.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/khgn_case_study_1_same_name.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/khgn_build_your_case.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/tipple-trial.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/get-involved.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/donation-portal.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/adair/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/allen/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/anderson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/ballard/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/barren/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/bath/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/bell/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/boone/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/bourbon/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/boyd/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/boyle/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/bracken/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/breathitt/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/breckinridge/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/bullitt/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/butler/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/caldwell/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/calloway/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/campbell/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/carlisle/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/carroll/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/carter/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/casey/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/christian/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/clark/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/clay/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/clinton/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/crittenden/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/cumberland/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/daviess/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/edmonson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/elliott/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/estill/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/fayette/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/fleming/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/floyd/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/franklin/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/fulton/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/gallatin/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/garrard/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/grant/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/graves/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/grayson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/green/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/greenup/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/hancock/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/hardin/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/harlan/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/harrison/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/hart/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/henderson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/henry/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/hickman/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/hopkins/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/jackson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/jefferson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/jessamine/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/johnson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/kenton/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/knott/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/knox/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/larue/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/laurel/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/lawrence/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/lee/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/leslie/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/letcher/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/lewis/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/lincoln/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/livingston/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/logan/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/lyon/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/madison/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/magoffin/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/marion/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/marshall/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/martin/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/mason/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/mccracken/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/mccreary/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/mclean/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/meade/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/menifee/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/mercer/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/metcalfe/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/monroe/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/montgomery/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/morgan/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/muhlenberg/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/nelson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/nicholas/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/ohio/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/oldham/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/owen/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/owsley/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/pendleton/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/perry/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/pike/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/powell/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/pulaski/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/robertson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/rockcastle/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/rowan/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/russell/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/scott/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/shelby/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/simpson/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/spencer/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/taylor/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/todd/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/trigg/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/trimble/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/union/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/warren/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/washington/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/wayne/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/webster/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/whitley/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/wolfe/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://khgn-inc.org/counties/woodford/</loc><lastmod>2026-11-01</lastmod></url>
+</urlset>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Involved: Volunteer and Board Recruitment | KHGN, Inc.</title>
+<meta name="description" content="Volunteer with Kentucky History and Genealogy Network, Inc. (KHGN, Inc.): free training, volunteer Trail Routes, and open seats on the Board of Directors.">
+<link rel="canonical" href="https://khgn-inc.org/get-involved.html">
+<meta property="og:title" content="Volunteer and Board Recruitment | KHGN, Inc.">
+<meta property="og:description" content="Free training, volunteer Trail Routes, and open seats on the KHGN, Inc. Board of Directors.">
+<meta property="og:url" content="https://khgn-inc.org/get-involved.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--walnut:#2B211A;--walnut-deep:#1C140F;--parchment:#EDE0C8;--parchment-dim:#E0D0AC;--ink:#221A12;--brass:#B08D57;--brass-bright:#D4AF6A;--rust:#A63D2F;--rust-bright:#C2503F;--sage:#6B8A5C;--line:#4A392A;}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Public Sans',Arial,sans-serif;font-size:18px;line-height:1.65;background:var(--walnut);color:var(--parchment);}
+.hero{background:radial-gradient(ellipse at 50% -10%,rgba(176,141,87,.18),transparent 60%),var(--walnut);border-bottom:1px solid var(--line);padding:50px 20px 40px;text-align:center;}
+.hero .eyebrow{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-bright);margin:0 0 8px;}
+.hero h1{font-family:'Rye',Georgia,serif;font-weight:400;font-size:clamp(30px,6vw,42px);line-height:1.2;margin:0 0 12px;color:var(--parchment);text-shadow:0 2px 0 var(--walnut-deep);}
+.hero p{max-width:720px;margin:0 auto;color:var(--parchment-dim);}
+.wrap{max-width:1000px;margin:0 auto;padding:36px 20px 50px;}
+section{background:var(--parchment);color:var(--ink);border-radius:12px;border-top:4px solid var(--brass);box-shadow:0 10px 30px rgba(0,0,0,.35);padding:26px;margin-bottom:28px;}
+section h2{font-family:'Rye',Georgia,serif;font-weight:400;font-size:28px;margin:0 0 10px;color:var(--ink);}
+section p{color:#4A3A28;margin:0 0 14px;}
+section a{color:var(--rust);font-weight:700;}
+.steps{list-style:none;margin:6px 0 18px;padding:0;counter-reset:s;display:grid;gap:12px;}
+.steps li{counter-increment:s;position:relative;padding:14px 16px 14px 64px;background:rgba(0,0,0,.04);border-radius:10px;}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:14px;width:36px;height:36px;border-radius:50%;background:var(--rust);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.steps b{display:block;color:var(--ink);font-size:19px;}
+.btns{display:flex;flex-wrap:wrap;gap:12px;}
+.btn{display:inline-flex;align-items:center;min-height:52px;padding:12px 20px;border-radius:10px;font-weight:700;text-decoration:none;font-size:18px;}
+.btn-rust{background:var(--rust);color:#fff !important;}
+.btn-rust:hover{background:var(--rust-bright);}
+.btn-gold{background:var(--brass-bright);color:#1C140F !important;}
+.btn-gold:hover{background:#E0BE7E;}
+.btn-ghost{border:2px solid var(--rust);color:var(--rust) !important;}
+.btn-ghost:hover{background:var(--rust);color:#fff !important;}
+.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:8px 0 0;}
+.route{background:#fff;border:1px solid #D8C7A3;border-radius:10px;padding:18px;}
+.route h3{font-family:'Rye',Georgia,serif;font-weight:400;font-size:21px;margin:0 0 6px;color:var(--ink);}
+.route p{font-size:16.5px;margin:0 0 10px;}
+.path{font-size:15px;color:#5E5242;border-top:1px solid #E5D7BB;padding-top:8px;}
+.path b{color:var(--ink);}
+.note{font-size:15.5px;color:var(--parchment-dim);text-align:center;margin:8px 0 0;}
+a:focus-visible{outline:3px solid var(--brass-bright);outline-offset:2px;}
+</style>
+</head>
+<body class="page-recruiting">
+<div id="khgn-nav"></div>
+<script src="/khgn-nav.js"></script>
+
+<div class="hero">
+  <p class="eyebrow">Volunteer and Board Recruitment</p>
+  <h1>Volunteer with KHGN, Inc.</h1>
+  <p>Help Kentuckians discover their family history. Every volunteer role begins with free training, and every route grows at your own pace.</p>
+</div>
+
+<div class="wrap">
+
+<section>
+  <h2>How to Become a Volunteer</h2>
+  <ol class="steps">
+    <li><b>Complete the Tipple Trial</b>Our free core training covers privacy, copyright, record release dates, and conflicts of interest. Take it at your own pace, in as many sittings as you like.</li>
+    <li><b>Send us a message</b>Message <a href="https://www.facebook.com/KHGNINC/" target="_blank" rel="noopener">KHGN&rsquo;s Facebook Page</a> letting us know you&rsquo;ve completed the Tipple Trial, and which kind of role interests you.</li>
+    <li><b>Talk with us</b>We&rsquo;ll schedule a short phone call to meet you and go over the role that fits you best.</li>
+    <li><b>Get approved and start your route</b>Once approved, you&rsquo;ll receive access to your Trail Route training by email.</li>
+  </ol>
+  <div class="btns">
+    <a class="btn btn-gold" href="/tipple-trial.html">Start the Tipple Trial</a>
+    <a class="btn btn-rust" href="https://www.facebook.com/KHGNINC/" target="_blank" rel="noopener">Message KHGN on Facebook</a>
+  </div>
+</section>
+
+<section>
+  <h2>Volunteer Trail Routes</h2>
+  <p>Each route is a series of steps you climb as your experience grows. Start at the first step, and move up when you&rsquo;re ready.</p>
+  <div class="routes">
+    <div class="route">
+      <h3>Moderating on Facebook</h3>
+      <p>Help keep KHGN&rsquo;s county and statewide groups welcoming, accurate, and on topic.</p>
+      <p class="path"><b>Route:</b> Contributing Steward &rarr; Moderator &rarr; County Administrator &rarr; District Administrator &rarr; Regional Administrator</p>
+      <p class="path">District Administrators support a small group of County Administrators, carrying their questions and reports up to the Board and committees, and bringing guidance back down, so no one carries too much alone.</p>
+    </div>
+    <div class="route">
+      <h3>Workforce Development</h3>
+      <p>Welcome new volunteers, guide them through training, and help them find the right route.</p>
+      <p class="path"><b>Route:</b> Trail Greeter &rarr; Trail Guide &rarr; Pathfinder &rarr; Trailblazer &rarr; Trailkeeper</p>
+    </div>
+    <div class="route">
+      <h3>Community Advisory</h3>
+      <p>Be the public&rsquo;s voice inside KHGN, sharing what&rsquo;s working and what could be better.</p>
+      <p class="path"><b>Route:</b> Regional Advisor</p>
+    </div>
+  </div>
+  <p style="margin-top:16px"><a class="btn btn-ghost" href="/game-portal.html#enroll">See the Trail Routes at the Trailhead</a></p>
+</section>
+
+<section>
+  <h2>Serve on the Board of Directors</h2>
+  <p>KHGN, Inc. has open seats on its Board of Directors. Directors help guide the organization&rsquo;s work through committees such as Communication, Secretary, Finance, and Grant and Fundraising. Directors serve two-year terms, with elections held every year for half of the seats, so the Board grows steadily.</p>
+  <p>If you&rsquo;d like to learn about serving as a Director, send us a message and we&rsquo;ll be glad to talk with you.</p>
+  <div class="btns">
+    <a class="btn btn-rust" href="https://www.facebook.com/KHGNINC/" target="_blank" rel="noopener">Ask about Board service</a>
+  </div>
+</section>
+
+<p class="note">KHGN, Inc. is the filed assumed name of Kentucky History and Genealogy Network, Inc., a 501(c)(3) nonprofit. Trailhead Training is unaccredited volunteer education. This page does not collect any personal information.</p>
+</div>
+</body>
+</html>
