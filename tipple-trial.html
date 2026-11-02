@@ -19,9 +19,9 @@
     margin:0;
     background: radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
     color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
-    display:flex; justify-content:center; padding:28px 16px 60px;
+    display:block; padding:0 0 60px;
   }
-  .app{ width:100%; max-width:760px; }
+  .app{ width:100%; max-width:760px; margin:28px auto 0; padding:0 16px; box-sizing:border-box; }
   .masthead{ text-align:center; margin-bottom:18px; }
   .masthead .eyebrow{ font-size:13px; letter-spacing:0.03em; color:var(--brass-bright); margin-bottom:4px; }
   .masthead h1{
@@ -162,6 +162,8 @@
 <script src="/khgn-path.js" defer></script>
 </head>
 <body>
+<div id="khgn-nav"></div>
+<script src="/khgn-nav.js"></script>
 <div class="app">
 
   <div class="masthead">
