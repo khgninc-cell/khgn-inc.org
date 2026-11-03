@@ -1,7 +1,9 @@
 /* ==================================================================
-   KHGN, Inc. — Shared site menu
+   KHGN, Inc. — Shared site menu and footer
    ------------------------------------------------------------------
-   Every page loads its menu from this one file. To rename a tab or add
+   Every page loads its menu, and the disclaimer footer at the bottom
+   of the page, from this one file. To change the footer wording, edit
+   the FOOTER section below. To rename a tab or add
    a page, edit the MENU list below; every page updates at once.
 
    HOW TO ADD THE MENU TO A PAGE
@@ -48,6 +50,33 @@
   var onMain = host === "khgn-inc.org" || host === "www.khgn-inc.org" || host === "localhost" || host === "127.0.0.1" || host === "";
   function full(href) { return onMain ? href : MAIN + href; }
 
+
+  /* ---------- Footer: edit this wording to change the disclaimer everywhere ---------- */
+  var FOOTER = [
+    '<p><strong>KHGN, Inc.</strong> is the filed assumed name of Kentucky History and Genealogy Network, Inc., a 501(c)(3) nonprofit.</p>',
+    '<p><strong>Independence.</strong> KHGN is independent of, and not affiliated with, any government agency, including the Kentucky Secretary of State and its Land Office, the Kentucky Department for Libraries and Archives, and county clerks; any county historical or genealogical society; any genealogical credentialing body, such as the Board for Certification of Genealogists; or Meta Platforms, Inc. Facebook is a trademark of Meta Platforms, Inc.</p>',
+    '<p><strong>Not professional advice.</strong> KHGN\u2019s pages, training, and research reviews are educational. They are not legal, surveying, title, tax, financial, medical, or other professional advice. KHGN\u2019s volunteers do not act as attorneys, licensed land surveyors, certified or accredited genealogists, accountants, appraisers, genetic counselors, or any other licensed or credentialed professional. For legal questions, consult an attorney; for boundary or land questions, a licensed land surveyor.</p>',
+    '<p><strong>Titles and ratings.</strong> KHGN\u2019s volunteer titles, such as Scout, Register, and Land Commissioner, are historical names for KHGN volunteer roles, and carry no government, legal, or professional authority. KHGN\u2019s research ratings reflect KHGN\u2019s own standards, and are not legal proof of title, kinship, or inheritance. KHGN\u2019s training is unaccredited volunteer education.</p>',
+    '<p><a href="__MAIN__/volunteer-privacy.html">Privacy Notice</a> &middot; <a href="mailto:privacy@khgn-inc.org">privacy@khgn-inc.org</a></p>'
+  ];
+  var footerCss = [
+    ".khgn-legal{background:#1C140F;border-top:1px solid #4A392A;color:#E0D0AC;font-family:'Public Sans',Arial,sans-serif;font-size:15px;line-height:1.65;margin-top:40px}",
+    ".khgn-legal-inner{max-width:1000px;margin:0 auto;padding:26px 20px 34px;box-sizing:border-box}",
+    ".khgn-legal p{margin:0 0 10px}",
+    ".khgn-legal strong{color:#D4AF6A}",
+    ".khgn-legal a{color:#D4AF6A;font-weight:700}",
+    ".khgn-legal a:focus-visible{outline:3px solid #D4AF6A;outline-offset:2px}"
+  ].join("");
+  function buildFooter() {
+    if (document.querySelector(".khgn-legal")) { return; }
+    var st = document.createElement("style"); st.textContent = footerCss; document.head.appendChild(st);
+    var f = document.createElement("footer"); f.className = "khgn-legal"; f.setAttribute("aria-label", "Legal notices");
+    var inner = document.createElement("div"); inner.className = "khgn-legal-inner";
+    inner.innerHTML = FOOTER.join("").replace(/__MAIN__/g, onMain ? "" : MAIN);
+    f.appendChild(inner);
+    document.body.appendChild(f);
+  }
+
   function currentKey() {
     var parts = location.pathname.split("/").filter(Boolean);
     if (parts[0] && parts[0].toLowerCase() === "counties") { return "counties"; }
@@ -89,4 +118,5 @@
     holder.parentNode.replaceChild(nav, holder);
   }
   build();
+  if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", buildFooter); } else { buildFooter(); }
 })();
