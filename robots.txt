@@ -25,3 +25,6 @@ Disallow: /
 User-agent: *
 Allow: /
 Disallow: /donation-portal.html
+
+# Sitemap for search engines
+Sitemap: https://khgn-inc.org/sitemap.xml
