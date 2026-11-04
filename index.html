@@ -19,7 +19,9 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Kentucky History and Genealogy Network, Inc. (KHGN, Inc.)">
     <meta name="twitter:description" content="Official website for Kentucky History and Genealogy Network, Inc. Access community history, County Hubs for all 120 Kentucky counties, volunteer opportunities, and educational tools.">
+    <link rel="preload" href="khgn-hero.webp" as="image" type="image/webp" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root{
@@ -50,8 +52,10 @@
             padding: 60px 20px;
             text-align: center;
         }
+        .hero-figure { margin: 0 auto 30px; max-width: 600px; }
+        .hero-figure figcaption { font-size: 14px; line-height: 1.5; color: var(--parchment-dim); margin-top: 10px; font-style: italic; }
         .hero-image {
-            display: block; margin: 0 auto 30px; max-width: 600px; width: 100%; height: auto;
+            display: block; margin: 0 auto; max-width: 600px; width: 100%; height: auto; aspect-ratio: 1200 / 750;
             border-radius: 10px; border: 2px solid var(--line); box-shadow: 0 10px 30px rgba(0,0,0,0.35);
         }
         .hero h1 {
@@ -99,7 +103,13 @@
 <script src="/khgn-nav.js"></script>
 
     <div class="hero">
-        <img src="ed lester ai.png" alt="Kentucky History and Genealogy Network" class="hero-image">
+        <figure class="hero-figure">
+            <picture>
+                <source srcset="khgn-hero.webp" type="image/webp">
+                <img src="khgn-hero.jpg" width="1200" height="750" fetchpriority="high" decoding="async" alt="Black-and-white photograph of Edward Madison Dizney, at left beside the open door of an early automobile, and Lester Dizney, at right by its hood, with wooden farm buildings behind them, Knox County, Kentucky, about 1938" class="hero-image">
+            </picture>
+            <figcaption>Edward Madison Dizney (left) and Lester Dizney (right), Knox County, Kentucky, about 1938. Courtesy of the Estate of Mary Frances Foley and Edward Dizney. Photograph restored with the help of AI, with human review.</figcaption>
+        </figure>
         <h1>Kentucky History and Genealogy Network, Inc.</h1>
         <p>Welcome to KHGN, Inc., an independent, volunteer-driven non-profit dedicated to preserving Kentucky's community history and genealogy. Explore the County Hubs for all 120 Kentucky counties, get involved as a volunteer, support our mission, or dive into our educational training tools.</p>
     </div>
