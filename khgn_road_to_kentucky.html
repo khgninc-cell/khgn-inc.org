@@ -5,7 +5,9 @@
 <noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui,sans-serif}</style></noscript>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Road to Kentucky</title>
+<title>The Road to Kentucky | KHGN, Inc.</title>
+<meta name="description" content="A KHGN story trail: from an agent's promise in Ireland, through indenture and Revolutionary service, to a Virginia bounty warrant and a choice about Kentucky land.">
+<link rel="canonical" href="https://khgn-inc.org/khgn_road_to_kentucky.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rye&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -18,24 +20,25 @@
   body{
     margin:0;
     background:radial-gradient(ellipse at 50% -10%, rgba(176,141,87,0.18), transparent 60%), var(--walnut);
-    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh;
-    display:flex; justify-content:center; padding:28px 16px 60px;
+    color:var(--parchment); font-family:'Public Sans', sans-serif; min-height:100vh; padding:0 0 60px; font-size:17px;
   }
-  .app{ width:100%; max-width:780px; }
+  .app{ width:100%; max-width:820px; margin:28px auto 0; padding:0 16px; }
   .masthead{ text-align:center; margin-bottom:18px; }
-  .masthead .eyebrow{ font-size:13px; letter-spacing:.03em; color:var(--brass-bright); margin-bottom:4px; }
-  .masthead h1{ font-family:'Rye', serif; font-weight:400; font-size:clamp(26px,5vw,40px); margin:0; text-shadow:0 2px 0 var(--walnut-deep); }
-  .masthead .sub{ font-size:12.5px; color:var(--parchment); opacity:.7; margin-top:4px; }
+  .masthead .eyebrow{ font-size:13px; letter-spacing:.05em; color:var(--brass-bright); margin-bottom:4px; font-weight:700; }
+  .masthead h1{ font-family:'Rye', serif; font-weight:400; font-size:clamp(28px,5vw,42px); margin:0; text-shadow:0 2px 0 var(--walnut-deep); }
+  .masthead .sub{ font-size:16px; color:var(--parchment-dim); margin-top:6px; }
+  .back-link{ display:inline-block; margin-top:12px; font-size:15px; font-weight:700; color:var(--walnut-deep); background:var(--brass-bright); text-decoration:none; padding:9px 16px; border-radius:20px; }
+  .back-link:hover{ background:var(--brass); }
 
   .chapter-tabs{ display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; }
   .chapter-tab{
-    flex:1; min-width:130px; background:var(--walnut-deep); border:1px solid var(--line); border-radius:10px;
-    padding:9px 10px; text-align:center; opacity:.5;
+    flex:1; min-width:140px; background:var(--walnut-deep); border:1px solid var(--line); border-radius:10px;
+    padding:9px 10px; text-align:center; opacity:.55;
   }
   .chapter-tab.active{ border-color:var(--brass); background:rgba(176,141,87,0.12); opacity:1; }
   .chapter-tab.done{ opacity:.85; border-color:var(--sage); }
-  .chapter-tab .ct-name{ font-family:'Rye', serif; font-size:13.5px; }
-  .chapter-tab .ct-range{ font-size:9.5px; color:var(--parchment-dim); margin-top:2px; }
+  .chapter-tab .ct-name{ font-family:'Rye', serif; font-size:15px; }
+  .chapter-tab .ct-range{ font-size:12.5px; color:var(--parchment-dim); margin-top:2px; }
 
   .trail-wrap{ background:var(--walnut-deep); border:1px solid var(--line); border-radius:14px; padding:18px 14px 10px; margin-bottom:20px; overflow-x:auto; }
   .trail{ display:flex; align-items:center; min-width:700px; position:relative; padding:0 6px; }
@@ -44,58 +47,65 @@
   .stop{ flex:1; display:flex; flex-direction:column; align-items:center; position:relative; z-index:2; }
   .stop-dot{
     width:30px; height:30px; border-radius:50%; background:var(--walnut); border:3px solid var(--line);
-    display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--parchment-dim);
+    display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--parchment-dim);
   }
   .stop.done .stop-dot{ background:var(--sage); border-color:var(--sage-bright); color:var(--walnut-deep); }
   .stop.current .stop-dot{ background:var(--brass); border-color:var(--brass-bright); color:var(--walnut-deep); box-shadow:0 0 0 4px rgba(176,141,87,0.25); }
-  .stop-label{ font-size:9.5px; margin-top:6px; color:var(--parchment-dim); opacity:.7; }
+  .stop-label{ font-size:11.5px; margin-top:6px; color:var(--parchment-dim); opacity:.8; }
 
   .card{ background:var(--parchment); color:var(--ink); border-radius:16px; padding:28px 26px; box-shadow:0 10px 30px rgba(0,0,0,0.35); animation:rise .4s ease; }
+  @media (max-width:560px){ .card{ padding:22px 18px; } }
+  @media (prefers-reduced-motion: reduce){ .card{ animation:none; } }
   @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
   .card.correction{ background:#EAD9CE; }
 
   .character-row{ display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; }
   .portrait{ width:76px; height:76px; flex-shrink:0; border-radius:10px; border:2px solid var(--ink); background:var(--walnut); }
   .char-meta{ flex:1; }
-  .char-name{ font-family:'Rye', serif; font-size:22px; margin:0 0 2px; color:var(--ink); }
-  .char-role{ font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#6B5A42; margin:0 0 8px; }
+  .char-name{ font-family:'Rye', serif; font-size:23px; margin:0 0 2px; color:var(--ink); }
+  .char-role{ font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:#6B5A42; margin:0 0 8px; }
 
-  .body-text{ font-size:15.5px; line-height:1.6; margin:0 0 18px; }
+  .body-text{ font-size:17px; line-height:1.65; margin:0 0 18px; }
   .scenario-box{
     background:rgba(0,0,0,0.06); border-left:4px solid var(--brass); padding:14px 16px;
-    border-radius:6px; font-size:14.5px; line-height:1.55; margin-bottom:20px; font-style:italic;
+    border-radius:6px; font-size:16.5px; line-height:1.6; margin-bottom:20px; font-style:italic;
   }
 
   .primary-btn{
-    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:13px 22px;
-    font-size:15px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
+    background:var(--rust); color:#fff; border:none; border-radius:10px; padding:14px 22px; min-height:52px;
+    font-size:17px; font-weight:700; cursor:pointer; width:100%; transition:background .15s ease;
   }
   .primary-btn:hover{ background:var(--rust-bright); }
   .secondary-btn{
     background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:10px;
-    padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
+    padding:12px 20px; min-height:50px; font-size:16px; font-weight:700; cursor:pointer; width:100%; margin-top:10px;
   }
 
-  .q-num{ font-size:12px; font-weight:700; color:var(--rust); letter-spacing:.03em; margin-bottom:6px; }
-  .q-prompt{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .q-num{ font-size:13px; font-weight:700; color:var(--rust); letter-spacing:.04em; margin-bottom:6px; }
+  .q-prompt{ font-size:17px; font-weight:600; margin:0 0 10px; }
   .options{ display:flex; flex-direction:column; gap:8px; }
   .option{
-    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:11px 14px;
-    font-size:14.5px; font-family:inherit; cursor:pointer; color:var(--ink); transition:all .12s ease;
+    text-align:left; background:#fff; border:2px solid #D8C7A3; border-radius:8px; padding:12px 14px; min-height:48px;
+    font-size:16px; font-family:inherit; cursor:pointer; color:var(--ink); transition:all .12s ease;
   }
   .option:hover{ border-color:var(--brass); }
   .option.selected{ border-color:var(--ink); background:#F5EBD6; font-weight:600; }
   .option.correct{ border-color:var(--sage); background:#DCE9D6; }
   .option.incorrect{ border-color:var(--rust); background:#F2D9D4; }
   .option:disabled{ cursor:default; }
+  button:focus-visible, a:focus-visible{ outline:3px solid var(--brass-bright); outline-offset:2px; }
 
-  .feedback-banner{ display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:8px; font-size:14px; font-weight:700; margin-bottom:16px; }
+  .feedback-banner{ display:flex; align-items:center; gap:10px; padding:12px 14px; border-radius:8px; font-size:16px; font-weight:700; margin-bottom:16px; }
   .feedback-banner.pass{ background:#DCE9D6; color:#3C5533; }
   .feedback-banner.fail{ background:#F2D9D4; color:#7A2E23; }
 
   .final-question{ background:rgba(0,0,0,0.05); border-radius:10px; padding:16px; margin-top:6px; }
+  .records-box{ background:#F6EDDB; border:1px solid #D8C7A3; border-radius:10px; padding:14px 16px; margin:4px 0 16px; text-align:left; font-size:16px; line-height:1.6; }
+  .records-box b{ display:block; font-family:'Rye', serif; font-weight:400; font-size:19px; margin-bottom:4px; }
+  .records-box ul{ margin:6px 0 0; padding-left:22px; }
+  .records-box li{ margin-bottom:6px; }
 
-  .footer-note{ text-align:center; font-size:11.5px; color:var(--parchment-dim); opacity:.55; margin-top:18px; line-height:1.5; }
+  .footer-note{ text-align:center; font-size:14.5px; color:var(--parchment-dim); opacity:.85; margin-top:18px; line-height:1.6; }
 
   .complete-screen{ text-align:center; }
   .complete-screen .badge{
@@ -105,11 +115,14 @@
 </style>
 </head>
 <body>
+<div id="khgn-nav"></div>
+<script src="/khgn-nav.js"></script>
 <div class="app">
   <div class="masthead">
-    <div class="eyebrow">KHGN HISTORICAL JOURNEY SERIES</div>
+    <div class="eyebrow">KHGN STORY TRAILS</div>
     <h1>The Road to Kentucky</h1>
-    <div class="sub">From an agent's promise in Ireland to a homestead in Kentucky</div>
+    <div class="sub">From an agent's promise in Ireland to a claim on Kentucky land</div>
+    <a class="back-link" href="game-portal.html">&larr; Back to the Trailhead</a>
   </div>
 
   <div class="chapter-tabs" id="chapter-tabs"></div>
@@ -117,7 +130,7 @@
   <div id="stage"></div>
 
   <div class="footer-note">
-    Kentucky History &amp; Genealogy Network, Inc. — a composite story illustrating a common path many Kentucky settlers actually followed.<br>
+    Kentucky History and Genealogy Network, Inc. — a composite story illustrating a path many Kentucky settlers actually followed.<br>
     Missing the final question at any stop sends you back to the beginning of the journey.
   </div>
 </div>
@@ -171,7 +184,7 @@ const CHAPTERS = [
   { name: "The Agent's Promise", range: [1,2], guideName: "Mr. Kane", guideRole: "Land Agent", guideSvg: AGENT_KANE_SVG },
   { name: "The Crossing", range: [3,4], guideName: "Captain Byrne", guideRole: "Ship's Captain", guideSvg: CAPTAIN_BYRNE_SVG },
   { name: "The Indenture", range: [5,8], guideName: "Mr. Ashford", guideRole: "Land Manager, Virginia Land Company", guideSvg: LAND_MANAGER_SVG },
-  { name: "The Muster & the Patent", range: [9,12], guideName: "Captain Marsh", guideRole: "Virginia Militia Officer", guideSvg: CAPTAIN_MARSH_SVG }
+  { name: "The State Line & the Warrant", range: [9,12], guideName: "Captain Marsh", guideRole: "Virginia State Line Officer", guideSvg: CAPTAIN_MARSH_SVG }
 ];
 
 function chapterForStop(stop){
@@ -258,7 +271,7 @@ const STOPS = [
   },
   {
     title: "Fulfilling the Indenture",
-    scenario: `As Conor's term nears its end, Ashford must fulfill the remaining terms of the indenture contract — providing Conor's promised freedom dues and formally releasing him from service, now a trained, though not yet master-level, tradesman.`,
+    scenario: `As Conor's term ends, Ashford fulfills the remaining terms of the indenture contract — providing Conor's promised freedom dues and formally releasing him from service, now a trained, though not yet master-level, tradesman. Conor is free, but he has no land, little money, and war has come to Virginia.`,
     prompt: "What did completing the indenture term typically mean for a servant like Conor?",
     options: [
       "Legal release from bound service, along with promised freedom dues, while still leaving him short of land, savings, or the top tier of his trade.",
@@ -268,36 +281,36 @@ const STOPS = [
     ], correct: 0
   },
   {
-    title: "A Faster Path",
-    scenario: `With his indenture not yet fully paid, Conor learns that his original contract included a provision allowing enlistment in the Virginia militia to satisfy the remaining debt — far more quickly than continuing years of trade labor.`,
-    prompt: "How did military enlistment relate to Conor's original indenture contract?",
+    title: "Enlisting in the State Line",
+    scenario: `With the Revolution under way, Captain Marsh is recruiting for one of Virginia's State Line regiments — the state's own regular troops, enlisted for set terms, unlike the county militia, who mustered for short periods close to home. Virginia's legislature has promised that soldiers who serve in its Continental and State Line regiments will be rewarded with land. Now free of his indenture, Conor enlists.`,
+    prompt: "Why did it matter that Conor enlisted in the Virginia State Line, rather than serving only in the county militia?",
     options: [
-      "The indenture contract itself included a provision allowing military enlistment to satisfy the remaining debt far more quickly than continuing years of labor.",
-      "Enlistment had no connection whatsoever to the indenture contract's terms.",
-      "Enlistment automatically voided the indenture contract without satisfying any of its terms.",
-      "Only Ashford, not Conor, was permitted to fulfill the indenture through enlistment."
+      "Virginia's bounty land laws rewarded service in its Continental Line and State Line regiments; ordinary militia duty generally did not earn bounty land.",
+      "Militia service earned more land than any other kind of service.",
+      "There was no difference; every kind of service earned the same land bounty.",
+      "State Line soldiers were paid only in land and received no wages at all."
     ], correct: 0
   },
   {
     title: "Service in the Revolution",
-    scenario: `Conor enlists and serves through several campaigns of the Revolutionary War — long marches, scarce supplies, and combat — service that Virginia's government records carefully for the purpose of future compensation.`,
-    prompt: "Why did it matter that Conor's military service was carefully documented at the time?",
+    scenario: `Conor serves through several campaigns of the Revolutionary War — long marches, scarce supplies, and combat. His enlistment, his company, and his time of service are recorded, and at the end he receives a written discharge, which he keeps carefully.`,
+    prompt: "Why did it matter that Conor's service was carefully documented, and that he kept his discharge?",
     options: [
-      "Documentation of service was later required to prove eligibility for the land bounty promised under the indenture contract's military clause.",
+      "Proof of service was required to claim the bounty land Virginia promised; without records or a discharge, a veteran could struggle to prove he qualified.",
       "Military records were purely ceremonial and had no practical use afterward.",
       "Only officers' service was ever recorded; enlisted soldiers received no documentation at all.",
-      "Service records were routinely destroyed immediately after the war ended."
+      "Discharges were collected and destroyed when the war ended."
     ], correct: 0
   },
   {
-    title: "The Patent Written Into the Contract",
-    scenario: `Because his original indenture contract included the military service clause, Conor's completed enlistment does double duty: it satisfies his remaining debt to Ashford, and it entitles him, under that same contract, to a land bounty warrant — a military patent — for acreage in the Virginia Military District, in what would become Kentucky. Like most such warrants, his is fully transferable: he could sell it outright to a land speculator or a family member instead of ever traveling west himself. What he decides to do with it is still ahead of him.`,
-    prompt: "Why is it significant that the land bounty was written into the original indenture contract, rather than being a separate, unrelated opportunity?",
+    title: "The Bounty Warrant",
+    scenario: `After the war, Conor presents proof of his service, and Virginia issues him a military bounty land warrant: the right to a set number of acres, based on his rank and length of service. Virginia had set aside a Military District for these warrants in Kentucky, south of the Green River. Like most such warrants, his is transferable: he could locate and claim the land himself, or sell the warrant to someone else. What he decides is still ahead of him.`,
+    prompt: "Where could Conor's Virginia military warrant be used to claim land?",
     options: [
-      "It meant Conor's path to freedom, trade skill, and land ownership were all connected through a single continuous legal arrangement, rather than three unrelated strokes of luck.",
-      "It meant the land bounty had nothing to do with his military service at all.",
-      "It meant Ashford, not Conor, received the land bounty instead.",
-      "It meant the indenture contract became void the moment Conor enlisted."
+      "In the Military District Virginia set aside south of the Green River, in what would become Kentucky.",
+      "Anywhere in Kentucky, including the eastern mountains.",
+      "Only on the Virginia Land Company's property, as part of his old indenture.",
+      "Only in Ireland, where he was born."
     ], correct: 0
   }
 ];
@@ -359,10 +372,10 @@ function renderIntro(){
     <p class="body-text">
       "A word, friend, if you've a moment. What follows isn't one man's story alone — it's the story
       of thousands who left Ireland behind: hard harvests, harder laws, and no land left to inherit.
-      They left with nothing but a promise and a debt, and found, years later, that the very same
-      contract that bound them also carried the seed of their freedom — a trade, a uniform, and in
-      the end, land of their own in a place called Kentucky. It started, as these things often did,
-      with someone like me making an offer worth signing for. Let's begin there."
+      They left with nothing but a promise and a debt. Their years of bound service gave them a trade,
+      a war gave them the chance to earn land, and in the end, a piece of paper gave them a choice
+      about a place called Kentucky. It started, as these things often did, with someone like me
+      making an offer worth signing for. Let's begin there."
     </p>
     <button class="primary-btn" onclick="startJourney()">Begin the Journey</button>
   </div>`;
@@ -403,10 +416,9 @@ function renderStop(stopIndex){
     html += `<button class="primary-btn" style="margin-top:16px;" onclick="submitAnswer(${stopIndex})">Submit Answer</button>`;
   } else {
     const correct = quizAnswers[stopIndex] === stop.correct;
-    const isLast = stopIndex === TOTAL_STOPS;
     if(correct){
       html += `<div class="feedback-banner pass">✓ Correct — the journey continues.</div>
-      <button class="primary-btn" onclick="advance()">${isLast ? 'Complete the Journey' : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+      <button class="primary-btn" onclick="advance()">${stopIndex + 1 === TOTAL_STOPS ? 'Face the Choice' : 'Continue to Stop ' + (stopIndex+1)}</button>`;
     } else {
       html += `<div class="feedback-banner fail">⚠ Not quite. ${ch.guideName} would like a word.</div>
       <button class="primary-btn" onclick="goToCorrection(${stopIndex})">Hear ${ch.guideName} Out</button>`;
@@ -443,6 +455,18 @@ function renderCorrection(stopIndex){
   </div>`;
 }
 
+const RECORDS_BOX = `
+  <div class="records-box">
+    <b>Finding a real Conor in the records</b>
+    Veterans like Conor left a trail you can still follow today:
+    <ul>
+      <li><strong>Virginia bounty warrants and military warrants:</strong> the Library of Virginia</li>
+      <li><strong>Surveys and patents in the Military District, and Kentucky's other land grants:</strong> the Kentucky Land Office</li>
+      <li><strong>Deeds for land bought or sold:</strong> the county clerk, and the parent county if the county formed later</li>
+      <li><strong>Pension files:</strong> the National Archives. Decades later, under the act of 1832, many veterans, including militia men who never earned bounty land, applied for pensions, describing their service in their own words.</li>
+    </ul>
+  </div>`;
+
 function renderChoiceOrEnding(){
   const ch = chapterForStop(12);
   if(!chosenEnding){
@@ -451,18 +475,18 @@ function renderChoiceOrEnding(){
       <div class="character-row">
         <div class="portrait">${ch.guideSvg}</div>
         <div class="char-meta">
-          <p class="char-name">The Patent in Hand</p>
+          <p class="char-name">The Warrant in Hand</p>
           <p class="char-role">${ch.guideName} · Stop 12 of ${TOTAL_STOPS}</p>
         </div>
       </div>
       <p class="body-text">
-        "The patent is yours now, Conor — proof enough to sell to the highest bidder, or a claim
-        you could ride west and settle yourself. Land agents and speculators are already circling,
-        offering hard coin today for paper that might take years of hard labor to turn into a
-        working farm. What'll it be?"
+        "The warrant is yours now, Conor. You could carry it west yourself: pick out your land in
+        the Military District south of the Green River, have it surveyed, and claim it. Or you could
+        sell it today. Speculators are already circling, offering hard coin for paper that might take
+        years of hard travel and labor to turn into a working farm. What'll it be?"
       </p>
-      <button class="primary-btn" onclick="chooseEnding('settle')">Keep the Patent — Ride to Kentucky and Settle It</button>
-      <button class="secondary-btn" onclick="chooseEnding('sell')">Sell the Patent to a Speculator</button>
+      <button class="primary-btn" onclick="chooseEnding('settle')">Keep the Warrant — Locate and Claim the Land</button>
+      <button class="secondary-btn" onclick="chooseEnding('sell')">Sell the Warrant to a Speculator</button>
     </div>`;
   }
   if(chosenEnding === 'settle'){
@@ -471,18 +495,20 @@ function renderChoiceOrEnding(){
       <div class="badge">🏡</div>
       <p class="char-name" style="font-size:26px;">A Kentucky Landowner</p>
       <p class="body-text" style="text-align:left;">
-        Conor travels to Kentucky, surveys his bounty land, builds a house, and clears a garden
-        plot to satisfy the settlement requirement attached to his patent. He is now a landowner,
-        a veteran, and a permanent resident of Kentucky — an indenture begun years before with an
-        agent's promise in Ireland, finally paid in full through every stage of the journey.
+        Conor travels to the Military District south of the Green River and follows the steps every
+        Kentucky land claim required: he makes an <strong>entry</strong> reserving his chosen tract,
+        a surveyor runs its lines in a <strong>survey</strong>, and in time he receives a
+        <strong>grant</strong>, the patent that makes the land his. He builds a cabin and clears his
+        fields: a landowner, a veteran, and a Kentuckian, an indenture begun years before with an
+        agent's promise in Ireland, finally turned into land of his own.
       </p>
       <p class="body-text" style="text-align:left;">
-        It's worth remembering, though, that this was one outcome among several: a great many
-        veterans instead sold their warrants to land speculators or relatives and never set foot
-        on the land themselves — which is exactly why land speculation became such a large and
-        controversial business on the Kentucky frontier.
+        It's worth remembering that this was one outcome among several: a great many veterans sold
+        their warrants and never set foot on the land, which is exactly why land speculation became
+        such a large and controversial business on the Kentucky frontier.
       </p>
-      <button class="primary-btn" onclick="chooseEnding('sell')">What if he'd sold the patent instead?</button>
+      ${RECORDS_BOX}
+      <button class="primary-btn" onclick="chooseEnding('sell')">What if he'd sold the warrant instead?</button>
       <button class="secondary-btn" onclick="resetJourney()">Walk the Whole Journey Again</button>
     </div>`;
   }
@@ -491,20 +517,22 @@ function renderChoiceOrEnding(){
       <div class="badge">📜</div>
       <p class="char-name" style="font-size:26px;">The Speculator's Offer</p>
       <p class="body-text" style="text-align:left;">
-        Conor decides the sure thing is better than the gamble. He sells his patent to a land
-        speculator working out of Richmond for a lump sum — good money by the standards of a
-        jobbing journeyman carpenter. He never travels to Kentucky at all. Instead, he uses the
-        proceeds to set up his own small carpentry shop in a growing Virginia town, eventually
-        earning full recognition as a master carpenter in his own right.
+        Conor decides the sure thing is better than the gamble. He sells his warrant to a land
+        speculator for a lump sum, good money by the standards of a journeyman carpenter. Years later,
+        his trade well established, he follows the road into the Kentucky mountains anyway, and
+        <strong>buys a farm by deed</strong> from an earlier owner, recorded in the county clerk's
+        deed books. Like many eastern Kentucky families, he became a landowner by purchase, not by
+        bounty.
       </p>
       <p class="body-text" style="text-align:left;">
-        The acreage he once held on paper is surveyed, settled, and eventually farmed — but by
-        someone else entirely, a family who bought the land from the speculator years later, with
-        no idea a soldier named Conor ever held the original claim. This, too, was a common
-        outcome: warrants changed hands constantly, and the men whose service earned them often
-        never saw the land at all.
+        Meanwhile, the acreage his warrant once promised is located, surveyed, and patented south of
+        the Green River by the speculator's buyers, families with no idea a soldier named Conor ever
+        held the right to it. This, too, was common: warrants changed hands constantly, and the men
+        whose service earned them often never saw that land at all. A researcher looking only for
+        Conor's bounty land would never find his farm; the deed books would.
       </p>
-      <button class="primary-btn" onclick="chooseEnding('settle')">What if he'd kept and settled the patent instead?</button>
+      ${RECORDS_BOX}
+      <button class="primary-btn" onclick="chooseEnding('settle')">What if he'd kept the warrant and claimed the land?</button>
       <button class="secondary-btn" onclick="resetJourney()">Walk the Whole Journey Again</button>
     </div>`;
 }
@@ -512,6 +540,7 @@ function renderChoiceOrEnding(){
 function chooseEnding(which){
   chosenEnding = which;
   render();
+  window.scrollTo(0, 0);
 }
 
 function render(){
@@ -550,9 +579,8 @@ function answerFinal(stopIndex, chosenIndex){
     else if(i === chosenIndex) btn.classList.add('incorrect');
   });
   if(chosenIndex === stop.correct){
-    const isLast = stopIndex === TOTAL_STOPS;
     resultDiv.innerHTML = `<div class="feedback-banner pass" style="margin-top:14px;">✓ That's it exactly.</div>
-    <button class="primary-btn" onclick="advance()">${isLast ? 'Complete the Journey' : 'Continue to Stop ' + (stopIndex+1)}</button>`;
+    <button class="primary-btn" onclick="advance()">${stopIndex + 1 === TOTAL_STOPS ? 'Face the Choice' : 'Continue to Stop ' + (stopIndex+1)}</button>`;
   } else {
     resultDiv.innerHTML = `<div class="feedback-banner fail" style="margin-top:14px;">✗ Still not quite. Back to the beginning of the journey.</div>
     <button class="primary-btn" onclick="resetJourney()">Return to the Dock</button>`;
@@ -562,4 +590,4 @@ function answerFinal(stopIndex, chosenIndex){
 render();
 </script>
 </body>
-</html>w
+</html>
