@@ -66,7 +66,17 @@
     ".khgn-legal p{margin:0 0 10px}",
     ".khgn-legal strong{color:#D4AF6A}",
     ".khgn-legal a{color:#D4AF6A;font-weight:700}",
-    ".khgn-legal a:focus-visible{outline:3px solid #D4AF6A;outline-offset:2px}"
+    ".khgn-legal a:focus-visible{outline:3px solid #D4AF6A;outline-offset:2px}",
+    ".khgn-share{max-width:1000px;margin:40px auto 0;padding:0 20px;box-sizing:border-box;font-family:'Public Sans',Arial,sans-serif}",
+    ".khgn-share-inner{background:#1C140F;border:1px solid #4A392A;border-radius:12px;padding:16px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}",
+    ".khgn-share-label{font-weight:800;color:#D4AF6A;font-size:16px;margin-right:4px}",
+    ".khgn-share a,.khgn-share button{display:inline-flex;align-items:center;min-height:46px;padding:10px 16px;border-radius:8px;font:700 16px 'Public Sans',Arial,sans-serif;text-decoration:none;cursor:pointer;border:2px solid #B08D57;background:transparent;color:#EDE0C8}",
+    ".khgn-share a:hover,.khgn-share button:hover{border-color:#D4AF6A;color:#D4AF6A}",
+    ".khgn-share .ks-fb{background:#2F5F8A;border-color:#2F5F8A;color:#fff}",
+    ".khgn-share .ks-fb:hover{background:#3B72A3;border-color:#3B72A3;color:#fff}",
+    ".khgn-share a:focus-visible,.khgn-share button:focus-visible{outline:3px solid #D4AF6A;outline-offset:2px}",
+    ".khgn-share .ks-status{font-size:15px;color:#E0D0AC}",
+    ".khgn-legal{margin-top:20px}"
   ].join("");
   function buildFooter() {
     if (document.querySelector(".khgn-legal")) { return; }
@@ -75,7 +85,42 @@
     var inner = document.createElement("div"); inner.className = "khgn-legal-inner";
     inner.innerHTML = FOOTER.join("").replace(/__MAIN__/g, onMain ? "" : MAIN);
     f.appendChild(inner);
+    if (onMain) { document.body.appendChild(buildShare()); }
     document.body.appendChild(f);
+  }
+
+  /* ---------- Share this page (simple links: nothing loads from Facebook until clicked) ---------- */
+  function buildShare() {
+    var canon = document.querySelector('link[rel="canonical"]');
+    var url = canon ? canon.href : (location.origin + location.pathname);
+    var title = document.title || "KHGN, Inc.";
+    var wrap = document.createElement("div"); wrap.className = "khgn-share"; wrap.setAttribute("role", "region"); wrap.setAttribute("aria-label", "Share this page");
+    var box = document.createElement("div"); box.className = "khgn-share-inner";
+    var label = document.createElement("span"); label.className = "khgn-share-label"; label.textContent = "Share this page:";
+    box.appendChild(label);
+    var fb = document.createElement("a"); fb.className = "ks-fb"; fb.textContent = "Share on Facebook";
+    fb.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+    fb.target = "_blank"; fb.rel = "noopener";
+    box.appendChild(fb);
+    var em = document.createElement("a"); em.textContent = "Email";
+    em.href = "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent("I thought you might like this page from KHGN, Inc.:\n\n" + url);
+    box.appendChild(em);
+    var status = document.createElement("span"); status.className = "ks-status"; status.setAttribute("role", "status"); status.setAttribute("aria-live", "polite");
+    var cp = document.createElement("button"); cp.type = "button"; cp.textContent = "Copy link";
+    cp.addEventListener("click", function () {
+      var done = function () { status.textContent = "Link copied."; setTimeout(function () { status.textContent = ""; }, 2500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, function () { status.textContent = url; }); }
+      else { status.textContent = url; }
+    });
+    box.appendChild(cp);
+    if (navigator.share) {
+      var ns = document.createElement("button"); ns.type = "button"; ns.textContent = "More ways to share";
+      ns.addEventListener("click", function () { navigator.share({ title: title, url: url }).catch(function () {}); });
+      box.appendChild(ns);
+    }
+    box.appendChild(status);
+    wrap.appendChild(box);
+    return wrap;
   }
 
   function currentKey() {
