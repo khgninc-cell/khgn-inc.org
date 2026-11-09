@@ -1,2 +1,16 @@
+# Knox County, KHGN, Inc. - At a Glance banner
+# Lines starting with # are notes and do not appear on the page.
+# VERIFY each fact against the sources below before uploading.
+# Upload to: counties/knox/about.txt in the public repository.
+
+Formed | 1799
+Formed from | Lincoln County
+Named for | Henry Knox, the first U.S. Secretary of War
+History | Knox County was created by the Kentucky General Assembly in 1799 from Lincoln County, on the frontier's southeastern edge, where the Wilderness Road carried settlers from Cumberland Gap into Kentucky. Its county seat, Barbourville, was named for James Barbour, who gave land for the town.
+History | Long before the county existed, in 1750, Dr. Thomas Walker built a small cabin near present-day Barbourville while exploring for the Loyal Land Company, one of the earliest known buildings raised by English-speaking explorers in what would become Kentucky.
+History | As settlement grew, parts of Knox County went to form several later counties, including Clay, Rockcastle, Whitley, Harlan, Laurel, and Bell. Researchers tracing early Knox County families should look in those counties' records as well.
 History | The Mountain Echo, first published in Barbourville in 1873, moved to London in 1875, where it later became part of the Sentinel-Echo. In 1904, Barbourville gained its own paper, the Mountain Advocate, still published today. Two papers whose names, together, echo the original.
-Source | The Sentinel-Echo, "About Us"; Laurel County History Museum timeline
+Source | John E. Kleber, ed., The Kentucky Encyclopedia (Lexington: University Press of Kentucky, 1992)
+Source | Acts of the Kentucky General Assembly, Kentucky Department for Libraries and Archives
+Source | Kentucky State Parks, Dr. Thomas Walker State Historic Site
+Source | The Sentinel-Echo, "About Us"; Laurel County History Museum timeline; Kentucky Genealogical Society
