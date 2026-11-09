@@ -1,0 +1,13 @@
+# Jackson County, KHGN, Inc. - At a Glance banner
+# Lines starting with # are notes and do not appear on the page.
+# VERIFY each fact against the sources below before uploading.
+# Upload to: counties/jackson/about.txt in the public repository.
+
+Formed | 1858
+Formed from | Parts of Clay, Estill, Laurel, Madison, Owsley, and Rockcastle counties
+Named for | Andrew Jackson, seventh President of the United States
+History | Jackson County was created by the Kentucky General Assembly in 1858 from parts of six neighboring counties, in the hills between the Kentucky River's forks and the Rockcastle River. Its county seat, McKee, was named for Judge George R. McKee.
+History | Because Jackson County was formed so late, records for families living there before 1858 are found in its six parent counties. Researchers should check the records of Clay, Estill, Laurel, Madison, Owsley, and Rockcastle counties for earlier deeds, marriages, and court records.
+History | A note for researchers: Jackson County is not the same as the town of Jackson, which is the county seat of Breathitt County. Records labeled "Jackson, Kentucky" may belong to either, so check the county named in the record.
+Source | John E. Kleber, ed., The Kentucky Encyclopedia (Lexington: University Press of Kentucky, 1992)
+Source | Acts of the Kentucky General Assembly, Kentucky Department for Libraries and Archives
