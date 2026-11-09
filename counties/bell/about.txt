@@ -1,0 +1,15 @@
+# Bell County, KHGN, Inc. - At a Glance banner
+# Lines starting with # are notes and do not appear on the page.
+# VERIFY each fact against the sources below before uploading.
+# Upload to: counties/bell/about.txt in the public repository.
+
+Formed | 1867
+Formed from | Parts of Knox and Harlan counties
+Named for | Joshua Fry Bell, Kentucky congressman (first named Josh Bell County)
+History | Bell County was created by the Kentucky General Assembly in 1867 from parts of Knox and Harlan counties. It was first called Josh Bell County, and the name was later shortened to Bell. Its county seat, Pineville, grew up at Cumberland Ford, where the Wilderness Road crossed the Cumberland River.
+History | Cumberland Gap, the mountain pass through which thousands of settlers entered Kentucky on the Wilderness Road, lies at Bell County's southeastern corner, where Kentucky, Virginia, and Tennessee meet. It is now preserved as Cumberland Gap National Historical Park.
+History | Middlesboro, the county's largest city, was founded in the late 1880s as a planned industrial town, financed largely by English investors and built in a broad, bowl-shaped valley.
+History | Because Bell County was formed in 1867, records for families living there before then are found in Knox and Harlan counties. Researchers should check both for earlier deeds, marriages, and court records.
+Source | John E. Kleber, ed., The Kentucky Encyclopedia (Lexington: University Press of Kentucky, 1992)
+Source | Acts of the Kentucky General Assembly, Kentucky Department for Libraries and Archives
+Source | National Park Service, Cumberland Gap National Historical Park
