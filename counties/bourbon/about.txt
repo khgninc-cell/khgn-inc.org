@@ -1,0 +1,14 @@
+# Bourbon County, KHGN, Inc. - At a Glance banner
+# Lines starting with # are notes and do not appear on the page.
+# VERIFY each fact against the sources below before uploading.
+# Upload to: counties/bourbon/about.txt in the public repository.
+
+Formed | 1785, by the Virginia legislature, before Kentucky's statehood
+Formed from | Fayette County
+Named for | The French royal House of Bourbon, honoring France's aid during the American Revolution
+History | Bourbon County is one of the counties Virginia created in its Kentucky district before statehood. Formed in 1785 from Fayette County, the original Bourbon County covered a vast area of northern and eastern Kentucky, sometimes called "Old Bourbon."
+History | Its county seat, Paris, was first known as Hopewell, then Bourbonton, before taking the name Paris, another tribute to France.
+History | Because Old Bourbon was so large, many later counties were formed wholly or partly from its territory. Researchers tracing early families anywhere in northern and eastern Kentucky may find them in Bourbon County's early records, and records from before 1785 are found in Fayette County.
+History | The county's name is also linked in popular history to bourbon whiskey, though historians still debate exactly how the spirit got its name.
+Source | John E. Kleber, ed., The Kentucky Encyclopedia (Lexington: University Press of Kentucky, 1992)
+Source | Acts of the Virginia General Assembly, Library of Virginia; Acts of the Kentucky General Assembly, Kentucky Department for Libraries and Archives
