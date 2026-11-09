@@ -1,0 +1,13 @@
+# Adair County, KHGN, Inc. - At a Glance banner
+# Lines starting with # are notes and do not appear on the page.
+# VERIFY each fact against the sources below before uploading.
+# Upload to: counties/adair/about.txt in the public repository.
+
+Formed | 1801
+Formed from | Green County
+Named for | John Adair, Revolutionary War and War of 1812 officer, and later Governor of Kentucky
+History | Adair County was created by the Kentucky General Assembly in 1801 from Green County, in the rolling hills of south-central Kentucky. Its county seat is Columbia, home of Lindsey Wilson College.
+History | Records for families living in the area before 1801 are found in Green County, and before Green County's creation in 1792, in its own parent counties. Researchers should follow that chain back when tracing early families.
+History | As settlement grew, parts of Adair County went to form later counties, including Russell and Metcalfe. Researchers tracing Adair County families should look in those counties' records as well.
+Source | John E. Kleber, ed., The Kentucky Encyclopedia (Lexington: University Press of Kentucky, 1992)
+Source | Acts of the Kentucky General Assembly, Kentucky Department for Libraries and Archives
