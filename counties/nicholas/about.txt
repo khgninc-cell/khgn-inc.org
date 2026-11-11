@@ -1,0 +1,13 @@
+# Nicholas County, KHGN, Inc. - At a Glance banner (DRAFT for review)
+# Lines starting with # are notes and do not appear on the page.
+# VERIFY each fact against the sources below before uploading.
+# Upload to: counties/nicholas/about.txt in the public repository.
+
+Formed | 1799
+Formed from | Parts of Bourbon and Mason counties
+Named for | George Nicholas, Kentucky's first attorney general and a leading author of the state's first constitution
+History | Nicholas County was created by the Kentucky General Assembly in 1799, seven years after Kentucky became a state, from parts of Bourbon and Mason counties in the northern Bluegrass. Its county seat is Carlisle.
+History | The county honors George Nicholas, a Revolutionary War officer from Virginia who moved to Kentucky and helped write the Kentucky Constitution of 1792, then served as the new state's first attorney general.
+History | Because Nicholas County was formed in 1799, records for families living there before then are found in Bourbon and Mason counties, and before those, in their own parent counties. Researchers should follow that chain back when tracing early families.
+Source | John E. Kleber, ed., The Kentucky Encyclopedia (Lexington: University Press of Kentucky, 1992)
+Source | Acts of the Kentucky General Assembly, Kentucky Department for Libraries and Archives
