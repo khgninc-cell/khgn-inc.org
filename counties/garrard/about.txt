@@ -1,0 +1,15 @@
+# Garrard County, KHGN, Inc. - At a Glance banner (DRAFT for review)
+# Lines starting with # are notes and do not appear on the page.
+# VERIFY each fact against the sources below before uploading.
+# Upload to: counties/garrard/about.txt in the public repository.
+
+Formed | 1797
+Formed from | Parts of Madison, Lincoln, and Mercer counties
+Named for | James Garrard, the second Governor of Kentucky
+History | Garrard County was created by the Kentucky General Assembly in 1797 from parts of Madison, Lincoln, and Mercer counties, in the southern Bluegrass along the Dix River and Paint Lick Creek. Its county seat is Lancaster.
+History | During the Civil War, Camp Dick Robinson, in northern Garrard County, was established in 1861 as one of the first Union recruiting camps south of the Ohio River.
+History | Garrard County gave Kentucky two governors, William Owsley and Robert P. Letcher, both of Lancaster.
+History | Because Garrard County was formed in 1797, records for families living there before then are found in Madison, Lincoln, and Mercer counties. Researchers should check all three for earlier deeds, marriages, and court records.
+Source | John E. Kleber, ed., The Kentucky Encyclopedia (Lexington: University Press of Kentucky, 1992)
+Source | Acts of the Kentucky General Assembly, Kentucky Department for Libraries and Archives
+Source | Kentucky Historical Society, Kentucky Historical Marker Program
