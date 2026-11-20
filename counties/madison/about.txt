@@ -1,0 +1,15 @@
+# Madison County, KHGN, Inc. - At a Glance banner (DRAFT for review)
+# Lines starting with # are notes and do not appear on the page.
+# VERIFY each fact against the sources below before uploading.
+# Upload to: counties/madison/about.txt in the public repository.
+
+Formed | 1785, by the Virginia legislature, before Kentucky's statehood
+Formed from | Lincoln County
+Named for | James Madison, then a member of the Virginia legislature and later fourth President of the United States
+History | Madison County is one of the counties Virginia created in its Kentucky district before statehood. Formed in 1785 from Lincoln County, it lies where the Bluegrass meets the foothills of the mountains. Its county seat is Richmond.
+History | Fort Boonesborough, founded in 1775 by Daniel Boone and his party on the Kentucky River, stood in what became Madison County. It was one of the earliest settlements in Kentucky, and many early Kentucky families passed through it.
+History | Berea, home of Berea College, founded in 1855, and Richmond, home of Eastern Kentucky University, have made the county a center of learning. The Battle of Richmond was fought near the county seat in August 1862, during the Civil War.
+History | Records for families in the area before 1785 are found in Lincoln County. As settlement grew, parts of Madison County went to form later counties, including Garrard, Estill, Rockcastle, and Jackson, so researchers should check those counties' records as well.
+Source | John E. Kleber, ed., The Kentucky Encyclopedia (Lexington: University Press of Kentucky, 1992)
+Source | Acts of the Virginia General Assembly, Library of Virginia; Acts of the Kentucky General Assembly, Kentucky Department for Libraries and Archives
+Source | Kentucky State Parks, Fort Boonesborough State Park
