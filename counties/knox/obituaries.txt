@@ -1,0 +1,3 @@
+# Knox County obituaries. One entry per line: Name | Date of death | Newspaper and date | Text
+# Items at least 100 years old (public domain), proofread against the original.
+Oliver Partin | Died Monday night, January 9, 1922 | Mountain Advocate (Barbourville, Ky.), January 20, 1922, page 4, King News column | "Uncle Oliver Partin, of Poplar Creek, died Monday night, Jan. 9. His wife died only a few days before."
