@@ -1,0 +1,14 @@
+# Washington County, KHGN, Inc. - At a Glance banner (DRAFT for review)
+# Lines starting with # are notes and do not appear on the page.
+# VERIFY each fact against the sources below before uploading.
+# Upload to: counties/washington/about.txt in the public repository.
+
+Formed | 1792, the first county created after Kentucky became a state
+Formed from | Nelson County
+Named for | George Washington, first President of the United States
+History | Washington County was created by the Kentucky General Assembly in 1792, in the first months after Kentucky became a state, from part of Nelson County. Its county seat is Springfield.
+History | Thomas Lincoln and Nancy Hanks, the parents of Abraham Lincoln, were married in Washington County in 1806. Lincoln Homestead State Park, near Springfield, preserves sites connected to the Lincoln family's years in the county.
+History | Records for families in the area before 1792 are found in Nelson County. In 1834, the southern part of Washington County became Marion County, so researchers tracing early families should check Marion County's records as well.
+Source | John E. Kleber, ed., The Kentucky Encyclopedia (Lexington: University Press of Kentucky, 1992)
+Source | Acts of the Kentucky General Assembly, Kentucky Department for Libraries and Archives
+Source | Kentucky State Parks, Lincoln Homestead State Park
