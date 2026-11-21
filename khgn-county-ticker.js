@@ -17,7 +17,7 @@
 
   var css = [
     ".kt-bar{background:#241A13;border-top:1px solid #4A392A;color:#EDE0C8;font-family:'Public Sans',Arial,sans-serif}",
-    ".kt-inner{max-width:1100px;margin:0 auto;padding:7px 20px;display:flex;align-items:center;gap:12px;min-height:40px;box-sizing:border-box}",
+    ".kt-inner{max-width:1100px;margin:0 auto;padding:7px 20px;display:flex;align-items:center;gap:12px;min-height:52px;box-sizing:border-box}",
     ".kt-label{flex-shrink:0;font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#D4AF6A}",
     ".kt-stage{flex:1 1 auto;min-width:0}",
     ".kt-item{display:flex;align-items:center;gap:10px;min-width:0;color:#EDE0C8;text-decoration:none;transition:opacity .45s ease}",
@@ -30,7 +30,7 @@
     ".kt-btn{width:38px;height:38px;border-radius:6px;border:1px solid #4A392A;background:#1C140F;color:#EDE0C8;cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center}",
     ".kt-btn:hover{border-color:#D4AF6A}",
     ".kt-btn:focus-visible{outline:3px solid #D4AF6A;outline-offset:2px}",
-    "@media (max-width:700px){.kt-label{display:none}.kt-text{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}}",
+    "@media (max-width:700px){.kt-label{display:none}.kt-inner{min-height:66px}.kt-text{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}}",
     "@media (prefers-reduced-motion:reduce){.kt-item{transition:none}}"
   ].join("");
 
@@ -54,10 +54,21 @@
     }).catch(function () { return ""; });
   }
 
+  var shell = null;
+  function makeShell() {
+    var nav = document.querySelector(".site-nav");
+    if (!nav || document.querySelector(".kt-bar")) { return null; }
+    var style = document.createElement("style"); style.textContent = css; document.head.appendChild(style);
+    var bar = document.createElement("div"); bar.className = "kt-bar kt-waiting";
+    bar.setAttribute("aria-hidden", "true");
+    bar.innerHTML = '<div class="kt-inner"><span class="kt-label">&nbsp;</span><div class="kt-stage"><span class="kt-text">&nbsp;</span></div><div class="kt-ctrls"><span class="kt-btn" style="visibility:hidden"></span></div></div>';
+    nav.appendChild(bar);
+    return bar;
+  }
   function build(items, labelText) {
     var nav = document.querySelector(".site-nav");
+    if (shell && shell.parentNode) { shell.parentNode.removeChild(shell); }
     if (!nav || !items.length || document.querySelector(".kt-bar")) { return; }
-    var style = document.createElement("style"); style.textContent = css; document.head.appendChild(style);
 
     var bar = document.createElement("div"); bar.className = "kt-bar";
     bar.setAttribute("role", "region"); bar.setAttribute("aria-label", "News ticker");
@@ -112,6 +123,7 @@
   }
 
   function init() {
+    shell = makeShell();
     var holder = document.querySelector("[data-county-ticker]");
     var countyLabel = holder ? holder.getAttribute("data-county-ticker") : "";
     var countyFile = holder ? (holder.getAttribute("data-ticker-src") || "ticker.txt") : "";
@@ -119,7 +131,11 @@
     first.then(function (t) {
       var items = parse(t);
       if (items.length) { build(items, countyLabel + ":"); return; }
-      load(STATEWIDE).then(function (s) { build(parse(s), "On the Trail:"); });
+      load(STATEWIDE).then(function (s) {
+        var list = parse(s);
+        if (list.length) { build(list, "On the Trail:"); }
+        else if (shell && shell.parentNode) { shell.parentNode.removeChild(shell); }
+      });
     });
   }
   if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", init); } else { init(); }
