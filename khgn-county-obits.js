@@ -20,7 +20,8 @@
    When either file has entries, "The Town Crier" appears at the bottom
    of the county page, set apart from the County Hub above it, with a
    "Read The Town Crier" button near the top of the page. A name search
-   appears once there are three or more items.
+   appears once there are three or more items. Press Enter (or the
+   "Go to next mention" button) to move to each highlighted mention.
    ================================================================== */
 (function () {
   "use strict";
@@ -97,7 +98,12 @@
       "#town-crier .tc-place{font-size:17px;font-weight:700;color:#7A3A1E;margin:0 0 2px}",
       "#town-crier .tc-src{font-size:15.5px;color:#5E5242;font-style:italic;margin:0 0 14px}",
       "#town-crier p.tc-p{font-size:19px;line-height:1.7;margin:0 0 10px;color:#221A12}",
-      "#town-crier mark{background:#F6D57A;color:#221A12;padding:0 2px;border-radius:3px}",
+      "#town-crier mark{background:#F6D57A;color:#221A12;padding:0 2px;border-radius:3px;scroll-margin-top:140px;scroll-margin-bottom:140px}",
+      "#town-crier mark.tc-current{background:#F28C28;box-shadow:0 0 0 2px #A63D2F}",
+      "#town-crier .tc-next{min-height:50px;padding:8px 16px;font:700 18px 'Public Sans',sans-serif;background:#A63D2F;color:#fff;border:0;border-radius:8px;cursor:pointer}",
+      "#town-crier .tc-next:hover{background:#C2503F}",
+      "#town-crier .tc-next:focus-visible{outline:3px solid #D4AF6A;outline-offset:2px}",
+      "#town-crier .tc-next[hidden]{display:none}",
       "#town-crier .tc-links{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-size:16px}",
       "#town-crier .tc-obits{list-style:none;margin:0;padding:0;display:grid;gap:10px}",
       "#town-crier .tc-obits li{border:1px solid #D8C7A3;border-radius:8px;padding:12px 14px;background:rgba(0,0,0,.03)}",
@@ -157,7 +163,8 @@
       var srch = el("div", "tc-search");
       var lab = el("label", "", "Search The Town Crier for a name:"); lab.setAttribute("for", "tc-find");
       var inp = el("input"); inp.type = "search"; inp.id = "tc-find"; inp.placeholder = "Type a name, such as a surname"; inp.autocomplete = "off";
-      srch.appendChild(lab); srch.appendChild(inp); main.appendChild(srch);
+      var nextBtn = el("button", "tc-next", "Go to next mention"); nextBtn.type = "button"; nextBtn.id = "tc-next"; nextBtn.hidden = true;
+      srch.appendChild(lab); srch.appendChild(inp); srch.appendChild(nextBtn); main.appendChild(srch);
       status = el("p", "tc-status"); status.setAttribute("role", "status"); status.setAttribute("aria-live", "polite"); main.appendChild(status);
     }
 
@@ -180,8 +187,8 @@
     arts.forEach(function (a) {
       var art = el("section"); art.appendChild(el("article"));
       var body = art.firstChild; body.id = a.id;
-      body.appendChild(el("h3", "", a.title));
-      if (a.place) { body.appendChild(el("p", "tc-place", a.place)); }
+      body.appendChild(hl(el("h3"), a.title));
+      if (a.place) { body.appendChild(hl(el("p", "tc-place"), a.place)); }
       if (a.source) { body.appendChild(el("p", "tc-src", "From the " + a.source)); }
       a.paras.forEach(function (p) { body.appendChild(hl(el("p", "tc-p"), p)); });
       var links = el("div", "tc-links");
@@ -237,7 +244,26 @@
           if (hit) { shown++; }
         });
         if (obitBox) { obitBox.hidden = q && !obitBox.querySelector(".tc-obits li:not([hidden])"); }
-        status.textContent = q ? (shown ? shown + (shown === 1 ? " item mentions" : " items mention") + " “" + this.value.trim() + ".”" : "No items mention “" + this.value.trim() + ".”") : "";
+        status.textContent = q ? (shown ? shown + (shown === 1 ? " item mentions" : " items mention") + " “" + this.value.trim() + ".” Press Enter or the button to go to each mention." : "No items mention “" + this.value.trim() + ".”") : "";
+        cur = -1;
+        document.getElementById("tc-next").hidden = !(q && shown);
+      });
+      /* step through the highlighted mentions, one at a time */
+      var cur = -1;
+      function goNext() {
+        var marks = Array.prototype.filter.call(document.querySelectorAll("#town-crier mark"), function (m) { return m.offsetParent !== null; });
+        if (!marks.length) { return; }
+        marks.forEach(function (m) { m.classList.remove("tc-current"); });
+        cur = (cur + 1) % marks.length;
+        var m = marks[cur];
+        m.classList.add("tc-current");
+        m.scrollIntoView({ behavior: "smooth", block: "center" });
+        var q = document.getElementById("tc-find").value.trim();
+        status.textContent = "Mention " + (cur + 1) + " of " + marks.length + " for “" + q + ".” Press Enter or the button for the next one.";
+      }
+      document.getElementById("tc-next").addEventListener("click", goNext);
+      document.getElementById("tc-find").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") { e.preventDefault(); goNext(); }
       });
     }
 
