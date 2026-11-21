@@ -1,5 +1,5 @@
 /* ==================================================================
-   KHGN Inc. — Age Gate for the Trailhead and training games
+   KHGN Inc. — Age Gate for Trailhead Training and the training games
    ------------------------------------------------------------------
    HOW TO INSTALL
    1. Upload this file to the main folder of the website, next to
@@ -9,7 +9,7 @@
       as high in the <head> as possible:
 
       <script src="/khgn-age-gate.js"></script>
-      <noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view the KHGN Trailhead.";display:block;padding:40px 24px;font:18px/1.5 system-ui,sans-serif}</style></noscript>
+      <noscript><style>body > *{display:none !important}body::before{content:"Please turn on JavaScript in your browser to view KHGN Trailhead Training.";display:block;padding:40px 24px;font:18px/1.5 system-ui,sans-serif}</style></noscript>
 
    A visitor who passes the gate once is not asked again on the other
    game pages until they close the browser tab.
@@ -41,11 +41,11 @@
 
   /* ---------- Styles: hide the page until the gate is passed ---------- */
   var css = [
-    "html:not(.khgn-age-ok) body > *:not(#khgn-gate){display:none !important}",
+    "html:not(.khgn-age-ok) body > *:not(#khgn-gate){filter:blur(1.5px);pointer-events:none;user-select:none}",
     "html:not(.khgn-age-ok) body{overflow:hidden}",
     "#khgn-gate{--navy:#1F3A5F;--navy-deep:#13233A;--brass:#8A5A14;--paper:#F5F7FA;--ink:#1B2230;--muted:#4A5263;--line:#B8C2D1;",
       "position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px;",
-      "overflow-y:auto;box-sizing:border-box;background:var(--navy-deep);color:var(--ink);",
+      "overflow-y:auto;box-sizing:border-box;background:rgba(19,35,58,0.72);color:var(--ink);",
       "font-family:'Source Sans 3','Segoe UI',system-ui,-apple-system,sans-serif;text-align:left}",
     "#khgn-gate *{box-sizing:border-box}",
     "#khgn-gate [hidden]{display:none !important}",
@@ -79,7 +79,7 @@
         '<p class="kg-org">KHGN Inc.</p>' +
         '<div id="kg-ask">' +
           '<h1 id="kg-title">Before you continue</h1>' +
-          '<p>Enter your date of birth to open the Trailhead.</p>' +
+          '<p>Enter your date of birth to open Trailhead Training.</p>' +
           '<form id="kg-form" novalidate>' +
             '<fieldset>' +
               '<legend>Date of birth</legend>' +
@@ -94,11 +94,14 @@
         '</div>' +
         '<div id="kg-denied" hidden>' +
           '<h1 id="kg-denied-title" tabindex="-1">This area isn\'t available</h1>' +
-          '<p>The Trailhead is for visitors ' + MIN_AGE + ' and older. You\'re welcome to keep browsing the rest of our website.</p>' +
+          '<p>Trailhead Training is for visitors ' + MIN_AGE + ' and older. You\'re welcome to keep browsing the rest of our website.</p>' +
           '<a class="kg-home" href="' + HOME_URL + '">Go to the home page</a>' +
         '</div>' +
       '</div>';
     document.body.insertBefore(gate, document.body.firstChild);
+    /* The page stays readable behind the gate (and to search engines), but can't be used until the age check passes */
+    var behind = Array.prototype.filter.call(document.body.children, function (el) { return el !== gate; });
+    behind.forEach(function (el) { el.setAttribute("inert", ""); el.setAttribute("aria-hidden", "true"); });
 
     var askView = document.getElementById("kg-ask");
     var deniedView = document.getElementById("kg-denied");
@@ -117,6 +120,7 @@
     function unlock() {
       root.classList.add("khgn-age-ok");
       gate.parentNode.removeChild(gate);
+      behind.forEach(function (el) { el.removeAttribute("inert"); el.removeAttribute("aria-hidden"); });
       var heading = document.querySelector("h1");
       if (heading) {
         if (!heading.hasAttribute("tabindex")) { heading.setAttribute("tabindex", "-1"); }
