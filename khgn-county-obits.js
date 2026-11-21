@@ -5,6 +5,7 @@
 
    news.txt  (articles, separated by a line of three dashes ---)
        Title: King News, January 1922
+       Place: King, Knox County, Kentucky   (optional)
        Source: Mountain Advocate (Barbourville, Ky.), January 20, 1922, page 4
        Link: https://www.loc.gov/resource/...
        Each following line is one paragraph of the transcription.
@@ -39,8 +40,8 @@
       if (line.charAt(0) === "#") { return; }
       if (/^-{3,}$/.test(line)) { if (cur) { arts.push(cur); } cur = null; return; }
       if (!line) { return; }
-      if (!cur) { cur = { title: "", source: "", link: "", paras: [] }; }
-      var m = line.match(/^(Title|Source|Link):\s*(.*)$/i);
+      if (!cur) { cur = { title: "", place: "", source: "", link: "", paras: [] }; }
+      var m = line.match(/^(Title|Place|Source|Link):\s*(.*)$/i);
       if (m && !cur.paras.length) { cur[m[1].toLowerCase()] = m[2]; return; }
       cur.paras.push(line);
     });
@@ -93,6 +94,7 @@
       "#town-crier .tc-toc span{display:block;font-size:15px;color:#5E5242;font-weight:400}",
       "#town-crier article{scroll-margin-top:120px}",
       "#town-crier article h3{font-family:'Rye',Georgia,serif;font-weight:400;color:#221A12;font-size:25px;margin:0 0 4px}",
+      "#town-crier .tc-place{font-size:17px;font-weight:700;color:#7A3A1E;margin:0 0 2px}",
       "#town-crier .tc-src{font-size:15.5px;color:#5E5242;font-style:italic;margin:0 0 14px}",
       "#town-crier p.tc-p{font-size:19px;line-height:1.7;margin:0 0 10px;color:#221A12}",
       "#town-crier mark{background:#F6D57A;color:#221A12;padding:0 2px;border-radius:3px}",
@@ -167,6 +169,7 @@
         var id = slug(a.title); while (used[id]) { id += "-2"; } used[id] = 1; a.id = id;
         var li = el("li"), link = el("a"); link.href = "#" + id;
         link.appendChild(document.createTextNode(a.title));
+        if (a.place) { link.appendChild(el("span", "", a.place)); }
         if (a.source) { link.appendChild(el("span", "", a.source)); }
         li.appendChild(link); toc.appendChild(li); a.tocItem = li;
       });
@@ -178,6 +181,7 @@
       var art = el("section"); art.appendChild(el("article"));
       var body = art.firstChild; body.id = a.id;
       body.appendChild(el("h3", "", a.title));
+      if (a.place) { body.appendChild(el("p", "tc-place", a.place)); }
       if (a.source) { body.appendChild(el("p", "tc-src", "From the " + a.source)); }
       a.paras.forEach(function (p) { body.appendChild(hl(el("p", "tc-p"), p)); });
       var links = el("div", "tc-links");
@@ -187,7 +191,7 @@
       var back = el("a", "", "Back to the list of articles"); back.href = arts.length ? "#tc-list" : "#town-crier"; links.appendChild(back);
       body.appendChild(links);
       wrap.appendChild(art);
-      items.push({ box: art, toc: a.tocItem, text: (a.title + " " + a.paras.join(" ")).toLowerCase() });
+      items.push({ box: art, toc: a.tocItem, text: (a.title + " " + a.place + " " + a.paras.join(" ")).toLowerCase() });
     });
 
     if (obits.length) {
@@ -251,6 +255,57 @@
       var arts = parseNews(r[0]), obits = parseObits(r[1]);
       if (arts.length || obits.length) { build(arts, obits); }
     });
+  }
+  if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", init); } else { init(); }
+})();
+
+/* ==================================================================
+   KHGN, Inc. — Seasonal county banner
+   ------------------------------------------------------------------
+   Each county folder may hold up to four banners:
+       banner-fall.webp    (shows about Sept. 22 to Dec. 20)
+       banner-winter.webp  (about Dec. 21 to March 19)
+       banner-spring.webp  (about March 20 to June 20)
+       banner-summer.webp  (about June 21 to Sept. 21)
+   The page shows the current season's banner. If that one is not
+   uploaded yet, it shows the most recent earlier season instead.
+   A county with no banner files looks exactly as before.
+   ================================================================== */
+(function () {
+  "use strict";
+  var ORDER = ["winter", "spring", "summer", "fall"];
+  function currentSeason(d) {
+    var md = (d.getMonth() + 1) * 100 + d.getDate();
+    if (md >= 1221 || md < 320) { return "winter"; }
+    if (md < 621) { return "spring"; }
+    if (md < 922) { return "summer"; }
+    return "fall";
+  }
+  function init() {
+    var county = document.body.getAttribute("data-county-ticker");
+    var h1 = document.querySelector("h1");
+    if (!county || !h1) { return; }
+    var start = ORDER.indexOf(currentSeason(new Date()));
+    var tries = [0, 1, 2, 3].map(function (k) { return ORDER[(start - k + 4) % 4]; });
+    var style = document.createElement("style");
+    style.textContent = ".kc-banner{margin:6px 0 18px}.kc-banner img{display:block;width:100%;height:auto;aspect-ratio:1200/626;border-radius:10px;border:1px solid #4A392A;background:#1C140F}.kc-banner figcaption{font-size:14px;font-style:italic;color:#E0D0AC;margin-top:6px;text-align:right}";
+    document.head.appendChild(style);
+    var fig = document.createElement("figure"); fig.className = "kc-banner";
+    var img = document.createElement("img");
+    img.width = 1200; img.height = 626; img.decoding = "async";
+    var cap = document.createElement("figcaption");
+    cap.textContent = "Banner created with the help of AI, with human review.";
+    fig.appendChild(img); fig.appendChild(cap);
+    var i = 0;
+    function next() {
+      if (i >= tries.length) { if (fig.parentNode) { fig.parentNode.removeChild(fig); } return; }
+      var s = tries[i++];
+      img.alt = county + ", Kentucky History and Genealogy Network, Inc., " + s + " banner";
+      img.src = "banner-" + s + ".webp";
+    }
+    img.addEventListener("error", next);
+    h1.parentNode.insertBefore(fig, h1);
+    next();
   }
   if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", init); } else { init(); }
 })();
