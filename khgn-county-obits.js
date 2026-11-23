@@ -224,10 +224,7 @@
     var note = document.querySelector("body > .small-note");
     if (note) { note.parentNode.insertBefore(wrap, note); } else { document.body.appendChild(wrap); }
 
-    var tabs = document.querySelector(".tabs");
-    if (tabs && !tabs.querySelector(".tab-tc")) {
-      var t = el("a", "tab tab-tc", "Read The Town Crier"); t.href = "#town-crier"; tabs.appendChild(t);
-    }
+    /* The "On this page" bar (below) now links to The Town Crier. */
 
     if (status) {
       var obitBox = document.getElementById("tc-obituaries");
@@ -274,7 +271,8 @@
   }
 
   function init() {
-    if (!document.body.hasAttribute("data-county-ticker")) { return; }
+    if (!document.body.hasAttribute("data-county-ticker") || window.KHGN_TOWN_CRIER) { return; }
+    window.KHGN_TOWN_CRIER = true;
     var obitBox = document.getElementById("obituaries");
     var obitSrc = (obitBox && obitBox.getAttribute("data-src")) || "obituaries.txt";
     Promise.all([getText("news.txt"), getText(obitSrc)]).then(function (r) {
@@ -310,7 +308,7 @@
   function init() {
     var county = document.body.getAttribute("data-county-ticker");
     var h1 = document.querySelector("h1");
-    if (!county || !h1) { return; }
+    if (!county || !h1 || document.querySelector(".kc-banner")) { return; }
     var start = ORDER.indexOf(currentSeason(new Date()));
     var tries = [0, 1, 2, 3].map(function (k) { return ORDER[(start - k + 4) % 4]; });
     var style = document.createElement("style");
@@ -332,6 +330,127 @@
     img.addEventListener("error", next);
     h1.parentNode.insertBefore(fig, h1);
     next();
+  }
+  if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", init); } else { init(); }
+})();
+
+/* ==================================================================
+   KHGN, Inc. — "On this page" jump bar for County Hubs
+   ------------------------------------------------------------------
+   Adds a row of buttons under the county's tabs that jump to each
+   section on the page: At a Glance, Getting Started, The Town Crier,
+   Events (when a county has them), and Neighboring Counties. A button
+   only appears when its section is on the page. On larger screens the
+   row stays pinned under the site menu while scrolling. A short tip
+   explains how to search the page with Ctrl+F.
+   To add a future section, give it an id and add it to SECTIONS.
+   ================================================================== */
+(function () {
+  "use strict";
+  var SECTIONS = [
+    { id: "about", label: "At a Glance" },
+    { id: "getting-started", label: "Getting Started" },
+    { id: "town-crier", label: "The Town Crier" },
+    { id: "events", label: "Events" },
+    { id: "neighbors", label: "Neighboring Counties" }
+  ];
+  var bar, list, sig = "", spy = null;
+
+  function addStyle() {
+    var css = [
+      ".kc-jump{background:#1C140F;border:1px solid #4A392A;border-radius:12px;padding:10px 12px;margin:0 0 10px;z-index:900}",
+      "@media (min-width:701px){.kc-jump{position:sticky;top:var(--kc-nav-h,68px)}}",
+      ".kc-jump-label{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#E0D0AC;margin:0 0 6px 4px}",
+      ".kc-jump ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}",
+      ".kc-jump a{display:inline-flex;align-items:center;min-height:46px;padding:8px 16px;border-radius:999px;border:2px solid #B08D57;color:#EDE0C8;text-decoration:none;font-weight:700;font-size:17px}",
+      ".kc-jump a:hover{background:#3A2C20;color:#D4AF6A}",
+      ".kc-jump a[aria-current='true']{background:#D4AF6A;border-color:#D4AF6A;color:#1C140F}",
+      ".kc-jump a.kc-tc{border-color:#A63D2F}",
+      ".kc-jump a.kc-tc[aria-current='true']{background:#A63D2F;border-color:#A63D2F;color:#fff}",
+      ".kc-find-tip{font-size:15.5px;color:#E0D0AC;margin:0 0 22px 4px}",
+      ".kc-find-tip kbd{font:700 14px 'Public Sans',Arial,sans-serif;background:#EDE0C8;color:#1C140F;border-radius:5px;padding:1px 6px}",
+      "body section[id],#town-crier,#town-crier article{scroll-margin-top:var(--kc-offset,150px)}"
+    ].join("");
+    var s = document.createElement("style"); s.textContent = css; document.head.appendChild(s);
+  }
+
+  function visible(node) { return node && !node.hidden && node.offsetParent !== null; }
+
+  function tagNeighbors() {
+    if (document.getElementById("neighbors")) { return; }
+    var hs = document.querySelectorAll("section > h2");
+    for (var i = 0; i < hs.length; i++) {
+      if (/neighbou?ring counties/i.test(hs[i].textContent) && !hs[i].parentNode.id) { hs[i].parentNode.id = "neighbors"; return; }
+    }
+  }
+
+  function offsets() {
+    var nav = document.querySelector(".site-nav");
+    var navH = nav ? nav.offsetHeight : 0;
+    var pinned = window.matchMedia("(min-width:701px)").matches;
+    var barH = pinned && bar ? bar.offsetHeight : 0;
+    document.documentElement.style.setProperty("--kc-nav-h", navH + "px");
+    document.documentElement.style.setProperty("--kc-offset", (navH + barH + 16) + "px");
+  }
+
+  function render() {
+    tagNeighbors();
+    var found = SECTIONS.filter(function (s) { return visible(document.getElementById(s.id)); });
+    var now = found.map(function (s) { return s.id; }).join(",");
+    if (now === sig) { return; }
+    sig = now;
+    list.innerHTML = "";
+    found.forEach(function (s) {
+      var li = document.createElement("li"), a = document.createElement("a");
+      a.href = "#" + s.id; a.textContent = s.label;
+      if (s.id === "town-crier") { a.className = "kc-tc"; }
+      li.appendChild(a); list.appendChild(li);
+    });
+    bar.hidden = found.length < 2;
+    document.getElementById("kc-find-tip").hidden = bar.hidden;
+    offsets(); watch(found);
+  }
+
+  /* highlight the button for the section being read */
+  function watch(found) {
+    if (!("IntersectionObserver" in window)) { return; }
+    if (spy) { spy.disconnect(); }
+    spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) { return; }
+        var links = list.querySelectorAll("a");
+        for (var i = 0; i < links.length; i++) {
+          links[i].setAttribute("aria-current", links[i].getAttribute("href") === "#" + e.target.id ? "true" : "false");
+        }
+      });
+    }, { rootMargin: "-35% 0px -60% 0px" });
+    found.forEach(function (s) { spy.observe(document.getElementById(s.id)); });
+  }
+
+  function init() {
+    if (!document.body.hasAttribute("data-county-ticker") || document.querySelector(".kc-jump")) { return; }
+    addStyle();
+    bar = document.createElement("nav"); bar.className = "kc-jump"; bar.setAttribute("aria-label", "On this page");
+    var lab = document.createElement("span"); lab.className = "kc-jump-label"; lab.textContent = "On this page";
+    list = document.createElement("ul");
+    bar.appendChild(lab); bar.appendChild(list);
+    var tip = document.createElement("p"); tip.className = "kc-find-tip"; tip.id = "kc-find-tip";
+    tip.innerHTML = "<b>Tip:</b> To find a name or word anywhere on this page, press <kbd>Ctrl</kbd> + <kbd>F</kbd> (on a Mac, <kbd>Command</kbd> + <kbd>F</kbd>). On a phone, open your browser’s menu and choose <b>Find in page</b>.";
+    var tabs = document.querySelector(".tabs"), h1 = document.querySelector("h1");
+    var anchor = tabs || h1;
+    if (!anchor) { return; }
+    anchor.parentNode.insertBefore(tip, anchor.nextSibling);
+    anchor.parentNode.insertBefore(bar, tip);
+    var old = tabs && tabs.querySelector(".tab-tc"); if (old) { old.parentNode.removeChild(old); }
+    render();
+    /* sections such as At a Glance and The Town Crier load a moment later */
+    var pending = null;
+    new MutationObserver(function () {
+      if (pending) { return; }
+      pending = setTimeout(function () { pending = null; render(); }, 150);
+    }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["hidden"] });
+    window.addEventListener("resize", offsets);
+    if (location.hash) { setTimeout(function () { var t = document.getElementById(location.hash.slice(1)); if (t) { t.scrollIntoView(); } }, 400); }
   }
   if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", init); } else { init(); }
 })();
